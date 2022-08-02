@@ -51,7 +51,7 @@
 		<v:layer v:name="Connector" v:index="3"/>
 		<v:layer v:name="Flowchart" v:index="4"/>
 		<v:layer v:name="Entities" v:index="5"/>
-		<g id="group53-1" transform="translate(98.6456,-1175.98)" v:mID="53" v:groupContext="group">
+		<g id="group53-1" transform="translate(98.6456,-1147.98)" v:mID="53" v:groupContext="group">
 			<v:userDefs>
 				<v:ud v:nameU="msvStructureType" v:prompt="" v:val="VT4(List)"/>
 				<v:ud v:nameU="msvSDContainerResize" v:prompt="" v:val="VT0(2):26"/>
@@ -77,7 +77,7 @@
 				<v:ud v:nameU="EntityNameSpace" v:prompt="" v:val="VT4(Invoice)"/>
 			</v:userDefs>
 			<title>Entity.13</title>
-			<g id="shape54-2" v:mID="54" v:groupContext="shape" transform="translate(0,-171.199)">
+			<g id="shape54-2" v:mID="54" v:groupContext="shape" transform="translate(0,-199.203)">
 				<title>Sheet.54</title>
 				<v:userDefs>
 					<v:ud v:nameU="EmblOffset" v:prompt="" v:val="VT0(0):26"/>
@@ -86,9 +86,9 @@
 			</g>
 			<g id="shape55-4" v:mID="55" v:groupContext="shape">
 				<title>Sheet.55</title>
-				<rect x="0" y="1476.58" width="205.512" height="171.199" class="st2"/>
+				<rect x="0" y="1448.58" width="205.512" height="199.203" class="st2"/>
 			</g>
-			<g id="shape56-6" v:mID="56" v:groupContext="shape" transform="translate(1802.27,1507.76) rotate(90)">
+			<g id="shape56-6" v:mID="56" v:groupContext="shape" transform="translate(1802.27,1479.76) rotate(90)">
 				<title>Sheet.56</title>
 				<v:userDefs>
 					<v:ud v:nameU="ContainerMargin" v:prompt="" v:val="VT0(0):24"/>
@@ -96,7 +96,7 @@
 					<v:ud v:nameU="ControlsX" v:prompt="" v:val="VT0(2.1456692026772):24"/>
 				</v:userDefs>
 			</g>
-			<g id="shape57-8" v:mID="57" v:groupContext="shape" transform="translate(0,-140.018)">
+			<g id="shape57-8" v:mID="57" v:groupContext="shape" transform="translate(0,-168.022)">
 				<title>Sheet.57</title>
 				<desc>Invoice</desc>
 				<v:userDefs>
@@ -170,7 +170,7 @@
 				<text x="81" y="1635.79" class="st3" v:langID="3081"><v:paragraph v:horizAlign="1"/><v:tabList/>Shift</text>			</g>
 			<g id="shape87-22" v:mID="87" v:groupContext="groupContent"/>
 		</g>
-		<g id="group124-23" transform="translate(1069.51,-1288.78)" v:mID="124" v:groupContext="group">
+		<g id="group124-23" transform="translate(1069.51,-1260.78)" v:mID="124" v:groupContext="group">
 			<v:userDefs>
 				<v:ud v:nameU="msvStructureType" v:prompt="" v:val="VT4(List)"/>
 				<v:ud v:nameU="msvSDContainerResize" v:prompt="" v:val="VT0(2):26"/>
@@ -196,7 +196,7 @@
 				<v:ud v:nameU="EntityNameSpace" v:prompt="" v:val="VT4(Product)"/>
 			</v:userDefs>
 			<title>Entity.13.124</title>
-			<g id="shape125-24" v:mID="125" v:groupContext="shape" transform="translate(0,-171.199)">
+			<g id="shape125-24" v:mID="125" v:groupContext="shape" transform="translate(0,-199.203)">
 				<title>Sheet.125</title>
 				<v:userDefs>
 					<v:ud v:nameU="EmblOffset" v:prompt="" v:val="VT0(0):26"/>
@@ -205,9 +205,9 @@
 			</g>
 			<g id="shape126-26" v:mID="126" v:groupContext="shape">
 				<title>Sheet.126</title>
-				<rect x="0" y="1476.58" width="184.252" height="171.199" class="st2"/>
+				<rect x="0" y="1448.58" width="184.252" height="199.203" class="st2"/>
 			</g>
-			<g id="shape127-28" v:mID="127" v:groupContext="shape" transform="translate(1781.01,1507.76) rotate(90)">
+			<g id="shape127-28" v:mID="127" v:groupContext="shape" transform="translate(1781.01,1479.76) rotate(90)">
 				<title>Sheet.127</title>
 				<v:userDefs>
 					<v:ud v:nameU="ContainerMargin" v:prompt="" v:val="VT0(0):24"/>
@@ -215,7 +215,7 @@
 					<v:ud v:nameU="ControlsX" v:prompt="" v:val="VT0(1.8503937007874):24"/>
 				</v:userDefs>
 			</g>
-			<g id="shape128-30" v:mID="128" v:groupContext="shape" transform="translate(0,-140.018)">
+			<g id="shape128-30" v:mID="128" v:groupContext="shape" transform="translate(0,-168.022)">
 				<title>Sheet.128</title>
 				<desc>Product</desc>
 				<v:userDefs>
@@ -1561,7 +1561,7 @@
 				<v:textRect cx="6.02725" cy="1633.78" width="12.06" height="12.0036"/>
 				<text x="0" y="1636.78" class="st6" v:langID="3081"><v:paragraph/><v:tabList/>FK</text>			</g>
 		</g>
-		<g id="group77-255" transform="translate(98.6456,-1203.99)" v:mID="77" v:groupContext="group">
+		<g id="group77-255" transform="translate(98.6456,-1175.98)" v:mID="77" v:groupContext="group">
 			<v:userDefs>
 				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(Database;DbAttribute;DbListItem)"/>
 				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(attribute name)"/>
@@ -1585,7 +1585,7 @@
 				<v:ud v:nameU="WidthMin" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="BackFillColor" v:prompt="" v:val="VT5(1)"/>
 				<v:ud v:nameU="BackLineColor" v:prompt="" v:val="VT5(#000000)"/>
-				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(5):26"/>
+				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(6):26"/>
 			</v:userDefs>
 			<title>Primary Key Attribute.77</title>
 			<desc>CustomerName</desc>
@@ -1667,7 +1667,7 @@
 				<v:textRect cx="6.02725" cy="1633.78" width="12.06" height="12.0036"/>
 				<text x="0" y="1636.78" class="st6" v:langID="3081"><v:paragraph/><v:tabList/>FK</text>			</g>
 		</g>
-		<g id="group83-270" transform="translate(98.6456,-1175.98)" v:mID="83" v:groupContext="group">
+		<g id="group83-270" transform="translate(98.6456,-1147.98)" v:mID="83" v:groupContext="group">
 			<v:userDefs>
 				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(Database;DbAttribute;DbListItem)"/>
 				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(attribute name)"/>
@@ -1691,7 +1691,7 @@
 				<v:ud v:nameU="WidthMin" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="BackFillColor" v:prompt="" v:val="VT5(1)"/>
 				<v:ud v:nameU="BackLineColor" v:prompt="" v:val="VT5(#000000)"/>
-				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(6):26"/>
+				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(7):26"/>
 			</v:userDefs>
 			<title>Primary Key Attribute.83</title>
 			<desc>DateTime</desc>
@@ -2025,7 +2025,7 @@
 				<v:textRect cx="6.02725" cy="1633.78" width="12.06" height="12.0036"/>
 				<text x="-0" y="1636.78" class="st6" v:langID="3081"><v:paragraph/><v:tabList/>FK</text>			</g>
 		</g>
-		<g id="group136-330" transform="translate(1069.51,-1316.79)" v:mID="136" v:groupContext="group">
+		<g id="group136-330" transform="translate(1069.51,-1288.78)" v:mID="136" v:groupContext="group">
 			<v:userDefs>
 				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(Database;DbAttribute;DbListItem)"/>
 				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(attribute name)"/>
@@ -2048,7 +2048,7 @@
 				<v:ud v:nameU="WidthMin" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="BackFillColor" v:prompt="" v:val="VT5(1)"/>
 				<v:ud v:nameU="BackLineColor" v:prompt="" v:val="VT5(#000000)"/>
-				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(5):26"/>
+				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(6):26"/>
 			</v:userDefs>
 			<title>Attribute.136</title>
 			<desc>ProductName</desc>
@@ -2067,7 +2067,7 @@
 				<v:textRect cx="14.8168" cy="1639.28" width="12.63" height="12.0036"/>
 			</g>
 		</g>
-		<g id="group140-336" transform="translate(1069.51,-1288.78)" v:mID="140" v:groupContext="group">
+		<g id="group140-336" transform="translate(1069.51,-1260.78)" v:mID="140" v:groupContext="group">
 			<v:userDefs>
 				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(Database;DbAttribute;DbListItem)"/>
 				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(attribute name)"/>
@@ -2090,7 +2090,7 @@
 				<v:ud v:nameU="WidthMin" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="BackFillColor" v:prompt="" v:val="VT5(1)"/>
 				<v:ud v:nameU="BackLineColor" v:prompt="" v:val="VT5(#000000)"/>
-				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(6):26"/>
+				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(7):26"/>
 			</v:userDefs>
 			<title>Attribute.140</title>
 			<desc>Price</desc>
@@ -3128,9 +3128,9 @@
 				<v:ud v:nameU="Override" v:prompt="" v:val="VT0(1):5"/>
 				<v:ud v:nameU="EndAngle" v:prompt="" v:val="VT0(3.1413037052926):32"/>
 				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(0.16955347079249):24"/>
-				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-4.8992187933194E-05):1"/>
+				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-4.8992187936747E-05):1"/>
 				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(-0.16955347079248):24"/>
-				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(4.8992188030894E-05):1"/>
+				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(4.8992188034447E-05):1"/>
 				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(-0.00028894829660953):32"/>
 				<v:ud v:nameU="RITextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
@@ -3230,7 +3230,7 @@
 				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(0.14119944468837):24"/>
 				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-4.8992188119712E-05):1"/>
 				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(0.14119944468836):24"/>
-				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(-4.8992188022012E-05):1"/>
+				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(-4.8992188027341E-05):1"/>
 				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(-0.00034697152088724):32"/>
 				<v:ud v:nameU="RITextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
@@ -3278,9 +3278,9 @@
 				<v:ud v:nameU="Override" v:prompt="" v:val="VT0(1):5"/>
 				<v:ud v:nameU="EndAngle" v:prompt="" v:val="VT0(-0.00038957005055649):32"/>
 				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(0.12575963030195):24"/>
-				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-4.899218801846E-05):1"/>
+				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-4.8992188014907E-05):1"/>
 				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(0.12575963030196):24"/>
-				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(-4.8992188013131E-05):1"/>
+				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(-4.8992188016683E-05):1"/>
 				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(-0.00038957005058478):32"/>
 				<v:ud v:nameU="RITextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
@@ -3738,7 +3738,7 @@
 				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(-4.8992187981156E-05):1"/>
 				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-0.87692329639272):1"/>
 				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(-0.8769232963927):1"/>
-				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(4.8992188030894E-05):1"/>
+				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(4.8992188034447E-05):1"/>
 				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(-1.5708521950654):32"/>
 				<v:ud v:nameU="RITextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
@@ -4866,9 +4866,9 @@
 				<v:ud v:nameU="Override" v:prompt="" v:val="VT0(1):5"/>
 				<v:ud v:nameU="EndAngle" v:prompt="" v:val="VT0(-0.00011433527089479):32"/>
 				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(0.42849583894213):24"/>
-				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-4.8992188026453E-05):1"/>
+				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-4.8992188023789E-05):1"/>
 				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(0.42849583894214):24"/>
-				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(-4.8992188035335E-05):1"/>
+				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(-4.8992188037111E-05):1"/>
 				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(-0.00011433527086992):32"/>
 				<v:ud v:nameU="RITextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
@@ -5324,14 +5324,15 @@
 				<v:ud v:nameU="Override" v:prompt="" v:val="VT0(1):5"/>
 				<v:ud v:nameU="EndAngle" v:prompt="" v:val="VT0(-4.1526152932402E-05):32"/>
 				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(-1.1797911576727):1"/>
-				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(4.8992188030894E-05):1"/>
+				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(4.8992188020236E-05):1"/>
 				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(1.1797911576727):1"/>
-				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(-4.8992188069974E-05):1"/>
+				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(-4.8992188068198E-05):1"/>
 				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(3.1415511274369):32"/>
 				<v:ud v:nameU="RITextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 			</v:userDefs>
-			<path d="M-9.96 1647.78 L-10.32 1647.78 L-771.5 1647.78 L-771.5 2440.59 L-425.2 2440.59" class="st9"/>
+			<path d="M-9.96 1647.78 L-10.32 1647.78 L-771.5 1647.78 L-771.5 2440.59 L-491.34 2440.59 A2.3622 2.3622 0 0 1 -486.61
+						 2440.59 L-425.2 2440.59" class="st9"/>
 		</g>
 		<g id="shape446-818" v:mID="446" v:groupContext="shape" v:layerMember="2" transform="translate(1363.61,-1414.8)">
 			<title>Relationship.446</title>
@@ -5373,15 +5374,16 @@
 				<v:ud v:nameU="DBNotation" v:prompt="" v:val="VT0(2):26"/>
 				<v:ud v:nameU="Override" v:prompt="" v:val="VT0(1):5"/>
 				<v:ud v:nameU="EndAngle" v:prompt="" v:val="VT0(1.3233091676316):32"/>
-				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(-4.8992188112607E-05):1"/>
+				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(-4.8992188109054E-05):1"/>
 				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-1.3480174537641):1"/>
-				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(0.27190933937558):1"/>
+				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(0.27190933937557):1"/>
 				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(1.0761571065765):1"/>
 				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(-1.5708326706775):32"/>
 				<v:ud v:nameU="RITextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 			</v:userDefs>
-			<path d="M0 1657.74 L0 1658.1 L0 2171.65 L-1284.54 2171.65 L-1284.54 1816.59 L-1264.97 1816.59" class="st9"/>
+			<path d="M0 1657.74 L0 1658.1 L0 2171.65 L-1042.92 2171.65 A2.3622 2.3622 -180 0 0 -1047.65 2171.65 L-1284.54 2171.65
+						 L-1284.54 1816.59 L-1264.97 1816.59" class="st9"/>
 		</g>
 		<g id="group450-823" transform="translate(1069.51,-661.666)" v:mID="450" v:groupContext="group">
 			<v:userDefs>
@@ -5458,6 +5460,160 @@
 				<text x="34.02" y="1636.78" class="st6" v:langID="3081"><v:paragraph/><v:tabList/>IdEmployeeChange</text>			</g>
 			<g id="shape1001-833" v:mID="1001" v:groupContext="shape" transform="translate(4.25197,-5.49788)">
 				<title>Sheet.1001</title>
+				<desc>PK</desc>
+				<v:userDefs>
+					<v:ud v:nameU="PrimaryKey" v:prompt="" v:val="VT0(0):5"/>
+					<v:ud v:nameU="ForeignKey" v:prompt="" v:val="VT0(0):5"/>
+				</v:userDefs>
+				<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+				<v:textRect cx="14.8168" cy="1639.28" width="12.63" height="12.0036"/>
+			</g>
+		</g>
+		<g id="group1003-835" transform="translate(98.6456,-1203.99)" v:mID="1003" v:groupContext="group">
+			<v:userDefs>
+				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(Database;DbAttribute;DbListItem)"/>
+				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(attribute name)"/>
+				<v:ud v:nameU="PrimaryKey" v:prompt="" v:val="VT0(1):5"/>
+				<v:ud v:nameU="ForeignKey" v:prompt="" v:val="VT0(0):5"/>
+				<v:ud v:nameU="Required" v:prompt="" v:val="VT0(0):5"/>
+				<v:ud v:nameU="ContainerMargin" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="WidthMin" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="UserWidth" v:prompt="" v:val="VT0(1.8897637795276):24"/>
+				<v:ud v:nameU="DarkerColor" v:prompt="" v:val="VT5(#000000)"/>
+				<v:ud v:nameU="DarkColor" v:prompt="" v:val="VT5(#000000)"/>
+				<v:ud v:nameU="BackFillColor" v:prompt="" v:val="VT5(1)"/>
+				<v:ud v:nameU="BackLineColor" v:prompt="" v:val="VT5(#000000)"/>
+				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(-1):26"/>
+				<v:ud v:nameU="EmblOffset" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="Spacer" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="visVersion" v:prompt="" v:val="VT0(15):26"/>
+				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(IdGroupTable)"/>
+				<v:ud v:nameU="PrimaryKey" v:prompt="" v:val="VT0(0):5"/>
+				<v:ud v:nameU="ForeignKey" v:prompt="" v:val="VT0(1):5"/>
+				<v:ud v:nameU="ContainerMargin" v:prompt="" v:val="VT0(0):24"/>
+				<v:ud v:nameU="WidthMin" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="BackFillColor" v:prompt="" v:val="VT5(1)"/>
+				<v:ud v:nameU="BackLineColor" v:prompt="" v:val="VT5(#000000)"/>
+				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(5):26"/>
+			</v:userDefs>
+			<title>Primary Key Attribute.1003</title>
+			<desc>IdGroupTable</desc>
+			<g id="shape1003-836" v:mID="1003" v:groupContext="groupContent">
+				<v:textBlock v:margins="rect(8,8,8,34.0157)" v:tabSpace="42.5197"/>
+				<v:textRect cx="102.756" cy="1633.78" width="205.52" height="28.0036"/>
+				<text x="34.02" y="1636.78" class="st6" v:langID="3081"><v:paragraph/><v:tabList/>IdGroupTable</text>			</g>
+			<g id="shape1004-839" v:mID="1004" v:groupContext="shape" transform="translate(4.25197,-5.49788)">
+				<title>Sheet.1004</title>
+				<desc>PK</desc>
+				<v:userDefs>
+					<v:ud v:nameU="PrimaryKey" v:prompt="" v:val="VT0(1):5"/>
+					<v:ud v:nameU="ForeignKey" v:prompt="" v:val="VT0(0):5"/>
+					<v:ud v:nameU="PrimaryKey" v:prompt="" v:val="VT0(0):5"/>
+					<v:ud v:nameU="ForeignKey" v:prompt="" v:val="VT0(1):5"/>
+				</v:userDefs>
+				<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+				<v:textRect cx="14.8168" cy="1633.27" width="12.63" height="12.0036"/>
+				<path d="M1.7 1645.26 L4.25 1647.78 L6.17 1645.89 L6.17 1639.59 L7.44 1639.59 L6.8 1638.33 A4.2097 4.2097 -180 1
+							 0 1.7 1638.33 L1.06 1639.59 L2.34 1639.59 L2.34 1640.22 L1.38 1641.48 L2.98 1642.74 L2.98 1643.37 L1.7
+							 1644.63 L1.7 1645.26 Z" class="st7"/>
+			</g>
+			<g id="shape1005-842" v:mID="1005" v:groupContext="shape" transform="translate(12.7559,0)">
+				<title>Sheet.1005</title>
+				<v:userDefs>
+					<v:ud v:nameU="PrimaryKey" v:prompt="" v:val="VT0(1):5"/>
+					<v:ud v:nameU="ForeignKey" v:prompt="" v:val="VT0(0):5"/>
+					<v:ud v:nameU="ForeignKeyText" v:prompt="" v:val="VT4(FK)"/>
+					<v:ud v:nameU="PKRightSide" v:prompt="" v:val="VT0(0.17716535433071):24"/>
+					<v:ud v:nameU="PrimaryKey" v:prompt="" v:val="VT0(0):5"/>
+					<v:ud v:nameU="ForeignKey" v:prompt="" v:val="VT0(1):5"/>
+				</v:userDefs>
+				<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+				<v:textRect cx="6.02725" cy="1633.78" width="12.06" height="12.0036"/>
+				<text x="0" y="1636.78" class="st6" v:langID="3081"><v:paragraph/><v:tabList/>FK</text>			</g>
+		</g>
+		<g id="shape1006-844" v:mID="1006" v:groupContext="shape" v:layerMember="2" transform="translate(787.548,-521.328)">
+			<title>Relationship.1006</title>
+			<v:userDefs>
+				<v:ud v:nameU="DBShapeType" v:prompt="Relationship (Foreign Key)" v:val="VT0(2):26"/>
+				<v:ud v:nameU="RefShapeGuid" v:prompt="Unique identifier used by the add-on." v:val="VT0(0):26"/>
+				<v:ud v:nameU="Identifying" v:prompt="Set to indicate the relationship is an &#39;Identifying Relationship&#39;."
+						v:val="VT0(0):5"/>
+				<v:ud v:nameU="DBCardinality" v:prompt="25=exactly one, 28=one or more, 29=zero one or more, 30=zero or one"/>
+				<v:ud v:nameU="DBNotation" v:prompt="0 = IDEF1X; 2 = Relational" v:val="VT0(0):26"/>
+				<v:ud v:nameU="CrowsFoot"
+						v:prompt="Overrides the relationship notation specifed by the IDEF1X or Relational notations."
+						v:val="VT0(0):5"/>
+				<v:ud v:nameU="Optional" v:prompt="Set to indicate the relationship is optional." v:val="VT0(0):5"/>
+				<v:ud v:nameU="Override"
+						v:prompt="Set to override Database | Document | Options locally for this relationship shape."
+						v:val="VT0(0):5"/>
+				<v:ud v:nameU="ManualEdits"
+						v:prompt="Set to allow free-form editing (manual edits are not maintained in the model.)" v:val="VT0(1):5"/>
+				<v:ud v:nameU="OverrideDBNotation" v:prompt="This formula conditionally sets the DBNotation setting."
+						v:val="VT0(0):26"/>
+				<v:ud v:nameU="EndAngle" v:prompt="Calculates a reference point for Relationship text."
+						v:val="VT0(-0.78539816339745):32"/>
+				<v:ud v:nameU="OverrideCrowsFoot" v:prompt="This formula conditionally sets the CrowsFoot notation flag."
+						v:val="VT0(0):26"/>
+				<v:ud v:nameU="DX1" v:prompt="Calculates a reference point for Relationship text." v:val="VT0(0.044444444444444):1"/>
+				<v:ud v:nameU="DY1" v:prompt="Calculates a reference point for Relationship text."
+						v:val="VT0(-0.044444444444444):1"/>
+				<v:ud v:nameU="DX3" v:prompt="Calculates a reference point for Relationship text." v:val="VT0(0.04444444444444):1"/>
+				<v:ud v:nameU="DY3" v:prompt="Calculates a reference point for Relationship text." v:val="VT0(-0.04444444444444):1"/>
+				<v:ud v:nameU="BeginAngle" v:prompt="Calculates a reference point for Relationship text."
+						v:val="VT0(-0.78539816339745):32"/>
+				<v:ud v:nameU="DBShapeVersion" v:prompt="Shape&#39;s version." v:val="VT0(4):26"/>
+				<v:ud v:nameU="RITextRefGuid" v:prompt="reference to associated text shape"/>
+				<v:ud v:nameU="CardTextRefGuid" v:prompt="reference to associated text shape"/>
+				<v:ud v:nameU="visDescription"
+						v:val="VT4(Use to define a foreign key between two tables in your Entity Relationship diagram.)"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+				<v:ud v:nameU="DBNotation" v:prompt="" v:val="VT0(2):26"/>
+				<v:ud v:nameU="Override" v:prompt="" v:val="VT0(1):5"/>
+				<v:ud v:nameU="EndAngle" v:prompt="" v:val="VT0(1.925221762444):32"/>
+				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(4.8992188116159E-05):24"/>
+				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(0.72867301411095):1"/>
+				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(-0.19680175852128):24"/>
+				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(0.5318222634016):1"/>
+				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(1.5707290919899):32"/>
+				<v:ud v:nameU="RITextRefGuid" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
+			</v:userDefs>
+			<path d="M0 1637.82 L0 1637.46 L0 1547.47 L-469.22 1547.47 L-469.22 951.12 L-483.39 951.12" class="st9"/>
+		</g>
+		<g id="group1007-849" transform="translate(1069.51,-1316.79)" v:mID="1007" v:groupContext="group">
+			<v:userDefs>
+				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(Database;DbAttribute;DbListItem)"/>
+				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(attribute name)"/>
+				<v:ud v:nameU="PrimaryKey" v:prompt="" v:val="VT0(0):5"/>
+				<v:ud v:nameU="ForeignKey" v:prompt="" v:val="VT0(0):5"/>
+				<v:ud v:nameU="Required" v:prompt="" v:val="VT0(0):5"/>
+				<v:ud v:nameU="ContainerMargin" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="WidthMin" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="UserWidth" v:prompt="" v:val="VT0(1.8897637795276):24"/>
+				<v:ud v:nameU="DarkerColor" v:prompt="" v:val="VT5(#000000)"/>
+				<v:ud v:nameU="DarkColor" v:prompt="" v:val="VT5(#000000)"/>
+				<v:ud v:nameU="BackFillColor" v:prompt="" v:val="VT5(1)"/>
+				<v:ud v:nameU="BackLineColor" v:prompt="" v:val="VT5(#000000)"/>
+				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(-1):26"/>
+				<v:ud v:nameU="EmblOffset" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="Spacer" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="visVersion" v:prompt="" v:val="VT0(15):26"/>
+				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(SrcImage)"/>
+				<v:ud v:nameU="ContainerMargin" v:prompt="" v:val="VT0(0):24"/>
+				<v:ud v:nameU="WidthMin" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="BackFillColor" v:prompt="" v:val="VT5(1)"/>
+				<v:ud v:nameU="BackLineColor" v:prompt="" v:val="VT5(#000000)"/>
+				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(5):26"/>
+			</v:userDefs>
+			<title>Attribute.1007</title>
+			<desc>SrcImage</desc>
+			<g id="shape1007-850" v:mID="1007" v:groupContext="groupContent">
+				<v:textBlock v:margins="rect(8,8,8,34.0157)" v:tabSpace="42.5197"/>
+				<v:textRect cx="92.126" cy="1633.78" width="184.26" height="28.0036"/>
+				<text x="34.02" y="1636.78" class="st6" v:langID="3081"><v:paragraph/><v:tabList/>SrcImage</text>			</g>
+			<g id="shape1008-853" v:mID="1008" v:groupContext="shape" transform="translate(4.25197,-5.49788)">
+				<title>Sheet.1008</title>
 				<desc>PK</desc>
 				<v:userDefs>
 					<v:ud v:nameU="PrimaryKey" v:prompt="" v:val="VT0(0):5"/>
