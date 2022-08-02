@@ -1,25 +1,45 @@
 package com.java04.wibucian.controllers;
 
+import com.java04.wibucian.models.Category;
+import com.java04.wibucian.repositories.CategoryRepository;
+import com.java04.wibucian.services.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+
 @Controller
-@RequestMapping(path = "/")
 public class HomeController {
+    @Autowired
+    private CategoryService categoryService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
+        ArrayList<Category> categories = new ArrayList<>();
+        categories = (ArrayList<Category>) categoryService.findAll();
+        for (Category category : categories) {
+            System.out.println(category);
+        }
         System.out.println("HomeController.index()");
         return "index";
     }
-    //home route
+
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String home(ModelMap model) {
-        System.out.println("HomeController.home()");
-        model.addAttribute("message", "Hello World!");
-        return "home";
+    public String home() {
+        ArrayList<Category> categories = new ArrayList<>();
+        categories = (ArrayList<Category>) categoryService.findAll();
+        for (Category category : categories) {
+            System.out.println(category);
+        }
+        System.out.println("HomeController.index()");
+        return "index";
     }
+
+
+
 
 
 }
