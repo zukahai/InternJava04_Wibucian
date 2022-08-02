@@ -11,6 +11,10 @@ import java.util.ArrayList;
 @Service
 public class CategoryService implements ServiceInterface<Category> {
 
+    public void test() {
+        System.out.println("service ok");
+    }
+
     @Autowired
     private CategoryRepository categoryRepository;
 
