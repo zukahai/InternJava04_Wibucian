@@ -10,7 +10,11 @@
     <title>Trang chủ</title>
 </head>
 <body>
-
-    </table>
+<form method="post" action="${pageContext.request.contextPath}/admin/category/update">
+    <input type="text" name="id" readonly placeholder="id" value="<c:out value="${category.id}" > </c:out> ">
+    <input type="text" name="name" placeholder="name" value="<c:out value="${category.name}" > </c:out> ">
+    <input type="submit" value="Cập nhật">
+</form>
+</table>
 </body>
 </html>

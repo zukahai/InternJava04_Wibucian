@@ -23,7 +23,7 @@ tablelist
             <td>${item.name}</td>
             <td>
                 <a href="${pageContext.request.contextPath}/admin/category/edit/${item.id}">Edit</a>
-                <a href="${pageContext.request.contextPath}/admin/category/delete?id=${item.id}">Delete</a>
+                <a href="${pageContext.request.contextPath}/admin/category/delete/${item.id}">Delete</a>
             </td>
         </tr>
     </c:forEach>

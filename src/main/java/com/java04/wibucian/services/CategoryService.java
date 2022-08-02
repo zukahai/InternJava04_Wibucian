@@ -16,22 +16,26 @@ public class CategoryService implements ServiceInterface<Category> {
 
     @Override
     public Category findById(int id) {
-        return null;
+        return categoryRepository.findById(id).get()    ;
     }
 
     @Override
     public void save(Category category) {
-
+        categoryRepository.save(category);
     }
 
     @Override
     public void deleteById(int id) {
-
+        categoryRepository.deleteById(id);
     }
 
     @Override
     public void updateById(Category category) {
-
+        Category categoryFind = this.findById(category.getId());
+        if (categoryFind != null) {
+            categoryFind.setName(category.getName());
+            categoryRepository.save(categoryFind);
+        }
     }
 
     @Override
