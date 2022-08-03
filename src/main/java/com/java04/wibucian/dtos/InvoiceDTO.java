@@ -19,6 +19,8 @@ public class InvoiceDTO implements Serializable {
 
     private String customerName;
 
+    private Float toltalMoney;
+
     private Date dateTime;
 
 }

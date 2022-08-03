@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 
 @Data
@@ -21,5 +22,9 @@ public class DetailInvoiceVO implements Serializable {
     private String idProduct;
 
     private Integer quantity;
+
+    private Date dateTime;
+
+    private Float totalMoney;
 
 }

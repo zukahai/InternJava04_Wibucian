@@ -4,6 +4,7 @@ package com.java04.wibucian.vos;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 public class SaleQueryVO implements Serializable {
@@ -15,6 +16,8 @@ public class SaleQueryVO implements Serializable {
 
     private String pcent;
 
-    private Float price;
+    private Date timeStart;
+
+    private Date timeEnd;
 
 }

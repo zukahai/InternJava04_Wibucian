@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @Entity
@@ -28,5 +29,11 @@ public class DetailInvoice implements Serializable {
 
     @Column(name = "quantity")
     private Integer quantity;
+
+    @Column(name = "dateTime")
+    private Date dateTime;
+
+    @Column(name = "totalMoney")
+    private Float totalMoney;
 
 }

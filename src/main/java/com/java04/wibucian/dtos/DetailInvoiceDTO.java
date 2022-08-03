@@ -4,6 +4,7 @@ package com.java04.wibucian.dtos;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 public class DetailInvoiceDTO implements Serializable {
@@ -17,5 +18,9 @@ public class DetailInvoiceDTO implements Serializable {
     private String idProduct;
 
     private Integer quantity;
+
+    private Date dateTime;
+
+    private Float totalMoney;
 
 }

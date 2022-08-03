@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 
 @Data
@@ -19,6 +20,8 @@ public class SaleVO implements Serializable {
     @NotNull(message = "pcent can not null")
     private String pcent;
 
-    private Float price;
+    private Date timeStart;
+
+    private Date timeEnd;
 
 }

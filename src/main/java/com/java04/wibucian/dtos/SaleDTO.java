@@ -4,6 +4,7 @@ package com.java04.wibucian.dtos;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 public class SaleDTO implements Serializable {
@@ -14,6 +15,8 @@ public class SaleDTO implements Serializable {
 
     private String pcent;
 
-    private Float price;
+    private Date timeStart;
+
+    private Date timeEnd;
 
 }

@@ -30,6 +30,9 @@ public class Invoice implements Serializable {
     @Column(name = "customerName", nullable = false)
     private String customerName;
 
+    @Column(name = "toltalMoney")
+    private Float toltalMoney;
+
     @Column(name = "dateTime")
     private Date dateTime;
 

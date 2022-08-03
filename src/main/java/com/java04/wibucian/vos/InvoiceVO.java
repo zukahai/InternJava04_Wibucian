@@ -24,6 +24,8 @@ public class InvoiceVO implements Serializable {
     @NotNull(message = "customerName can not null")
     private String customerName;
 
+    private Float toltalMoney;
+
     private Date dateTime;
 
 }

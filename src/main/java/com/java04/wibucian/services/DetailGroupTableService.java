@@ -18,8 +18,6 @@ public class DetailGroupTableService {
 
     @Autowired
     private DetailGroupTableRepository detailGroupTableRepository;
-    private String id;
-    private DetailGroupTableUpdateVO vO;
 
     public String save(DetailGroupTableVO vO) {
         DetailGroupTable bean = new DetailGroupTable();
@@ -33,8 +31,6 @@ public class DetailGroupTableService {
     }
 
     public void update(String id, DetailGroupTableUpdateVO vO) {
-        this.id = id;
-        this.vO = vO;
         DetailGroupTable bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         detailGroupTableRepository.save(bean);

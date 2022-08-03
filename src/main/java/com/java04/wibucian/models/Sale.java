@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @Entity
@@ -23,7 +24,10 @@ public class Sale implements Serializable {
     @Column(name = "pcent", nullable = false)
     private String pcent;
 
-    @Column(name = "price")
-    private Float price;
+    @Column(name = "timeStart")
+    private Date timeStart;
+
+    @Column(name = "timeEnd")
+    private Date timeEnd;
 
 }
