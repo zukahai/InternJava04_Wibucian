@@ -1,9 +1,9 @@
 package com.java04.wibucian.repositories;
 
-import com.java04.wibucian.models.Category;
+import com.java04.wibucian.models.Ordercf;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface CategoryRepository extends JpaRepository<Category, Integer>, JpaSpecificationExecutor<Category> {
+public interface OrdercfRepository extends JpaRepository<Ordercf, String>, JpaSpecificationExecutor<Ordercf> {
 
 }
