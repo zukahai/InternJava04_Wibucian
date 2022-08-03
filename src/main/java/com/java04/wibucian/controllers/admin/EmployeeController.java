@@ -8,6 +8,7 @@ import com.java04.wibucian.vos.EmployeeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,10 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/")
-    public String findAll() throws Exception { return "admin/employee/index";}
+    public String Home(ModelMap modelMap)throws Exception {
+        modelMap.addAttribute("employee", "Hieu");
+        return "admin/employee/index";
+    }
 
     @PostMapping
     public String save(@Valid @RequestBody EmployeeVO vO) {

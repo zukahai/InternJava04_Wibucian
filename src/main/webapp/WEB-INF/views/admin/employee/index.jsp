@@ -10,6 +10,6 @@
     <title>Trang chủ</title>
 </head>
 <body>
-    <h1 style="font-size: 1.5em; font-weight: bold;">Hiếu dubai</h1>
+    <h1 style="font-size: 1.5em; font-weight: bold;">Hiếu ${employee}</h1>
 </body>
 </html>
