@@ -90,6 +90,16 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>8.0.0</version>
+                <configuration>
+                    <url>
+                        jdbc:sqlserver://localhost:1433;database=WIBUCIAN
+                    </url>
+                    <user>
+                        sa
+                    </user>
+                    <password>1</password>
+                    <locations>filesystem:db/migration</locations>
+                </configuration>
             </plugin>
 
         </plugins>
