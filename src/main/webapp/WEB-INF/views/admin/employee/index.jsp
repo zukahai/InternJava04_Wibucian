@@ -10,8 +10,6 @@
     <title>Trang chủ</title>
 </head>
 <body>
-<c:forEach var="i" begin="1" end="5">
-Item <c:out value="${i}"/><p>
-    </c:forEach>
+    <h1 style="font-size: 1.5em; font-weight: bold;">Hiếu dubai</h1>
 </body>
 </html>
