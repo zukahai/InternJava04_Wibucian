@@ -4,10 +4,12 @@ import com.java04.wibucian.models.Category;
 import com.java04.wibucian.repositories.CategoryRepository;
 import com.java04.wibucian.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 
@@ -17,14 +19,18 @@ public class HomeController {
     private CategoryService categoryService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
-        ArrayList<Category> categories = new ArrayList<>();
-        categories = (ArrayList<Category>) categoryService.findAll();
-        for (Category category : categories) {
-            System.out.println(category);
-        }
-        System.out.println("HomeController.index()");
-        return "index";
+//        public String index() {
+//            ArrayList<Category> categories = new ArrayList<>();
+//            categories = (ArrayList<Category>) categoryService.findAll();
+//            for (Category category : categories) {
+//                System.out.println(category);
+//            }
+//            System.out.println("HomeController.index()");
+//            return "index";
+//        }
+    public @ResponseBody ResponseEntity<String> getHome() {
+        return ResponseEntity.ok()
+                             .body("home for user");
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -37,9 +43,6 @@ public class HomeController {
         System.out.println("HomeController.index()");
         return "index";
     }
-
-
-
 
 
 }
