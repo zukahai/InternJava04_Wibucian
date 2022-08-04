@@ -1,30 +1,80 @@
 package com.java04.wibucian.models;
 
-import lombok.Data;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-@Data
 @Entity
-@Table(name = "GroupTable")
 public class GroupTable implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     @Id
-    @Column(name = "idGroupTable", nullable = false)
-    private String idGroupTable;
+    @Column(name = "idGroupTable", nullable = false, length = 15)
+    private String id;
 
-    @Column(name = "groupName")
+    @Column(name = "groupName", length = 50)
     private String groupName;
 
     @Column(name = "foundedTime")
-    private Date foundedTime;
+    private Instant foundedTime;
 
+    @OneToMany(mappedBy = "groupTable")
+    private Set<Ordercf> ordercfs = new LinkedHashSet<>();
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public Instant getFoundedTime() {
+        return foundedTime;
+    }
+
+    public void setFoundedTime(Instant foundedTime) {
+        this.foundedTime = foundedTime;
+    }
+
+    public Set<Ordercf> getOrdercfs() {
+        return ordercfs;
+    }
+
+    public void setOrdercfs(Set<Ordercf> ordercfs) {
+        this.ordercfs = ordercfs;
+    }
+
+    public Set<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(Set<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+
+    public Set<DetailGroupTable> getDetailGroupTables() {
+        return detailGroupTables;
+    }
+
+    public void setDetailGroupTables(Set<DetailGroupTable> detailGroupTables) {
+        this.detailGroupTables = detailGroupTables;
+    }
+
+    @OneToMany(mappedBy = "groupTable")
+    private Set<Invoice> invoices = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "groupTable")
+    private Set<DetailGroupTable> detailGroupTables = new LinkedHashSet<>();
 }

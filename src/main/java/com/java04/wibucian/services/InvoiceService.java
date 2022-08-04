@@ -23,7 +23,7 @@ public class InvoiceService {
         Invoice bean = new Invoice();
         BeanUtils.copyProperties(vO, bean);
         bean = invoiceRepository.save(bean);
-        return bean.getIdInvoice();
+        return bean.getId();
     }
 
     public void delete(String id) {

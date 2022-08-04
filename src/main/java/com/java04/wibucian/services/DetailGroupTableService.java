@@ -23,7 +23,7 @@ public class DetailGroupTableService {
         DetailGroupTable bean = new DetailGroupTable();
         BeanUtils.copyProperties(vO, bean);
         bean = detailGroupTableRepository.save(bean);
-        return bean.getIdDetailGroupTable();
+        return bean.getId();
     }
 
     public void delete(String id) {

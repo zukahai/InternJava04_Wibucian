@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<base href="/">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <jsp:include page="../includes/sidebar.jsp"></jsp:include>
@@ -10,54 +12,46 @@
         <div class="card-header cursor-pointer">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Profile Details</h3>
+                <h3 class="fw-bold m-0">Dach sách loại bàn</h3>
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
             <a
                     href="../../demo14/dist/account/settings.html"
                     class="btn btn-primary align-self-center"
-            >Edit Profile</a
+            >Thêm loại bàn</a
             >
             <!--end::Action-->
         </div>
         <!--begin::Card header-->
         <!--begin::Card body-->
-        <div class="mb-10">
-   
-</div>
         <div class="card-body p-9">
-         <label for="exampleFormControlInput1" class="required form-label">Example</label>
-    <input type="email" class="form-control form-control-solid" placeholder="Example input"/>
+
+<!--end::Input group-->
             <div class="table-responsive">
                 <table class="table table-row-bordered gy-5">
                     <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
-                        <th>Name</th>
-                        <th class="table-sort-asc">Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+<%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
+                        <th>Mã loại bàn</th>
+                        <th>Tên loại bàn</th>
+                        <th>Giá</th>
+                        <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>$170,750</td>
-                    </tr>
+                    <c:forEach var="item" items="${typeTables}">
+                        <tr>
+                            <th scope="row">${  item.idTypeTable }</th>
+                            <td>${  item.typeName }</td>
+                            <td>${  item.price }</td>
+                            <td>
+                                <a href="" class="btn btn-warning mx-1">Xem</a>
+                                <a href="" class="btn btn-success mx-1">Sửa</a>
+                                <a href="" class="btn btn-danger mx-1">Xoá</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

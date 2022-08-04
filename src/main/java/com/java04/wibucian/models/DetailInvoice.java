@@ -1,39 +1,55 @@
 package com.java04.wibucian.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
-@Data
 @Entity
-@Table(name = "DetailInvoice")
-public class DetailInvoice implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class DetailInvoice {
     @Id
-    @Column(name = "idDetailInvoice", nullable = false)
-    private String idDetailInvoice;
+    @Column(name = "idDetailInvoice", nullable = false, length = 15)
+    private String id;
 
-    @Column(name = "idInvoice")
-    private String idInvoice;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idInvoice")
+    private Invoice invoice;
 
-    @Column(name = "idProduct")
-    private String idProduct;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idProduct")
+    private Product product;
 
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "dateTime")
-    private Date dateTime;
+    public String getId() {
+        return id;
+    }
 
-    @Column(name = "totalMoney")
-    private Float totalMoney;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 
 }

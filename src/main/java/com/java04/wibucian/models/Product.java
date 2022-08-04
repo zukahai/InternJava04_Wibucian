@@ -1,38 +1,112 @@
 package com.java04.wibucian.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-@Data
 @Entity
-@Table(name = "Product")
-public class Product implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class Product  {
     @Id
-    @Column(name = "idProduct", nullable = false)
-    private String idProduct;
+    @Column(name = "idProduct", nullable = false, length = 15)
+    private String id;
 
-    @Column(name = "idSale")
-    private String idSale;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idSale")
+    private Sale sale;
 
-    @Column(name = "idProductType")
-    private String idProductType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idProductType")
+    private TypeProduct productType;
 
-    @Column(name = "describe")
+    @Lob
+    @Column(name = "\"describe\"")
     private String describe;
 
-    @Column(name = "srcImage", nullable = false)
+    @Column(name = "srcImage", nullable = false, length = 100)
     private String srcImage;
 
-    @Column(name = "productName", nullable = false)
+    @Column(name = "productName", nullable = false, length = 100)
     private String productName;
 
+    @OneToMany(mappedBy = "product")
+    private Set<DetailInvoice> detailInvoices = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "product")
+    private Set<Ordercf> ordercfs = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "product")
+    private Set<DetailProduct> detailProducts = new LinkedHashSet<>();
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
+    }
+
+    public TypeProduct getProductType() {
+        return productType;
+    }
+
+    public void setProductType(TypeProduct productType) {
+        this.productType = productType;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public String getSrcImage() {
+        return srcImage;
+    }
+
+    public void setSrcImage(String srcImage) {
+        this.srcImage = srcImage;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public Set<DetailInvoice> getDetailInvoices() {
+        return detailInvoices;
+    }
+
+    public void setDetailInvoices(Set<DetailInvoice> detailInvoices) {
+        this.detailInvoices = detailInvoices;
+    }
+
+    public Set<Ordercf> getOrdercfs() {
+        return ordercfs;
+    }
+
+    public void setOrdercfs(Set<Ordercf> ordercfs) {
+        this.ordercfs = ordercfs;
+    }
+
+    public Set<DetailProduct> getDetailProducts() {
+        return detailProducts;
+    }
+
+    public void setDetailProducts(Set<DetailProduct> detailProducts) {
+        this.detailProducts = detailProducts;
+    }
 }

@@ -25,7 +25,7 @@ public class EmployeeController {
 
     @GetMapping("/")
     public String Home(ModelMap modelMap)throws Exception {
-        modelMap.addAttribute("employee", "Hieu");
+        modelMap.addAttribute("DanhSach", employeeService.findAll());
         return "admin/employee/index";
     }
 

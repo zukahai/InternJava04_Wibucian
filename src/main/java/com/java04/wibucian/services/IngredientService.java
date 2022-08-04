@@ -23,7 +23,7 @@ public class IngredientService {
         Ingredient bean = new Ingredient();
         BeanUtils.copyProperties(vO, bean);
         bean = ingredientRepository.save(bean);
-        return bean.getIdIngredient();
+        return bean.getId();
     }
 
     public void delete(String id) {

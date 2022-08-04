@@ -1,36 +1,99 @@
 package com.java04.wibucian.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 
-@Data
 @Entity
-@Table(name = "Shift")
-public class Shift implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class Shift {
     @Id
-    @Column(name = "idShift", nullable = false)
-    private String idShift;
+    @Column(name = "idShift", nullable = false, length = 15)
+    private String id;
 
-    @Column(name = "idEmployee")
-    private String idEmployee;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEmployee")
+    private Employee employee;
 
-    @Column(name = "idEmployeeChange")
-    private String idEmployeeChange;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEmployeeChange")
+    private Employee employeeChange;
 
     @Column(name = "timeStart")
-    private Date timeStart;
+    private Instant timeStart;
 
     @Column(name = "timeEnd")
-    private Date timeEnd;
+    private Instant timeEnd;
 
+    @Column(name = "isRequestShift")
+    private Boolean isRequestShift;
+
+    @Column(name = "isOvertimeRequest")
+    private Boolean isOvertimeRequest;
+
+    @Column(name = "requestTime")
+    private Instant requestTime;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Employee getEmployeeChange() {
+        return employeeChange;
+    }
+
+    public void setEmployeeChange(Employee employeeChange) {
+        this.employeeChange = employeeChange;
+    }
+
+    public Instant getTimeStart() {
+        return timeStart;
+    }
+
+    public void setTimeStart(Instant timeStart) {
+        this.timeStart = timeStart;
+    }
+
+    public Instant getTimeEnd() {
+        return timeEnd;
+    }
+
+    public void setTimeEnd(Instant timeEnd) {
+        this.timeEnd = timeEnd;
+    }
+
+    public Boolean getRequestShift() {
+        return isRequestShift;
+    }
+
+    public void setRequestShift(Boolean requestShift) {
+        isRequestShift = requestShift;
+    }
+
+    public Boolean getOvertimeRequest() {
+        return isOvertimeRequest;
+    }
+
+    public void setOvertimeRequest(Boolean overtimeRequest) {
+        isOvertimeRequest = overtimeRequest;
+    }
+
+    public Instant getRequestTime() {
+        return requestTime;
+    }
+
+    public void setRequestTime(Instant requestTime) {
+        this.requestTime = requestTime;
+    }
 }
