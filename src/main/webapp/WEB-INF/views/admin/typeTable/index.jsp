@@ -42,7 +42,7 @@
                     <tbody>
                     <c:forEach var="item" items="${typeTables}">
                         <tr>
-                            <th scope="row">${  item.idTypeTable }</th>
+                            <th scope="row">${  item.id }</th>
                             <td>${  item.typeName }</td>
                             <td>${  item.price }</td>
                             <td>
