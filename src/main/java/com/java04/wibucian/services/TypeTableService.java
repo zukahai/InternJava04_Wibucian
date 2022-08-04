@@ -24,7 +24,7 @@ public class TypeTableService {
         TypeTable bean = new TypeTable();
         BeanUtils.copyProperties(vO, bean);
         bean = typeTableRepository.save(bean);
-        return bean.getIdTypeTable();
+        return bean.getId();
     }
 
     public void delete(String id) {

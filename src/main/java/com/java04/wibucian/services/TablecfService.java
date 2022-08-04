@@ -23,7 +23,7 @@ public class TablecfService {
         Tablecf bean = new Tablecf();
         BeanUtils.copyProperties(vO, bean);
         bean = tablecfRepository.save(bean);
-        return bean.getIdTablecf();
+        return bean.getId();
     }
 
     public void delete(String id) {

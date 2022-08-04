@@ -1,32 +1,67 @@
 package com.java04.wibucian.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-@Data
 @Entity
-@Table(name = "Tablecf")
-public class Tablecf implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class Tablecf  {
     @Id
-    @Column(name = "idTablecf", nullable = false)
-    private String idTablecf;
+    @Column(name = "idTablecf", nullable = false, length = 15)
+    private String id;
 
-    @Column(name = "idTypeTable")
-    private String idTypeTable;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idTypeTable")
+    private TypeTable typeTable;
 
-    @Column(name = "describe")
+    @Lob
+    @Column(name = "\"describe\"")
     private String describe;
 
     @Column(name = "capacity")
     private Integer capacity;
 
+    @OneToMany(mappedBy = "tablecf")
+    private Set<DetailGroupTable> detailGroupTables = new LinkedHashSet<>();
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public TypeTable getTypeTable() {
+        return typeTable;
+    }
+
+    public void setTypeTable(TypeTable typeTable) {
+        this.typeTable = typeTable;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public Set<DetailGroupTable> getDetailGroupTables() {
+        return detailGroupTables;
+    }
+
+    public void setDetailGroupTables(Set<DetailGroupTable> detailGroupTables) {
+        this.detailGroupTables = detailGroupTables;
+    }
 }

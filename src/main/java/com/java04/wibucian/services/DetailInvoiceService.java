@@ -23,7 +23,7 @@ public class DetailInvoiceService {
         DetailInvoice bean = new DetailInvoice();
         BeanUtils.copyProperties(vO, bean);
         bean = detailInvoiceRepository.save(bean);
-        return bean.getIdDetailInvoice();
+        return bean.getId();
     }
 
     public void delete(String id) {
