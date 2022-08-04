@@ -10,15 +10,10 @@ import java.io.Serializable;
 public class TypeTableVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "id can not null")
-    private Integer id;
-
-    @NotNull(message = "idTypeTable can not null")
-    private String idTypeTable;
-
     @NotNull(message = "typeName can not null")
     private String typeName;
 
-    private Float price;
+    @NotNull(message = "price can not null")
+    private Double price;
 
 }
