@@ -2,7 +2,11 @@ package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.ProductDTO;
 import com.java04.wibucian.models.Product;
+import com.java04.wibucian.models.Sale;
+import com.java04.wibucian.models.TypeProduct;
 import com.java04.wibucian.repositories.ProductRepository;
+import com.java04.wibucian.repositories.SaleRepository;
+import com.java04.wibucian.repositories.TypeProductRepository;
 import com.java04.wibucian.vos.ProductQueryVO;
 import com.java04.wibucian.vos.ProductUpdateVO;
 import com.java04.wibucian.vos.ProductVO;
@@ -11,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -19,9 +24,20 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private SaleRepository saleRepository;
+
+    @Autowired
+    private TypeProductRepository typeProductRepository;
+
+
     public String save(ProductVO vO) {
         Product bean = new Product();
+        TypeProduct typeProduct = this.typeProductRepository.findById(vO.getIdProductType())
+                .orElseThrow(() -> new NoSuchElementException());
         BeanUtils.copyProperties(vO, bean);
+        bean.setSale(null);
+        bean.setProductType(typeProduct);
         bean = productRepository.save(bean);
         return bean.getId();
     }
@@ -29,6 +45,20 @@ public class ProductService {
     public void delete(String id) {
         productRepository.deleteById(id);
     }
+
+    public Product get(String productId) {
+        return productRepository.findById(productId)
+                .get();
+    }
+
+    public List<Product> listAll() {
+        return productRepository.findAll();
+    }
+
+    public void save(Product product) {
+        productRepository.save(product);
+    }
+
 
     public void update(String id, ProductUpdateVO vO) {
         Product bean = requireOne(id);

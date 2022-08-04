@@ -10,16 +10,10 @@ import java.io.Serializable;
 public class ProductVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "id can not null")
-    private Integer id;
-
-    @NotNull(message = "idProduct can not null")
-    private String idProduct;
-
-    private String idSale;
-
+    @NotNull(message = "Product type can not null")
     private String idProductType;
 
+    @NotNull(message = "Describe can not null")
     private String describe;
 
     @NotNull(message = "srcImage can not null")
