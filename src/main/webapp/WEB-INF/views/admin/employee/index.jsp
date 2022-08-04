@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
@@ -55,13 +56,21 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <c:forEach var="item" items="${DanhSach}">
                     <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
+                        <th scope="row">${item.id}</th>
+                        <td>${ item.srcEmployee}</td>
+                        <td>${ item.name}</td>
+                        <td>${ item.phoneNumber}</td>
+                        <td>${ item.CoefficientsSalary}</td>
+                        <td>
+                            <a href="" class="btn btn-warning mx-1">Hoạt động</a>
+                        </td>
+                        <td>
+                            <a href="" class="btn btn-warning mx-1">Sửa</a>
+                            <a href="" class="btn btn-success mx-1">Xem</a>
+                            <a href="" class="btn btn-danger mx-1">Xóa</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Garrett Winters</td>
@@ -70,7 +79,8 @@
                         <td>63</td>
                         <td>2011/07/25</td>
                         <td>$170,750</td>
-                    </tr>
+                    </tr
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
