@@ -23,7 +23,7 @@ public class ImportGoodsService {
         ImportGoods bean = new ImportGoods();
         BeanUtils.copyProperties(vO, bean);
         bean = importGoodsRepository.save(bean);
-        return bean.getIdImportGoods();
+        return bean.getId();
     }
 
     public void delete(String id) {

@@ -23,7 +23,7 @@ public class ShiftService {
         Shift bean = new Shift();
         BeanUtils.copyProperties(vO, bean);
         bean = shiftRepository.save(bean);
-        return bean.getIdShift();
+        return bean.getId();
     }
 
     public void delete(String id) {

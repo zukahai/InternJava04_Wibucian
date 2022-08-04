@@ -1,13 +1,14 @@
 package com.java04.wibucian.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "ImportGoods")
-public class ImportGood {
+public class ImportGoods {
     @Id
     @Column(name = "idImportGoods", nullable = false, length = 15)
     private String id;
@@ -19,9 +20,8 @@ public class ImportGood {
     @Column(name = "timeImport")
     private Instant timeImport;
 
-    @OneToMany(mappedBy = "idImportGoods")
-    private Set<com.java04.wibucian.models.DetailImportGood> detailImportGoods =
-            new LinkedHashSet<>();
+    @OneToMany(mappedBy = "importGoods")
+    private Set<DetailImportGoods> detailImportGoods = new LinkedHashSet<>();
 
     public String getId() {
         return id;
@@ -47,13 +47,11 @@ public class ImportGood {
         this.timeImport = timeImport;
     }
 
-    public Set<com.java04.wibucian.models.DetailImportGood> getDetailImportGoods() {
+    public Set<DetailImportGoods> getDetailImportGoods() {
         return detailImportGoods;
     }
 
-    public void setDetailImportGoods(
-            Set<com.java04.wibucian.models.DetailImportGood> detailImportGoods) {
+    public void setDetailImportGoods(Set<DetailImportGoods> detailImportGoods) {
         this.detailImportGoods = detailImportGoods;
     }
-
 }

@@ -23,7 +23,7 @@ public class OrdercfService {
         Ordercf bean = new Ordercf();
         BeanUtils.copyProperties(vO, bean);
         bean = ordercfRepository.save(bean);
-        return bean.getIdOrdercf();
+        return bean.getId();
     }
 
     public void delete(String id) {

@@ -23,7 +23,7 @@ public class EmployeeService {
         Employee bean = new Employee();
         BeanUtils.copyProperties(vO, bean);
         bean = employeeRepository.save(bean);
-        return bean.getIdEmployee();
+        return bean.getId();
     }
 
     public void delete(String id) {
