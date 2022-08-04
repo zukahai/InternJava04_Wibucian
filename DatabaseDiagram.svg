@@ -765,7 +765,7 @@
 				<text x="77.83" y="2441.68" class="st3" v:langID="3081"><v:paragraph v:horizAlign="1"/><v:tabList/>Order</text>			</g>
 			<g id="shape408-132" v:mID="408" v:groupContext="groupContent"/>
 		</g>
-		<g id="group504-133" transform="translate(1140.38,-1723.41)" v:mID="504" v:groupContext="group">
+		<g id="group504-133" transform="translate(1249.37,-1709.53)" v:mID="504" v:groupContext="group">
 			<v:userDefs>
 				<v:ud v:nameU="msvStructureType" v:prompt="" v:val="VT4(List)"/>
 				<v:ud v:nameU="msvSDContainerResize" v:prompt="" v:val="VT0(2):26"/>
@@ -5982,7 +5982,7 @@
 			</v:userDefs>
 			<path d="M9.96 2453.67 L10.32 2453.67 L18.58 2453.67 L18.58 2483.48 L113.39 2483.48" class="st9"/>
 		</g>
-		<g id="group509-913" transform="translate(1140.38,-1807.42)" v:mID="509" v:groupContext="group">
+		<g id="group509-913" transform="translate(1249.37,-1793.54)" v:mID="509" v:groupContext="group">
 			<v:userDefs>
 				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(Database;DbAttribute;DbListItem)"/>
 				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(attribute name)"/>
@@ -6003,6 +6003,7 @@
 				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(idShiftRotate)"/>
 				<v:ud v:nameU="ContainerMargin" v:prompt="" v:val="VT0(0):24"/>
 				<v:ud v:nameU="WidthMin" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="BackFillColor" v:prompt="" v:val="VT5(#bfbfbf)"/>
 				<v:ud v:nameU="ItemIndex" v:prompt="" v:val="VT0(1):26"/>
 			</v:userDefs>
 			<title>Primary Key Attribute.509</title>
@@ -6010,7 +6011,7 @@
 			<g id="shape509-914" v:mID="509" v:groupContext="groupContent">
 				<v:textBlock v:margins="rect(8,8,8,34.0157)" v:tabSpace="42.5197"/>
 				<v:textRect cx="92.126" cy="2439.67" width="184.26" height="28.0036"/>
-				<path d="M0 2453.67 L184.25 2453.67 L184.25 2425.67 L0 2425.67 L0 2453.67 Z" class="st4"/>
+				<path d="M0 2453.67 L184.25 2453.67 L184.25 2425.67 L0 2425.67 L0 2453.67 Z" class="st7"/>
 				<text x="34.02" y="2442.67" class="st6" v:langID="3081"><v:paragraph/><v:tabList/>idShiftRotate</text>			</g>
 			<g id="shape510-918" v:mID="510" v:groupContext="shape" transform="translate(4.25197,-5.49788)">
 				<title>Sheet.510</title>
@@ -6023,10 +6024,10 @@
 				<v:textRect cx="14.8168" cy="2445.17" width="12.63" height="12.0036"/>
 				<path d="M1.7 2451.15 L4.25 2453.67 L6.17 2451.78 L6.17 2445.48 L7.44 2445.48 L6.8 2444.22 A4.2097 4.2097 -180 1
 							 0 1.7 2444.22 L1.06 2445.48 L2.34 2445.48 L2.34 2446.11 L1.38 2447.37 L2.98 2448.63 L2.98 2449.26 L1.7
-							 2450.52 L1.7 2451.15 Z" class="st11"/>
-				<text x="8.5" y="2448.17" class="st12" v:langID="3081"><v:paragraph/><v:tabList/>PK</text>			</g>
+							 2450.52 L1.7 2451.15 Z" class="st7"/>
+				<text x="8.5" y="2448.17" class="st6" v:langID="3081"><v:paragraph/><v:tabList/>PK</text>			</g>
 		</g>
-		<g id="shape512-922" v:mID="512" v:groupContext="shape" transform="translate(1140.38,-1807.42)">
+		<g id="shape512-922" v:mID="512" v:groupContext="shape" transform="translate(1249.37,-1793.54)">
 			<title>Primary Key Separator.512</title>
 			<v:userDefs>
 				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(Database;DbPkSeparator;DbListItem)"/>
@@ -6037,7 +6038,7 @@
 			<path d="M0 2453.67 L184.25 2453.67 L0 2453.67 Z" class="st4"/>
 			<path d="M0 2453.67 L184.25 2453.67" class="st5"/>
 		</g>
-		<g id="group513-925" transform="translate(1140.38,-1779.41)" v:mID="513" v:groupContext="group">
+		<g id="group513-925" transform="translate(1249.37,-1765.54)" v:mID="513" v:groupContext="group">
 			<v:userDefs>
 				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(Database;DbAttribute;DbListItem)"/>
 				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(attribute name)"/>
@@ -6094,9 +6095,9 @@
 				</v:userDefs>
 				<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
 				<v:textRect cx="6.02725" cy="2439.67" width="12.06" height="12.0036"/>
-				<text x="0" y="2442.67" class="st6" v:langID="3081"><v:paragraph/><v:tabList/>FK</text>			</g>
+				<text x="-0" y="2442.67" class="st6" v:langID="3081"><v:paragraph/><v:tabList/>FK</text>			</g>
 		</g>
-		<g id="group516-934" transform="translate(1140.38,-1723.41)" v:mID="516" v:groupContext="group">
+		<g id="group516-934" transform="translate(1249.37,-1709.53)" v:mID="516" v:groupContext="group">
 			<v:userDefs>
 				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(Database;DbAttribute;DbListItem)"/>
 				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(attribute name)"/>
@@ -6138,7 +6139,7 @@
 				<v:textRect cx="14.8168" cy="2445.17" width="12.63" height="12.0036"/>
 			</g>
 		</g>
-		<g id="group522-940" transform="translate(1140.38,-1751.41)" v:mID="522" v:groupContext="group">
+		<g id="group522-940" transform="translate(1249.37,-1737.53)" v:mID="522" v:groupContext="group">
 			<v:userDefs>
 				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(Database;DbAttribute;DbListItem)"/>
 				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(attribute name)"/>
@@ -6219,16 +6220,17 @@
 				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
 				<v:ud v:nameU="DBNotation" v:prompt="" v:val="VT0(2):26"/>
 				<v:ud v:nameU="Override" v:prompt="" v:val="VT0(1):5"/>
-				<v:ud v:nameU="EndAngle" v:prompt="" v:val="VT0(-0.00088714853298242):32"/>
-				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(0.055224320790829):24"/>
+				<v:ud v:nameU="EndAngle" v:prompt="" v:val="VT0(2.6764099056509):32"/>
+				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(0.38747086583782):24"/>
 				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-4.8992187902996E-05):1"/>
-				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(0.055224320790819):24"/>
-				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(-4.8992188027341E-05):1"/>
-				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(-0.00088714853073062):32"/>
+				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(-0.25795100316281):24"/>
+				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(0.12947087048692):1"/>
+				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(-0.00012644095843432):32"/>
 				<v:ud v:nameU="RITextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 			</v:userDefs>
-			<path d="M9.96 2453.67 L10.32 2453.67 L32.19 2453.67 L32.19 2467.84 L75.26 2467.84" class="st9"/>
+			<path d="M9.96 2453.67 L10.32 2453.67 L61.09 2453.67 L61.09 2578.61 L387.08 2578.61 L387.08 2481.72 L368.5 2481.72"
+					class="st9"/>
 		</g>
 		<g id="shape526-951" v:mID="526" v:groupContext="shape" v:layerMember="2" transform="translate(1327.32,-1423.84)">
 			<title>Relationship.526</title>
@@ -6279,6 +6281,106 @@
 				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
 			</v:userDefs>
 			<path d="M9.96 2453.67 L10.32 2453.67 L18.58 2453.67 L18.58 2565.68 L202.82 2565.68" class="st9"/>
+		</g>
+		<g id="shape530-956" v:mID="530" v:groupContext="shape" v:layerMember="2" transform="translate(1058.03,-2189.97)">
+			<title>Relationship.530</title>
+			<v:userDefs>
+				<v:ud v:nameU="DBShapeType" v:prompt="Relationship (Foreign Key)" v:val="VT0(2):26"/>
+				<v:ud v:nameU="RefShapeGuid" v:prompt="Unique identifier used by the add-on." v:val="VT0(0):26"/>
+				<v:ud v:nameU="Identifying" v:prompt="Set to indicate the relationship is an &#39;Identifying Relationship&#39;."
+						v:val="VT0(0):5"/>
+				<v:ud v:nameU="DBCardinality" v:prompt="25=exactly one, 28=one or more, 29=zero one or more, 30=zero or one"/>
+				<v:ud v:nameU="DBNotation" v:prompt="0 = IDEF1X; 2 = Relational" v:val="VT0(0):26"/>
+				<v:ud v:nameU="CrowsFoot"
+						v:prompt="Overrides the relationship notation specifed by the IDEF1X or Relational notations."
+						v:val="VT0(0):5"/>
+				<v:ud v:nameU="Optional" v:prompt="Set to indicate the relationship is optional." v:val="VT0(0):5"/>
+				<v:ud v:nameU="Override"
+						v:prompt="Set to override Database | Document | Options locally for this relationship shape."
+						v:val="VT0(0):5"/>
+				<v:ud v:nameU="ManualEdits"
+						v:prompt="Set to allow free-form editing (manual edits are not maintained in the model.)" v:val="VT0(1):5"/>
+				<v:ud v:nameU="OverrideDBNotation" v:prompt="This formula conditionally sets the DBNotation setting."
+						v:val="VT0(0):26"/>
+				<v:ud v:nameU="EndAngle" v:prompt="Calculates a reference point for Relationship text."
+						v:val="VT0(-0.78539816339745):32"/>
+				<v:ud v:nameU="OverrideCrowsFoot" v:prompt="This formula conditionally sets the CrowsFoot notation flag."
+						v:val="VT0(0):26"/>
+				<v:ud v:nameU="DX1" v:prompt="Calculates a reference point for Relationship text." v:val="VT0(0.044444444444444):1"/>
+				<v:ud v:nameU="DY1" v:prompt="Calculates a reference point for Relationship text."
+						v:val="VT0(-0.044444444444444):1"/>
+				<v:ud v:nameU="DX3" v:prompt="Calculates a reference point for Relationship text." v:val="VT0(0.04444444444444):1"/>
+				<v:ud v:nameU="DY3" v:prompt="Calculates a reference point for Relationship text." v:val="VT0(-0.04444444444444):1"/>
+				<v:ud v:nameU="BeginAngle" v:prompt="Calculates a reference point for Relationship text."
+						v:val="VT0(-0.78539816339745):32"/>
+				<v:ud v:nameU="DBShapeVersion" v:prompt="Shape&#39;s version." v:val="VT0(4):26"/>
+				<v:ud v:nameU="RITextRefGuid" v:prompt="reference to associated text shape"/>
+				<v:ud v:nameU="CardTextRefGuid" v:prompt="reference to associated text shape"/>
+				<v:ud v:nameU="visDescription"
+						v:val="VT4(Use to define a foreign key between two tables in your Entity Relationship diagram.)"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+				<v:ud v:nameU="DBNotation" v:prompt="" v:val="VT0(2):26"/>
+				<v:ud v:nameU="Override" v:prompt="" v:val="VT0(1):5"/>
+				<v:ud v:nameU="EndAngle" v:prompt="" v:val="VT0(-0.00012061924393348):32"/>
+				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(0.40617223417786):1"/>
+				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-4.8992187902996E-05):1"/>
+				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(0.40617223417779):1"/>
+				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(-4.8992188030894E-05):1"/>
+				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(-0.00012061924361858):32"/>
+				<v:ud v:nameU="RITextRefGuid" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
+			</v:userDefs>
+			<path d="M9.96 2453.67 L10.32 2453.67 L124.87 2453.67 L124.87 2920.11 L191.34 2920.11" class="st9"/>
+		</g>
+		<g id="shape531-961" v:mID="531" v:groupContext="shape" v:layerMember="2" transform="translate(1182.9,-1758.98)">
+			<title>Relationship.531</title>
+			<v:userDefs>
+				<v:ud v:nameU="DBShapeType" v:prompt="Relationship (Foreign Key)" v:val="VT0(2):26"/>
+				<v:ud v:nameU="RefShapeGuid" v:prompt="Unique identifier used by the add-on." v:val="VT0(0):26"/>
+				<v:ud v:nameU="Identifying" v:prompt="Set to indicate the relationship is an &#39;Identifying Relationship&#39;."
+						v:val="VT0(0):5"/>
+				<v:ud v:nameU="DBCardinality" v:prompt="25=exactly one, 28=one or more, 29=zero one or more, 30=zero or one"/>
+				<v:ud v:nameU="DBNotation" v:prompt="0 = IDEF1X; 2 = Relational" v:val="VT0(0):26"/>
+				<v:ud v:nameU="CrowsFoot"
+						v:prompt="Overrides the relationship notation specifed by the IDEF1X or Relational notations."
+						v:val="VT0(0):5"/>
+				<v:ud v:nameU="Optional" v:prompt="Set to indicate the relationship is optional." v:val="VT0(0):5"/>
+				<v:ud v:nameU="Override"
+						v:prompt="Set to override Database | Document | Options locally for this relationship shape."
+						v:val="VT0(0):5"/>
+				<v:ud v:nameU="ManualEdits"
+						v:prompt="Set to allow free-form editing (manual edits are not maintained in the model.)" v:val="VT0(1):5"/>
+				<v:ud v:nameU="OverrideDBNotation" v:prompt="This formula conditionally sets the DBNotation setting."
+						v:val="VT0(0):26"/>
+				<v:ud v:nameU="EndAngle" v:prompt="Calculates a reference point for Relationship text."
+						v:val="VT0(-0.78539816339745):32"/>
+				<v:ud v:nameU="OverrideCrowsFoot" v:prompt="This formula conditionally sets the CrowsFoot notation flag."
+						v:val="VT0(0):26"/>
+				<v:ud v:nameU="DX1" v:prompt="Calculates a reference point for Relationship text." v:val="VT0(0.044444444444444):1"/>
+				<v:ud v:nameU="DY1" v:prompt="Calculates a reference point for Relationship text."
+						v:val="VT0(-0.044444444444444):1"/>
+				<v:ud v:nameU="DX3" v:prompt="Calculates a reference point for Relationship text." v:val="VT0(0.04444444444444):1"/>
+				<v:ud v:nameU="DY3" v:prompt="Calculates a reference point for Relationship text." v:val="VT0(-0.04444444444444):1"/>
+				<v:ud v:nameU="BeginAngle" v:prompt="Calculates a reference point for Relationship text."
+						v:val="VT0(-0.78539816339745):32"/>
+				<v:ud v:nameU="DBShapeVersion" v:prompt="Shape&#39;s version." v:val="VT0(4):26"/>
+				<v:ud v:nameU="RITextRefGuid" v:prompt="reference to associated text shape"/>
+				<v:ud v:nameU="CardTextRefGuid" v:prompt="reference to associated text shape"/>
+				<v:ud v:nameU="visDescription"
+						v:val="VT4(Use to define a foreign key between two tables in your Entity Relationship diagram.)"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+				<v:ud v:nameU="DBNotation" v:prompt="" v:val="VT0(2):26"/>
+				<v:ud v:nameU="Override" v:prompt="" v:val="VT0(1):5"/>
+				<v:ud v:nameU="EndAngle" v:prompt="" v:val="VT0(-0.012091393109281):32"/>
+				<v:ud v:nameU="DX1" v:prompt="" v:val="VT0(0.041045754256068):1"/>
+				<v:ud v:nameU="DY1" v:prompt="" v:val="VT0(-0.00049632453812265):1"/>
+				<v:ud v:nameU="DX3" v:prompt="" v:val="VT0(0.041045754256064):1"/>
+				<v:ud v:nameU="DY3" v:prompt="" v:val="VT0(-0.00049632453825765):1"/>
+				<v:ud v:nameU="BeginAngle" v:prompt="" v:val="VT0(-0.012091393105992):32"/>
+				<v:ud v:nameU="RITextRefGuid" v:prompt="" v:val="VT0(0):26"/>
+				<v:ud v:nameU="CardTextRefGuid" v:prompt="" v:val="VT0(0):26"/>
+			</v:userDefs>
+			<path d="M9.96 2460.5 L10.32 2460.51 L66.47 2461.12" class="st9"/>
 		</g>
 	</g>
 </svg>
