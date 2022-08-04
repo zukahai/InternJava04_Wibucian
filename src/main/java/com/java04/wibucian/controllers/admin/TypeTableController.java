@@ -7,6 +7,7 @@ import com.java04.wibucian.vos.TypeTableUpdateVO;
 import com.java04.wibucian.vos.TypeTableVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-@Validated
+//@Validated
 @Controller
 @RequestMapping("admin/typeTable")
 public class TypeTableController {
@@ -28,6 +29,18 @@ public class TypeTableController {
 
         modelMap.addAttribute("typeTables", typeTableService.findAll());
         return "admin/typeTable/index";
+    }
+
+    @GetMapping("/create")
+    public String createProductPage(ModelMap modelMap) throws Exception {
+        return "admin/typeTable/create";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String createNewProduct(ModelMap modelMap, @Valid TypeTableVO typeTableVO) throws Exception {
+        String productId = this.typeTableService.save(typeTableVO);
+        System.out.println(typeTableVO);
+        return "redirect:/admin/typeTable/";
     }
 
     @PostMapping
