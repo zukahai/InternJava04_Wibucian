@@ -1,0 +1,29 @@
+//
+// Root
+//
+
+// Light mode
+@include theme-light() {
+    // Page bg
+    --kt-page-bg: #{$page-bg};
+
+    // Header
+    --kt-header-box-shadow: #{get($header-config, box-shadow)};
+
+    // Aside
+    --kt-aside-bg-color: #{get($aside-config, bg-color)};
+    --kt-aside-menu-link-bg-color-active: #{get($aside-config, menu-link-bg-color-active)};
+}
+
+// Dark mode
+@include theme-dark() {
+    // Page bg
+    --kt-page-bg: #{$page-bg-dark};
+
+    // Header
+    --kt-header-box-shadow: #{get($header-config, box-shadow-dark)};
+
+    // Aside
+    --kt-aside-bg-color: #{get($aside-config, bg-color-dark)};
+    --kt-aside-menu-link-bg-color-active: #{get($aside-config, menu-link-bg-color-active-dark)};
+}
