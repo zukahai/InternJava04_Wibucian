@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @RequestMapping("/ordercf")
 public class OrdercfController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(path = {"/", ""}, method = {RequestMethod.POST, RequestMethod.GET})
     private String index() {
         return "admin/order/index";
     }
