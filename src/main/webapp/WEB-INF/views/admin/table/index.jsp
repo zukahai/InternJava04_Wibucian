@@ -33,7 +33,7 @@
                 <table class="table table-row-bordered gy-5">
                     <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
-                        <th class="table-sort-desc">Name</th>
+                        <th>Name</th>
                         <th class="table-sort-asc">Position</th>
                         <th>Office</th>
                         <th>Age</th>
