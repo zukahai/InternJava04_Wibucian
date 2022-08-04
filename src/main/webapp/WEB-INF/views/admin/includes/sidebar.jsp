@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
->>>>>>> 8eebca1dd14a93516731ba7db1bacf6792a9e9f7
 <!--begin::Aside menu-->
 <div class="aside-menu flex-column-fluid px-4">
     <!--begin::Aside Menu-->
@@ -37,19 +34,16 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-<<<<<<< HEAD
                         <a class="menu-link active" href="../../demo14/dist/index.html">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                             <span class="menu-title">Default</span>
-=======
                         <a class="menu-link active" href="admin/employee/">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                             <span class="menu-title">Danh Sách Nhân Viên</span>
->>>>>>> 8eebca1dd14a93516731ba7db1bacf6792a9e9f7
                         </a>
                         <!--end:Menu link-->
                     </div>
@@ -450,8 +444,6 @@
                 </div>
                 <!--end:Menu sub-->
             </div>
-<<<<<<< HEAD
-=======
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <!--begin:Menu link-->
                 <span class="menu-link">
@@ -577,7 +569,6 @@
                 </div>
                 <!--end:Menu sub-->
             </div>
->>>>>>> 8eebca1dd14a93516731ba7db1bacf6792a9e9f7
             <!--end:Menu item-->
             <!--begin:Menu item-->
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">

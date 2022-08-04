@@ -7,11 +7,7 @@
 <head>
     <base href="" />
     <title>
-<<<<<<< HEAD
-       Quản lý quán cà phê
-=======
-        WIBUCIAN
->>>>>>> 8eebca1dd14a93516731ba7db1bacf6792a9e9f7
+
     </title>
     <meta charset="utf-8" />
 
