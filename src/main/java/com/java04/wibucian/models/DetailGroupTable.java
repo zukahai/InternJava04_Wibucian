@@ -1,33 +1,56 @@
 package com.java04.wibucian.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 
-@Data
 @Entity
-@Table(name = "DetailGroupTable")
-public class DetailGroupTable implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class DetailGroupTable {
     @Id
-    @Column(name = "idDetailGroupTable", nullable = false)
-    private String idDetailGroupTable;
+    @Column(name = "idDetailGroupTable", nullable = false, length = 15)
+    private String id;
 
-    @Column(name = "idGroupTable")
-    private String idGroupTable;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idGroupTable")
+    private GroupTable groupTable;
 
-    @Column(name = "idTablecf")
-    private String idTablecf;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idTablecf")
+    private Tablecf tablecf;
 
     @Column(name = "groupTime")
-    private Date groupTime;
+    private Instant groupTime;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public GroupTable getGroupTable() {
+        return groupTable;
+    }
+
+    public void setGroupTable(GroupTable groupTable) {
+        this.groupTable = groupTable;
+    }
+
+    public Tablecf getTablecf() {
+        return tablecf;
+    }
+
+    public void setTablecf(Tablecf tablecf) {
+        this.tablecf = tablecf;
+    }
+
+    public Instant getGroupTime() {
+        return groupTime;
+    }
+
+    public void setGroupTime(Instant groupTime) {
+        this.groupTime = groupTime;
+    }
 
 }

@@ -23,7 +23,7 @@ public class AccountService {
         Account bean = new Account();
         BeanUtils.copyProperties(vO, bean);
         bean = accountRepository.save(bean);
-        return bean.getIdAccount();
+        return bean.getId();
     }
 
     public void delete(String id) {

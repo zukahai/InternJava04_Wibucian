@@ -23,7 +23,7 @@ public class GroupTableService {
         GroupTable bean = new GroupTable();
         BeanUtils.copyProperties(vO, bean);
         bean = groupTableRepository.save(bean);
-        return bean.getIdGroupTable();
+        return bean.getId();
     }
 
     public void delete(String id) {

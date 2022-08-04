@@ -13,21 +13,24 @@ use WIBUCIAN
 go
 ---
 CREATE TABLE Invoice (
-    id           int IDENTITY(1,1),
-    idInvoice AS [dbo].getUniqueIdWithPrefix1(id, 'Invoice') PERSISTED primary key,
-    idEmployee   nvarchar (15),
-    idGroupTable nvarchar (15),
-    customerName nvarchar (50) not null,
-    dateTime     datetime
-                     )
+     id int IDENTITY(1,1),
+     idInvoice AS [dbo].getUniqueIdWithPrefix1(id, 'Invoice') PERSISTED primary key,
+     idEmployee nvarchar (15),
+     idGroupTable nvarchar (15),
+     customerName nvarchar (50) not null,
+     toltalMoney float,
+     dateTime datetime
+)
 -------------------------------
 create table DetailInvoice (
-    id        int IDENTITY(1,1),
-    idDetailInvoice AS [dbo].getUniqueIdWithPrefix1(id, 'DTInvoice') PERSISTED primary key,
-    idInvoice nvarchar (15),
-    idProduct nvarchar (15),
-    quantity  int
-                           )
+   id int IDENTITY(1,1),
+   idDetailInvoice AS [dbo].getUniqueIdWithPrefix1(id, 'DTInvoice') PERSISTED primary key,
+   idInvoice nvarchar (15),
+   idProduct nvarchar (15),
+   quantity int,
+   dateTime datetime,
+   totalMoney float
+)
     go
 ------------------------------
 create table Account (
@@ -87,11 +90,12 @@ create table DetailProduct (
                            )
 ------------------------------------
 create table Sale (
-    id    int IDENTITY(1,1),
-    idSale AS [dbo].getUniqueIdWithPrefix1(id, 'Sale') PERSISTED primary key,
-    pcent nvarchar(50) not null,
-    price float
-                  )
+      id int IDENTITY(1,1),
+      idSale AS [dbo].getUniqueIdWithPrefix1(id, 'Sale') PERSISTED primary key,
+      pcent nvarchar(50) not null,
+      timeStart datetime,
+      timeEnd datetime
+)
 -------------------------------------
 create table ImportGoods (
     id         int IDENTITY(1,1),

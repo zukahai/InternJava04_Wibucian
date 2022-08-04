@@ -1,36 +1,66 @@
 package com.java04.wibucian.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 
-@Data
 @Entity
-@Table(name = "Ordercf")
-public class Ordercf implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class Ordercf {
     @Id
-    @Column(name = "idOrdercf", nullable = false)
-    private String idOrdercf;
+    @Column(name = "idOrdercf", nullable = false, length = 15)
+    private String id;
 
-    @Column(name = "idGroupTable")
-    private String idGroupTable;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idGroupTable")
+    private GroupTable groupTable;
 
-    @Column(name = "idProduct")
-    private String idProduct;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idProduct")
+    private Product product;
 
     @Column(name = "quantity")
     private Integer quantity;
 
     @Column(name = "timeOrder")
-    private Date timeOrder;
+    private Instant timeOrder;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public GroupTable getGroupTable() {
+        return groupTable;
+    }
+
+    public void setGroupTable(GroupTable groupTable) {
+        this.groupTable = groupTable;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Instant getTimeOrder() {
+        return timeOrder;
+    }
+
+    public void setTimeOrder(Instant timeOrder) {
+        this.timeOrder = timeOrder;
+    }
 }

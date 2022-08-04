@@ -23,7 +23,7 @@ public class TypeProductService {
         TypeProduct bean = new TypeProduct();
         BeanUtils.copyProperties(vO, bean);
         bean = typeProductRepository.save(bean);
-        return bean.getIdTypeProduct();
+        return bean.getId();
     }
 
     public void delete(String id) {

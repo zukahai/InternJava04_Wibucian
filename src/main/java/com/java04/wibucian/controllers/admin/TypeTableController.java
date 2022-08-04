@@ -7,6 +7,8 @@ import com.java04.wibucian.vos.TypeTableUpdateVO;
 import com.java04.wibucian.vos.TypeTableVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +16,19 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Validated
-@RestController
-@RequestMapping("/typeTable")
+@Controller
+@RequestMapping("admin/typeTable")
 public class TypeTableController {
 
     @Autowired
     private TypeTableService typeTableService;
+
+    @GetMapping("/")
+    public String Home(ModelMap modelMap)throws Exception {
+
+        modelMap.addAttribute("typeTables", typeTableService.findAll());
+        return "admin/typeTable/index";
+    }
 
     @PostMapping
     public String save(@Valid @RequestBody TypeTableVO vO) {

@@ -23,7 +23,7 @@ public class DetailProductService {
         DetailProduct bean = new DetailProduct();
         BeanUtils.copyProperties(vO, bean);
         bean = detailProductRepository.save(bean);
-        return bean.getIdDetailProduct();
+        return bean.getId();
     }
 
     public void delete(String id) {

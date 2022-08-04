@@ -1,32 +1,54 @@
 package com.java04.wibucian.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data
 @Entity
-@Table(name = "Account")
-public class Account implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class Account {
     @Id
-    @Column(name = "idAccount", nullable = false)
-    private String idAccount;
+    @Column(name = "idAccount", nullable = false, length = 15)
+    private String id;
 
-    @Column(name = "idEmployee")
-    private String idEmployee;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEmployee")
+    private Employee employee;
 
-    @Column(name = "password")
+    @Column(name = "password", length = 50)
     private String password;
 
     @Column(name = "role")
     private Integer role;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
 
 }

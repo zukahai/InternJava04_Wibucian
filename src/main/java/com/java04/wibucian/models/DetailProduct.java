@@ -1,32 +1,55 @@
 package com.java04.wibucian.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data
 @Entity
-@Table(name = "DetailProduct")
-public class DetailProduct implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class DetailProduct {
     @Id
-    @Column(name = "idDetailProduct", nullable = false)
-    private String idDetailProduct;
+    @Column(name = "idDetailProduct", nullable = false, length = 15)
+    private String id;
 
-    @Column(name = "idProduct")
-    private String idProduct;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idProduct")
+    private Product product;
 
-    @Column(name = "idIngredient")
-    private String idIngredient;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idIngredient")
+    private Ingredient ingredient;
 
     @Column(name = "quantity")
     private Integer quantity;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 
 }
