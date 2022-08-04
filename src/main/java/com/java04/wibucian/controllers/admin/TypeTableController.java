@@ -33,7 +33,7 @@ public class TypeTableController {
 
     @GetMapping("/create")
     public String createProductPage(ModelMap modelMap) throws Exception {
-        return "admin/typeTable/create";
+        return "admin/typeTable/create2";
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
