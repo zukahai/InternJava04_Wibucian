@@ -123,7 +123,7 @@
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3 btn btn-danger btn-sm text-white text-center"
+                                    <a href="#" class="menu-link px-3 btn btn-danger btn-sm text-white text-center delete-btn"
                                        data-kt-users-table-filter="delete_row ">Xoá</a>
                                 </div>
                                 <!--end::Menu item-->
@@ -156,4 +156,61 @@
 
 
     });
+    //handle click on .delete-btn button
+    $(".delete-btn").click(function () {
+        var id = $(this).data("id");
+        var btn = $(this);
+        swal.fire({
+            title: 'Bạn có chắc chắn muốn xoá?',
+            text: "Bạn sẽ không thể khôi phục lại dữ liệu này!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Xoá',
+            cancelButtonText: 'Hủy',
+            reverseButtons: true
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/delete/" + id,
+                    type: "DELETE",
+                    data: {
+                        id: id
+                    },
+                    success: function (response) {
+                        if (response.check === true) {
+                            swal.fire({
+                                title: 'Xoá thành công!',
+                                text: 'Dữ liệu đã được xoá.',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            btn.closest("tr").remove();
+
+
+                        } else {
+                            swal.fire({
+                                title: 'Xoá thất bại!',
+                                text: 'Dữ liệu đã được xoá.',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    }
+                });
+            } else if (result.dismiss === 'cancel') {
+                swal.fire({
+                    title: 'Hủy bỏ',
+                    text: 'Dữ liệu được bảo toàn.',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    });
+
+
+
 </script>
