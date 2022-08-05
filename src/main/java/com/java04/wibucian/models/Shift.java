@@ -3,10 +3,13 @@ package com.java04.wibucian.models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class Shift {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idShift", nullable = false, length = 15)
     private String id;
 
@@ -18,11 +21,6 @@ public class Shift {
     @JoinColumn(name = "idEmployeeChange")
     private Employee employeeChange;
 
-    @Column(name = "timeStart")
-    private Instant timeStart;
-
-    @Column(name = "timeEnd")
-    private Instant timeEnd;
 
     @Column(name = "isRequestShift")
     private Boolean isRequestShift;
@@ -32,6 +30,28 @@ public class Shift {
 
     @Column(name = "requestTime")
     private Instant requestTime;
+
+    @Column(name = "shiftDate")
+    private Date shiftDate;
+
+    @Column(name = "shiftCode")
+    private Integer shiftCode;
+
+    public Integer getShiftCode() {
+        return shiftCode;
+    }
+
+    public void setShiftCode(Integer shiftCode) {
+        this.shiftCode = shiftCode;
+    }
+
+    public Date getShiftDate() {
+        return shiftDate;
+    }
+
+    public void setShiftDate(Date shiftDate) {
+        this.shiftDate = shiftDate;
+    }
 
     public String getId() {
         return id;
@@ -55,22 +75,6 @@ public class Shift {
 
     public void setEmployeeChange(Employee employeeChange) {
         this.employeeChange = employeeChange;
-    }
-
-    public Instant getTimeStart() {
-        return timeStart;
-    }
-
-    public void setTimeStart(Instant timeStart) {
-        this.timeStart = timeStart;
-    }
-
-    public Instant getTimeEnd() {
-        return timeEnd;
-    }
-
-    public void setTimeEnd(Instant timeEnd) {
-        this.timeEnd = timeEnd;
     }
 
     public Boolean getRequestShift() {
