@@ -28,9 +28,9 @@
                 <div class="rounded border p-5">
                     <div class="form-floating my-5">
                         <select class="form-select" data-control="select2" id="idTypeTable" name="idTypeTable" data-placeholder="Select an option">
-                                <option value="TypeTable00001">Option 1</option>
-                                <option value="TypeTable00002">Option 2</option>
-                                <option value="TypeTable00003">Option 3</option>
+                            <c:forEach var="item" items="${typeTables}">
+                                <option value="${item.id}">${item.id} - ${item.typeName}</option>
+                            </c:forEach>>
                         </select>
                         <label for="idTypeTable">Loại bàn</label>
                     </div>
