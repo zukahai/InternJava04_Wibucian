@@ -28,7 +28,7 @@
 
                     <div class="form-floating my-5">
                         <input type="text" class="form-control" id="typeName" name="typeName" placeholder="VIP"/>
-                        <label for="typeName">Tên loại sản phẩm</label>
+                        <label for="typeName">Tên loại bàn</label>
                     </div>
                     <div class="form-floating my-5">
                         <input type="number" class="form-control" id="price" name="price" placeholder="0"/>
