@@ -26,18 +26,23 @@ public class TypeTableController {
 
     @GetMapping("/")
     public String Home(ModelMap modelMap)throws Exception {
-
         modelMap.addAttribute("typeTables", typeTableService.findAll());
         return "admin/typeTable/index";
     }
 
+
+//    @GetMapping("/{id}")
+//    public String HomeEdit(ModelMap modelMap)throws Exception {
+//        return "admin/typeTable/edit";
+//    }
+
     @GetMapping("/create")
-    public String createProductPage(ModelMap modelMap) throws Exception {
+    public String createTypeTablePage(ModelMap modelMap) throws Exception {
         return "admin/typeTable/create";
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String createNewProduct(ModelMap modelMap, @Valid TypeTableVO typeTableVO) throws Exception {
+    public String createNewTypeTable(ModelMap modelMap, @Valid TypeTableVO typeTableVO) throws Exception {
         String productId = this.typeTableService.save(typeTableVO);
         System.out.println(typeTableVO);
         return "redirect:/admin/typeTable/";
@@ -50,6 +55,7 @@ public class TypeTableController {
 
     @DeleteMapping("/{id}")
     public void delete(@Valid @NotNull @PathVariable("id") String id) {
+        System.out.println("delete ");
         typeTableService.delete(id);
     }
 
