@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -34,6 +35,10 @@ public class ImportGoodsService {
         ImportGoods bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         importGoodsRepository.save(bean);
+    }
+
+    public List<ImportGoods> findAll(){
+        return importGoodsRepository.findAll();
     }
 
     public ImportGoodsDTO getById(String id) {

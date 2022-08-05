@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
-<jsp:include page="../includes/sidebar2.jsp"></jsp:include>
+<jsp:include page="../includes/sidebar.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
 <div class="content flex-column-fluid" id="kt_content">
 
@@ -12,14 +12,14 @@
         <div class="card-header cursor-pointer">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Dach sách loại bàn</h3>
+                <h3 class="fw-bold m-0">Quản lý nhập hàng</h3>
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
             <a
-                    href="admin/typeTable/create/"
+                    href="../../demo14/dist/account/settings.html"
                     class="btn btn-primary align-self-center"
-            >Thêm loại bàn</a
+            >Thêm nguyên liệu</a
             >
             <!--end::Action-->
         </div>
@@ -27,30 +27,30 @@
         <!--begin::Card body-->
         <div class="card-body p-9">
 
-<!--end::Input group-->
+            <!--end::Input group-->
             <div class="table-responsive">
                 <table class="table table-row-bordered gy-5">
                     <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
-<%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
-                        <th>Mã loại bàn</th>
-                        <th>Tên loại bàn</th>
-                        <th>Giá</th>
-                        <th class="d-flex align-center justify-content-center">Hành động</th>
+                        <%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
+                        <th>ID</th>
+                        <th>Nhân viên nhập hàng</th>
+                        <th>Thời gian nhập</th>
+                            <th>Hành động</th>
+                        <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="item" items="${typeTables}">
+                    <c:forEach var="item" items="${nhaphang}">
                         <tr>
                             <th scope="row">${  item.id }</th>
-                            <td>${  item.typeName }</td>
-                            <td>${  item.price }</td>
-                            <td class="d-flex align-center justify-content-center">
+                            <td>${  item.employee.id }</td>
+                            <td>${  item.dateFormat }</td>
+                            <td>
                                 <a href="" class="btn btn-warning mx-1">Xem</a>
                                 <a href="" class="btn btn-success mx-1">Sửa</a>
                                 <a href="" class="btn btn-danger mx-1">Xoá</a>
                             </td>
-                            <!--end::Action=-->
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -62,4 +62,3 @@
 </div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
-

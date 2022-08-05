@@ -1,9 +1,6 @@
 package com.java04.wibucian.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -11,6 +8,7 @@ import java.util.Set;
 @Entity
 public class TypeTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idTypeTable", nullable = false, length = 15)
     private String id;
 
