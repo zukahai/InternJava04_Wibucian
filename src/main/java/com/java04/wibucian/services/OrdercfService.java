@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -26,6 +27,7 @@ public class OrdercfService {
         return bean.getId();
     }
 
+   //delete return json
     public void delete(String id) {
         ordercfRepository.deleteById(id);
     }
@@ -54,5 +56,9 @@ public class OrdercfService {
     private Ordercf requireOne(String id) {
         return ordercfRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
+    }
+
+    public List<Ordercf> findALl() {
+        return ordercfRepository.findAll();
     }
 }
