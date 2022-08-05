@@ -7,7 +7,7 @@
 <head>
     <base href="" />
     <title>
-       Quản lý quán cà phê
+
     </title>
     <meta charset="utf-8" />
 
