@@ -1,9 +1,13 @@
 package com.java04.wibucian.vos;
 
+import com.java04.wibucian.validations.annotation.ValidShiftCode;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -11,18 +15,22 @@ import java.util.Date;
 public class ShiftVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "id can not null")
-    private Integer id;
-
-    @NotNull(message = "idShift can not null")
-    private String idShift;
-
+    @NotNull(message = "Vui lòng nhập vào mã nhân viên")
+    //    @Pattern(regexp = "", message = "Mã nhân viên không hợp lệ")
     private String idEmployee;
 
-    private String idEmployeeChange;
+    @NotNull(message = "Vui lòng nhập vào ngày làm việc")
+    private String shiftDate;
 
-    private Date timeStart;
+    @NotNull(message = "Vui lòng nhập vào ca làm việc")
+    @ValidShiftCode(message = "Ca làm không hợp lệ")
+    private int shiftCode;
 
-    private Date timeEnd;
-
+    public Date getShiftDate() {
+        try {
+            return new SimpleDateFormat("dd-MM-yyyy").parse(this.shiftDate);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
