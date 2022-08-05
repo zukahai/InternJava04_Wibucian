@@ -37,6 +37,15 @@
                         <input type="number" class="form-control" id="price" name="price" placeholder="0"/>
                         <label for="price">Giá</label>
                     </div>
+                    <div class="form-floating">
+                        <select class="form-select h-100" id="floatingSelect" aria-label="Floating label select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <label for="floatingSelect">Works with selects</label>
+                    </div>
 
                 </div>
                 <div class="text-center my-5">
