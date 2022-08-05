@@ -13,7 +13,6 @@ public class TypeTableVO implements Serializable {
     @NotNull(message = "typeName can not null")
     private String typeName;
 
-    @NotNull(message = "price can not null")
     private Double price;
 
 }

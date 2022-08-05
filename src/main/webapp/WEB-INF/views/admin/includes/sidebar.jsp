@@ -524,7 +524,7 @@
                         <!--begin:Menu link-->
                         <a
                                 class="menu-link"
-                                href="admin/typeTable/"
+                                href="admin/table/"
                         >
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
