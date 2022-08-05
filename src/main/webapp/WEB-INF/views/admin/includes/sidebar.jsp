@@ -555,7 +555,7 @@
                         <!--begin:Menu link-->
                         <a
                                 class="menu-link"
-                                href="admin/typeTable/"
+                                href="admin/groupTable/"
                         >
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
