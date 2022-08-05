@@ -18,7 +18,7 @@
             <a
                     href="../../demo14/dist/account/settings.html"
                     class="btn btn-primary align-self-center"
-            >Edit Profile</a
+            >Thêm Nhân Viên</a
             >
             <!--end::Action-->
         </div>
@@ -26,22 +26,22 @@
         <!--begin::Card body-->
         <div class="card-body p-9">
             <!--begin::Input group-->
-<!--end::Input group-->
+            <!--end::Input group-->
 
-<!--begin::Input group-->
-<!--end::Input group-->
+            <!--begin::Input group-->
+            <!--end::Input group-->
 
-<!--begin::Input group-->
-<!--end::Input group-->
+            <!--begin::Input group-->
+            <!--end::Input group-->
 
-<!--begin::Input group-->
-<!--end::Input group-->
+            <!--begin::Input group-->
+            <!--end::Input group-->
 
-<!--begin::Input group-->
-<!--end::Input group-->
+            <!--begin::Input group-->
+            <!--end::Input group-->
 
-<!--begin::Input group-->
-<!--end::Input group-->
+            <!--begin::Input group-->
+            <!--end::Input group-->
             <div class="table-responsive">
                 <table class="table table-row-bordered gy-5">
                     <thead>
@@ -51,35 +51,28 @@
                         <th>Họ & Tên</th>
                         <th>SĐT</th>
                         <th>Hệ Số Lương</th>
-                        <th>Trạng Thái</th>
-                        <th>Chức Năng</th>
+                        <th class ="justify-content-center d-flex" >Chức Năng</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="item" items="${DanhSach}">
-                    <tr>
-                        <th scope="row">${item.id}</th>
-                        <td>${ item.srcEmployee}</td>
-                        <td>${ item.name}</td>
-                        <td>${ item.phoneNumber}</td>
-                        <td>${ item.CoefficientsSalary}</td>
-                        <td>
-                            <a href="" class="btn btn-warning mx-1">Hoạt động</a>
-                        </td>
-                        <td>
-                            <a href="" class="btn btn-warning mx-1">Sửa</a>
-                            <a href="" class="btn btn-success mx-1">Xem</a>
-                            <a href="" class="btn btn-danger mx-1">Xóa</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>$170,750</td>
-                    </tr
+                        <tr>
+                            <th scope="row">${item.id}</th>
+                            <td>
+                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                    <img class="w-100"
+                                         src="${pageContext.request.contextPath}/admin/assets/img/avatar.jpg">
+                            <td>${ item.name}</td>
+                            <td>${ item.phoneNumber}</td>
+                            <td>${ item.coefficientsSalary}</td>
+                            <td  class ="justify-content-center d-flex" >
+                                <a href="" class="btn btn-warning mx-1">Sửa</a>
+                                <a href="" class="btn btn-success mx-1">Xem</a>
+                                <a href="" class="btn btn-danger mx-1">Xóa</a>
+                                <a href="" class="btn btn-bg-secondary mx-1 ">Khóa</a>
+                            </td>
+                        </tr>
+
                     </c:forEach>
                     </tbody>
                 </table>
