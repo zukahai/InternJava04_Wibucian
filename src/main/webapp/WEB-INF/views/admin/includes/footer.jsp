@@ -1,5 +1,4 @@
 
-               
                     <!--end::Post-->
                     <!--begin::Footer-->
                     <div class="footer py-4 d-flex flex-column flex-md-row flex-stack" id="kt_footer">
