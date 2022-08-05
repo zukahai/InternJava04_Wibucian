@@ -4,261 +4,281 @@
 <jsp:include page="../includes/sidebar1.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
 
-    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
-        <!--begin::Card header-->
-        <div class="card-header cursor-pointer">
-            <!--begin::Card title-->
-            <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Profile Details</h3>
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+    <!--begin::Card header-->
+    <div class="card-header cursor-pointer">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+            <h3 class="fw-bold m-0">Profile Details</h3>
+        </div>
+        <!--end::Card title-->
+        <!--begin::Action-->
+        <span class="btn btn-primary align-self-center save-data">Lưu thông tin</span>
+        <!--end::Action-->
+    </div>
+    <!--begin::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body p-9">
+        <!--begin::Wrapper-->
+        <form class="form-submit">
+            <div class="mb-10">
+                <label for="id-table-select" class="required form-label">Chọn bàn</label>
+                <select id="id-table-select" class="form-select form-select-solid" data-control="select2"
+                        data-placeholder="Chọn Bàn">
+                    <option value="1">Bàn 1</option>
+
+                </select>
             </div>
-            <!--end::Card title-->
-            <!--begin::Action-->
-            <a href="../../demo14/dist/account/settings.html" class="btn btn-primary align-self-center">Edit Profile</a>
-            <!--end::Action-->
-        </div>
-        <!--begin::Card header-->
-        <!--begin::Card body-->
-        <div class="card-body p-9">
-            <!--begin::Wrapper-->
-            <form class="form-submit" >
-                <div class="mb-10">
-                    <label for="id-table" class="required form-label">Chọn bàn</label>
-                    <select id="id-table" class="form-select form-select-solid" data-control="select2"
-                            data-placeholder="Chọn Bàn">
-                        <option></option>
-                        <option value="1">Bàn 1</option>
-                        <option value="2">Bàn 2</option>
-                        <option value="3">Bàn 3</option>
-                        <option value="4">Bàn 4</option>
-                        <option value="5">Bàn 5</option>
-                        <option value="6">Bàn 6</option>
-                        <option value="7">Bàn 7</option>
-                        <option value="8">Bàn 8</option>
-
+            <div class="row  d-flex  justify-content-between">
+                <div class="mb-5 col">
+                    <select id="id-select-product" class="form-select form-select-solid" data-control="select2"
+                            data-placeholder="Chọn sản phẩm">
+                        <option data-name="Sản phẩm 1" data-price="50000" value="1">Sản phẩm 1</option>
+                        <option data-name="Sản phẩm 2" data-price="100000" value="2">Sản phẩm 2</option>
+                        <option data-name="Sản phẩm 3" data-price="150000" value="3">Sản phẩm 3</option>
+                        <option data-name="Sản phẩm 4" data-price="200000" value="4">Sản phẩm 4</option>
+                        <option data-name="Sản phẩm 5" data-price="250000" value="5">Sản phẩm 5</option>
                     </select>
-                </div>
-                <div class="row  d-flex  justify-content-between">
-                    <div class="mb-5 col">
-                        <select id="id-table-product" class="form-select form-select-solid" data-control="select2"
-                                data-placeholder="Chọn sản phẩm">
-                            <option></option>
-                            <option value="1">Sản phẩm 1</option>
-                            <option value="2">Sản phẩm 2</option>
-                            <option value="3">Sản phẩm 3</option>
-                            <option value="4">Sản phẩm 4</option>
-                            <option value="5">Sản phẩm 5</option>
-                            <option value="6">Sản phẩm 6</option>
-                            <option value="7">Sản phẩm 7</option>
-                            <option value="8">Sản phẩm 8</option>
-                        </select>
 
-                    </div>
-                    <div class="col ">
-                        <div class="input-group mb-5">
-                            <span class="input-group-text me-2">Giá</span>
-                            <input  type="text" value="35 000" class="form-control text-center price-prod" id="price-prod" />
-                        </div>
-                    </div>
-                    <div class="col col-3">
-                        <div class="input-group mb-5">
-                            <span class="input-group-text me-2" id="basic-addon3">Số lượng</span>
-                            <span class="input-group-text btn  btn-dark text-center  down-count " id="down-count">-</span>
-                            <input type="text" value="1" class="form-control text-center text-count" id="count" />
-                            <span class="input-group-text btn  btn-dark text-center  up-count " id="up-count">+</span>
-                        </div>
-                    </div>
-                    <div class="col ">
-                        <div readonly="true" class="input-group mb-5">
-                            <span class="input-group-text" >Tổng tiền</span>
-                            <input type="text" class="form-control total-price" id="total-price"  aria-describedby="basic-addon3"/>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-primary align-self-center">Thêm sản phẩm</button>
+                </div>
+                <div class="col ">
+                    <div class="input-group mb-5">
+                        <span class="input-group-text me-2">Giá</span>
+                        <input type="text" value="35 000" class="form-control text-center price-product"
+                               id="price-prod"/>
                     </div>
                 </div>
-                <hr>
-                <h3>Danh sách sản phẩm order</h3>
-                <div class="d-flex flex-stack mb-5">
-
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
-                        <!--begin::Table head-->
-                        <thead>
-                        <!--begin::Table row-->
-                        <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                            <th class="w-10px pe-2">
-                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                           data-kt-check-target="#kt_table_users .form-check-input" value="1"/>
-                                </div>
-                            </th>
-                            <th class="min-w-125px">Tên sản phẩm</th>
-                            <th class="min-w-125px">Số lượng</th>
-                            <th class="min-w-125px">Giá</th>
-                            <th class="min-w-100px">Tổng tiền</th>
-                            <th class="text-end min-w-100px">Hành động</th>
-                        </tr>
-                        <!--end::Table row-->
-                        </thead>
-                        <!--end::Table head-->
-                        <!--begin::Table body-->
-                        <tbody class="text-gray-600 fw-semibold">
-                        <!--begin::Table row-->
-                        <tr>
-
-                            <td>
-                                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="1"/>
-                                </div>
-                            </td>
-                            <td>Trà sữa trân châu</td>
-                            <td>12</td>
-                            <td>35 000</td>
-                            <td class="total-price">12 * 35000</td>
-                            <td class="text-end">
-                                <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                   data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                    <span class="svg-icon svg-icon-5 m-0">
-															<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                                 xmlns="http://www.w3.org/2000/svg">
-																<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                                      fill="currentColor"/>
-															</svg>
-														</span>
-                                    <!--end::Svg Icon--></a>
-                                <!--begin::Menu-->
-                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
-                                     data-kt-menu="true">
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="../../demo14/dist/apps/user-management/users/view.html"
-                                           class="menu-link px-3 btn btn-primary btn-sm text-white text-center">Xem</a>
-                                    </div>
-                                    <div class="menu-item px-3">
-                                        <a href="../../demo14/dist/apps/user-management/users/view.html"
-                                           class="menu-link px-3 btn btn-success btn-sm text-white text-center">Sửa</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#"
-                                           class="menu-link px-3 btn btn-danger btn-sm text-white text-center delete-btn"
-                                           data-kt-users-table-filter="delete_row ">Xoá</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                </div>
-                                <!--end::Menu-->
-                            </td>
-                            <!--end::Action=-->
-                        </tr>
-
-                        <!--end::Table row-->
-                        </tbody>
-                        <!--end::Table body-->
-                    </table>
+                <div class="col col-3">
+                    <div class="input-group mb-5">
+                        <span class="input-group-text me-2" id="basic-addon3">Số lượng</span>
+                        <span class="input-group-text btn  btn-dark text-center  down-count " id="down-count">-</span>
+                        <input type="text" value="0" class="form-control text-center text-count" id="count"/>
+                        <span class="input-group-text btn  btn-dark text-center  up-count " id="up-count">+</span>
+                    </div>
                 </div>
-            </form>
-        </div>
+                <div class="col ">
+                    <div readonly="true" class="input-group mb-5">
+                        <span class="input-group-text">Tổng tiền</span>
+                        <input value="0" type="text" class="form-control total-price" id="total-price"
+                               aria-describedby="basic-addon3"/>
+                    </div>
+                </div>
+                <div class="col">
+                    <spam class="btn btn-primary align-self-center add-product-order">Thêm sản phẩm</spam>
+                </div>
+            </div>
+            <hr>
+            <h3>Danh sách sản phẩm order</h3>
+            <div class="d-flex flex-stack ">
+
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tabel-order">
+                    <!--begin::Table head-->
+                    <thead>
+                    <!--begin::Table row-->
+                    <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                        <th class="w-10px pe-2">
+                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                <input class="form-check-input" type="checkbox" data-kt-check="true"
+                                       data-kt-check-target="#kt_table_users .form-check-input" value="1"/>
+                            </div>
+                        </th>
+                        <th class="min-w-125px">Id Sản phẩm</th>
+                        <th class="min-w-125px">Tên sản phẩm</th>
+                        <th class="min-w-125px">Số lượng</th>
+                        <th class="min-w-125px">Giá</th>
+                        <th class="min-w-125px">Tổng tiền</th>
+                        <th class="min-w-125px">Hành động</th>
+                    </tr>
+                    <!--end::Table row-->
+                    </thead>
+                    <!--end::Table head-->
+                    <!--begin::Table body-->
+                    <tbody class="text-gray-600 fw-semibold">
+                    <!--begin::Table row-->
+                    <tr>
+                        <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" value="1"/>
+                            </div>
+                        </td>
+                        <td><p class="id-product-tabel">345435345</p></td>
+                        <td><p class="name-product-tabel">345435345</p></td>
+                        <td class="w-175px">
+                            <div class="input-group mb-5">
+                                <span class="input-group-text btn btn-dark text-center down-count-tabel">-</span>
+                                <input type="text" value="1" class="form-control text-center text-count-tabel"/>
+                                <span class="input-group-text btn btn-dark text-center down-up-tabel ">+</span>
+                            </div>
+                        </td>
+                        <td><p class="price-product-tabel">34534543</p></td>
+                        <td class="total-price-tabel"><p class="total-product-table">345345345</p></td>
+                        <td class="">
+                            <span class=" delete-btn btn btn-icon btn-danger btn-sm btn-icon-md btn-circle"
+                                  data-toggle="tooltip" data-placement="top" title="Xóa">
+                                <i class="fa fa-trash"></i>
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
     </div>
 
 </div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
 <script !src="">
-
-    $("#kt_datatable_column_rendering").DataTable({
-        select: true,
-        responsive: true,
-        searching: true,
-        search: {},
-        paging: true,
-        ordering: true,
-        info: true,
-
-
-    });
+    $("#tabel-order").DataTable({});
     //handle click on .delete-btn button
-    $(".delete-btn").click(function () {
-        var id = $(this).data("id");
-        var btn = $(this);
-        swal.fire({
-            title: 'Bạn có chắc chắn muốn xoá?',
-            text: "Bạn sẽ không thể khôi phục lại dữ liệu này!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Xoá',
-            cancelButtonText: 'Hủy',
-            reverseButtons: true
-        }).then(function (result) {
-            if (result.value) {
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/delete/" + id,
-                    type: "DELETE",
-                    data: {
-                        id: id
-                    },
-                    success: function (response) {
-                        if (response.check === true) {
-                            swal.fire({
-                                title: 'Xoá thành công!',
-                                text: 'Dữ liệu đã được xoá.',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                            btn.closest("tr").remove();
-
-
-                        } else {
-                            swal.fire({
-                                title: 'Xoá thất bại!',
-                                text: 'Dữ liệu đã được xoá.',
-                                icon: 'error',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        }
-                    }
-                });
-            } else if (result.dismiss === 'cancel') {
-                swal.fire({
-                    title: 'Hủy bỏ',
-                    text: 'Dữ liệu được bảo toàn.',
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            }
-        });
-    });
 
     //handle click on up-count and down-count button
-    $(".up-count").click(function () {
-        var count_text  = $(this).siblings(".text-count");
-        var total_price = $("#total-price");
-        var price_product = $("#price-prod");
-        var count = parseInt(count_text.val() );
-        count_text.val(count+1);
-        var price = validatePrice(price_product.val());
-        console.log(price);
-        total_price.val(price*count);
+    $(document).on("click", ".up-count", function () {
+        var count = parseInt($(this).siblings(".text-count").val());
+        count++;
+        $(this).siblings(".text-count").val(count);
+        var price_product = $(".price-product");
+        var total_price = $(".total-price");
+        var total_product = $(".total-product");
+        var price_product_value = validatePrice(price_product.val());
+        var total_price_value = count * price_product_value;
+        total_price.val(total_price_value);
     });
-
-    $(".down-count").click(function () {
-        var count_text  = $(this).siblings(".text-count");
-        var count = parseInt(count_text.val());
+    $(document).on("click", ".down-count", function () {
+        var count = parseInt($(this).siblings(".text-count").val());
         if (count > 0) {
-            count_text.val(count - 1);
+            count--;
+            $(this).siblings(".text-count").val(count);
+            var price_product = $(".price-product");
+            var total_price = $(".total-price");
+            var total_product = $(".total-product");
+            var price_product_value = validatePrice(price_product.val());
+            var total_price_value = count * price_product_value;
+            total_price.val(total_price_value);
         }
     });
-    function validatePrice(price){
+
+    function validatePrice(price) {
         //delete all character except number script
         var price_new = price.replace(/[^0-9]/g, '');
         return price_new;
     }
 
+    $(document).on("click", ".down-up-tabel", function () {
+        var count_text = $(this).siblings(".text-count-tabel");
+        var total_price = $(this).closest("tr").find(".total-price-tabel");
+        var price_product = $(this).closest("tr").find(".price-product-tabel");
+        var count = parseInt(count_text.val());
+        count_text.val(count + 1);
+        var price = validatePrice(price_product.text());
+        total_price.text(price * (count + 1));
 
+    });
+    $(document).on("click", ".down-count-tabel", function () {
+        var count_text = $(this).siblings(".text-count-tabel");
+        var total_price = $(this).closest("tr").find(".total-price-tabel");
+        var price_product = $(this).closest("tr").find(".price-product-tabel");
+        var count = parseInt(count_text.val());
+        if (count > 0) {
+            count_text.val(count - 1);
+            var price = validatePrice(price_product.text());
+            total_price.text(price * (count - 1));
+        }
+    });
+    //handle on type in text-count change value of total-price
+    $(document).on("input", ".text-count", function () {
+        var count = parseInt($(this).val());
+        $(this).siblings(".text-count").val(count);
+        var price_product = $(".price-product");
+        var total_price = $(".total-price");
+        var total_product = $(".total-product");
+        var price_product_value = validatePrice(price_product.val());
+        var total_price_value = count * price_product_value;
+        total_price.val(total_price_value);
+    });
+    //handle on type in text-count-tabel change value of total-price
+    $(document).on("input", ".text-count-tabel", function () {
+        var count = parseInt($(this).val());
+        $(this).siblings(".text-count-tabel").val(count);
+        var price_product = $(this).closest("tr").find(".price-product-tabel");
+        var total_price = $(this).closest("tr").find(".total-price-tabel");
+        var price_product_value = validatePrice(price_product.text());
+        var total_price_value = count * price_product_value;
+        total_price.text(total_price_value);
+    });
+    //handel add-product-order button
+    $(document).on("click", ".add-product-order", function () {
+        var count = parseInt($(".text-count").val());
+        var price_product = $(".price-product").val();
+        var total_price = $(".total-price").val();
+        var id_product = $("#id-select-product").val();
+        var name_product = $("#id-select-product option:selected").attr("data-name");
+        var html = `<tr>
+                        <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" value="1"/>
+                            </div>
+                        </td>
+                        <td><p class="id-product-tabel">` + id_product + `</p></td>
+                        <td><p class="name-product-tabel">` + name_product + `</p></td>
+                        <td class="w-175px">
+                            <div class="input-group mb-5">
+                                <span class="input-group-text btn btn-dark text-center down-count-tabel">-</span>
+                                <input type="text" value="` + count + `" class="form-control text-center text-count-tabel"/>
+                                <span class="input-group-text btn btn-dark text-center down-up-tabel ">+</span>
+                            </div>
+                        </td>
+                        <td><p class="price-product-tabel">` + price_product + `</p></td>
+                        <td class="total-price-tabel"><p class="total-product-table">` + total_price + `</p></td>
+                        <td class="">
+                            <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
+                                  data-toggle="tooltip" data-placement="top" title="Xóa">
+                                <i class="fa fa-trash"></i>
+                            </span>
+                        </td>
+                    </tr>`;
+        $("#tabel-order").DataTable().row.add($(html)).draw();
+    });
+    //handle on click save-data
+    $(document).on("click", ".save-data", function () {
+        ///get data from tabel-order
+        var tabel = $("#tabel-order tbody");
+        let data = [];
+        tabel.find("tr").each(function () {
+            var id_product = $(this).find(".id-product-tabel").text();
+            var name_product = $(this).find(".name-product-tabel").text();
+            var count = $(this).find(".text-count-tabel").val();
+            var price_product = $(this).find(".price-product-tabel").text();
+            var total_price = $(this).find(".total-price-tabel").text();
+            var tabel_group_id = $("#id-table-select").val();
+            data.push({
+                idGroupTable: tabel_group_id,
+                idProduct: id_product,
+                quantity: count,
+            });
+        });
+        console.log(data);
 
-
+    });
+    //handle on click delete-btn
+    $(document).on("click", ".delete-btn", function () {
+        //confirm delete alert
+        swal.fire(
+            {
+                title: "Bạn có chắc chắn muốn xóa?",
+                text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Xóa",
+                cancelButtonText: "Hủy"
+            }
+        ).then((result) => {
+            if (result.value) {
+                var row = $(this).closest("tr");
+                $("#tabel-order").DataTable().row(row).remove().draw();
+            }
+        });
+    });
 </script>
