@@ -12,6 +12,7 @@ import com.java04.wibucian.vos.TypeTableUpdateVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.MultiValueMap;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 
 @Validated
 @Controller
@@ -54,11 +56,30 @@ public class TablecfController {
         return "admin/table/edit";
     }
 
-    @GetMapping("/delete/{id}")
-    public String HomeDelete(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
-        tablecfService.delete(id);
-        return "redirect:/admin/table/";
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
+        try {
+            tablecfService.delete(id);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", true);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", false);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        }
     }
+//
+//    @GetMapping("/delete/{id}")
+//    public String HomeDelete(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
+//        tablecfService.delete(id);
+//        return "redirect:/admin/table/";
+//    }
+
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String createNewTable(ModelMap modelMap, @Valid TablecfVO tablecf, @RequestBody MultiValueMap<String, String> formData) throws Exception {
@@ -84,10 +105,10 @@ public class TablecfController {
         return tablecfService.save(vO).toString();
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@Valid @NotNull @PathVariable("id") String id) {
-        tablecfService.delete(id);
-    }
+//    @DeleteMapping("/{id}")
+//    public void delete(@Valid @NotNull @PathVariable("id") String id) {
+//        tablecfService.delete(id);
+//    }
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") String id,
