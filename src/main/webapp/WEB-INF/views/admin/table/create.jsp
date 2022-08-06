@@ -30,7 +30,7 @@
                         <select class="form-select" data-control="select2" id="idTypeTable" name="idTypeTable" data-placeholder="Select an option">
                             <c:forEach var="item" items="${typeTables}">
                                 <option value="${item.id}">${item.id} - ${item.typeName}</option>
-                            </c:forEach>>
+                            </c:forEach>
                         </select>
                         <label for="idTypeTable">Loại bàn</label>
                     </div>
