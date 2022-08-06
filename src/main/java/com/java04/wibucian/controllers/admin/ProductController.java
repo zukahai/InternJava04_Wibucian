@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 @Controller
 @RequestMapping("admin/product")
 public class ProductController {
+    // bên tôi vẫn bth, không biết bên kia bị gì mà nó k wire cái productService được
 
     @Autowired
     private ProductService productService;

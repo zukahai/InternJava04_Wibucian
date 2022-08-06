@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
@@ -25,7 +26,9 @@
                 <label for="id-table-select" class="required form-label">Chọn bàn</label>
                 <select id="id-table-select" class="form-select form-select-solid" data-control="select2"
                         data-placeholder="Chọn Bàn">
-                    <option value="1">Bàn 1</option>
+                    <c:forEach items="${groupTables}" var="item">
+                        <option value="${item.id}">${item.groupName}</option>
+                    </c:forEach>
 
                 </select>
             </div>
@@ -33,18 +36,18 @@
                 <div class="mb-5 col">
                     <select id="id-select-product" class="form-select form-select-solid" data-control="select2"
                             data-placeholder="Chọn sản phẩm">
-                        <option data-name="Sản phẩm 1" data-price="50000" value="1">Sản phẩm 1</option>
-                        <option data-name="Sản phẩm 2" data-price="100000" value="2">Sản phẩm 2</option>
-                        <option data-name="Sản phẩm 3" data-price="150000" value="3">Sản phẩm 3</option>
-                        <option data-name="Sản phẩm 4" data-price="200000" value="4">Sản phẩm 4</option>
-                        <option data-name="Sản phẩm 5" data-price="250000" value="5">Sản phẩm 5</option>
+                        <c:forEach items="${products}" var="product">
+                            <option data-name="${product.productName}" data-price="${product.price}"
+                                    value="${product.id}">${product.productName}</option>
+                        </c:forEach>
                     </select>
 
                 </div>
                 <div class="col ">
                     <div class="input-group mb-5">
                         <span class="input-group-text me-2">Giá</span>
-                        <input type="text" value="35 000" class="form-control text-center price-product"
+                        <input readonly type="text" value="<c:out value="${products[0].price}"></c:out>"
+                               class="form-control text-center price-product"
                                id="price-prod"/>
                     </div>
                 </div>
@@ -58,8 +61,8 @@
                 </div>
                 <div class="col ">
                     <div readonly="true" class="input-group mb-5">
-                        <span class="input-group-text">Tổng tiền</span>
-                        <input value="0" type="text" class="form-control total-price" id="total-price"
+                        <span  class="input-group-text">Tổng tiền</span>
+                        <input readonly value="0" type="text" class="form-control total-price" id="total-price"
                                aria-describedby="basic-addon3"/>
                     </div>
                 </div>
@@ -95,30 +98,7 @@
                     <!--begin::Table body-->
                     <tbody class="text-gray-600 fw-semibold">
                     <!--begin::Table row-->
-                    <tr>
-                        <td>
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="1"/>
-                            </div>
-                        </td>
-                        <td><p class="id-product-tabel">345435345</p></td>
-                        <td><p class="name-product-tabel">345435345</p></td>
-                        <td class="w-175px">
-                            <div class="input-group mb-5">
-                                <span class="input-group-text btn btn-dark text-center down-count-tabel">-</span>
-                                <input type="text" value="1" class="form-control text-center text-count-tabel"/>
-                                <span class="input-group-text btn btn-dark text-center down-up-tabel ">+</span>
-                            </div>
-                        </td>
-                        <td><p class="price-product-tabel">34534543</p></td>
-                        <td class="total-price-tabel"><p class="total-product-table">345345345</p></td>
-                        <td class="">
-                            <span class=" delete-btn btn btn-icon btn-danger btn-sm btn-icon-md btn-circle"
-                                  data-toggle="tooltip" data-placement="top" title="Xóa">
-                                <i class="fa fa-trash"></i>
-                            </span>
-                        </td>
-                    </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -213,7 +193,20 @@
         var total_price = $(".total-price").val();
         var id_product = $("#id-select-product").val();
         var name_product = $("#id-select-product option:selected").attr("data-name");
-        var html = `<tr>
+        var tr_in_tabel = $("#tabel-order tbody tr");
+        //get row in tabel have id_product
+        var row_in_tabel = tr_in_tabel.filter(function () {
+            return $(this).find(".id-product-tabel").text() == id_product;
+        });
+        //update count and total price in row have id_product
+        if (row_in_tabel.length > 0) {
+            //update with DataTable
+            var count_in_tabel = row_in_tabel.find(".text-count-tabel");
+            var total_price_in_tabel = row_in_tabel.find(".total-price-tabel");
+            count_in_tabel.val(parseInt(count_in_tabel.val()) + parseInt(count));
+            total_price_in_tabel.text(parseInt(total_price_in_tabel.text()) + parseInt(total_price));
+        } else {
+            var html = `<tr>
                         <td>
                             <div class="form-check form-check-sm form-check-custom form-check-solid">
                                 <input class="form-check-input" type="checkbox" value="1"/>
@@ -237,7 +230,10 @@
                             </span>
                         </td>
                     </tr>`;
-        $("#tabel-order").DataTable().row.add($(html)).draw();
+            $("#tabel-order").DataTable().row.add($(html)).draw();
+        }
+
+
     });
     //handle on click save-data
     $(document).on("click", ".save-data", function () {
@@ -257,28 +253,59 @@
                 quantity: count,
             });
         });
-        console.log(data);
+        console.log(JSON.stringify(data));
 
-    });
-    //handle on click delete-btn
-    $(document).on("click", ".delete-btn", function () {
-        //confirm delete alert
-        swal.fire(
-            {
-                title: "Bạn có chắc chắn muốn xóa?",
-                text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Xóa",
-                cancelButtonText: "Hủy"
+        //send data to server
+        $.ajax({
+            url: "/ordercf/store",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (result) {
+                if (result.check === true) {
+                    toastr.success("Thêm thành công");
+                    $("#tabel-order").DataTable().clear().draw();
+                } else {
+                    toastr.error("Thêm thất bại");
+                }
             }
-        ).then((result) => {
-            if (result.value) {
-                var row = $(this).closest("tr");
-                $("#tabel-order").DataTable().row(row).remove().draw();
-            }
+        })
+
+
+        //handle on click delete-btn
+        $(document).on("click", ".delete-btn", function () {
+            //confirm delete alert
+            swal.fire(
+                {
+                    title: "Bạn có chắc chắn muốn xóa?",
+                    text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Xóa",
+                    cancelButtonText: "Hủy"
+                }
+            ).then((result) => {
+                if (result.value) {
+                    var row = $(this).closest("tr");
+                    $("#tabel-order").DataTable().row(row).remove().draw();
+                }
+            });
         });
     });
+
+    //handel on change id-select-product
+    $(document).on("change", "#id-select-product", function () {
+            var id_product = $(this).val();
+            var price_product = $(this).find("option:selected").attr("data-price");
+            var name_product = $(this).find("option:selected").attr("data-name");
+            $(".price-product").val(price_product);
+            $(".name-product").val(name_product);
+            $(".total-price").val(0);
+            $(".text-count").val(0);
+        }
+    );
+
+
 </script>
