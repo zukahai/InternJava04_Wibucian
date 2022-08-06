@@ -15,14 +15,16 @@
         <div class="card-header cursor-pointer">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Dach sách nhóm bàn</h3>
+                <h3 class="fw-bold m-0">Chi tiết nhóm bàn: </h3>
+                <h2>&nbsp ${groupTable.id}</h2>
+                <h2>&nbsp ${groupTable.groupName}</h2>
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
             <a
-                    href="admin/groupTable/create/"
+                    href="admin/groupTable/"
                     class="btn btn-primary align-self-center"
-            >Thêm nhóm bàn</a
+            >Danh sách nhóm bàn</a
             >
             <!--end::Action-->
         </div>
@@ -36,21 +38,19 @@
                     <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
 <%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
-                        <th>Mã nhóm bàn</th>
-                        <th>Tên nhóm bàn</th>
-                        <th>Thời gian lập nhóm</th>
+                        <th>Mã bàn</th>
+                        <th>Loại bàn</th>
+                        <th>Thời gian gộp nhóm</th>
                         <th class="d-flex align-center justify-content-center">Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="item" items="${groupTables}">
+                    <c:forEach var="item" items="${tablecfList}">
                         <tr>
-                            <th scope="row">${  item.id }</th>
-                            <td>${ item.groupName } </td>
-                            <td>${ item.foundedTime.toString() } </td>
+                            <th scope="row">${  item.tablecf.id }</th>
+                            <th scope="row">${  item.tablecf.typeTable.typeName }</th>
+                            <td>${ item.groupTime } </td>
                             <td class="d-flex align-center justify-content-center">
-                                <a href="admin/detailGroupTable/view/${item.id}" class="btn btn-warning mx-1">Xem</a>
-                                <a href="admin/groupTable/edit/${item.id}" class="btn btn-success mx-1">Sửa</a>
                                 <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
                             </td>
                             <!--end::Action=-->
@@ -85,14 +85,14 @@
         }).then(function (result) {
             if (result.value) {
                 $.ajax({
-                    url: "/admin/groupTable/delete/" + id,
+                    url: "/admin/detailGroupTable/delete/" + id,
                     type: "GET",
                     success: function (result) {
                         if (result.check === true) {
                             toastr.success("Xóa thành công");
                             row.remove();
                         } else {
-                            toastr.error("Xóa thất bại: Nhóm bàn này đã được sử dụng");
+                            toastr.error("Xóa thất bại");
                         }
                     }
                 })
