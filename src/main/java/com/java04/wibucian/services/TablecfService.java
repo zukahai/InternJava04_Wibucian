@@ -2,7 +2,9 @@ package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.TablecfDTO;
 import com.java04.wibucian.models.Tablecf;
+import com.java04.wibucian.models.TypeTable;
 import com.java04.wibucian.repositories.TablecfRepository;
+import com.java04.wibucian.repositories.TypeTableRepository;
 import com.java04.wibucian.vos.TablecfQueryVO;
 import com.java04.wibucian.vos.TablecfUpdateVO;
 import com.java04.wibucian.vos.TablecfVO;
@@ -11,19 +13,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class TablecfService {
 
     @Autowired
     private TablecfRepository tablecfRepository;
+    private TypeTableRepository typeTableRepository;
+
+    public TablecfService(TypeTableRepository typeTableRepository) {
+        this.typeTableRepository = typeTableRepository;
+    }
 
     public String save(TablecfVO vO) {
         Tablecf bean = new Tablecf();
         BeanUtils.copyProperties(vO, bean);
         bean = tablecfRepository.save(bean);
         return bean.getId();
+    }
+
+    public String save(TablecfVO vO, String idTypeTable) {
+        Tablecf tablecf = new Tablecf();
+        BeanUtils.copyProperties(vO, tablecf);
+        TypeTable typeTable = typeTableRepository.findById(idTypeTable).orElse(null);
+        tablecf.setTypeTable(typeTable);
+        tablecf = tablecfRepository.save(tablecf);
+        return tablecf.getId();
     }
 
     public void delete(String id) {
@@ -54,5 +72,9 @@ public class TablecfService {
     private Tablecf requireOne(String id) {
         return tablecfRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
+    }
+
+    public List<Tablecf> findAll(){
+        return tablecfRepository.findAll();
     }
 }
