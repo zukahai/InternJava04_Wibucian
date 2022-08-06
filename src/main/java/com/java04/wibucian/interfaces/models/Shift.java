@@ -1,5 +1,8 @@
 package com.java04.wibucian.interfaces.models;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
@@ -19,12 +22,11 @@ public class Shift {
     @JoinColumn(name = "idEmployeeChange")
     private Employee employeeChange;
 
-
     @Column(name = "isRequestShift")
-    private Boolean isRequestShift;
+    private boolean requestShift;
 
     @Column(name = "isOvertimeRequest")
-    private Boolean isOvertimeRequest;
+    private boolean overtimeRequest;
 
     @Column(name = "requestTime")
     private Instant requestTime;
@@ -52,7 +54,12 @@ public class Shift {
     }
 
     public String getId() {
-        return id;
+        try {
+            int id = Integer.parseInt(this.id);
+            return "Shift" + String.format("%05d", id);
+        } catch (NumberFormatException e) {
+            return this.id;
+        }
     }
 
     public void setId(String id) {
@@ -75,20 +82,20 @@ public class Shift {
         this.employeeChange = employeeChange;
     }
 
-    public Boolean getRequestShift() {
-        return isRequestShift;
+    public boolean getRequestShift() {
+        return requestShift;
     }
 
-    public void setRequestShift(Boolean requestShift) {
-        isRequestShift = requestShift;
+    public void setRequestShift(boolean requestShift) {
+        this.requestShift = requestShift;
     }
 
-    public Boolean getOvertimeRequest() {
-        return isOvertimeRequest;
+    public boolean isOvertimeRequest() {
+        return overtimeRequest;
     }
 
-    public void setOvertimeRequest(Boolean overtimeRequest) {
-        isOvertimeRequest = overtimeRequest;
+    public void setOvertimeRequest(boolean overtimeRequest) {
+        this.overtimeRequest = overtimeRequest;
     }
 
     public Instant getRequestTime() {
