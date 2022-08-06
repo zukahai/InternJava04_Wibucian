@@ -1,11 +1,14 @@
 package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.TablecfDTO;
+import com.java04.wibucian.models.Tablecf;
+import com.java04.wibucian.models.TypeTable;
 import com.java04.wibucian.services.TablecfService;
 import com.java04.wibucian.services.TypeTableService;
 import com.java04.wibucian.vos.TablecfQueryVO;
 import com.java04.wibucian.vos.TablecfUpdateVO;
 import com.java04.wibucian.vos.TablecfVO;
+import com.java04.wibucian.vos.TypeTableUpdateVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
@@ -43,10 +46,36 @@ public class TablecfController {
         return "admin/table/create";
     }
 
+    @GetMapping("/edit/{id}")
+    public String HomeEdit(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
+        Tablecf tablecf = tablecfService.findById(id);
+        modelMap.addAttribute("typeTables", typeTableService.findAll());
+        modelMap.addAttribute("tablecf", tablecf);
+        return "admin/table/edit";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String HomeDelete(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
+        tablecfService.delete(id);
+        return "redirect:/admin/table/";
+    }
+
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String createNewProduct(ModelMap modelMap, @Valid TablecfVO tablecf, @RequestBody MultiValueMap<String, String> formData) throws Exception {
+    public String createNewTable(ModelMap modelMap, @Valid TablecfVO tablecf, @RequestBody MultiValueMap<String, String> formData) throws Exception {
         String idTypeTable =  formData.get("idTypeTable").get(0);
         String typeTableId = this.tablecfService.save(tablecf, idTypeTable);
+        return "redirect:/admin/table/";
+    }
+
+    @RequestMapping(value = "/edit",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String editTable(ModelMap modelMap,
+                                @Valid TablecfUpdateVO tablecfUpdateVO,
+                                @RequestBody MultiValueMap<String, String> formData) throws Exception {
+        String idTable =  formData.get("idTablecf").get(0);
+        String idTypeTable = formData.get("idTypeTable").get(0);
+        this.tablecfService.update(idTable, tablecfUpdateVO, idTypeTable);
         return "redirect:/admin/table/";
     }
 

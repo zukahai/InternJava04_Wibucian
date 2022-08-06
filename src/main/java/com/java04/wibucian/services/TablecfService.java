@@ -54,9 +54,22 @@ public class TablecfService {
         tablecfRepository.save(bean);
     }
 
+    public void update(String id, TablecfUpdateVO vO, String idTypeTable) {
+        Tablecf bean = requireOne(id);
+        BeanUtils.copyProperties(vO, bean);
+
+        TypeTable typeTable = typeTableRepository.findById(idTypeTable).orElse(null);
+        bean.setTypeTable(typeTable);
+
+        tablecfRepository.save(bean);
+    }
+
     public TablecfDTO getById(String id) {
         Tablecf original = requireOne(id);
         return toDTO(original);
+    }
+    public Tablecf findById(String id) {
+        return requireOne(id);
     }
 
     public Page<TablecfDTO> query(TablecfQueryVO vO) {
