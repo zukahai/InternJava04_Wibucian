@@ -1,6 +1,9 @@
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.Instant" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <base href="/">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <jsp:include page="../includes/sidebar.jsp"></jsp:include>
@@ -12,14 +15,14 @@
         <div class="card-header cursor-pointer">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Dach sách loại bàn</h3>
+                <h3 class="fw-bold m-0">Dach sách nhóm bàn</h3>
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
             <a
-                    href="admin/table/create/"
+                    href="admin/groupTable/create/"
                     class="btn btn-primary align-self-center"
-            >Thêm bàn</a
+            >Thêm nhóm bàn</a
             >
             <!--end::Action-->
         </div>
@@ -33,24 +36,22 @@
                     <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
 <%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
-                        <th>Mã bàn</th>
-                        <th>Tên loại bàn</th>
-                        <th>Mô tả</th>
-                        <th>Sức chứa</th>
+                        <th>Mã nhóm bàn</th>
+                        <th>Tên nhóm bàn</th>
+                        <th>Thời gian lập nhóm</th>
                         <th class="d-flex align-center justify-content-center">Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="item" items="${tables}">
+                    <c:forEach var="item" items="${groupTables}">
                         <tr>
-                            <th scope="row">${ item.id }</th>
-                            <td>${  item.typeTable.typeName }</td>
-                            <td>${  item.describe }</td>
-                            <td>${  item.capacity }</td>
+                            <th scope="row">${  item.id }</th>
+                            <td>${ item.groupName } </td>
+                            <td>${ item.foundedTime.toString() } </td>
                             <td class="d-flex align-center justify-content-center">
                                 <a href="" class="btn btn-warning mx-1">Xem</a>
-                                <a href="admin/table/edit/${ item.id }" class="btn btn-success mx-1">Sửa</a>
-                                <a href="admin/table/delete/${ item.id }" class="btn btn-danger mx-1">Xoá</a>
+                                <a href="" class="btn btn-success mx-1">Sửa</a>
+                                <a href="admin.groupTable/delete/${item.id}" class="btn btn-danger mx-1">Xoá</a>
                             </td>
                             <!--end::Action=-->
                         </tr>

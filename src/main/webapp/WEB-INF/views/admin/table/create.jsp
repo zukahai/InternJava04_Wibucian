@@ -5,6 +5,7 @@
         <jsp:include page="../includes/header.jsp"></jsp:include>
         <jsp:include page="../includes/sidebar.jsp"></jsp:include>
         <jsp:include page="../includes/container.jsp"></jsp:include>
+
         <div class="content flex-column-fluid" id="kt_content">
 
             <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
@@ -12,29 +13,36 @@
                 <div class="card-header cursor-pointer">
                     <!--begin::Card title-->
                     <div class="card-title m-0">
-                        <h3 class="fw-bold m-0">Dach sách loại bàn</h3>
+                        <h3 class="fw-bold m-0">Thêm bàn</h3>
                     </div>
                     <!--end::Card title-->
                     <!--begin::Action-->
-                    <a href="admin/typeTable/" class="btn btn-primary align-self-center">Danh sách loại bàn</a
+                    <a href="admin/table/" class="btn btn-primary align-self-center">Danh sách bàn</a
             >
             <!--end::Action-->
         </div>
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
-            <form action="/admin/typeTable/create" method="post">
+            <form action="/admin/table" method="post">
                 <div class="rounded border p-5">
                     <div class="form-floating my-5">
-                        <input type="text" class="form-control" id="typeName" name="typeName" placeholder="VIP"/>
-                        <label for="typeName">Tên loại bàn</label>
+                        <select class="form-select" data-control="select2" id="idTypeTable" name="idTypeTable" data-placeholder="Select an option">
+                            <c:forEach var="item" items="${typeTables}">
+                                <option value="${item.id}">${item.id} - ${item.typeName}</option>
+                            </c:forEach>
+                        </select>
+                        <label for="idTypeTable">Loại bàn</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="number" class="form-control" id="price" name="price" placeholder="0"/>
-                        <label for="price">Giá</label>
+                        <input type="capacity" class="form-control" id="capacity" name="capacity" placeholder="0"/>
+                        <label for="capacity">Sức chứa</label>
                     </div>
-
+                    <div class="form-group">
+                        <textarea class="form-control" id="describe" name="describe" placeholder="" rows="6" placeholder="Mô tả"></textarea>
+                    </div>
                 </div>
+
                 <div class="text-center my-5">
                     <button class="btn btn-primary" type="submit">Thêm</button>
                 </div>

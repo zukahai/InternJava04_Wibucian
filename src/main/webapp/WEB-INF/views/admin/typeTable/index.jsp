@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
-<jsp:include page="../includes/sidebar2.jsp"></jsp:include>
+<jsp:include page="../includes/sidebar.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
 <div class="content flex-column-fluid" id="kt_content">
 
@@ -46,9 +46,9 @@
                             <td>${  item.typeName }</td>
                             <td>${  item.price }</td>
                             <td class="d-flex align-center justify-content-center">
-                                <a href="" class="btn btn-warning mx-1">Xem</a>
-                                <a href="" class="btn btn-success mx-1">Sửa</a>
-                                <a href="" class="btn btn-danger mx-1">Xoá</a>
+                                <a href="admin/typeTable/edit/${item.id}" class="btn btn-warning mx-1">Xem</a>
+                                <a href="admin/typeTable/edit/${item.id}" class="btn btn-success m mx-1">Sửa</a>
+                                <a href="admin/typeTable/delete/${item.id}" class="btn btn-danger mx-1">Xoá</a>
                             </td>
                             <!--end::Action=-->
                         </tr>
