@@ -31,6 +31,10 @@ public class EmployeeService {
         return bean.getId();
     }
 
+    public List<Employee> findAll() {
+        return this.employeeRepository.findAll();
+    }
+
     public void delete(String id) {
         employeeRepository.deleteById(id);
     }
