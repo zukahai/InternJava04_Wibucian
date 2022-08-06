@@ -61,7 +61,7 @@
                 </div>
                 <div class="col ">
                     <div readonly="true" class="input-group mb-5">
-                        <span  class="input-group-text">Tổng tiền</span>
+                        <span class="input-group-text">Tổng tiền</span>
                         <input readonly value="0" type="text" class="form-control total-price" id="total-price"
                                aria-describedby="basic-addon3"/>
                     </div>
@@ -85,6 +85,7 @@
                                        data-kt-check-target="#kt_table_users .form-check-input" value="1"/>
                             </div>
                         </th>
+
                         <th class="min-w-125px">Id Sản phẩm</th>
                         <th class="min-w-125px">Tên sản phẩm</th>
                         <th class="min-w-125px">Số lượng</th>
@@ -212,7 +213,9 @@
                                 <input class="form-check-input" type="checkbox" value="1"/>
                             </div>
                         </td>
-                        <td><p class="id-product-tabel">` + id_product + `</p></td>
+                        <td style="display: none"><p class="id-ordercf-tabel"></p></td>
+                        <td style="display: none"><p class="id-idOrdercf-tabel"></p></td>
+                        <td><p class="idOrdercf-product-tabel">` + id_product + `</p></td>
                         <td><p class="name-product-tabel">` + name_product + `</p></td>
                         <td class="w-175px">
                             <div class="input-group mb-5">
@@ -246,8 +249,12 @@
             var count = $(this).find(".text-count-tabel").val();
             var price_product = $(this).find(".price-product-tabel").text();
             var total_price = $(this).find(".total-price-tabel").text();
+            var id_order = $(this).find(".id-ordercf-tabel").text();
+            var idOrdercf = $(this).find(".id-idOrdercf-tabel").text();
             var tabel_group_id = $("#id-table-select").val();
             data.push({
+                id: id_order || null,
+                idOrdercf: idOrdercf || null,
                 idGroupTable: tabel_group_id,
                 idProduct: id_product,
                 quantity: count,
@@ -306,6 +313,71 @@
             $(".text-count").val(0);
         }
     );
+</script>
+<script>
+    let update_data = (tabel_group_id) => {
+        var tabel = $("#tabel-order").DataTable();
+        tabel.clear().draw();
+        $.ajax({
+                url: "/ordercf/findByGroupTableId/" + tabel_group_id,
+                type: "GET",
+                contentType: "application/json",
+                success: function (result) {
+                    result.forEach(function (item) {
+                        var product;
+                        $.ajax({
+                            url: "/ordercf/findByProductId/" + item.idProduct,
+                            type: "GET",
+                            contentType: "application/json",
+                            success: function (result) {
+                                product = result;
+                                console.log(product.price);
+                                var total_price = parseInt(product.price) * parseInt(item.quantity);
+                                var html = `<tr>
+                        <td>
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" value="1"/>
+                            </div>
+                        </td>
+                        <td style="display: none"><p class="id-ordercf-tabel">` + item.id + `</p></td>
+                        <td style="display: none"><p class="id-idOrdercf-tabel">` + item.idOrdercf + `</p></td>
+                        <td><p class="id-product-tabel">` + item.idProduct + `</p></td>
+                        <td><p class="name-product-tabel">` + product.productName + `</p></td>
+                        <td class="w-175px">
+                            <div class="input-group mb-5">
+                                <span class="input-group-text btn btn-dark text-center down-count-tabel">-</span>
+                                <input type="text" value="` + item.quantity + `" class="form-control text-center text-count-tabel"/>
+                                <span class="input-group-text btn btn-dark text-center down-up-tabel ">+</span>
+                            </div>
+                        </td>
+                        <td><p class="price-product-tabel">` + product.price + `</p></td>
+                        <td class="total-price-tabel"><p class="total-product-table">` + total_price + `</p></td>
+                        <td class="">
+                            <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
+                                  data-toggle="tooltip" data-placement="top" title="Xóa">
+                                <i class="fa fa-trash"></i>
+                            </span>
+                        </td>
+                    </tr>`;
+                                $("#tabel-order").DataTable().row.add($(html)).draw();
+                            }
+                        });
 
+                    });
+                }
 
+            }
+        );
+    }
+    //ready function
+    $(document).ready(function () {
+        var tabel_group_id = $("#id-table-select").val();
+        update_data(tabel_group_id)
+    });
+    //handle on change id-table-select
+    $(document).on("change", "#id-table-select", function () {
+        var tabel_group_id = $(this).val();
+        console.log(tabel_group_id);
+        update_data(tabel_group_id)
+    });
 </script>

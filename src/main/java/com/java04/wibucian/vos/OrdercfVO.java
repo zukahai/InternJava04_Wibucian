@@ -11,6 +11,10 @@ import java.util.Date;
 public class OrdercfVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private Integer id;
+
+    private String idOrdercf;
+
     private String idGroupTable;
 
     private String idProduct;
