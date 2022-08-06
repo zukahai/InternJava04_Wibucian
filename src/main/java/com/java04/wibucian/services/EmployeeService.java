@@ -1,7 +1,7 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.EmployeeDTO;
-import com.java04.wibucian.interfaces.models.Employee;
+import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.repositories.EmployeeRepository;
 import com.java04.wibucian.vos.EmployeeQueryVO;
 import com.java04.wibucian.vos.EmployeeUpdateVO;
@@ -27,9 +27,9 @@ public class EmployeeService {
         return bean.getId();
     }
 
-//    public List<Employee> findAll() {
-//        return this.employeeRepository.findAll();
-//    }
+    public List<Employee> findAll() {
+        return this.employeeRepository.findAll();
+    }
 
     public void delete(String id) {
         employeeRepository.deleteById(id);
@@ -44,13 +44,9 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-//    public EmployeeDTO getById(String id) {
-//        Employee original = requireOne(id);
-//        return toDTO(original);
-//    }
-
-    public Employee getById(String id) {
-        return requireOne(id);
+    public EmployeeDTO getById(String id) {
+        Employee original = requireOne(id);
+        return toDTO(original);
     }
 
     public Page<EmployeeDTO> query(EmployeeQueryVO vO) {

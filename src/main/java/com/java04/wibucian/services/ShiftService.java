@@ -45,7 +45,7 @@ public class ShiftService {
      *
      * @return
      */
-    public ShiftDTO createShift(ShiftVO shiftVO, String employeeId) {
+    public String createShift(ShiftVO shiftVO, String employeeId) {
         // query employee
         Employee employee = this.employeeRepository.findById(employeeId)
                                                    .orElse(null);
@@ -77,7 +77,7 @@ public class ShiftService {
      *
      * @return Mã ca làm việc vừa tạo
      */
-    private ShiftDTO adminCreateShift(Employee employee, Calendar currentDate,
+    private String adminCreateShift(Employee employee, Calendar currentDate,
                                     Calendar firstDayOfNextWeek,
                                     Calendar lastDayOfNextWeek, ShiftVO shiftVO) {
         Shift shift = null;
@@ -95,7 +95,7 @@ public class ShiftService {
         shift.setEmployee(employee);
         shift.setRequestTime(currentDate.toInstant());
         shift = shiftRepository.save(shift);
-        return toDTO(shift);
+        return shift.getId();
     }
 
     /**
@@ -109,7 +109,7 @@ public class ShiftService {
      *
      * @return Mã ca làm việc vừa tạo
      */
-    private ShiftDTO staffCreateShift(Employee employee, Calendar currentDate,
+    private String staffCreateShift(Employee employee, Calendar currentDate,
                                     Calendar firstDayOfNextWeek,
                                     Calendar lastDayOfNextWeek, ShiftVO shiftVO) {
         Shift shift = null;
@@ -136,23 +136,19 @@ public class ShiftService {
             if (!canRequestNormally) {
                 throw new BadRequestException("Không thể đăng ký dự bị");
             }
-            boolean isFullSlot = true;
             for (Shift existShift : shifts) {
                 if (existShift.isOvertimeRequest()) {
                     shift = existShift;
                     shift.setOvertimeRequest(false);
-                    isFullSlot = false;
                     break;
                 }
-            }
-            if (isFullSlot) {
                 throw new BadRequestException("Ca làm việc đã đủ slot");
             }
         }
         shift.setEmployee(employee);
         shift.setRequestTime(currentDate.toInstant());
         shift = shiftRepository.save(shift);
-        return toDTO(shift);
+        return shift.getId();
     }
 
     /**
@@ -242,15 +238,6 @@ public class ShiftService {
                                           .isPresent();
     }
 
-    public List<ShiftDTO> findAllShiftsBetween(Calendar start, Calendar end) {
-        return this.shiftRepository.findAllByRequestShiftAndShiftDateBetween(false,
-                                                                             start.getTime(),
-                                                                             end.getTime())
-                                   .stream()
-                                   .map(this::toDTO)
-                                   .toList();
-    }
-
     public ShiftDTO getById(String id) {
         Shift original = requireOne(id);
         return toDTO(original);
@@ -260,22 +247,10 @@ public class ShiftService {
         throw new UnsupportedOperationException();
     }
 
-    private ShiftDTO toDTO(Shift shift) {
-        ShiftDTO shiftDTO = new ShiftDTO();
-        BeanUtils.copyProperties(shift, shiftDTO);
-        shiftDTO.setId(shift.getId());
-        shiftDTO.setIdEmployee(shift.getEmployee()
-                                    .getId());
-        shiftDTO.setIdEmployeeChange(shift.getEmployeeChange() == null
-                                             ? null
-                                             : shift.getEmployeeChange()
-                                                    .getId());
-        String[] timeRange =
-                Utils.getShiftTimeRangeFromShiftDateAndCode(shift.getShiftDate(),
-                                                            shift.getShiftCode());
-        shiftDTO.setStart(timeRange[0]);
-        shiftDTO.setEnd(timeRange[1]);
-        return shiftDTO;
+    private ShiftDTO toDTO(Shift original) {
+        ShiftDTO bean = new ShiftDTO();
+        BeanUtils.copyProperties(original, bean);
+        return bean;
     }
 
     private Shift requireOne(String shiftId) {
@@ -326,34 +301,14 @@ public class ShiftService {
                 && requestDate.compareTo(lastDayOfNextWeek) < 1;
     }
 
-    /**
-     * Phương thức lấy số ca đăng ký chính thức của nhân viên trong tuần tiếp theo
-     *
-     * @return
-     */
-    public int getNormalRequestOfEmployeeForDateBetween(Employee employee,
-                                                        Calendar firstDay,
-                                                        Calendar secondDay) {
-        return this.shiftRepository.countByEmployeeAndOvertimeRequestAndShiftDateBetween(
-                employee, false, firstDay.getTime(), secondDay.getTime());
-    }
-
-    /**
-     * Phương thức kiểm tra xem nhân viên còn có thể đăng ký ca làm chính thức cho tuần
-     * tiếp theo không
-     *
-     * @param employee
-     * @param firstDayOfNextWeek
-     * @param lastDayOfNextWeek
-     *
-     * @return
-     */
     private boolean canEmployeeRequestNormally(Employee employee,
                                                Calendar firstDayOfNextWeek,
                                                Calendar lastDayOfNextWeek) {
-        return this.getNormalRequestOfEmployeeForDateBetween(employee, firstDayOfNextWeek,
-                                                             lastDayOfNextWeek)
-                < Constant.MAX_SHIFT_REQUEST_PER_WEEK;
+        int employeeNumOfRequestOfNextWeek =
+                this.shiftRepository.countByEmployeeAndOvertimeRequestAndShiftDateBetween(
+                        employee, false, firstDayOfNextWeek.getTime(),
+                        lastDayOfNextWeek.getTime());
+        return employeeNumOfRequestOfNextWeek < Constant.MAX_SHIFT_REQUEST_PER_WEEK;
     }
 
     private Map<DayOfWeek, Map<ShiftOfDay, List<Shift>>> convertShiftList(

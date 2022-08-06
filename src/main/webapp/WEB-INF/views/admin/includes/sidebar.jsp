@@ -797,7 +797,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/shift/all"
+								href="admin/shift"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>

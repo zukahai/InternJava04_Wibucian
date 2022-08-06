@@ -14,13 +14,6 @@ public class Utils {
     public static Calendar getCurrentDate() {
         Calendar currentDate = Calendar.getInstance();
         currentDate.setTime(new Date());
-        if (currentDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-            currentDate.add(Calendar.DATE, -1);
-            currentDate.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-        } else {
-            currentDate.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-        }
-
         return currentDate;
     }
 
@@ -40,12 +33,8 @@ public class Utils {
         Calendar currentDateWithoutTime = currentDateWithoutTime();
         Calendar firstDayOfNextWeek = Calendar.getInstance();
         firstDayOfNextWeek.setTime(currentDateWithoutTime.getTime());
-        if (firstDayOfNextWeek.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-            firstDayOfNextWeek.add(Calendar.DATE, 1);
-        } else {
-            firstDayOfNextWeek.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-            firstDayOfNextWeek.add(Calendar.DATE, Calendar.DAY_OF_WEEK);
-        }
+        firstDayOfNextWeek.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        firstDayOfNextWeek.add(Calendar.DATE, Calendar.DAY_OF_WEEK);
         return firstDayOfNextWeek;
     }
 
@@ -53,15 +42,5 @@ public class Utils {
         Calendar lastDayOfNextWeek = getFirstDayOfNextWeek();
         lastDayOfNextWeek.add(Calendar.DATE, -1 + Calendar.DAY_OF_WEEK);
         return lastDayOfNextWeek;
-    }
-
-    public static String[] getShiftTimeRangeFromShiftDateAndCode(Date shiftDate,
-                                                                 int shiftCode) {
-        String[] result = new String[2];
-        String date = getDateFormat(shiftDate, Constant.YYYY_MM_DD_FORMAT);
-        ShiftOfDay shiftOfDay = ShiftOfDayConversion.getShiftOfDayFromValue(shiftCode);
-        result[0] = date + "T" + shiftOfDay.getStartTime();
-        result[1] = date + "T" + shiftOfDay.getEndTime();
-        return result;
     }
 }

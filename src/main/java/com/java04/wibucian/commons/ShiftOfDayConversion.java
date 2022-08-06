@@ -6,7 +6,6 @@ import java.util.Map;
 public class ShiftOfDayConversion {
 
     private static final Map<Integer, ShiftOfDay> ShiftOfDayMapping = new HashMap<>();
-    private static final Map<Integer, Integer[]> ShiftOfDayToHourMapping = new HashMap<>();
 
     public static ShiftOfDay getShiftOfDayFromValue(int value) {
         return ShiftOfDayMapping.get(value);

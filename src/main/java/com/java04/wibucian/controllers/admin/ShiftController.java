@@ -9,9 +9,10 @@ import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.models.Shift;
 import com.java04.wibucian.services.EmployeeService;
 import com.java04.wibucian.services.ShiftService;
-import com.java04.wibucian.validations.annotation.ValidDate;
-import com.java04.wibucian.validations.annotation.ValidISO8061Date;
-import com.java04.wibucian.vos.*;
+import com.java04.wibucian.vos.AdminShiftVO;
+import com.java04.wibucian.vos.ShiftQueryVO;
+import com.java04.wibucian.vos.ShiftUpdateVO;
+import com.java04.wibucian.vos.ShiftVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
@@ -24,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.DatatypeConverter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -48,17 +48,17 @@ public class ShiftController {
         return request.getContextPath();
     }
 
-    // tạo mới ca làm việc của admin
+    // tạo mới ca làm việc
     @RequestMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
                     method = RequestMethod.POST, value = {"", "/"})
     @ResponseBody
-    public ResponseEntity<ShiftDTO> save(@Valid AdminShiftVO shiftVO) {
+    public ResponseEntity<String> save(@Valid AdminShiftVO shiftVO) {
         return ResponseEntity.ok()
                              .body(this.shiftService.createShift(shiftVO,
                                                                  shiftVO.getIdEmployee()));
     }
 
-    // xóa ca làm việc của admin
+    // xóa ca làm việc
     @DeleteMapping("/{shiftId}")
     @ResponseBody
     public ResponseEntity<Boolean> delete(
@@ -67,7 +67,7 @@ public class ShiftController {
                              .body(shiftService.delete(shiftId, null));
     }
 
-    // sửa ca làm việc của admin
+    // sửa ca làm việc
     @RequestMapping(value = {"/{shiftId}"},
                     consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
                     method = RequestMethod.PATCH)
@@ -155,104 +155,9 @@ public class ShiftController {
         return "admin/shift/preview";
     }
 
-    @GetMapping("/all")
-    public String getShiftHistory() {
-        return "/admin/shift/index";
-    }
-
-    /**
-     * Chốt lịch làm việc cho tuần tiếp theo
-     *
-     * @param contextPath
-     *
-     * @return
-     */
     @GetMapping("/request/approve")
     public String approveShiftRequest(@ModelAttribute("contextPath") String contextPath) {
         this.shiftService.approveShiftRequest();
         return "redirect:" + contextPath + "/admin/shift/request/preview";
     }
-
-    /**
-     * Lấy danh sách các ca làm việc trong giới hạn ngày
-     *
-     * @param startTime Ngày đầu tiên
-     * @param endTime   Ngày cuối cùng
-     *
-     * @return
-     */
-    @GetMapping()
-    @ResponseBody
-    public ResponseEntity<List<ShiftDTO>> getAllShiftBetween(
-            @Valid @ValidISO8061Date @RequestParam("start") String startTime,
-            @Valid @ValidISO8061Date @RequestParam("end") String endTime) {
-        Calendar start = DatatypeConverter.parseDateTime(startTime);
-        Calendar end = DatatypeConverter.parseDateTime(endTime);
-        return ResponseEntity.ok()
-                             .body(this.shiftService.findAllShiftsBetween(start, end));
-    }
-
-    // toàn bộ của staff
-    @PostMapping("/staff/request")
-    @ResponseBody
-    public ResponseEntity<ShiftDTO> staffCreateShift(@Valid StaffShiftVO staffShiftVO) {
-        staffShiftVO.setIdEmployee("Employee00002");
-        return ResponseEntity.ok()
-                             .body(this.shiftService.createShift(staffShiftVO,
-                                                                 staffShiftVO.getIdEmployee()));
-    }
-
-    @DeleteMapping("/staff/request/{shiftId}")
-    @ResponseBody
-    public ResponseEntity<Boolean> staffDeleteShift(
-            @Valid @PathVariable("shiftId") String shiftId) {
-        return ResponseEntity.ok()
-                             .body(this.shiftService.delete(shiftId,
-                                                            this.employeeService.getById(
-                                                                    "Employee00002")));
-    }
-
-    @GetMapping("/staff/request")
-    public String getOwnShiftRequestForNextWeek(Model model) {
-        boolean isInShiftRequestTime = this.shiftService.isInShiftRequestTime();
-        if (isInShiftRequestTime) {
-            Calendar firstDayOfNextWeek = Utils.getFirstDayOfNextWeek();
-            Calendar lastDayOfNextWeek = Utils.getLastDayOfNextWeek();
-            model.addAttribute("totalNormalRequest",
-                               this.shiftService.getNormalRequestOfEmployeeForDateBetween(
-                                       this.employeeService.getById("Employee00002"),
-                                       firstDayOfNextWeek, lastDayOfNextWeek));
-            model.addAttribute("daysOfWeek", DayOfWeek.values());
-            model.addAttribute("shiftsOfDay", ShiftOfDay.values());
-            model.addAttribute("shiftRequestsForNextWeek",
-                               this.shiftService.getAllShiftRequestsForNextWeak());
-
-            model.addAttribute("weekStart",
-                               Utils.getDateFormat(firstDayOfNextWeek.getTime(),
-                                                   Constant.DD_MM_YYYY_FORMAT));
-            model.addAttribute("weekEnd", Utils.getDateFormat(lastDayOfNextWeek.getTime(),
-                                                              Constant.DD_MM_YYYY_FORMAT));
-            model.addAttribute("employeeId", "Employee00002");
-            Map<Integer, String> weekDayMapping = new HashMap<>();
-            while (firstDayOfNextWeek.compareTo(lastDayOfNextWeek) <= 0) {
-                weekDayMapping.put(firstDayOfNextWeek.get(Calendar.DAY_OF_WEEK),
-                                   Utils.getDateFormat(firstDayOfNextWeek.getTime(),
-                                                       Constant.DD_MM_YYYY_FORMAT));
-                firstDayOfNextWeek.add(Calendar.DATE, 1);
-            }
-            model.addAttribute("weekDayMapping", weekDayMapping);
-
-        }
-        model.addAttribute("isInShiftRequestTime", isInShiftRequestTime);
-        return "admin/shift/requestShift";
-    }
-
-//    @PostMapping("/staff/request")
-//    @ResponseBody
-//    public ResponseEntity<ShiftDTO> staffRequestShift(@Valid StaffShiftVO staffShiftVO) {
-//        staffShiftVO.setIdEmployee("Employee00004");
-//        return ResponseEntity.ok()
-//                             .body(this.shiftService.createShift(staffShiftVO,
-//                                                                 "Employee00004"));
-//    }
 }

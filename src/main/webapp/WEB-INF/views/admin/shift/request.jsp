@@ -5,9 +5,6 @@
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <jsp:include page="../includes/sidebar.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
 <div class="content flex-column-fluid" id="kt_content">
 	<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
 		<c:choose>
@@ -82,8 +79,7 @@
 				<!--end::Card body-->
 			</c:when>
 			<c:otherwise>
-				<div class="card-body p-9 fs-2 text-center">Xin lỗi, hiện tại không phải
-					là thời gian
+				<div class="card-body p-9 fs-2 text-center">Xin lỗi, hiện tại không phải là thời gian
 					đăng ký ca làm việc.
 				</div>
 			</c:otherwise>
