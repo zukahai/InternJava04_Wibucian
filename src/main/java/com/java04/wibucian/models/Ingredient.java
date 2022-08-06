@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -40,6 +42,7 @@ public class Ingredient {
     @OneToMany(mappedBy = "ingredient")
     private Set<DetailProduct> detailProducts = new LinkedHashSet<>();
 
+<<<<<<< HEAD
     @OneToMany(mappedBy = "idIngredient")
     private Set<DetailIngredient> detailIngredients = new LinkedHashSet<>();
 
@@ -51,6 +54,11 @@ public class Ingredient {
         this.detailIngredients = detailIngredients;
     }
 
+=======
+    public String getDateFormat() {
+        return this.expiryIngredient == null ? null : new SimpleDateFormat("dd-MM-yyyy").format(Date.from(this.expiryIngredient));
+    }
+>>>>>>> afaec8e (NamPV8)
     public String getId() {
         return id;
     }
