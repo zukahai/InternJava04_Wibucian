@@ -41,6 +41,12 @@ public class TypeTableController {
         return "admin/typeTable/edit";
     }
 
+    @GetMapping("/delete/{id}")
+    public String HomeDelete(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
+        typeTableService.delete(id);
+        return "redirect:/admin/typeTable/";
+    }
+
     @GetMapping("/create")
     public String createTypeTablePage(ModelMap modelMap) throws Exception {
         return "admin/typeTable/create";
