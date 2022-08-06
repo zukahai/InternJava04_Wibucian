@@ -6,7 +6,7 @@
         <jsp:include page="../includes/sidebar.jsp"></jsp:include>
         <jsp:include page="../includes/container.jsp"></jsp:include>
         <div class="content flex-column-fluid" id="kt_content">
-
+        <h1>${typeTable}</h1>
             <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
                 <!--begin::Card header-->
                 <div class="card-header cursor-pointer">
@@ -23,30 +23,24 @@
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
-            <form action="/admin/typeTable" method="post">
+            <form action="/admin/typeTable/edit" method="post">
                 <div class="rounded border p-5">
-
                     <div class="form-floating my-5">
-                        <input type="text" class="form-control" id="typeName" name="typeName" placeholder="VIP"/>
+                        <input type="text" class="form-control" id="idTypeTable" name="idTypeTable" value="${typeTable.id}" readonly/>
+                        <label for="idTypeTable">Mã loại bàn</label>
+                    </div>
+                    <div class="form-floating my-5">
+                        <input type="text" class="form-control" id="typeName" name="typeName" placeholder="VIP" value="${typeTable.typeName}"/>
                         <label for="typeName">Tên loại bàn</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="number" class="form-control" id="price" name="price" placeholder="0"/>
+                        <input type="number" class="form-control" id="price" name="price" placeholder="0" value="${typeTable.price}"/>
                         <label for="price">Giá</label>
-                    </div>
-                    <div class="form-floating">
-                        <select class="form-select h-100" id="floatingSelect" aria-label="Floating label select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                        <label for="floatingSelect">Works with selects</label>
                     </div>
 
                 </div>
                 <div class="text-center my-5">
-                    <button class="btn btn-primary" type="submit">Thêm</button>
+                    <button class="btn btn-success" type="submit">Sửa</button>
                 </div>
             </form>
         </div>
