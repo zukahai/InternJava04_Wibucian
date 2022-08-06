@@ -43,14 +43,14 @@
                     <tbody>
                     <c:forEach var="item" items="${tables}">
                         <tr>
-                            <th scope="row">${  item.id }</th>
+                            <th scope="row">${ item.id }</th>
                             <td>${  item.typeTable.typeName }</td>
                             <td>${  item.describe }</td>
                             <td>${  item.capacity }</td>
                             <td class="d-flex align-center justify-content-center">
                                 <a href="" class="btn btn-warning mx-1">Xem</a>
-                                <a href="" class="btn btn-success mx-1">Sửa</a>
-                                <a href="" class="btn btn-danger mx-1">Xoá</a>
+                                <a href="admin/table/edit/${ item.id }" class="btn btn-success mx-1">Sửa</a>
+                                <a href="admin/table/delete/${ item.id }" class="btn btn-danger mx-1">Xoá</a>
                             </td>
                             <!--end::Action=-->
                         </tr>

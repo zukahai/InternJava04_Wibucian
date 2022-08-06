@@ -67,8 +67,6 @@ public class TypeTableController {
                                 @RequestBody MultiValueMap<String, String> formData) throws Exception {
         String idTypeTable =  formData.get("idTypeTable").get(0);
         this.typeTableService.update(idTypeTable, typeTableUpdateVO);
-        System.out.println(typeTableUpdateVO);
-        System.out.println("Editor");
         return "redirect:/admin/typeTable/";
     }
 
