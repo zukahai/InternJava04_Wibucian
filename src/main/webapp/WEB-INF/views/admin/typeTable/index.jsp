@@ -48,7 +48,7 @@
                             <td class="d-flex align-center justify-content-center">
                                 <a href="admin/typeTable/edit/${item.id}" class="btn btn-warning mx-1">Xem</a>
                                 <a href="admin/typeTable/edit/${item.id}" class="btn btn-success m mx-1">Sửa</a>
-                                <a href="" class="btn btn-danger mx-1">Xoá</a>
+                                <a href="admin/typeTable/delete/${item.id}" class="btn btn-danger mx-1">Xoá</a>
                             </td>
                             <!--end::Action=-->
                         </tr>
