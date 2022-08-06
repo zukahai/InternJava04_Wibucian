@@ -10,6 +10,7 @@ import com.java04.wibucian.vos.TypeTableVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.MultiValueMap;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 
 @Validated
 @Controller
@@ -39,12 +41,6 @@ public class TypeTableController {
         TypeTable typeTable = typeTableService.findById(id);
         modelMap.addAttribute("typeTable", typeTable);
         return "admin/typeTable/edit";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String HomeDelete(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
-        typeTableService.delete(id);
-        return "redirect:/admin/typeTable/";
     }
 
     @GetMapping("/create")
@@ -75,10 +71,22 @@ public class TypeTableController {
         return typeTableService.save(vO).toString();
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@Valid @NotNull @PathVariable("id") String id) {
-        System.out.println("delete ");
-        typeTableService.delete(id);
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
+        try {
+            typeTableService.delete(id);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", true);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", false);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        }
     }
 
     @PutMapping("/{id}")
