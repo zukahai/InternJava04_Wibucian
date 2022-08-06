@@ -2,7 +2,9 @@ package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.DetailGroupTableDTO;
 import com.java04.wibucian.models.DetailGroupTable;
+import com.java04.wibucian.models.GroupTable;
 import com.java04.wibucian.repositories.DetailGroupTableRepository;
+import com.java04.wibucian.repositories.GroupTableRepository;
 import com.java04.wibucian.vos.DetailGroupTableQueryVO;
 import com.java04.wibucian.vos.DetailGroupTableUpdateVO;
 import com.java04.wibucian.vos.DetailGroupTableVO;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -18,6 +21,11 @@ public class DetailGroupTableService {
 
     @Autowired
     private DetailGroupTableRepository detailGroupTableRepository;
+    private GroupTableRepository groupTableRepository;
+
+    public DetailGroupTableService(GroupTableRepository groupTableRepository) {
+        this.groupTableRepository = groupTableRepository;
+    }
 
     public String save(DetailGroupTableVO vO) {
         DetailGroupTable bean = new DetailGroupTable();
@@ -39,6 +47,16 @@ public class DetailGroupTableService {
     public DetailGroupTableDTO getById(String id) {
         DetailGroupTable original = requireOne(id);
         return toDTO(original);
+    }
+
+    public DetailGroupTable findById(String id) {
+        return requireOne(id);
+    }
+
+    public List<DetailGroupTable> getByIdGroupTable(String idGroupTable) {
+        GroupTable groupTable = groupTableRepository.findById(idGroupTable).orElse(null);
+        System.out.println("GroupTable" + groupTable);
+        return detailGroupTableRepository.getByGroupTable(groupTable);
     }
 
     public Page<DetailGroupTableDTO> query(DetailGroupTableQueryVO vO) {

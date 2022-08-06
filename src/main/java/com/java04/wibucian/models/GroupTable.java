@@ -75,4 +75,13 @@ public class GroupTable implements Serializable {
 
     @OneToMany(mappedBy = "groupTable")
     private Set<DetailGroupTable> detailGroupTables = new LinkedHashSet<>();
+
+    @Override
+    public String toString() {
+        return "GroupTable{" +
+                "id='" + id + '\'' +
+                ", groupName='" + groupName + '\'' +
+                ", foundedTime=" + foundedTime +
+                '}';
+    }
 }
