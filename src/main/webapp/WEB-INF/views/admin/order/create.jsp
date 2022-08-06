@@ -215,7 +215,7 @@
                         </td>
                         <td style="display: none"><p class="id-ordercf-tabel"></p></td>
                         <td style="display: none"><p class="id-idOrdercf-tabel"></p></td>
-                        <td><p class="idOrdercf-product-tabel">` + id_product + `</p></td>
+                        <td><p class="id-product-tabel">` + id_product + `</p></td>
                         <td><p class="name-product-tabel">` + name_product + `</p></td>
                         <td class="w-175px">
                             <div class="input-group mb-5">
