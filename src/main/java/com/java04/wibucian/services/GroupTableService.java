@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -18,6 +19,10 @@ public class GroupTableService {
 
     @Autowired
     private GroupTableRepository groupTableRepository;
+
+    public List<GroupTable> findAll() {
+        return groupTableRepository.findAll();
+    }
 
     public String save(GroupTableVO vO) {
         GroupTable bean = new GroupTable();
