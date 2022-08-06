@@ -46,11 +46,9 @@
                             <td>${  item.typeName }</td>
                             <td>${  item.price }</td>
                             <td class="d-flex align-center justify-content-center">
-                                <a href="" class="btn btn-warning mx-1">Xem</a>
-                                <a href="" class="btn btn-success mx-1">Sửa</a>
-                                <form action="/admin/typeTable/${item.id}" method="delete">
-                                    <button type="submit" class="btn btn-danger mx-1">Xoá</button>
-                                </form>
+                                <a href="admin/typeTable/edit/${item.id}" class="btn btn-warning mx-1">Xem</a>
+                                <a href="admin/typeTable/edit/${item.id}" class="btn btn-success m mx-1">Sửa</a>
+                                <a href="" class="btn btn-danger mx-1">Xoá</a>
                             </td>
                             <!--end::Action=-->
                         </tr>

@@ -23,9 +23,8 @@
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
-            <form action="/admin/typeTable" method="post">
+            <form action="/admin/typeTable/create" method="post">
                 <div class="rounded border p-5">
-
                     <div class="form-floating my-5">
                         <input type="text" class="form-control" id="typeName" name="typeName" placeholder="VIP"/>
                         <label for="typeName">Tên loại bàn</label>
@@ -33,15 +32,6 @@
                     <div class="form-floating my-5">
                         <input type="number" class="form-control" id="price" name="price" placeholder="0"/>
                         <label for="price">Giá</label>
-                    </div>
-                    <div class="form-floating">
-                        <select class="form-select h-100" id="floatingSelect" aria-label="Floating label select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                        <label for="floatingSelect">Works with selects</label>
                     </div>
 
                 </div>
