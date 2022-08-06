@@ -51,7 +51,7 @@
                             <td class="d-flex align-center justify-content-center">
                                 <a href="" class="btn btn-warning mx-1">Xem</a>
                                 <a href="" class="btn btn-success mx-1">Sửa</a>
-                                <a href="" class="btn btn-danger mx-1">Xoá</a>
+                                <a href="admin.groupTable/delete/${item.id}" class="btn btn-danger mx-1">Xoá</a>
                             </td>
                             <!--end::Action=-->
                         </tr>

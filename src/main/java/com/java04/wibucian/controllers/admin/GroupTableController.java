@@ -37,6 +37,12 @@ public class GroupTableController {
         return "admin/groupTable/create";
     }
 
+    @GetMapping("/delete/{id}")
+    public String HomeDelete(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
+        groupTableService.delete(id);
+        return "redirect:/admin/table/";
+    }
+
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String createNewProduct(ModelMap modelMap,  @RequestBody MultiValueMap<String, String> formData) throws Exception {
         String nameGroupTable = formData.get("groupName").get(0);
