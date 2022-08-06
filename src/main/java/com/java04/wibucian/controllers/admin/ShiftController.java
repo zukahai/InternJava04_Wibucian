@@ -1,19 +1,35 @@
 package com.java04.wibucian.controllers.admin;
 
+import com.java04.wibucian.commons.Constant;
+import com.java04.wibucian.commons.DayOfWeek;
+import com.java04.wibucian.commons.ShiftOfDay;
+import com.java04.wibucian.commons.Utils;
 import com.java04.wibucian.dtos.ShiftDTO;
+import com.java04.wibucian.models.Employee;
+import com.java04.wibucian.models.Shift;
+import com.java04.wibucian.services.EmployeeService;
 import com.java04.wibucian.services.ShiftService;
+import com.java04.wibucian.vos.AdminShiftVO;
 import com.java04.wibucian.vos.ShiftQueryVO;
 import com.java04.wibucian.vos.ShiftUpdateVO;
 import com.java04.wibucian.vos.ShiftVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Validated
 @Controller
@@ -23,21 +39,43 @@ public class ShiftController {
     @Autowired
     private ShiftService shiftService;
 
+    @Autowired
+    private EmployeeService employeeService;
+
+    @ModelAttribute("contextPath")
+    public String getContextPath(HttpServletRequest request) {
+        return request.getContextPath();
+    }
+
+    // tạo mới ca làm việc
     @RequestMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-                    method = RequestMethod.POST)
-    public String save(@Valid ShiftVO shiftVO) {
-        return shiftService.createShift(shiftVO);
+                    method = RequestMethod.POST, value = {"", "/"})
+    @ResponseBody
+    public ResponseEntity<String> save(@Valid AdminShiftVO shiftVO) {
+        return ResponseEntity.ok()
+                             .body(this.shiftService.createShift(shiftVO,
+                                                                 shiftVO.getIdEmployee()));
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@Valid @NotNull @PathVariable("id") String id) {
-        shiftService.delete(id);
+    // xóa ca làm việc
+    @DeleteMapping("/{shiftId}")
+    @ResponseBody
+    public ResponseEntity<Boolean> delete(
+            @Valid @NotNull @PathVariable("shiftId") String shiftId) {
+        return ResponseEntity.ok()
+                             .body(shiftService.delete(shiftId, null));
     }
 
-    @PutMapping("/{id}")
-    public void update(@Valid @NotNull @PathVariable("id") String id,
-                       @Valid @RequestBody ShiftUpdateVO vO) {
-        shiftService.update(id, vO);
+    // sửa ca làm việc
+    @RequestMapping(value = {"/{shiftId}"},
+                    consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+                    method = RequestMethod.PATCH)
+    @ResponseBody
+    public ResponseEntity<Boolean> update(
+            @Valid @NotNull @PathVariable("shiftId") String shiftId,
+            @Valid ShiftUpdateVO shiftUpdateVO) {
+        return ResponseEntity.ok()
+                             .body(shiftService.update(shiftId, shiftUpdateVO));
     }
 
     @GetMapping("/{id}")
@@ -45,13 +83,80 @@ public class ShiftController {
         return shiftService.getById(id);
     }
 
-    @GetMapping("/register")
-    public String getShiftRegister() {
-        return "admin/shift/index";
+    /**
+     * Xem tất cả các đăng ký ca làm việc cho tuần tiếp theo
+     *
+     * @param model
+     *
+     * @return
+     */
+    @GetMapping("/request")
+    public String getShiftRequestPage(Model model) {
+        boolean isInShiftRequestTime = this.shiftService.isInShiftRequestTime();
+        if (isInShiftRequestTime) {
+            model.addAttribute("daysOfWeek", DayOfWeek.values());
+            model.addAttribute("shiftsOfDay", ShiftOfDay.values());
+            model.addAttribute("shiftRequestsForNextWeek",
+                               this.shiftService.getAllShiftRequestsForNextWeak());
+            Calendar firstDayOfNextWeek = Utils.getFirstDayOfNextWeek();
+            Calendar lastDayOfNextWeek = Utils.getLastDayOfNextWeek();
+            model.addAttribute("weekStart",
+                               Utils.getDateFormat(firstDayOfNextWeek.getTime(),
+                                                   Constant.DD_MM_YYYY_FORMAT));
+            model.addAttribute("weekEnd", Utils.getDateFormat(lastDayOfNextWeek.getTime(),
+                                                              Constant.DD_MM_YYYY_FORMAT));
+
+        }
+        model.addAttribute("isInShiftRequestTime", isInShiftRequestTime);
+        return "admin/shift/request";
     }
 
-    @GetMapping
-    public Page<ShiftDTO> query(@Valid ShiftQueryVO vO) {
-        return shiftService.query(vO);
+    /**
+     * Preview và chỉnh sửa các ca đăng ký làm việc trong tuần tiếp theo
+     *
+     * @param model
+     *
+     * @return
+     */
+    @GetMapping("/request/preview")
+    public String getShiftApprovePage(Model model) {
+        boolean isInShiftApproveTime = this.shiftService.isInShiftApproveTime();
+        boolean isAlreadyApprovedForNextWeek =
+                this.shiftService.isAlreadyApprovedForNextWeek();
+        if (isInShiftApproveTime) {
+            List<String> allEmployeesID = this.employeeService.findAll()
+                                                              .stream()
+                                                              .map(Employee::getId)
+                                                              .toList();
+            model.addAttribute("allEmployeesID", allEmployeesID);
+            model.addAttribute("daysOfWeek", DayOfWeek.values());
+            model.addAttribute("shiftsOfDay", ShiftOfDay.values());
+            model.addAttribute("shiftRequestsForNextWeek",
+                               this.shiftService.getAllShiftRequestsForNextWeak());
+            Calendar firstDayOfNextWeek = Utils.getFirstDayOfNextWeek();
+            Calendar lastDayOfNextWeek = Utils.getLastDayOfNextWeek();
+            model.addAttribute("weekStart",
+                               Utils.getDateFormat(firstDayOfNextWeek.getTime(),
+                                                   Constant.DD_MM_YYYY_FORMAT));
+            model.addAttribute("weekEnd", Utils.getDateFormat(lastDayOfNextWeek.getTime(),
+                                                              Constant.DD_MM_YYYY_FORMAT));
+            Map<Integer, String> weekDayMapping = new HashMap<>();
+            while (firstDayOfNextWeek.compareTo(lastDayOfNextWeek) <= 0) {
+                weekDayMapping.put(firstDayOfNextWeek.get(Calendar.DAY_OF_WEEK),
+                                   Utils.getDateFormat(firstDayOfNextWeek.getTime(),
+                                                       Constant.DD_MM_YYYY_FORMAT));
+                firstDayOfNextWeek.add(Calendar.DATE, 1);
+            }
+            model.addAttribute("weekDayMapping", weekDayMapping);
+        }
+        model.addAttribute("isInShiftApproveTime", isInShiftApproveTime);
+        model.addAttribute("isAlreadyApprovedForNextWeek", isAlreadyApprovedForNextWeek);
+        return "admin/shift/preview";
+    }
+
+    @GetMapping("/request/approve")
+    public String approveShiftRequest(@ModelAttribute("contextPath") String contextPath) {
+        this.shiftService.approveShiftRequest();
+        return "redirect:" + contextPath + "/admin/shift/request/preview";
     }
 }

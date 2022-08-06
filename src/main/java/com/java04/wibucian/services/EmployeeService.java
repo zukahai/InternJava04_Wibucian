@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -24,6 +25,10 @@ public class EmployeeService {
         BeanUtils.copyProperties(vO, bean);
         bean = employeeRepository.save(bean);
         return bean.getId();
+    }
+
+    public List<Employee> findAll() {
+        return this.employeeRepository.findAll();
     }
 
     public void delete(String id) {

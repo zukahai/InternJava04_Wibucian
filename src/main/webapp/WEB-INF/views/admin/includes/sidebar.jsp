@@ -767,7 +767,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/shift/register"
+								href="admin/shift/request"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
@@ -782,7 +782,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/shift/register/approve"
+								href="admin/shift/request/preview"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
