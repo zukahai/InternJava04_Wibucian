@@ -6,6 +6,7 @@ import java.time.Instant;
 @Entity
 public class DetailGroupTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDetailGroupTable", nullable = false, length = 15)
     private String id;
 

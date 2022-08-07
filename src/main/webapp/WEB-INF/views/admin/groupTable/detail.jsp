@@ -11,13 +11,14 @@
 <div class="content flex-column-fluid" id="kt_content">
 
     <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+
         <!--begin::Card header-->
         <div class="card-header cursor-pointer">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Chi tiết nhóm bàn: </h3>
-                <h2>&nbsp ${groupTable.id}</h2>
-                <h2>&nbsp ${groupTable.groupName}</h2>
+                <h3 class="fw-bold m-0">Nhóm bàn: </h3>
+                <h2 class="text-info">&nbsp ${groupTable.groupName}</h2>
+                <h2>&nbsp [${groupTable.id}]</h2>
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
@@ -31,6 +32,24 @@
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
+
+            <form action="/admin/detailGroupTable/view/${groupTable.id}" method="post">
+                <div class="rounded border row  d-flex justify-content-between h-100">
+                    <div class="col col-10 form-floating my-5">
+                        <select class="form-select" data-control="select2" id="idTable" name="idTable" data-placeholder="Select an option">
+                            <c:forEach var="item" items="${tablecfs}">
+                                <option value="${item.id}">${item.id} - ${item.typeTable.typeName}</option>
+                            </c:forEach>
+                        </select>
+                        <label for="idTable">Chọn bàn</label>
+                    </div>
+                    <div class="col text-center justify-content-center align-items-center d-inline-flex p-2">
+                        <button class="btn btn-primary align-middle" type="submit">Thêm</button>
+                    </div>
+                </div>
+
+
+            </form>
 
 <!--end::Input group-->
             <div class="table-responsive">
