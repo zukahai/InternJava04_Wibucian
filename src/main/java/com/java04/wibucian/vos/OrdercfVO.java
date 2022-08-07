@@ -25,6 +25,4 @@ public class OrdercfVO implements Serializable {
 
     private Integer status;
 
-
-
 }

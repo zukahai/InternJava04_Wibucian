@@ -31,21 +31,24 @@ public class OrdercfController {
     @Autowired
     private OrdercfService ordercfService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create(ModelMap modelMap) {
+
+
+    @RequestMapping( method = RequestMethod.GET)
+    public String index(ModelMap modelMap) {
         modelMap.addAttribute("groupTables", groupTableService.findAll());
         modelMap.addAttribute("products", productService.listAll());
-        return "admin/order/create";
+        return "admin/order/index";
     }
+
     @RequestMapping(value = {"/store","/store/"}, method = RequestMethod.POST,
             produces = "application/json; charset=utf-8")
     @ResponseBody
     public ResponseEntity<Object> store(@RequestBody List<OrdercfVO> ordercfList) {
         try {
             for(OrdercfVO ordercfVO: ordercfList){
-                System.out.println(ordercfVO);
-              ordercfService.save(ordercfVO);
+                ordercfService.save(ordercfVO);
             }
+
             HashMap<String, Object> map = new HashMap<>();
             map.put("check", true);
             map.put("value", "test");
@@ -59,7 +62,7 @@ public class OrdercfController {
         }
     }
     //find Ordercf by findByGroupTableId
-    @RequestMapping(value = "/findByGroupTableId/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/find-by-group-table/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
     public ResponseEntity<Object> findByGroupTableId(@PathVariable("id") String id) {
         try {
@@ -71,7 +74,7 @@ public class OrdercfController {
         }
     }
     //find product by findByProductId
-    @RequestMapping(value = "/findByProductId/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/find-product/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
     public ResponseEntity<Object> findByProductId(@PathVariable("id") String id) {
         try {
@@ -82,8 +85,19 @@ public class OrdercfController {
             return ResponseEntity.ok().body(null);
         }
     }
+    @RequestMapping(value = {"/find-all/","/find-all"} , method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<Object> findAll() {
+        try {
+            List<OrdercfNoMapPing> ordercfList = ordercfService.findAllNoMapp();
+            return ResponseEntity.ok().body(ordercfList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok().body(null);
+        }
+    }
     //find Ordercf by findByGroupTableId
-    @RequestMapping(value = "/findGroupTableId/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/find-group-table/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
     public ResponseEntity<Object> findGroupTableId(@PathVariable("id") String id) {
         try {
