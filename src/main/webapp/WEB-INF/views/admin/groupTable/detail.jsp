@@ -50,6 +50,24 @@
             </form>
             </c:if>
 
+            <form action="/admin/detailGroupTable/view/${groupTable.id}" method="post">
+                <div class="rounded border row  d-flex justify-content-between h-100">
+                    <div class="col col-10 form-floating my-5">
+                        <select class="form-select" data-control="select2" id="idTable" name="idTable" data-placeholder="Select an option">
+                            <c:forEach var="item" items="${tablecfs}">
+                                <option value="${item.id}">${item.id} - ${item.typeTable.typeName}</option>
+                            </c:forEach>
+                        </select>
+                        <label for="idTable">Chọn bàn</label>
+                    </div>
+                    <div class="col text-center justify-content-center align-items-center d-inline-flex p-2">
+                        <button class="btn btn-primary align-middle" type="submit">Thêm</button>
+                    </div>
+                </div>
+
+
+            </form>
+
 <!--end::Input group-->
             <div class="table-responsive">
                 <table class="table table-row-bordered gy-5">
