@@ -9,6 +9,7 @@ import com.java04.wibucian.vos.OrdercfVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -106,7 +107,7 @@ public class OrdercfService {
     }
 
     public List<OrdercfNoMapPing> findAllNoMapp() {
-        return ordercfNoMapPingRepository.findAll();
+        return ordercfNoMapPingRepository.findAll(Sort.by(Sort.Direction.ASC, "timeOrder"));
     }
 
 }

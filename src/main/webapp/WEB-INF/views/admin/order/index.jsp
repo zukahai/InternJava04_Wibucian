@@ -87,6 +87,7 @@
 
             <hr>
             <h3>Danh sách sản phẩm order</h3>
+
             <div class="d-flex flex-stack ">
 
                 <table class="table align-middle table-row-dashed fs-6 gy-5" id="tabel-order">
@@ -104,7 +105,7 @@
                         <th class="min-w-125px">Tên sản phẩm</th>
                         <th class="min-w-125px">Số lượng</th>
                         <th class="min-w-125px">Giá</th>
-                        <th class="min-w-125px">Tổng tiền</th>
+                        <th class="min-w-125px">Thời gian</th>
                         <th class="min-w-125px">Trạng Thái</th>
                         <th class="min-w-125px">Hành động</th>
                     </tr>
@@ -126,7 +127,9 @@
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
 <script !src="">
-    $("#tabel-order").DataTable({});
+    $("#tabel-order").DataTable({
+        dom: "<'row'<'col-sm-6 d-flex align-items-center justify-conten-start'l><'col-sm-6 d-flex align-items-center justify-content-end'f>><'table-responsive'tr><'row'<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i><'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>>",
+    });
     //handle click on .delete-btn button
 
     //handle click on up-count and down-count button
@@ -231,8 +234,8 @@
         var data = [];
         data.push(
             {
-                id:  null,
-                idOrdercf:  null,
+                id: null,
+                idOrdercf: null,
                 idGroupTable: id_group_tabel_value,
                 idProduct: id_product,
                 quantity: count,
@@ -271,6 +274,7 @@
                         <td style="display: none"><p class="id-group_tabel">` + data.id_group_tabel + `</p></td>
                         <td style="display: none"><p class="id-ordercf-tabel">` + data.id + `</p></td>
                         <td style="display: none"><p class="id-idOrdercf-tabel">` + data.idOrdercf + `</p></td>
+                         <td style="display: none"><p class="count">` + data.count + `</p></td>
                         <td style="display: none"><p class="id-product-tabel">` + data.id_product + `</p></td>
                         <td><p class="name-product-tabel">` + data.name_product + `</p></td>
                         <td class="w-175px">
@@ -281,13 +285,16 @@
                             </div>
                         </td>
                         <td><p class="price-product-tabel">` + data.price_product + `</p></td>
-                        <td class="total-price-tabel"><p class="total-product-table">` + data.total_price + `</p></td>
+                        <td style="display: none" class="total-price-tabel"><p class="total-product-table">` + data.total_price + `</p></td>
+                        <td class="time-order-tabel"><p class="total-product-table">` + data.time_order + `</p></td>
                         <td class="status-tabel">
                             <div class="mb-5 col">
                                 <select class="form-select form-select-solid sellect-2" data-control="select2"
                                     data-placeholder="Chọn Trạng Thái">
                                     ` + data.option_html + `
                                 </select>
+
+
                             </div>
                         </td>
                         <td class="">
@@ -414,7 +421,9 @@
                 type: "GET",
                 contentType: "application/json",
                 success: function (result) {
-                    result.forEach(function (item, index) {
+
+                    for(let i = 0; i < result.length; i++){
+                        let item = result[i];
                         console.log(item);
                         $.ajax({
                             url: "/ordercf/find-product/" + item.idProduct,
@@ -434,6 +443,7 @@
                                     id_product: item.idProduct,
                                     name_product: product.productName,
                                     count: item.quantity,
+                                    time_order: dateTimeSqlServerToDateTime(item.timeOrder),
                                     price_product: product.price,
                                     total_price: total_price,
                                     option_html: option_html,
@@ -454,7 +464,7 @@
                         });
 
 
-                    });
+                    }
 
                 }
 
@@ -472,5 +482,10 @@
         var tabel_group_id = $(this).val();
         update_data(tabel_group_id);
     });
+    let dateTimeSqlServerToDateTime = (dateTime) => {
+        var date = dateTime.split("T")[0];
+        var time = dateTime.split("T")[1].split("+")[0];
+        return date + " " + time;
+    }
 
 </script>
