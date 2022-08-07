@@ -2,6 +2,7 @@ package com.java04.wibucian.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 
 @Entity
 public class DetailInvoice {
@@ -19,6 +20,28 @@ public class DetailInvoice {
 
     @Column(name = "quantity")
     private Integer quantity;
+
+    @Column(name = "dateTime")
+    private Instant dateTime;
+
+    @Column(name = "totalMoney")
+    private Double totalMoney;
+
+    public Double getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(Double totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
+    public Instant getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Instant dateTime) {
+        this.dateTime = dateTime;
+    }
 
     public String getId() {
         return id;

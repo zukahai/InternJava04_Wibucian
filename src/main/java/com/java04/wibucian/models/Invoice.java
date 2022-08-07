@@ -29,6 +29,17 @@ public class Invoice {
     @OneToMany(mappedBy = "invoice")
     private Set<DetailInvoice> detailInvoices = new LinkedHashSet<>();
 
+    @Column(name = "totalMoney")
+    private Double totalMoney;
+
+    public Double getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(Double totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
     public String getId() {
         return id;
     }

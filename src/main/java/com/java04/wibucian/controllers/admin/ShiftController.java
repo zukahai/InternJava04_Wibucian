@@ -7,6 +7,8 @@ import com.java04.wibucian.vos.ShiftUpdateVO;
 import com.java04.wibucian.vos.ShiftVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,17 +16,18 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Validated
-@RestController
-@RequestMapping("/shift")
+@Controller
+@RequestMapping("admin/shift")
 public class ShiftController {
 //clone code của đứa khác vể thử cái backup
     //để t thử cái product service ni xem có lỗi y vậy k rồi có gì báo lại
     @Autowired
     private ShiftService shiftService;
 
-    @PostMapping
-    public String save(@Valid @RequestBody ShiftVO vO) {
-        return shiftService.save(vO).toString();
+    @RequestMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+                    method = RequestMethod.POST)
+    public String save(@Valid ShiftVO shiftVO) {
+        return shiftService.createShift(shiftVO);
     }
 
     @DeleteMapping("/{id}")
@@ -41,6 +44,11 @@ public class ShiftController {
     @GetMapping("/{id}")
     public ShiftDTO getById(@Valid @NotNull @PathVariable("id") String id) {
         return shiftService.getById(id);
+    }
+
+    @GetMapping("/register")
+    public String getShiftRegister() {
+        return "admin/shift/index";
     }
 
     @GetMapping
