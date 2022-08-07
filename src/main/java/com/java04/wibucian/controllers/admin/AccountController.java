@@ -2,11 +2,14 @@ package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.AccountDTO;
 import com.java04.wibucian.services.AccountService;
+import com.java04.wibucian.services.OrdercfService;
+import com.java04.wibucian.services.ProductService;
 import com.java04.wibucian.vos.AccountQueryVO;
 import com.java04.wibucian.vos.AccountUpdateVO;
 import com.java04.wibucian.vos.AccountVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +17,24 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Validated
-@RestController
+@Controller
 @RequestMapping("/account")
 public class AccountController {
 
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private OrdercfService ordercfService;
+    @Autowired
+    private ProductService productService;
+
+    @RequestMapping(path = "/", method = RequestMethod.GET)
+    public String index() {
+
+        System.out.println(productService.listAll());
+        return "admin/order/index";
+    }
     @PostMapping
     public String save(@Valid @RequestBody AccountVO vO) {
         return accountService.save(vO).toString();

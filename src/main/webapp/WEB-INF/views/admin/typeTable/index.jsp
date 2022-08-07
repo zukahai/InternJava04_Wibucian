@@ -17,7 +17,7 @@
             <!--end::Card title-->
             <!--begin::Action-->
             <a
-                    href="../../demo14/dist/account/settings.html"
+                    href="admin/typeTable/create/"
                     class="btn btn-primary align-self-center"
             >Thêm loại bàn</a
             >
@@ -36,20 +36,21 @@
                         <th>Mã loại bàn</th>
                         <th>Tên loại bàn</th>
                         <th>Giá</th>
-                        <th>&nbsp;</th>
+                        <th class="d-flex align-center justify-content-center">Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="item" items="${typeTables}">
                         <tr>
-                            <th scope="row">${  item.idTypeTable }</th>
+                            <th scope="row">${  item.id }</th>
                             <td>${  item.typeName }</td>
                             <td>${  item.price }</td>
-                            <td>
-                                <a href="" class="btn btn-warning mx-1">Xem</a>
-                                <a href="" class="btn btn-success mx-1">Sửa</a>
-                                <a href="" class="btn btn-danger mx-1">Xoá</a>
+                            <td class="d-flex align-center justify-content-center">
+                                <a href="admin/typeTable/edit/${item.id}" class="btn btn-warning mx-1">Xem</a>
+                                <a href="admin/typeTable/edit/${item.id}" class="btn btn-success m mx-1">Sửa</a>
+                                <a href="admin/typeTable/delete/${item.id}" class="btn btn-danger mx-1">Xoá</a>
                             </td>
+                            <!--end::Action=-->
                         </tr>
                     </c:forEach>
                     </tbody>
