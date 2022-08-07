@@ -45,10 +45,10 @@ public class EmployeeController {
         employeeService.update(id, vO);
     }
 
-    @GetMapping("/{id}")
-    public EmployeeDTO getById(@Valid @NotNull @PathVariable("id") String id) {
-        return employeeService.getById(id);
-    }
+//    @GetMapping("/{id}")
+//    public EmployeeDTO getById(@Valid @NotNull @PathVariable("id") String id) {
+//        return employeeService.getById(id);
+//    }
 
     @GetMapping
     public Page<EmployeeDTO> query(@Valid EmployeeQueryVO vO) {
