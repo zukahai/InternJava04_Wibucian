@@ -21,9 +21,9 @@ public class GroupTableService {
     @Autowired
     private GroupTableRepository groupTableRepository;
 
-    public List<GroupTable> findAll() {
-        return groupTableRepository.findAll();
-    }
+//    public List<GroupTable> findAll() {
+//        return groupTableRepository.findAll();
+//    }
 
     public String save(GroupTableVO vO) {
         GroupTable bean = new GroupTable();
