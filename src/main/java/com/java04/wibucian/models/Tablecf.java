@@ -8,6 +8,7 @@ import java.util.Set;
 @Entity
 public class Tablecf  {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idTablecf", nullable = false, length = 15)
     private String id;
 
@@ -63,5 +64,16 @@ public class Tablecf  {
 
     public void setDetailGroupTables(Set<DetailGroupTable> detailGroupTables) {
         this.detailGroupTables = detailGroupTables;
+    }
+
+    @Override
+    public String toString() {
+        return "Tablecf{" +
+                "id='" + id + '\'' +
+                ", typeTable=" + typeTable +
+                ", describe='" + describe + '\'' +
+                ", capacity=" + capacity +
+                ", detailGroupTables=" + detailGroupTables +
+                '}';
     }
 }
