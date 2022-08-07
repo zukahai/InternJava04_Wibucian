@@ -33,4 +33,7 @@ public class OrdercfNoMapPing implements Serializable {
     @Column(name = "timeOrder")
     private Date timeOrder;
 
+    @Column(name = "status")
+    private Integer status;
+
 }

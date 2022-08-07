@@ -45,10 +45,10 @@ public class OrdercfService {
             bean.setProduct(product);
             bean.setGroupTable(groupTable);
             bean.setTimeOrder(Instant.now());
+            System.out.println(bean);
             bean = ordercfRepository.save(bean);
         }
         if(vO.getId()!= null){
-            System.out.println(vO.getId());
             update(String.valueOf(vO.getIdOrdercf()), vO);
         }
         return bean.getId();

@@ -27,22 +27,24 @@
                 <select id="id-table-select" class="form-select form-select-solid" data-control="select2"
                         data-placeholder="Chọn Bàn">
                     <c:forEach items="${groupTables}" var="item">
+
                         <option value="${item.id}">${item.groupName}</option>
                     </c:forEach>
 
                 </select>
             </div>
+            <div class="mb-10">
+                <label for="id-table-select" class="required form-label">Chọn Sản Phẩm</label>
+                <select id="id-select-product" class="form-select form-select-solid" data-control="select2"
+                        data-placeholder="Chọn sản phẩm">
+                    <c:forEach items="${products}" var="product">
+                        <option data-name="${product.productName}" data-price="${product.price}"
+                                value="${product.id}">${product.productName}</option>
+                    </c:forEach>
+                </select>
+            </div>
             <div class="row  d-flex  justify-content-between">
-                <div class="mb-5 col">
-                    <select id="id-select-product" class="form-select form-select-solid" data-control="select2"
-                            data-placeholder="Chọn sản phẩm">
-                        <c:forEach items="${products}" var="product">
-                            <option data-name="${product.productName}" data-price="${product.price}"
-                                    value="${product.id}">${product.productName}</option>
-                        </c:forEach>
-                    </select>
 
-                </div>
                 <div class="col ">
                     <div class="input-group mb-5">
                         <span class="input-group-text me-2">Giá</span>
@@ -62,9 +64,18 @@
                 <div class="col ">
                     <div readonly="true" class="input-group mb-5">
                         <span class="input-group-text">Tổng tiền</span>
-                        <input readonly  value="<c:out value="${products[0].price}"></c:out>" type="text" class="form-control total-price" id="total-price"
+                        <input readonly value="<c:out value="${products[0].price}"></c:out>" type="text"
+                               class="form-control total-price" id="total-price"
                                aria-describedby="basic-addon3"/>
                     </div>
+                </div>
+                <div class="mb-5 col">
+                    <select id="id-select-status" class="form-select form-select-solid" data-control="select2"
+                            data-placeholder="Chọn Trạng Thái">
+                        <option value="1">Đang Chờ</option>
+                        <option value="2">Đã Xong</option>
+                        <option value="3">Đã Huỷ</option>
+                    </select>
                 </div>
                 <div class="col">
                     <spam class="btn btn-primary align-self-center add-product-order">Thêm sản phẩm</spam>
@@ -86,11 +97,11 @@
                             </div>
                         </th>
 
-                        <th class="min-w-125px">Id Sản phẩm</th>
                         <th class="min-w-125px">Tên sản phẩm</th>
                         <th class="min-w-125px">Số lượng</th>
                         <th class="min-w-125px">Giá</th>
                         <th class="min-w-125px">Tổng tiền</th>
+                        <th class="min-w-125px">Trạng Thái</th>
                         <th class="min-w-125px">Hành động</th>
                     </tr>
                     <!--end::Table row-->
@@ -105,6 +116,7 @@
             </div>
         </form>
     </div>
+
 
 </div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
@@ -187,6 +199,23 @@
         var total_price_value = count * price_product_value;
         total_price.text(total_price_value);
     });
+    let validateSelect = (status) => {
+        if (status == 1) {
+            return `<option selected value="1">Đang Chờ</option>
+                   <option value="2">Đã Xong</option>
+                   <option value="1">Đã Huỷ</option>`
+        }
+        if (status == 2) {
+            return `<option value="1">Đang Chờ</option>
+                     <option selected value="2">Đã Xong</option>
+                     <option value="1">Đã Huỷ</option>`
+        }
+        if (status == 3) {
+            return `<option value="1">Đang Chờ</option>
+                        <option value="2">Đã Xong</option>
+                        <option selected value="1">Đã Huỷ</option>`
+        }
+    }
     //handel add-product-order button
     $(document).on("click", ".add-product-order", function () {
         var count = parseInt($(".text-count").val());
@@ -195,49 +224,64 @@
         var id_product = $("#id-select-product").val();
         var name_product = $("#id-select-product option:selected").attr("data-name");
         var tr_in_tabel = $("#tabel-order tbody tr");
+        var status = $("#id-select-status").val();
+        var option_html = validateSelect(status);
         //get row in tabel have id_product
-        var row_in_tabel = tr_in_tabel.filter(function () {
-            return $(this).find(".id-product-tabel").text() == id_product;
-        });
-        //update count and total price in row have id_product
-        if (row_in_tabel.length > 0) {
-            //update with DataTable
-            var count_in_tabel = row_in_tabel.find(".text-count-tabel");
-            var total_price_in_tabel = row_in_tabel.find(".total-price-tabel");
-            count_in_tabel.val(parseInt(count_in_tabel.val()) + parseInt(count));
-            total_price_in_tabel.text(parseInt(total_price_in_tabel.text()) + parseInt(total_price));
-        } else {
-            var html = `<tr>
+        let data = {
+            id: null,
+            idOrdercf: null,
+            id_product: id_product,
+            name_product: name_product,
+            count: count,
+            price_product: price_product,
+            total_price: total_price,
+            option_html: option_html
+        };
+        var html = getHTMLRowTabel(data);
+        $("#tabel-order").DataTable().row.add($(html)).draw();
+        updateSelectInTabel();
+
+
+    });
+    let updateSelectInTabel = () => {
+        $(".sellect-2").select2();
+    }
+    let getHTMLRowTabel = (data) => {
+        return `<tr>
                         <td>
                             <div class="form-check form-check-sm form-check-custom form-check-solid">
                                 <input class="form-check-input" type="checkbox" value="1"/>
                             </div>
                         </td>
-                        <td style="display: none"><p class="id-ordercf-tabel"></p></td>
-                        <td style="display: none"><p class="id-idOrdercf-tabel"></p></td>
-                        <td><p class="id-product-tabel">` + id_product + `</p></td>
-                        <td><p class="name-product-tabel">` + name_product + `</p></td>
+                        <td style="display: none"><p class="id-ordercf-tabel">` + data.id + `</p></td>
+                        <td style="display: none"><p class="id-idOrdercf-tabel">` + data.idOrdercf + `</p></td>
+                        <td style="display: none"><p class="id-product-tabel">` + data.id_product + `</p></td>
+                        <td><p class="name-product-tabel">` + data.name_product + `</p></td>
                         <td class="w-175px">
                             <div class="input-group mb-5">
                                 <span class="input-group-text btn btn-dark text-center down-count-tabel">-</span>
-                                <input type="text" value="` + count + `" class="form-control text-center text-count-tabel"/>
+                                <input type="text" value="` + data.count + `" class="form-control text-center text-count-tabel"/>
                                 <span class="input-group-text btn btn-dark text-center down-up-tabel ">+</span>
                             </div>
                         </td>
-                        <td><p class="price-product-tabel">` + price_product + `</p></td>
-                        <td class="total-price-tabel"><p class="total-product-table">` + total_price + `</p></td>
+                        <td><p class="price-product-tabel">` + data.price_product + `</p></td>
+                        <td class="total-price-tabel"><p class="total-product-table">` + data.total_price + `</p></td>
+                        <td class="status-tabel">
+                            <div class="mb-5 col">
+                                <select class="form-select form-select-solid sellect-2" data-control="select2"
+                                    data-placeholder="Chọn Trạng Thái">
+                                    ` + data.option_html + `
+                                </select>
+                            </div>
+                        </td>
                         <td class="">
                             <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
                                   data-toggle="tooltip" data-placement="top" title="Xóa">
                                 <i class="fa fa-trash"></i>
                             </span>
                         </td>
-                    </tr>`;
-            $("#tabel-order").DataTable().row.add($(html)).draw();
-        }
-
-
-    });
+                    </tr>`
+    }
     //handle on click save-data
     $(document).on("click", ".save-data", function () {
         ///get data from tabel-order
@@ -252,12 +296,14 @@
             var total_price = $(this).find(".total-price-tabel").text();
             var id_order = $(this).find(".id-ordercf-tabel").text();
             var idOrdercf = $(this).find(".id-idOrdercf-tabel").text();
+            var status = $(this).find(".sellect-2").val();
             data.push({
                 id: id_order || null,
                 idOrdercf: idOrdercf || null,
                 idGroupTable: tabel_group_id,
                 idProduct: id_product,
                 quantity: count,
+                status: status,
             });
         });
         console.log(JSON.stringify(data));
@@ -279,14 +325,12 @@
         })
 
 
-
-
     });
     //handle on click delete-btn
     $(document).on("click", ".delete-btn", function () {
         var idOrdercf = $(this).closest("tr").find(".id-idOrdercf-tabel").text() || null;
         var row = $(this).closest("tr");
-        if (idOrdercf != null){
+        if (idOrdercf != null) {
             swal.fire({
                 title: "Bạn có chắc chắn muốn xóa?",
                 text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
@@ -312,8 +356,7 @@
                     })
                 }
             });
-        }
-        else {
+        } else {
             toastr.success("Xóa thành công");
             $("#tabel-order").DataTable().row(row).remove().draw();
         }
@@ -342,6 +385,7 @@
                 contentType: "application/json",
                 success: function (result) {
                     result.forEach(function (item) {
+                        console.log(item);
                         var product;
                         $.ajax({
                             url: "/ordercf/findByProductId/" + item.idProduct,
@@ -351,51 +395,42 @@
                                 product = result;
                                 console.log(product.price);
                                 var total_price = parseInt(product.price) * parseInt(item.quantity);
-                                var html = `<tr>
-                        <td>
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="1"/>
-                            </div>
-                        </td>
-                        <td style="display: none"><p class="id-ordercf-tabel">` + item.id + `</p></td>
-                        <td style="display: none"><p class="id-idOrdercf-tabel">` + item.idOrdercf + `</p></td>
-                        <td><p class="id-product-tabel">` + item.idProduct + `</p></td>
-                        <td><p class="name-product-tabel">` + product.productName + `</p></td>
-                        <td class="w-175px">
-                            <div class="input-group mb-5">
-                                <span class="input-group-text btn btn-dark text-center down-count-tabel">-</span>
-                                <input type="text" value="` + item.quantity + `" class="form-control text-center text-count-tabel"/>
-                                <span class="input-group-text btn btn-dark text-center down-up-tabel ">+</span>
-                            </div>
-                        </td>
-                        <td><p class="price-product-tabel">` + product.price + `</p></td>
-                        <td class="total-price-tabel"><p class="total-product-table">` + total_price + `</p></td>
-                        <td class="">
-                            <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
-                                  data-toggle="tooltip" data-placement="top" title="Xóa">
-                                <i class="fa fa-trash"></i>
-                            </span>
-                        </td>
-                    </tr>`;
+                                var status = item.status;
+                                var option_html = validateSelect(status);
+                                var data = {
+                                    id: item.id,
+                                    idOrdercf: item.idOrdercf,
+                                    id_product: item.idProduct,
+                                    name_product: product.productName,
+                                    count: item.quantity,
+                                    price_product: product.price,
+                                    total_price: total_price,
+                                    option_html: option_html
+                                };
+                                var html = getHTMLRowTabel(data);
                                 $("#tabel-order").DataTable().row.add($(html)).draw();
+                                updateSelectInTabel();
                             }
                         });
 
                     });
+
                 }
 
             }
         );
+
     }
     //ready function
     $(document).ready(function () {
         var tabel_group_id = $("#id-table-select").val();
-        update_data(tabel_group_id)
+        update_data(tabel_group_id);
     });
     //handle on change id-table-select
     $(document).on("change", "#id-table-select", function () {
         var tabel_group_id = $(this).val();
         console.log(tabel_group_id);
-        update_data(tabel_group_id)
+        update_data(tabel_group_id);
     });
+
 </script>

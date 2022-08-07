@@ -23,4 +23,8 @@ public class OrdercfVO implements Serializable {
 
     private Date timeOrder;
 
+    private Integer status;
+
+
+
 }

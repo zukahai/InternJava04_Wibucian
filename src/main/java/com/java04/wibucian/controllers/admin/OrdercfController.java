@@ -43,7 +43,8 @@ public class OrdercfController {
     public ResponseEntity<Object> store(@RequestBody List<OrdercfVO> ordercfList) {
         try {
             for(OrdercfVO ordercfVO: ordercfList){
-                ordercfService.save(ordercfVO);
+                System.out.println(ordercfVO);
+              ordercfService.save(ordercfVO);
             }
             HashMap<String, Object> map = new HashMap<>();
             map.put("check", true);
