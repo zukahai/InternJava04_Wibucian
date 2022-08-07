@@ -36,11 +36,6 @@
 <script src="/admin/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
-<%--calendar--%>
-<script src="/admin/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-<script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
-<%--calendar-end--%>
 </body>
 <!--end::Body-->
 </html>
