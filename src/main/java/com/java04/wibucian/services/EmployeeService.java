@@ -40,6 +40,9 @@ public class EmployeeService {
         BeanUtils.copyProperties(vO, bean);
         employeeRepository.save(bean);
     }
+    public List<Employee> findAll(){
+        return employeeRepository.findAll();
+    }
 
     public EmployeeDTO getById(String id) {
         Employee original = requireOne(id);

@@ -8,6 +8,7 @@ import java.util.Set;
 @Entity
 public class Product  {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProduct", nullable = false, length = 15)
     private String id;
 
@@ -28,6 +29,17 @@ public class Product  {
 
     @Column(name = "productName", nullable = false, length = 100)
     private String productName;
+
+    @Column(name = "price")
+    private double price;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     @OneToMany(mappedBy = "product")
     private Set<DetailInvoice> detailInvoices = new LinkedHashSet<>();

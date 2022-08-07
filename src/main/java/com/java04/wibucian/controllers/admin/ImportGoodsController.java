@@ -7,6 +7,8 @@ import com.java04.wibucian.vos.ImportGoodsUpdateVO;
 import com.java04.wibucian.vos.ImportGoodsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +16,18 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Validated
-@RestController
-@RequestMapping("/importGoods")
+@Controller
+@RequestMapping("admin/importgoods")
 public class ImportGoodsController {
 
     @Autowired
     private ImportGoodsService importGoodsService;
+
+    @GetMapping("/")
+    public String Home(ModelMap modelMap)throws Exception {
+        modelMap.addAttribute("nhaphang", importGoodsService.findAll());
+        return "admin/importgoods/index";
+    }
 
     @PostMapping
     public String save(@Valid @RequestBody ImportGoodsVO vO) {
