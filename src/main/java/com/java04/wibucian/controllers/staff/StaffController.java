@@ -1,5 +1,6 @@
 package com.java04.wibucian.controllers.staff;
 
+import com.java04.wibucian.dtos.ShiftDTO;
 import com.java04.wibucian.services.ShiftService;
 import com.java04.wibucian.vos.ShiftVO;
 import com.java04.wibucian.vos.StaffShiftVO;
@@ -28,7 +29,7 @@ public class StaffController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/shift")
     @ResponseBody
-    public ResponseEntity<String> staffRequestShift(@Valid StaffShiftVO shiftVO) {
+    public ResponseEntity<ShiftDTO> staffRequestShift(@Valid StaffShiftVO shiftVO) {
         // TODO: Fetch employeeID
         shiftVO.setIdEmployee("Employee00002");
         return ResponseEntity.ok()
