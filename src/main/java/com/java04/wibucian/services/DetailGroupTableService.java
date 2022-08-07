@@ -3,8 +3,10 @@ package com.java04.wibucian.services;
 import com.java04.wibucian.dtos.DetailGroupTableDTO;
 import com.java04.wibucian.models.DetailGroupTable;
 import com.java04.wibucian.models.GroupTable;
+import com.java04.wibucian.models.Tablecf;
 import com.java04.wibucian.repositories.DetailGroupTableRepository;
 import com.java04.wibucian.repositories.GroupTableRepository;
+import com.java04.wibucian.repositories.TablecfRepository;
 import com.java04.wibucian.vos.DetailGroupTableQueryVO;
 import com.java04.wibucian.vos.DetailGroupTableUpdateVO;
 import com.java04.wibucian.vos.DetailGroupTableVO;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -22,14 +25,32 @@ public class DetailGroupTableService {
     @Autowired
     private DetailGroupTableRepository detailGroupTableRepository;
     private GroupTableRepository groupTableRepository;
+    private TablecfRepository tablecfRepository;
 
-    public DetailGroupTableService(GroupTableRepository groupTableRepository) {
+    public DetailGroupTableService(GroupTableRepository groupTableRepository, TablecfRepository tablecfRepository) {
         this.groupTableRepository = groupTableRepository;
+        this.tablecfRepository = tablecfRepository;
     }
 
     public String save(DetailGroupTableVO vO) {
         DetailGroupTable bean = new DetailGroupTable();
         BeanUtils.copyProperties(vO, bean);
+        bean = detailGroupTableRepository.save(bean);
+        return bean.getId();
+    }
+
+    public String save(String idGroupTable, String idTable) {
+        Tablecf table = tablecfRepository.findById(idTable).orElse(null);
+        GroupTable groupTable = groupTableRepository.findById(idGroupTable).orElse(null);
+
+        DetailGroupTable bean = new DetailGroupTable();
+        bean.setTablecf(table);
+        bean.setGroupTable(groupTable);
+        bean.setGroupTime(Instant.now());
+
+        System.out.println("table " + table);
+        System.out.println("GroupTable " + groupTable);
+
         bean = detailGroupTableRepository.save(bean);
         return bean.getId();
     }
@@ -55,7 +76,6 @@ public class DetailGroupTableService {
 
     public List<DetailGroupTable> getByIdGroupTable(String idGroupTable) {
         GroupTable groupTable = groupTableRepository.findById(idGroupTable).orElse(null);
-        System.out.println("GroupTable" + groupTable);
         return detailGroupTableRepository.getByGroupTable(groupTable);
     }
 
