@@ -17,7 +17,7 @@ public class Tablecf  {
     private TypeTable typeTable;
 
     @Lob
-    @Column(name = "\"describe\"")
+    @Column(name ="\"describe\"", nullable = false)
     private String describe;
 
     @Column(name = "capacity")
