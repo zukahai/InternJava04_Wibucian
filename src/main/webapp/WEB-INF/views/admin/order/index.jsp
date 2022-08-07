@@ -127,8 +127,11 @@
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
 <script !src="">
-    $("#tabel-order").DataTable({
-        dom: "<'row'<'col-sm-6 d-flex align-items-center justify-conten-start'l><'col-sm-6 d-flex align-items-center justify-content-end'f>><'table-responsive'tr><'row'<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i><'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>>",
+    $(document).ready(function () {
+        $("#tabel-order").DataTable({
+            dom: "<'row'<'col-sm-6 d-flex align-items-center justify-conten-start'l><'col-sm-6 d-flex align-items-center justify-content-end'f>><'table-responsive'tr><'row'<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i><'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>>",
+            order: [[5, "desc"]],
+        });
     });
     //handle click on .delete-btn button
 
@@ -213,9 +216,9 @@
                    <option value="3">Đã Huỷ</option>`
         }
         if (status == 2) {
-            return `<option value="1">Đang Chờ</option>
+            return `<option disabled value="1">Đang Chờ</option>
                      <option selected value="2">Đã Xong</option>
-                     <option value="3">Đã Huỷ</option>`
+                     <option disabled value="3">Đã Huỷ</option>`
         }
         if (status == 3) {
             return `<option value="1">Đang Chờ</option>
@@ -242,7 +245,6 @@
                 status: status,
             }
         );
-        console.log(JSON.stringify(data));
         $.ajax({
             url: "/ordercf/store",
             contentType: "application/json",
@@ -271,10 +273,10 @@
                             </div>
                         </td>
                         <td ><p class="group-tabel-name"-tabel>` + data.group_tabel_name + `</p></td>
-                        <td style="display: none"><p class="id-group_tabel">` + data.id_group_tabel + `</p></td>
+                        <td style="display: none"><p class="id-group-tabel">` + data.id_group_tabel + `</p></td>
                         <td style="display: none"><p class="id-ordercf-tabel">` + data.id + `</p></td>
                         <td style="display: none"><p class="id-idOrdercf-tabel">` + data.idOrdercf + `</p></td>
-                         <td style="display: none"><p class="count">` + data.count + `</p></td>
+                        <td style="display: none"><p class="count">` + data.count + `</p></td>
                         <td style="display: none"><p class="id-product-tabel">` + data.id_product + `</p></td>
                         <td><p class="name-product-tabel">` + data.name_product + `</p></td>
                         <td class="w-175px">
@@ -287,7 +289,7 @@
                         <td><p class="price-product-tabel">` + data.price_product + `</p></td>
                         <td style="display: none" class="total-price-tabel"><p class="total-product-table">` + data.total_price + `</p></td>
                         <td class="time-order-tabel"><p class="total-product-table">` + data.time_order + `</p></td>
-                        <td class="status-tabel">
+                        <td data-status = "` + data.status + `" class="status-tabel">
                             <div class="mb-5 col">
                                 <select class="form-select form-select-solid sellect-2" data-control="select2"
                                     data-placeholder="Chọn Trạng Thái">
@@ -309,9 +311,9 @@
     $(document).on("click", ".save-data", function () {
         ///get data from tabel-order
         var tabel = $("#tabel-order tbody");
-        var tabel_group_id = $("#id-table-select").val();
         let data = [];
         tabel.find("tr").each(function () {
+            var tabel_group_id = $("#id-table-select").val();
             var id_product = $(this).find(".id-product-tabel").text();
             var name_product = $(this).find(".name-product-tabel").text();
             var count = $(this).find(".text-count-tabel").val();
@@ -319,7 +321,12 @@
             var total_price = $(this).find(".total-price-tabel").text();
             var id_order = $(this).find(".id-ordercf-tabel").text();
             var idOrdercf = $(this).find(".id-idOrdercf-tabel").text();
+            var id_group_table = $(this).find(".id-group-tabel").text();
             var status = $(this).find(".sellect-2").val();
+            if(tabel_group_id === "all"){
+                tabel_group_id = id_group_table;
+            }
+            console.log(id_group_table)
             data.push({
                 id: id_order || null,
                 idOrdercf: idOrdercf || null,
@@ -329,8 +336,7 @@
                 status: status,
             });
         });
-        console.log(JSON.stringify(data));
-
+        console.log(data);
         //send data to server
         $.ajax({
             url: "/ordercf/store",
@@ -340,6 +346,7 @@
             success: function (result) {
                 if (result.check === true) {
                     toastr.success("Thêm thành công");
+                    var tabel_group_id = $("#id-table-select").val();
                     update_data(tabel_group_id);
                 } else {
                     toastr.error("Thêm thất bại");
@@ -409,7 +416,6 @@
             url = "/ordercf/find-all";
         } else {
             var layout = $('.add-product-layout');
-            console.log(layout);
             layout.show();
             url = "/ordercf/find-by-group-table/" + tabel_group_id;
 
@@ -422,20 +428,19 @@
                 contentType: "application/json",
                 success: function (result) {
 
-                    for(let i = 0; i < result.length; i++){
+                    for (let i = 0; i < result.length; i++) {
                         let item = result[i];
-                        console.log(item);
                         $.ajax({
                             url: "/ordercf/find-product/" + item.idProduct,
                             type: "GET",
                             contentType: "application/json",
                             success: function (result) {
                                 product = result;
-                                console.log(product.price);
                                 var total_price = parseInt(product.price) * parseInt(item.quantity);
                                 var status = item.status;
                                 var option_html = validateSelect(status);
                                 var data = {
+                                    status: status,
                                     id: item.id,
                                     id_group_tabel: item.idGroupTable,
                                     group_tabel_name: null,
@@ -487,5 +492,78 @@
         var time = dateTime.split("T")[1].split("+")[0];
         return date + " " + time;
     }
+    //handle on change status-tabel
+    $(document).on("change", ".sellect-2", function () {
+        var current_status = $(this).closest("tr").find(".status-tabel").attr("data-status");
+
+        var status = $(this).val();
+        var select = $(this);
+        if (status == "2") {
+            //confirm message
+            swal.fire({
+                title: "Bạn có chắc chắn muốn xác nhận đã xong không?",
+                text: "Sau khi đặt bàn, bạn sẽ không thể phục hồi dữ liệu này!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Đồng ý",
+                cancelButtonText: "Hủy bỏ"
+            }).then(function (res) {
+                if (res.value) {
+                    var id = select.closest("tr").find(".id-ordercf-tabel").text();
+                    var id_ordercf = select.closest("tr").find(".id-idOrdercf-tabel").text();
+                    var id_group_tabel = select.closest("tr").find(".id-group-tabel").text();
+                    var id_product = select.closest("tr").find(".id-product-tabel").text();
+                    var count = select.closest("tr").find(".text-count-tabel").val();
+                    var data = [];
+                    data.push(
+                        {
+                            id: id,
+                            idOrdercf: id_ordercf,
+                            idGroupTable: id_group_tabel,
+                            idProduct: id_product,
+                            quantity: count,
+                            status: status,
+                        }
+                    );
+                    console.log(JSON.stringify(data));
+                    $.ajax({
+                        url: "/ordercf/store",
+                        contentType: "application/json",
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        success: function (result) {
+                            if (result.check === true) {
+                                //disable option exept current
+                                select.find("option").each(function () {
+                                    if ($(this).val() != status) {
+                                        $(this).attr("disabled", true);
+                                    }
+                                });
+                                select.select2("val", current_status);
+                                var tabel_group_id = $("#id-table-select").val();
+                                toastr.success("Cập nhật thành công");
+                                update_data(tabel_group_id);
+                            } else {
+
+                                toastr.error("Cập nhật thất bại");
+                            }
+                        }
+                    });
+
+                    //disable option except current
+
+                }
+                else if(res.dismiss == 'cancel'){
+                    select.select2("val", current_status);
+                }
+            }) ;
+        }
+        else {
+            $(this).closest("tr").find(".status-tabel").attr("data-status", status);
+        }
+    });
+
 
 </script>
