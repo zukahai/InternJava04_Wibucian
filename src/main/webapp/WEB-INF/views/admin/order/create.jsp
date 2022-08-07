@@ -10,7 +10,7 @@
     <div class="card-header cursor-pointer">
         <!--begin::Card title-->
         <div class="card-title m-0">
-            <h3 class="fw-bold m-0">Profile Details</h3>
+            <h3 class="fw-bold m-0">Order</h3>
         </div>
         <!--end::Card title-->
         <!--begin::Action-->
@@ -55,14 +55,14 @@
                     <div class="input-group mb-5">
                         <span class="input-group-text me-2" id="basic-addon3">Số lượng</span>
                         <span class="input-group-text btn  btn-dark text-center  down-count " id="down-count">-</span>
-                        <input type="text" value="0" class="form-control text-center text-count" id="count"/>
+                        <input type="text" value="1" class="form-control text-center text-count" id="count"/>
                         <span class="input-group-text btn  btn-dark text-center  up-count " id="up-count">+</span>
                     </div>
                 </div>
                 <div class="col ">
                     <div readonly="true" class="input-group mb-5">
                         <span class="input-group-text">Tổng tiền</span>
-                        <input readonly value="0" type="text" class="form-control total-price" id="total-price"
+                        <input readonly  value="<c:out value="${products[0].price}"></c:out>" type="text" class="form-control total-price" id="total-price"
                                aria-describedby="basic-addon3"/>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
     });
     $(document).on("click", ".down-count", function () {
         var count = parseInt($(this).siblings(".text-count").val());
-        if (count > 0) {
+        if (count > 1) {
             count--;
             $(this).siblings(".text-count").val(count);
             var price_product = $(".price-product");
@@ -160,7 +160,7 @@
         var total_price = $(this).closest("tr").find(".total-price-tabel");
         var price_product = $(this).closest("tr").find(".price-product-tabel");
         var count = parseInt(count_text.val());
-        if (count > 0) {
+        if (count > 1) {
             count_text.val(count - 1);
             var price = validatePrice(price_product.text());
             total_price.text(price * (count - 1));
@@ -242,6 +242,7 @@
     $(document).on("click", ".save-data", function () {
         ///get data from tabel-order
         var tabel = $("#tabel-order tbody");
+        var tabel_group_id = $("#id-table-select").val();
         let data = [];
         tabel.find("tr").each(function () {
             var id_product = $(this).find(".id-product-tabel").text();
@@ -251,7 +252,6 @@
             var total_price = $(this).find(".total-price-tabel").text();
             var id_order = $(this).find(".id-ordercf-tabel").text();
             var idOrdercf = $(this).find(".id-idOrdercf-tabel").text();
-            var tabel_group_id = $("#id-table-select").val();
             data.push({
                 id: id_order || null,
                 idOrdercf: idOrdercf || null,
@@ -271,7 +271,7 @@
             success: function (result) {
                 if (result.check === true) {
                     toastr.success("Thêm thành công");
-                    $("#tabel-order").DataTable().clear().draw();
+                    update_data(tabel_group_id);
                 } else {
                     toastr.error("Thêm thất bại");
                 }
@@ -279,27 +279,45 @@
         })
 
 
-        //handle on click delete-btn
-        $(document).on("click", ".delete-btn", function () {
-            //confirm delete alert
-            swal.fire(
-                {
-                    title: "Bạn có chắc chắn muốn xóa?",
-                    text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Xóa",
-                    cancelButtonText: "Hủy"
-                }
-            ).then((result) => {
+
+
+    });
+    //handle on click delete-btn
+    $(document).on("click", ".delete-btn", function () {
+        var idOrdercf = $(this).closest("tr").find(".id-idOrdercf-tabel").text() || null;
+        var row = $(this).closest("tr");
+        if (idOrdercf != null){
+            swal.fire({
+                title: "Bạn có chắc chắn muốn xóa?",
+                text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Đồng ý",
+                cancelButtonText: "Hủy bỏ"
+            }).then(function (result) {
                 if (result.value) {
-                    var row = $(this).closest("tr");
-                    $("#tabel-order").DataTable().row(row).remove().draw();
+                    $.ajax({
+                        url: "/ordercf/delete/" + idOrdercf,
+                        type: "GET",
+                        success: function (result) {
+                            if (result.check === true) {
+                                toastr.success("Xóa thành công");
+                                $("#tabel-order").DataTable().row(row).remove().draw();
+                            } else {
+                                toastr.error("Xóa thất bại");
+                            }
+                        }
+                    })
                 }
             });
-        });
+        }
+        else {
+            toastr.success("Xóa thành công");
+            $("#tabel-order").DataTable().row(row).remove().draw();
+        }
+
     });
 
     //handel on change id-select-product
@@ -309,8 +327,8 @@
             var name_product = $(this).find("option:selected").attr("data-name");
             $(".price-product").val(price_product);
             $(".name-product").val(name_product);
-            $(".total-price").val(0);
-            $(".text-count").val(0);
+            $(".total-price").val(price_product);
+            $(".text-count").val(1);
         }
     );
 </script>

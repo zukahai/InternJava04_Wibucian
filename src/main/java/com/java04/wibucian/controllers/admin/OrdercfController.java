@@ -42,7 +42,6 @@ public class OrdercfController {
     @ResponseBody
     public ResponseEntity<Object> store(@RequestBody List<OrdercfVO> ordercfList) {
         try {
-            System.out.println(ordercfList);
             for(OrdercfVO ordercfVO: ordercfList){
                 ordercfService.save(ordercfVO);
             }
