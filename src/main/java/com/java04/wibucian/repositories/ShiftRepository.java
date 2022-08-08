@@ -26,4 +26,8 @@ public interface ShiftRepository extends JpaRepository<Shift, String>, JpaSpecif
     public int countByEmployeeAndOvertimeRequestAndShiftDateBetween(Employee employee,
                                                                     boolean overtimeRequest, Date firstDay,
                                                                     Date lastDay);
+
+//    public List<Shift> findAllByRequestShiftAndShiftDateBetween(boolean requestShift,
+//                                                                Date firstDate,
+//                                                                Date shiftDate2);
 };
