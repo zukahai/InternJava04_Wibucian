@@ -1,7 +1,7 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.SaleDTO;
-import com.java04.wibucian.models.Sale;
+import com.java04.wibucian.interfaces.models.Sale;
 import com.java04.wibucian.repositories.SaleRepository;
 import com.java04.wibucian.vos.SaleQueryVO;
 import com.java04.wibucian.vos.SaleUpdateVO;

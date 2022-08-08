@@ -1,10 +1,9 @@
-package com.java04.wibucian.models;
+package com.java04.wibucian.interfaces.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.io.Serializable;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
