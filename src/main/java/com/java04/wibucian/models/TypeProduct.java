@@ -1,9 +1,10 @@
-package com.java04.wibucian.interfaces.models;
+package com.java04.wibucian.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 

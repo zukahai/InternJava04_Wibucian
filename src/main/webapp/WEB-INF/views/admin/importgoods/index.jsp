@@ -12,14 +12,14 @@
         <div class="card-header cursor-pointer">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Danh sách nhập hàng</h3>
+                <h3 class="fw-bold m-0">Quản lý nhập hàng</h3>
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
             <a
-                    href="admin/importgoods/create/"
+                    href="../../demo14/dist/account/settings.html"
                     class="btn btn-primary align-self-center"
-            >Thêm nhập hàng</a
+            >Thêm nguyên liệu</a
             >
             <!--end::Action-->
         </div>

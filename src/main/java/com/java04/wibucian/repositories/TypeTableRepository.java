@@ -1,6 +1,6 @@
 package com.java04.wibucian.repositories;
 
-import com.java04.wibucian.interfaces.models.TypeTable;
+import com.java04.wibucian.models.TypeTable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
