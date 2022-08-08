@@ -49,7 +49,7 @@
                             <td>${ item.groupName } </td>
                             <td>${ item.foundedTime.toString() } </td>
                             <td class="d-flex align-center justify-content-center">
-                                <a href="admin/detailGroupTable/view/${item.id}" class="btn btn-warning mx-1">Xem</a>
+                                <a href="admin/detailGroupTable/view/${item.id}" class="btn btn-info mx-1">Chi tiết</a>
                                 <a href="admin/groupTable/edit/${item.id}" class="btn btn-success mx-1">Sửa</a>
                                 <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
                             </td>
@@ -74,7 +74,7 @@
         console.log(id);
 
         swal.fire({
-            title: "Bạn có chắc chắn muốn xóa?",
+            title: "Bạn có chắc chắn muốn xóa nhóm bàn này không?",
             text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
             icon: "warning",
             showCancelButton: true,

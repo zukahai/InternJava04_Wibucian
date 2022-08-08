@@ -1,7 +1,9 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.GroupTableDTO;
+import com.java04.wibucian.models.DetailGroupTable;
 import com.java04.wibucian.models.GroupTable;
+import com.java04.wibucian.repositories.DetailGroupTableRepository;
 import com.java04.wibucian.repositories.GroupTableRepository;
 import com.java04.wibucian.vos.GroupTableQueryVO;
 import com.java04.wibucian.vos.GroupTableUpdateVO;
@@ -20,6 +22,11 @@ public class GroupTableService {
 
     @Autowired
     private GroupTableRepository groupTableRepository;
+    private DetailGroupTableRepository detailGroupTableRepository;
+
+    public GroupTableService(DetailGroupTableRepository detailGroupTableRepository) {
+        this.detailGroupTableRepository = detailGroupTableRepository;
+    }
 
     public String save(GroupTableVO vO) {
         GroupTable bean = new GroupTable();
@@ -37,6 +44,11 @@ public class GroupTableService {
     }
 
     public void delete(String id) {
+        GroupTable groupTable = groupTableRepository.findById(id).orElse(null);
+        List<DetailGroupTable> list = detailGroupTableRepository.getByGroupTable(groupTable);
+        for (DetailGroupTable detailGroupTable : list) {
+            detailGroupTableRepository.deleteById(detailGroupTable.getId());
+        }
         groupTableRepository.deleteById(id);
     }
 
