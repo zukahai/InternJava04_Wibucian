@@ -49,10 +49,25 @@
                             <td>${ item.groupName } </td>
                             <td>${ item.foundedTime.toString() } </td>
                             <td class="d-flex align-center justify-content-center">
-                                <a href="admin/detailGroupTable/view/${item.id}" class="btn btn-info mx-1">Chi tiết</a>
-                                <a href="admin/groupTable/edit/${item.id}" class="btn btn-success mx-1">Sửa</a>
-                                <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
-                                <span data-id="${ item.id }" class="btn btn-warning mx-1 delete-btn-detail">Làm mới</span>
+                                <a href="admin/detailGroupTable/view/${item.id}" class="btn btn-icon btn-info btn-sm btn-icon-md btn-circle mx-1"
+                                   title="Chi tiết nhóm bàn">
+                                    <i class="fa fa-asterisk"></i>
+                                </a>
+
+                                <a href="admin/groupTable/edit/${item.id}" class="btn btn-icon btn-success btn-sm btn-icon-md btn-circle mx-1"
+                                   title="Sửa">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+
+                                <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle mx-1"
+                                      data-toggle="tooltip" data-placement="top" data-id="${item.id}" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+
+                                <span class="btn btn-icon btn-warning delete-btn-detail btn-sm btn-icon-md btn-circle mx-1"
+                                      data-toggle="tooltip" data-placement="top" data-id="${item.id}" title="Xoá bàn trong nhóm bàn">
+                                    <i class="fa fa-broom"></i>
+                                </span>
                             </td>
                             <!--end::Action=-->
                         </tr>

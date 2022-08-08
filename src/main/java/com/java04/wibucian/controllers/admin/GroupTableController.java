@@ -86,7 +86,6 @@ public class GroupTableController {
     public String createNewProduct(ModelMap modelMap,  @RequestBody MultiValueMap<String, String> formData) throws Exception {
         String nameGroupTable = formData.get("groupName").get(0);
         groupTableService.save(nameGroupTable);
-        System.out.println(nameGroupTable);
         return "redirect:/admin/groupTable/";
     }
 

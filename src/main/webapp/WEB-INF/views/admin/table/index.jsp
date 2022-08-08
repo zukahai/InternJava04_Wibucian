@@ -48,9 +48,14 @@
                             <td>${  item.describe }</td>
                             <td>${  item.capacity }</td>
                             <td class="d-flex align-center justify-content-center">
-                                <a href="" class="btn btn-warning mx-1">Xem</a>
-                                <a href="admin/table/edit/${ item.id }" class="btn btn-success mx-1">Sửa</a>
-                                <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
+                                <a href="admin/table/edit/${ item.id }" class="btn btn-icon btn-success btn-sm btn-icon-md btn-circle mx-1"
+                                   title="Sửa">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle mx-1"
+                                      data-toggle="tooltip" data-placement="top" data-id="${item.id}" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </span>
                             </td>
                             <!--end::Action=-->
                         </tr>

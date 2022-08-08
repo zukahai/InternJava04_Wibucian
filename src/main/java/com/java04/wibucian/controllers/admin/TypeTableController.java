@@ -51,7 +51,6 @@ public class TypeTableController {
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String createTypeTable(ModelMap modelMap, @Valid TypeTableVO typeTableVO) throws Exception {
         String productId = this.typeTableService.save(typeTableVO);
-        System.out.println(typeTableVO);
         return "redirect:/admin/typeTable/";
     }
 
