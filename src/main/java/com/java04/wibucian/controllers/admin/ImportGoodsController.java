@@ -35,6 +35,12 @@ public class ImportGoodsController {
         return "admin/importgoods/index";
     }
 
+    @GetMapping("/create")
+    public String create(ModelMap modelMap)throws Exception {
+        modelMap.addAttribute("nhaphang", importGoodsService.findAll());
+        return "admin/importgoods/create";
+    }
+
     @PostMapping
     @ResponseBody
     public ResponseEntity<Object> create(@RequestBody @Valid ImportGoodsVO vo) throws Exception {

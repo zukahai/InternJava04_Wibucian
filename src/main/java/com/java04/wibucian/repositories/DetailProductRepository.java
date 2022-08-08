@@ -1,6 +1,6 @@
 package com.java04.wibucian.repositories;
 
-import com.java04.wibucian.models.DetailProduct;
+import com.java04.wibucian.interfaces.models.DetailProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
