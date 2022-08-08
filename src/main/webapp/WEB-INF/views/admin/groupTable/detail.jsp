@@ -32,31 +32,30 @@
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
-
-            <form action="/admin/detailGroupTable/view/${groupTable.id}" method="post">
-                <div class="rounded border row  d-flex justify-content-between h-100">
-                    <div class="col col-10 form-floating my-5">
-                        <select class="form-select" data-control="select2" id="idTable" name="idTable" data-placeholder="Select an option">
-                            <c:forEach var="item" items="${tablecfs}">
-                                <option value="${item.id}">${item.id} - ${item.typeTable.typeName}</option>
-                            </c:forEach>
-                        </select>
-                        <label for="idTable">Chọn bàn</label>
+            <c:if test="${tablecfs.size() > 0}">
+                <form action="/admin/detailGroupTable/view/${groupTable.id}" method="post">
+                    <div class="rounded border row  d-flex justify-content-between h-100">
+                        <div class="col col-10 form-floating my-5">
+                            <select class="form-select" data-control="select2" id="idTable" name="idTable" data-placeholder="Select an option">
+                                <c:forEach var="item" items="${tablecfs}">
+                                    <option value="${item.id}">${item.id} - ${item.typeTable.typeName}</option>
+                                </c:forEach>
+                            </select>
+                            <label for="idTable">Chọn bàn</label>
+                        </div>
+                        <div class="col text-center justify-content-center align-items-center d-inline-flex p-2">
+                            <button class="btn btn-primary align-middle" type="submit">Thêm</button>
+                        </div>
                     </div>
-                    <div class="col text-center justify-content-center align-items-center d-inline-flex p-2">
-                        <button class="btn btn-info align-middle" type="submit">Thêm</button>
-                    </div>
-                </div>
+                </form>
+            </c:if>
 
-
-            </form>
-
-<!--end::Input group-->
+            <!--end::Input group-->
             <div class="table-responsive">
                 <table class="table table-row-bordered gy-5">
                     <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
-<%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
+                        <%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
                         <th>Mã bàn</th>
                         <th>Loại bàn</th>
                         <th>Thời gian gộp nhóm</th>
@@ -69,15 +68,12 @@
                             <th scope="row">${  item.tablecf.id }</th>
                             <th scope="row">${  item.tablecf.typeTable.typeName }</th>
                             <td>${ item.groupTime } </td>
-                            <td class="d-flex justify-content-center">
-                            <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
-                                  data-toggle="tooltip" data-placement="top" data-id="${ item.id }" title="Xóa">
-                                <i class="fa fa-trash"></i>
-                            </span>
+                            <td class="d-flex align-center justify-content-center">
+                                <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
+                                      data-toggle="tooltip" data-placement="top" data-id="${item.id}" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </span>
                             </td>
-<%--                            <td class="d-flex align-center justify-content-center">--%>
-<%--                                <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>--%>
-<%--                            </td>--%>
                             <!--end::Action=-->
                         </tr>
                     </c:forEach>
@@ -97,7 +93,6 @@
         var row = $(this).closest("tr");
         var id = $(this).attr("data-id");
         console.log(id);
-
         swal.fire({
             title: "Bạn có chắc chắn muốn xóa?",
             text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
@@ -123,11 +118,6 @@
                 })
             }
         });
-
-
     });
-
     //handel on change id-select-product
 </script>
-
-
