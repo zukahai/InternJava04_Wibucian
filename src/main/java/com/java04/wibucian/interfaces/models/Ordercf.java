@@ -6,6 +6,7 @@ import java.time.Instant;
 @Entity
 public class Ordercf {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idOrdercf", nullable = false, length = 15)
     private String id;
 

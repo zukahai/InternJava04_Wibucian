@@ -37,6 +37,8 @@ public class ImportGoodsController {
 
     @PostMapping
     public String save(@Valid @RequestBody ImportGoodsVO vO) {
+        // check xem mã thằng nhân viên
+
         return importGoodsService.save(vO).toString();
     }
 

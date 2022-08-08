@@ -12,6 +12,7 @@ import com.java04.wibucian.vos.ProductVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,14 +21,20 @@ import java.util.NoSuchElementException;
 @Service
 public class ProductService {
 
-    @Autowired
+//    @Autowired
     private ProductRepository productRepository;
-
-    @Autowired
+//
+//    @Autowired
     private SaleRepository saleRepository;
-
-    @Autowired
+//
+//    @Autowired
     private TypeProductRepository typeProductRepository;
+
+    public ProductService(ProductRepository productRepository, SaleRepository saleRepository, TypeProductRepository typeProductRepository) {
+        this.productRepository = productRepository;
+        this.saleRepository = saleRepository;
+        this.typeProductRepository = typeProductRepository;
+    }
 
 
     public String save(ProductVO vO) {
