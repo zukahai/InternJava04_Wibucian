@@ -1,4 +1,4 @@
-package com.java04.wibucian.models;
+package com.java04.wibucian.interfaces.models;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;

@@ -1,7 +1,7 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.DetailImportGoodsDTO;
-import com.java04.wibucian.models.DetailImportGoods;
+import com.java04.wibucian.interfaces.models.DetailImportGoods;
 import com.java04.wibucian.repositories.DetailImportGoodsRepository;
 import com.java04.wibucian.vos.DetailImportGoodsQueryVO;
 import com.java04.wibucian.vos.DetailImportGoodsUpdateVO;

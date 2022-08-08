@@ -4,6 +4,7 @@ import com.java04.wibucian.dtos.DetailGroupTableDTO;
 import com.java04.wibucian.models.DetailGroupTable;
 import com.java04.wibucian.models.GroupTable;
 import com.java04.wibucian.models.Tablecf;
+
 import com.java04.wibucian.repositories.DetailGroupTableRepository;
 import com.java04.wibucian.repositories.GroupTableRepository;
 import com.java04.wibucian.repositories.TablecfRepository;
