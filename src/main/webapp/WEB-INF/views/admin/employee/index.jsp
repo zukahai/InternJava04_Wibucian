@@ -63,13 +63,13 @@
                             <th scope="row">${item.id}</th>
                             <td>
                                 <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                    <img class="w-100"
-                                         src="${pageContext.request.contextPath}/admin/assets/img/avatar.jpg">
+                                    <img class="w-140"
+                                         src="${pageContext.request.contextPath}/admin/assets/file-upload/${item.srcEmployee}">
                             <td>${ item.name}</td>
                             <td>${ item.phoneNumber}</td>
                             <td>${ item.coefficientsSalary}</td>
                             <td  class ="justify-content-center d-flex" >
-                                <a href="" class="btn btn-warning mx-1">Sửa</a>
+                                <a href="admin/employee/update/${item.id}" class="btn btn-warning mx-1">Sửa</a>
                                 <a href="admin/employee/view/${item.id}" class="btn btn-success mx-1">Xem</a>
                                 <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
                                 <a href="" class="btn btn-bg-secondary mx-1 ">Khóa</a>

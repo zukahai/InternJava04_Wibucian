@@ -1,6 +1,8 @@
 package com.java04.wibucian.vos;
 
 import lombok.Data;
+import net.bytebuddy.utility.nullability.UnknownNull;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -20,8 +22,9 @@ public class EmployeeVO implements Serializable {
     @NotNull(message = "address can not null")
     private String address;
 
-    @NotNull(message = "srcEmployee can not null")
     private String srcEmployee;
+
+    private MultipartFile avatar;
 
     @NotNull(message = "email can not null")
     private String email;
