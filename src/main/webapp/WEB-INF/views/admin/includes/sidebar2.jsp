@@ -479,12 +479,12 @@
                         <!--begin:Menu link-->
                         <a
                                 class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/projects.html"
+                                href="admin/employee/"
                         >
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
-                            <span class="menu-title">Projects</span>
+                            <span class="menu-title">Thêm Nhân Viên</span>
                         </a>
                         <!--end:Menu link-->
                     </div>

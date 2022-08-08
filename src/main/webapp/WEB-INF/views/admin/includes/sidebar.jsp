@@ -25,7 +25,7 @@
                                                 <span class="menu-icon">
                                                     <i class="fas fa-house"></i>
                                                 </span>
-                                                <span class="menu-title">Nhân Viên</span>
+                                                <span class="menu-title">Dashboards</span>
                                                 <span class="menu-arrow"></span>
                                             </span>
                 <!--end:Menu link-->
@@ -39,12 +39,7 @@
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
                             <span class="menu-title">Default</span>
-                        <a class="menu-link active" href="admin/employee/">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Danh Sách Nhân Viên</span>
-                        </a>
+
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
@@ -606,7 +601,7 @@
                         <!--begin:Menu link-->
                         <a
                                 class="menu-link"
-                                href="admin/employee/index"
+                                href="admin/employee/"
                         >
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
@@ -621,12 +616,12 @@
                         <!--begin:Menu link-->
                         <a
                                 class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/projects.html"
+                                href="admin/employee/create"
                         >
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
-                            <span class="menu-title">Projects</span>
+                            <span class="menu-title">Thêm Nhân Viên</span>
                         </a>
                         <!--end:Menu link-->
                     </div>

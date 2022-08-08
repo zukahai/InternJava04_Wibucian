@@ -1,12 +1,15 @@
 package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.EmployeeDTO;
+import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.services.EmployeeService;
 import com.java04.wibucian.vos.EmployeeQueryVO;
 import com.java04.wibucian.vos.EmployeeUpdateVO;
 import com.java04.wibucian.vos.EmployeeVO;
+import com.java04.wibucian.vos.TypeTableVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +30,24 @@ public class EmployeeController {
     public String Home(ModelMap modelMap)throws Exception {
         modelMap.addAttribute("DanhSach", employeeService.findAll());
         return "admin/employee/index";
+    }
+    @GetMapping("/create")
+    public String createEmployeePage(ModelMap modelMap) throws Exception {
+        return "admin/employee/create";
+    }
+    @GetMapping("/view/{id}")
+    public String viewEmployeePage(ModelMap modelMap,@Valid @NotNull @PathVariable("id") String id) throws Exception {
+        modelMap.addAttribute("id",id);
+        Employee employee = employeeService.findById(id);
+        //System.out.println(id)
+        modelMap.addAttribute("employee",employee);
+        return "admin/employee/view";
+    }
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String createNewEmployee(ModelMap modelMap, @Valid EmployeeVO employeeVO) throws Exception {
+        String employeeId = this.employeeService.save(employeeVO);
+        System.out.println(employeeVO);
+        return "redirect:/admin/employee/";
     }
 
     @PostMapping
