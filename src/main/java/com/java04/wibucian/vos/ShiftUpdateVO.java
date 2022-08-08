@@ -4,13 +4,11 @@ package com.java04.wibucian.vos;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
-public class ShiftUpdateVO implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+public class ShiftUpdateVO extends ShiftVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "Vui lòng nhập vào mã nhân viên")
-    private String idEmployee;
 }

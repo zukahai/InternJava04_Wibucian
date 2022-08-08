@@ -7,30 +7,20 @@ import com.java04.wibucian.vos.IngredientUpdateVO;
 import com.java04.wibucian.vos.IngredientVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-@Controller
-@RequestMapping("admin/ingredient")
+@Validated
+@RestController
+@RequestMapping("/ingredient")
 public class IngredientController {
 
     @Autowired
     private IngredientService ingredientService;
-    @GetMapping("/")
-    public String Home(ModelMap modelMap)throws Exception {
-        System.out.println("Hello");
-        modelMap.addAttribute("xemdanhsach", ingredientService.findAll());
-        return "admin/ingredient/index";
-    }
-    @GetMapping("/index")
-    public String createEmployeePage(ModelMap modelMap) throws Exception {
-        return "admin/ingredient/index";
-    }
+
     @PostMapping
     public String save(@Valid @RequestBody IngredientVO vO) {
         return ingredientService.save(vO).toString();

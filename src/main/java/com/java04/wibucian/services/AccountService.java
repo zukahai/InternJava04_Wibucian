@@ -1,7 +1,7 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.AccountDTO;
-import com.java04.wibucian.interfaces.models.Account;
+import com.java04.wibucian.models.Account;
 import com.java04.wibucian.repositories.AccountRepository;
 import com.java04.wibucian.vos.AccountQueryVO;
 import com.java04.wibucian.vos.AccountUpdateVO;
