@@ -21,8 +21,14 @@
     <!--begin::Card body-->
     <div class="card-body p-9">
         <!--begin::Wrapper-->
-
-
+        <div class="mb-10">
+            <label for="id-invoice" class="required form-label">Example</label>
+            <input id="id-invoice" type="text" value="${invoice.id}" readonly class="form-control form-control-solid" placeholder="Example input"/>
+        </div>
+        <div class="mb-10">
+            <label for="name-employee-invoice" class="required form-label">Example</label>
+            <input data-value="${invoice.employee.name}" id="name-employee-invoice" type="text" value="${invoice.id}" readonly class="form-control form-control-solid" placeholder="Example input"/>
+        </div>
         <h3>Danh sách sản phẩm order</h3>
         <div class="d-flex flex-stack ">
 
@@ -31,44 +37,27 @@
                 <thead>
                 <!--begin::Table row-->
                 <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                    <th scope="col" class="min-w-100px">Id Hoá Đơn</th>
-                    <th scope="col" class="min-w-100px">Nhân viên</th>
-                    <th scope="col" class="min-w-100px">Tên Bàn</th>
-                    <th scope="col" class="min-w-100px">Tên khác hàng</th>
+                    <th scope="col" class="min-w-100px">Id chi tiết hoá đơn</th>
+                    <th scope="col" class="min-w-100px">Tên sản phẩm</th>
+                    <th scope="col" class="min-w-100px">Số lượng</th>
                     <th scope="col" class="min-w-100px">Tổng tiền</th>
-                    <th scope="col" class="min-w-100px">Trạng thái</th>
                     <th scope="col" class="min-w-100px">Hành động</th>
                 </tr>
                 <!--end::Table row-->
                 </thead>
 
                 <tbody class="text-gray-600 fw-semibold">
-                <c:forEach items="${listInvoice}" var="item">
+                <c:forEach items="${invoice.detailInvoices}" var="item">
                     <tr class="text-start">
-                        <td>${item.id}</td>
-                        <td>${item.employee.name}</td>
-                        <td>${item.groupTable.groupName}</td>
-                        <td>${item.customerName}</td>
+                        <td><p class="id-detail-invoice-table">${item.id}</p></td>
+                        <td><p data-id="item.product.id" class="id-product-tabel">${item.product.productName}</p></td>
+                        <td><p class="quantity-table">${item.quantity}</p></td>
                         <td>${item.totalMoney}</td>
                         <td>
-                            <c:if test="${item.status == 1}">
-                                <span class="badge badge-danger">Chưa thanh toán</span>
-                            </c:if>
-                            <c:if test="${item.status == 2}">
-                                <span class="badge badge-success">Đã thanh toán</span>
-                            </c:if>
-                        </td>
-                        <td class="text-center">
                             <a href="/invoice/detail/${item.id}" data-action="${item.id}" class="btn btn-icon btn-primary  btn-sm btn-icon-md btn-circle"
-                                      data-toggle="tooltip" data-placement="top" title="Sửa">
+                               data-toggle="tooltip" data-placement="top" title="Sửa">
                                 <i class="fa fa-edit"></i>
                             </a>
-
-                            <a href="/invoice/bill/${item.id}" data-action="${item.id}" class="btn btn-icon btn-success  btn-sm btn-icon-md btn-circle"
-                                  data-toggle="tooltip" data-placement="top" title="Thanh Toán">
-                                <i class="fa fa-money-bill"></i>
-                            </a>
-
                             <span data-action="${item.id}" class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
                                   data-toggle="tooltip" data-placement="top" title="Xóa">
                                 <i class="fa fa-trash"></i>
