@@ -2,8 +2,8 @@ package com.java04.wibucian.services;
 
 import com.java04.wibucian.commons.Constant;
 import com.java04.wibucian.dtos.ShiftDTO;
-import com.java04.wibucian.models.Employee;
-import com.java04.wibucian.models.Shift;
+import com.java04.wibucian.interfaces.models.Employee;
+import com.java04.wibucian.interfaces.models.Shift;
 import com.java04.wibucian.repositories.EmployeeRepository;
 import com.java04.wibucian.repositories.ShiftRepository;
 import com.java04.wibucian.vos.ShiftQueryVO;

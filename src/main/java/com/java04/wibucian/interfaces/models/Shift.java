@@ -1,9 +1,7 @@
-package com.java04.wibucian.models;
+package com.java04.wibucian.interfaces.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity

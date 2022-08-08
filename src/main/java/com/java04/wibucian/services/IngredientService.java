@@ -1,8 +1,7 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.IngredientDTO;
-import com.java04.wibucian.models.ImportGoods;
-import com.java04.wibucian.models.Ingredient;
+import com.java04.wibucian.interfaces.models.Ingredient;
 import com.java04.wibucian.repositories.IngredientRepository;
 import com.java04.wibucian.vos.IngredientQueryVO;
 import com.java04.wibucian.vos.IngredientUpdateVO;

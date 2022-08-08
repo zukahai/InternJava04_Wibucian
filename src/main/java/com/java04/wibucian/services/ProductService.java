@@ -1,9 +1,8 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.ProductDTO;
-import com.java04.wibucian.models.Product;
-import com.java04.wibucian.models.Sale;
-import com.java04.wibucian.models.TypeProduct;
+import com.java04.wibucian.interfaces.models.Product;
+import com.java04.wibucian.interfaces.models.TypeProduct;
 import com.java04.wibucian.repositories.ProductRepository;
 import com.java04.wibucian.repositories.SaleRepository;
 import com.java04.wibucian.repositories.TypeProductRepository;

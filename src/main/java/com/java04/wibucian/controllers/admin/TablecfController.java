@@ -1,14 +1,12 @@
 package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.TablecfDTO;
-import com.java04.wibucian.models.Tablecf;
-import com.java04.wibucian.models.TypeTable;
+import com.java04.wibucian.interfaces.models.Tablecf;
 import com.java04.wibucian.services.TablecfService;
 import com.java04.wibucian.services.TypeTableService;
 import com.java04.wibucian.vos.TablecfQueryVO;
 import com.java04.wibucian.vos.TablecfUpdateVO;
 import com.java04.wibucian.vos.TablecfVO;
-import com.java04.wibucian.vos.TypeTableUpdateVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;

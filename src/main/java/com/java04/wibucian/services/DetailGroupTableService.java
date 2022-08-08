@@ -1,7 +1,7 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.DetailGroupTableDTO;
-import com.java04.wibucian.models.DetailGroupTable;
+import com.java04.wibucian.interfaces.models.DetailGroupTable;
 import com.java04.wibucian.repositories.DetailGroupTableRepository;
 import com.java04.wibucian.vos.DetailGroupTableQueryVO;
 import com.java04.wibucian.vos.DetailGroupTableUpdateVO;

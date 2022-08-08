@@ -1,7 +1,7 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.OrdercfDTO;
-import com.java04.wibucian.models.Ordercf;
+import com.java04.wibucian.interfaces.models.Ordercf;
 import com.java04.wibucian.repositories.OrdercfRepository;
 import com.java04.wibucian.vos.OrdercfQueryVO;
 import com.java04.wibucian.vos.OrdercfUpdateVO;

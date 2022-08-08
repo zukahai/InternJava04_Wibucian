@@ -1,9 +1,8 @@
 package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.TypeTableDTO;
-import com.java04.wibucian.models.TypeTable;
+import com.java04.wibucian.interfaces.models.TypeTable;
 import com.java04.wibucian.services.TypeTableService;
-import com.java04.wibucian.vos.TablecfUpdateVO;
 import com.java04.wibucian.vos.TypeTableQueryVO;
 import com.java04.wibucian.vos.TypeTableUpdateVO;
 import com.java04.wibucian.vos.TypeTableVO;
