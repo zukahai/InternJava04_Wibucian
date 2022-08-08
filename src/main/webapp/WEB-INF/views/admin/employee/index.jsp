@@ -58,6 +58,7 @@
                     </thead>
                     <tbody>
                     <c:forEach var="item" items="${DanhSach}">
+<<<<<<< Updated upstream
                         <tr>
                             <th scope="row" class ="text-center">${item.id}</th>
                             <td class ="text-center">
@@ -75,6 +76,25 @@
                             </td>
                         </tr>
 
+=======
+                    <tr>
+                        <th scope="row">${item.id}</th>
+                        <td><div class ="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                            <img class="w-100" src="${pageContext.request.contextPath}/storage/file/img/avatar.jpg">
+                        </div></td>
+                        <td>${ item.name}</td>
+                        <td>${ item.phoneNumber}</td>
+                        <td>${ item.coefficientsSalary}</td>
+                        <td>
+                            <a href="" class="badge badge-warning mx-1">Hoạt động</a>
+                        </td>
+                        <td>
+                            <a href="" class="btn btn-warning mx-1">Sửa</a>
+                            <a href="" class="btn btn-success mx-1">Xem</a>
+                            <a href="" class="btn btn-danger mx-1">Xóa</a>
+                        </td>
+                    </tr>
+>>>>>>> Stashed changes
                     </c:forEach>
                     </tbody>
                 </table>
