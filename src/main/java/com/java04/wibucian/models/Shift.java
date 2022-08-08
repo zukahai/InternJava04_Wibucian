@@ -1,8 +1,5 @@
 package com.java04.wibucian.models;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;

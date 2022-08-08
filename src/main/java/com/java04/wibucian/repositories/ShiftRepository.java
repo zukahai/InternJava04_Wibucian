@@ -1,7 +1,7 @@
 package com.java04.wibucian.repositories;
 
-import com.java04.wibucian.models.Employee;
-import com.java04.wibucian.models.Shift;
+import com.java04.wibucian.interfaces.models.Employee;
+import com.java04.wibucian.interfaces.models.Shift;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
