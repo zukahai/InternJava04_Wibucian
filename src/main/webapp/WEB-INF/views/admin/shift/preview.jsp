@@ -254,7 +254,7 @@
         return {
             success: true,
             data: {
-                shiftId: responseData
+                shift: JSON.parse(responseData)
             }
         }
     }
@@ -299,7 +299,7 @@
                 window.alert("Create failed")
                 return
             }
-            input.setAttribute("shiftid", data.shiftId)
+            input.setAttribute("shiftid", data.shift.id)
             input.value = employeeId
             return
         }
