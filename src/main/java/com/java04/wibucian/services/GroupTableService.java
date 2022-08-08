@@ -52,6 +52,14 @@ public class GroupTableService {
         groupTableRepository.deleteById(id);
     }
 
+    public void deleteDetail(String id) {
+        GroupTable groupTable = groupTableRepository.findById(id).orElse(null);
+        List<DetailGroupTable> list = detailGroupTableRepository.getByGroupTable(groupTable);
+        for (DetailGroupTable detailGroupTable : list) {
+            detailGroupTableRepository.deleteById(detailGroupTable.getId());
+        }
+    }
+
     public void update(String id, GroupTableUpdateVO vO) {
         GroupTable bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
