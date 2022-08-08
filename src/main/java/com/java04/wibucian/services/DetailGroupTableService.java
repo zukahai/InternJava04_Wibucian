@@ -4,6 +4,7 @@ import com.java04.wibucian.dtos.DetailGroupTableDTO;
 import com.java04.wibucian.models.DetailGroupTable;
 import com.java04.wibucian.models.GroupTable;
 import com.java04.wibucian.models.Tablecf;
+
 import com.java04.wibucian.repositories.DetailGroupTableRepository;
 import com.java04.wibucian.repositories.GroupTableRepository;
 import com.java04.wibucian.repositories.TablecfRepository;
@@ -35,6 +36,22 @@ public class DetailGroupTableService {
     public String save(DetailGroupTableVO vO) {
         DetailGroupTable bean = new DetailGroupTable();
         BeanUtils.copyProperties(vO, bean);
+        bean = detailGroupTableRepository.save(bean);
+        return bean.getId();
+    }
+
+    public String save(String idGroupTable, String idTable) {
+        Tablecf table = tablecfRepository.findById(idTable).orElse(null);
+        GroupTable groupTable = groupTableRepository.findById(idGroupTable).orElse(null);
+
+        DetailGroupTable bean = new DetailGroupTable();
+        bean.setTablecf(table);
+        bean.setGroupTable(groupTable);
+        bean.setGroupTime(Instant.now());
+
+        System.out.println("table " + table);
+        System.out.println("GroupTable " + groupTable);
+
         bean = detailGroupTableRepository.save(bean);
         return bean.getId();
     }
