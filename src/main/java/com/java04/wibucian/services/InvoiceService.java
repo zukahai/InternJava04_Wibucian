@@ -34,6 +34,17 @@ public class InvoiceService {
     @Autowired
     private InvoiceNoMapPingRepository invoiceNoMapPingRepository;
 
+    public List<InvoiceNoMapPing> getAllInvoiceNoMapPing() {
+        return invoiceNoMapPingRepository.findAll();
+    }
+
+    public List<Invoice> findAll() {
+        return invoiceRepository.findAll();
+    }
+
+    public Invoice findById(String id) {
+        return invoiceRepository.findById(id).orElse(null);
+    }
 
     public String save(InvoiceVO vO) {
         Invoice bean = new Invoice();

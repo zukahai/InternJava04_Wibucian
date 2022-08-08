@@ -27,6 +27,7 @@
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
     <link href="/admin/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/admin/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
