@@ -70,7 +70,10 @@
                             <th scope="row">${  item.tablecf.typeTable.typeName }</th>
                             <td>${ item.groupTime } </td>
                             <td class="d-flex align-center justify-content-center">
-                                <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
+                                <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
+                                      data-toggle="tooltip" data-placement="top" data-id="${item.id}" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </span>
                             </td>
                             <!--end::Action=-->
                         </tr>

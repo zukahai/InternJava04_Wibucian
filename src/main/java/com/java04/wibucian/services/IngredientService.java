@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -36,6 +37,9 @@ public class IngredientService {
         ingredientRepository.save(bean);
     }
 
+    public List<Ingredient> findAll(){
+        return ingredientRepository.findAll();
+    }
     public IngredientDTO getById(String id) {
         Ingredient original = requireOne(id);
         return toDTO(original);

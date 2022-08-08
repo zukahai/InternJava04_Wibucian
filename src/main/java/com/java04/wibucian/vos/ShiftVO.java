@@ -12,8 +12,12 @@ import java.util.Date;
 
 
 @Data
-public abstract class ShiftVO implements Serializable {
+public class ShiftVO implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @NotNull(message = "Vui lòng nhập vào mã nhân viên")
+    //    @Pattern(regexp = "", message = "Mã nhân viên không hợp lệ")
+    private String idEmployee;
 
     @NotNull(message = "Vui lòng nhập vào ngày làm việc")
     private String shiftDate;

@@ -36,7 +36,7 @@
                         <th>ID</th>
                         <th>Nhân viên nhập hàng</th>
                         <th>Thời gian nhập</th>
-                            <th>Hành động</th>
+                        <th>Hành động</th>
                         <th>&nbsp;</th>
                     </tr>
                     </thead>

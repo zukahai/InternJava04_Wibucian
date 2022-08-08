@@ -1,7 +1,7 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.InvoiceDTO;
-import com.java04.wibucian.interfaces.models.Invoice;
+import com.java04.wibucian.models.Invoice;
 import com.java04.wibucian.repositories.InvoiceRepository;
 import com.java04.wibucian.vos.InvoiceQueryVO;
 import com.java04.wibucian.vos.InvoiceUpdateVO;
