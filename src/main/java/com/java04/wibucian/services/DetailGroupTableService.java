@@ -37,22 +37,6 @@ public class DetailGroupTableService {
 
 
 
-    public String save(String idGroupTable, String idTable) {
-        Tablecf table = tablecfRepository.findById(idTable).orElse(null);
-        GroupTable groupTable = groupTableRepository.findById(idGroupTable).orElse(null);
-
-        DetailGroupTable bean = new DetailGroupTable();
-        bean.setTablecf(table);
-        bean.setGroupTable(groupTable);
-        bean.setGroupTime(Instant.now());
-
-        System.out.println("table " + table);
-        System.out.println("GroupTable " + groupTable);
-
-        bean = detailGroupTableRepository.save(bean);
-        return bean.getId();
-    }
-
     public void delete(String id) {
         detailGroupTableRepository.deleteById(id);
     }
