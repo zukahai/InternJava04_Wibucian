@@ -24,6 +24,17 @@ public class Ordercf {
     @Column(name = "timeOrder")
     private Instant timeOrder;
 
+    @Column(name = "status")
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public String getId() {
         return id;
     }

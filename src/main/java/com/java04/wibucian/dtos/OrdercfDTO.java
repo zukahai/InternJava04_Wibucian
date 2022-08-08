@@ -21,4 +21,6 @@ public class OrdercfDTO implements Serializable {
 
     private Date timeOrder;
 
+    private Integer status;
+
 }

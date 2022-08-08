@@ -92,5 +92,4 @@ public class GroupTableService {
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
 
-    public List<GroupTable> findAll() {return groupTableRepository.findAll();}
 }
