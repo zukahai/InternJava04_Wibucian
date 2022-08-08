@@ -1,7 +1,7 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.TypeProductDTO;
-import com.java04.wibucian.models.TypeProduct;
+import com.java04.wibucian.interfaces.models.TypeProduct;
 import com.java04.wibucian.repositories.TypeProductRepository;
 import com.java04.wibucian.vos.TypeProductQueryVO;
 import com.java04.wibucian.vos.TypeProductUpdateVO;

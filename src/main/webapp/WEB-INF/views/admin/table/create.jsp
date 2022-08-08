@@ -35,11 +35,11 @@
                         <label for="idTypeTable">Loại bàn</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="capacity" class="form-control" id="capacity" name="capacity" placeholder="0"/>
+                        <input type="number" class="form-control" id="capacity" name="capacity" value="1"/>
                         <label for="capacity">Sức chứa</label>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" id="describe" name="describe" placeholder="" rows="6" placeholder="Mô tả"></textarea>
+                        <textarea class="form-control" id="describe" name="describe" placeholder="" rows="6" placeholder="Mô tả">Đây là mô tả</textarea>
                     </div>
                 </div>
 

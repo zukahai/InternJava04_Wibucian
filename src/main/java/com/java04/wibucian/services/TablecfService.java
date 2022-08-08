@@ -1,8 +1,8 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.TablecfDTO;
-import com.java04.wibucian.models.Tablecf;
-import com.java04.wibucian.models.TypeTable;
+import com.java04.wibucian.interfaces.models.Tablecf;
+import com.java04.wibucian.interfaces.models.TypeTable;
 import com.java04.wibucian.repositories.TablecfRepository;
 import com.java04.wibucian.repositories.TypeTableRepository;
 import com.java04.wibucian.vos.TablecfQueryVO;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class TablecfService {

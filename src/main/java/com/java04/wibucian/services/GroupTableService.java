@@ -1,7 +1,11 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.GroupTableDTO;
+
+import com.java04.wibucian.models.DetailGroupTable;
 import com.java04.wibucian.models.GroupTable;
+import com.java04.wibucian.repositories.DetailGroupTableRepository;
+
 import com.java04.wibucian.repositories.GroupTableRepository;
 import com.java04.wibucian.vos.GroupTableQueryVO;
 import com.java04.wibucian.vos.GroupTableUpdateVO;
@@ -20,9 +24,10 @@ public class GroupTableService {
 
     @Autowired
     private GroupTableRepository groupTableRepository;
+    private DetailGroupTableRepository detailGroupTableRepository;
 
-    public List<GroupTable> findAll() {
-        return groupTableRepository.findAll();
+    public GroupTableService(DetailGroupTableRepository detailGroupTableRepository) {
+        this.detailGroupTableRepository = detailGroupTableRepository;
     }
 
     public String save(GroupTableVO vO) {
@@ -41,7 +46,20 @@ public class GroupTableService {
     }
 
     public void delete(String id) {
+        GroupTable groupTable = groupTableRepository.findById(id).orElse(null);
+        List<DetailGroupTable> list = detailGroupTableRepository.getByGroupTable(groupTable);
+        for (DetailGroupTable detailGroupTable : list) {
+            detailGroupTableRepository.deleteById(detailGroupTable.getId());
+        }
         groupTableRepository.deleteById(id);
+    }
+
+    public void deleteDetail(String id) {
+        GroupTable groupTable = groupTableRepository.findById(id).orElse(null);
+        List<DetailGroupTable> list = detailGroupTableRepository.getByGroupTable(groupTable);
+        for (DetailGroupTable detailGroupTable : list) {
+            detailGroupTableRepository.deleteById(detailGroupTable.getId());
+        }
     }
 
     public void update(String id, GroupTableUpdateVO vO) {
@@ -53,6 +71,10 @@ public class GroupTableService {
     public GroupTableDTO getById(String id) {
         GroupTable original = requireOne(id);
         return toDTO(original);
+    }
+
+    public GroupTable findById(String id) {
+        return groupTableRepository.findById(id).orElse(null);
     }
 
     public Page<GroupTableDTO> query(GroupTableQueryVO vO) {
