@@ -79,6 +79,15 @@ public class DetailGroupTableService {
         return detailGroupTableRepository.getByGroupTable(groupTable);
     }
 
+    public List<Tablecf> getTableNotMerged() {
+        List<Tablecf> tables = tablecfRepository.findAll();
+        for (DetailGroupTable detailGroupTable : detailGroupTableRepository.findAll()) {
+            if (detailGroupTable.getGroupTable() != null)
+                tables.remove(detailGroupTable.getTablecf());
+        }
+        return tables;
+    }
+
     public Page<DetailGroupTableDTO> query(DetailGroupTableQueryVO vO) {
         throw new UnsupportedOperationException();
     }
