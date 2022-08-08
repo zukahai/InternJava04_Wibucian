@@ -1,9 +1,13 @@
 package com.java04.wibucian.vos;
 
 import lombok.Data;
+import net.bytebuddy.utility.nullability.UnknownNull;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
@@ -18,8 +22,9 @@ public class EmployeeVO implements Serializable {
     @NotNull(message = "address can not null")
     private String address;
 
-    @NotNull(message = "srcEmployee can not null")
     private String srcEmployee;
+
+    private MultipartFile avatar;
 
     @NotNull(message = "email can not null")
     private String email;
@@ -30,11 +35,19 @@ public class EmployeeVO implements Serializable {
     @NotNull(message = "gender can not null")
     private String gender;
 
-    private Instant birthDay;
+    private String birthDay;
 
     @NotNull(message = "maritalStatus can not null")
     private String maritalStatus;
 
     private Double coefficientsSalary;
 
+    public Date getBirthDay() {
+        System.out.println(this.birthDay);
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(this.birthDay);
+        } catch(ParseException e) {
+            throw new RuntimeException("Ngày không hợp lệ");
+        }
+    }
 }

@@ -38,7 +38,7 @@
                                     <div class="d-flex flex-center flex-column py-5">
                                         <!--begin::Avatar-->
                                         <div class="symbol symbol-200px symbol-circle mb-7">
-                                            <img src="/admin/assets/img/avatar.jpg" alt="image"/>
+                                            <img src="/admin/assets/file-upload/${employee.srcEmployee}" alt="image"/>
                                         </div>
                                         <!--end::Avatar-->
                                         <!--begin::Name-->
@@ -73,6 +73,10 @@
                             <td>${employee.address}</td>
                         </tr>
                         <tr>
+                            <td>Email</td>
+                            <td>${employee.email}</td>
+                        </tr>
+                        <tr>
                             <td>Giới Tính</td>
                             <td>${employee.gender}</td>
                         </tr>
@@ -100,9 +104,9 @@
                 <!--end::Card body-->
             </div></div>
 
-            </div>
 
         </div>
+
 
     <jsp:include page="../includes/footer.jsp"></jsp:include>
     <jsp:include page="../includes/end.jsp"></jsp:include>
