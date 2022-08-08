@@ -41,7 +41,7 @@ public class DetailGroupTableController {
     public String HomeView(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
         modelMap.addAttribute("tablecfList", detailGroupTableService.getByIdGroupTable(id));
         modelMap.addAttribute("groupTable", groupTableService.findById(id));
-        modelMap.addAttribute("tablecfs", tablecfService.findAll());
+        modelMap.addAttribute("tablecfs", detailGroupTableService.getTableNotMerged());
         return "admin/groupTable/detail";
     }
 

@@ -1,7 +1,7 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.IngredientDTO;
-import com.java04.wibucian.interfaces.models.Ingredient;
+import com.java04.wibucian.models.Ingredient;
 import com.java04.wibucian.repositories.IngredientRepository;
 import com.java04.wibucian.vos.IngredientQueryVO;
 import com.java04.wibucian.vos.IngredientUpdateVO;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -37,9 +36,6 @@ public class IngredientService {
         ingredientRepository.save(bean);
     }
 
-    public List<Ingredient> findAll(){
-        return ingredientRepository.findAll();
-    }
     public IngredientDTO getById(String id) {
         Ingredient original = requireOne(id);
         return toDTO(original);

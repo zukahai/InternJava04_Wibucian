@@ -1,11 +1,9 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.GroupTableDTO;
-
 import com.java04.wibucian.models.DetailGroupTable;
 import com.java04.wibucian.models.GroupTable;
 import com.java04.wibucian.repositories.DetailGroupTableRepository;
-
 import com.java04.wibucian.repositories.GroupTableRepository;
 import com.java04.wibucian.vos.GroupTableQueryVO;
 import com.java04.wibucian.vos.GroupTableUpdateVO;

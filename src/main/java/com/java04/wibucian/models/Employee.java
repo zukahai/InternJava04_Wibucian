@@ -1,6 +1,9 @@
-package com.java04.wibucian.interfaces.models;
+package com.java04.wibucian.models;
+
+import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;

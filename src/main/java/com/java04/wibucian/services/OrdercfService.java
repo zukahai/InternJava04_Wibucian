@@ -9,7 +9,6 @@ import com.java04.wibucian.vos.OrdercfVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -39,22 +38,24 @@ public class OrdercfService {
 
     public String save(OrdercfVO vO) {
         Ordercf bean = new Ordercf();
-        if (vO.getId() == null) {
+        if(vO.getIdOrdercf() == null){
             BeanUtils.copyProperties(vO, bean);
             Product product = productRepository.findById(vO.getIdProduct()).orElseThrow(() -> new NoSuchElementException());
             GroupTable groupTable = groupTableRepository.findById(vO.getIdGroupTable()).orElseThrow(() -> new NoSuchElementException());
             bean.setProduct(product);
             bean.setGroupTable(groupTable);
             bean.setTimeOrder(Instant.now());
-
             bean = ordercfRepository.save(bean);
-        } else if (vO.getId() != null) {
+        }
+        if(vO.getId()!= null){
+            System.out.println(vO.getId());
             update(String.valueOf(vO.getIdOrdercf()), vO);
         }
         return bean.getId();
+
     }
 
-    //delete return json
+   //delete return json
     public void delete(String id) {
         ordercfRepository.deleteById(id);
     }
@@ -68,11 +69,6 @@ public class OrdercfService {
     public OrdercfDTO getById(String id) {
         Ordercf original = requireOne(id);
         return toDTO(original);
-    }
-
-    public OrdercfNoMapPing getByIdNoMapPing(String id) {
-        OrdercfNoMapPing original = ordercfNoMapPingRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
-        return original;
     }
 
     public Page<OrdercfDTO> query(OrdercfQueryVO vO) {
@@ -90,26 +86,20 @@ public class OrdercfService {
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
 
-    public List<Ordercf> findAll() {
+    public List<Ordercf> findALl() {
         return ordercfRepository.findAll();
     }
 
     public List<OrdercfNoMapPing> findByGroupTableId(String id) {
         return ordercfNoMapPingRepository.findByGroupTableId(id);
     }
-
     public ProductNoMapPing findByProductId(String id) {
         return productNoMapPingRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
     }
-
     //findByGroupTableId(String groupTableId);
     public GroupTableNoMapPing findGroupTableId(String id) {
         return groupTableNoMapPingRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
     }
 
-    public List<OrdercfNoMapPing> findAllNoMapp() {
-        return ordercfNoMapPingRepository.findAll(Sort.by(Sort.Direction.ASC, "timeOrder"));
-    }
 
 }
-

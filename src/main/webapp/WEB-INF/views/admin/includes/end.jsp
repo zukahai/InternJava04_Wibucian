@@ -33,7 +33,6 @@
 <script src="/admin/assets/plugins/global/plugins.bundle.js"></script>
 <link href="/admin/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
 <script src="/admin/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-<script src="/admin/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 </body>

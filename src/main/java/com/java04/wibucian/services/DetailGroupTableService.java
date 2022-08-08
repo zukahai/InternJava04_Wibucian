@@ -4,7 +4,6 @@ import com.java04.wibucian.dtos.DetailGroupTableDTO;
 import com.java04.wibucian.models.DetailGroupTable;
 import com.java04.wibucian.models.GroupTable;
 import com.java04.wibucian.models.Tablecf;
-
 import com.java04.wibucian.repositories.DetailGroupTableRepository;
 import com.java04.wibucian.repositories.GroupTableRepository;
 import com.java04.wibucian.repositories.TablecfRepository;
@@ -56,22 +55,6 @@ public class DetailGroupTableService {
         return bean.getId();
     }
 
-    public String save(String idGroupTable, String idTable) {
-        Tablecf table = tablecfRepository.findById(idTable).orElse(null);
-        GroupTable groupTable = groupTableRepository.findById(idGroupTable).orElse(null);
-
-        DetailGroupTable bean = new DetailGroupTable();
-        bean.setTablecf(table);
-        bean.setGroupTable(groupTable);
-        bean.setGroupTime(Instant.now());
-
-        System.out.println("table " + table);
-        System.out.println("GroupTable " + groupTable);
-
-        bean = detailGroupTableRepository.save(bean);
-        return bean.getId();
-    }
-
     public void delete(String id) {
         detailGroupTableRepository.deleteById(id);
     }
@@ -94,6 +77,15 @@ public class DetailGroupTableService {
     public List<DetailGroupTable> getByIdGroupTable(String idGroupTable) {
         GroupTable groupTable = groupTableRepository.findById(idGroupTable).orElse(null);
         return detailGroupTableRepository.getByGroupTable(groupTable);
+    }
+
+    public List<Tablecf> getTableNotMerged() {
+        List<Tablecf> tables = tablecfRepository.findAll();
+        for (DetailGroupTable detailGroupTable : detailGroupTableRepository.findAll()) {
+            if (detailGroupTable.getGroupTable() != null)
+                tables.remove(detailGroupTable.getTablecf());
+        }
+        return tables;
     }
 
     public Page<DetailGroupTableDTO> query(DetailGroupTableQueryVO vO) {
