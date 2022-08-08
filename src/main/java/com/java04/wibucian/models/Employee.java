@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class Employee {
     private String gender;
 
     @Column(name = "birthDay")
-    private Instant birthDay;
+    private Date birthDay;
 
     @Column(name = "maritalStatus", nullable = false, length = 50)
     private String maritalStatus;
@@ -119,11 +120,11 @@ public class Employee {
         this.gender = gender;
     }
 
-    public Instant getBirthDay() {
+    public Date getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(Instant birthDay) {
+    public void setBirthDay(Date birthDay) {
         this.birthDay = birthDay;
     }
 

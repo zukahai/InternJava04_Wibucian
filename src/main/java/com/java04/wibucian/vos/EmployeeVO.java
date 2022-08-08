@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
@@ -30,11 +32,19 @@ public class EmployeeVO implements Serializable {
     @NotNull(message = "gender can not null")
     private String gender;
 
-    private Instant birthDay;
+    private String birthDay;
 
     @NotNull(message = "maritalStatus can not null")
     private String maritalStatus;
 
     private Double coefficientsSalary;
 
+    public Date getBirthDay() {
+        System.out.println(this.birthDay);
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(this.birthDay);
+        } catch(ParseException e) {
+            throw new RuntimeException("Ngày không hợp lệ");
+        }
+    }
 }

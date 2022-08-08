@@ -10,6 +10,7 @@ import com.java04.wibucian.vos.TypeTableVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 
 @Validated
 @Controller
@@ -55,9 +57,22 @@ public class EmployeeController {
         return employeeService.save(vO).toString();
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@Valid @NotNull @PathVariable("id") String id) {
-        employeeService.delete(id);
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
+        try {
+            employeeService.delete(id);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", true);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", false);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        }
     }
 
     @PutMapping("/{id}")
