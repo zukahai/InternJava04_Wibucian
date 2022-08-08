@@ -7,6 +7,8 @@ import com.java04.wibucian.vos.InvoiceUpdateVO;
 import com.java04.wibucian.vos.InvoiceVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Validated
-@RestController
+@Controller
 @RequestMapping("/invoice")
 public class InvoiceController {
 
@@ -23,7 +25,14 @@ public class InvoiceController {
 
     @PostMapping
     public String save(@Valid @RequestBody InvoiceVO vO) {
+        System.out.println(vO);
         return invoiceService.save(vO).toString();
+    }
+    @RequestMapping(value ={"store-one/", "store-one"}, method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object> storeOne(@Valid @RequestBody InvoiceVO vO) {
+        vO.setIdEmployee("Employee00005");
+        return ResponseEntity.ok().body(invoiceService.save_one(vO));
     }
 
     @DeleteMapping("/{id}")

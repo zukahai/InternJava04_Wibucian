@@ -23,4 +23,6 @@ public class InvoiceDTO implements Serializable {
 
     private Date dateTime;
 
+    private Integer status;
+
 }

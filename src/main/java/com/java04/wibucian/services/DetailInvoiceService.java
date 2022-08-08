@@ -2,7 +2,11 @@ package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.DetailInvoiceDTO;
 import com.java04.wibucian.models.DetailInvoice;
+import com.java04.wibucian.models.Invoice;
+import com.java04.wibucian.models.Product;
 import com.java04.wibucian.repositories.DetailInvoiceRepository;
+import com.java04.wibucian.repositories.InvoiceRepository;
+import com.java04.wibucian.repositories.ProductRepository;
 import com.java04.wibucian.vos.DetailInvoiceQueryVO;
 import com.java04.wibucian.vos.DetailInvoiceUpdateVO;
 import com.java04.wibucian.vos.DetailInvoiceVO;
@@ -19,9 +23,19 @@ public class DetailInvoiceService {
     @Autowired
     private DetailInvoiceRepository detailInvoiceRepository;
 
+    @Autowired
+    private InvoiceRepository invoiceRepository;
+    @Autowired
+    ProductRepository productRepository;
+
     public String save(DetailInvoiceVO vO) {
         DetailInvoice bean = new DetailInvoice();
         BeanUtils.copyProperties(vO, bean);
+        Invoice invoice = invoiceRepository.findById(vO.getIdInvoice()).orElseThrow(()-> new NoSuchElementException());
+        Product product = productRepository.findById(vO.getIdProduct()).orElseThrow(() -> new NoSuchElementException());
+        bean.setProduct(product);
+        bean.setInvoice(invoice);
+        bean.setTotalMoney(product.getPrice()*vO.getQuantity());
         bean = detailInvoiceRepository.save(bean);
         return bean.getId();
     }

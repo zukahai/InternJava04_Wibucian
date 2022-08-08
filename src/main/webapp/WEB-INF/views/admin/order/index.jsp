@@ -57,10 +57,11 @@
                     <div class="col col-3">
                         <div class="input-group mb-5">
                             <span class="input-group-text me-2" id="basic-addon3">Số lượng</span>
-                            <span class="input-group-text btn  btn-dark text-center  down-count "
+                            <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count "
                                   id="down-count">-</span>
-                            <input type="text" value="1" class="form-control text-center text-count" id="count"/>
-                            <span class="input-group-text btn  btn-dark text-center  up-count " id="up-count">+</span>
+                            <input type="text" value="1" class="form-control text-center text-count " id="count"/>
+                            <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle "
+                                  id="up-count">+</span>
                         </div>
                     </div>
                     <div class="col ">
@@ -90,24 +91,18 @@
 
             <div class="d-flex flex-stack ">
 
-                <table class="table align-middle table-row-dashed fs-6 gy-5" id="tabel-order">
+                <table class="table align-middle table-row-dashed fs-6 gy-5 table-responsive" id="tabel-order">
                     <!--begin::Table head-->
                     <thead>
                     <!--begin::Table row-->
-                    <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                        <th class="w-10px pe-2">
-                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                       data-kt-check-target="#kt_table_users .form-check-input" value="1"/>
-                            </div>
-                        </th>
-                        <th class="min-w-125px">Tên Bàn</th>
-                        <th class="min-w-125px">Tên sản phẩm</th>
-                        <th class="min-w-125px">Số lượng</th>
-                        <th class="min-w-125px">Giá</th>
-                        <th class="min-w-125px">Thời gian</th>
-                        <th class="min-w-125px">Trạng Thái</th>
-                        <th class="min-w-125px">Hành động</th>
+                    <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0 ">
+                        <th class="min-w-125px text-dark display-2">Tên Bàn</th>
+                        <th class="min-w-125px text-dark display-2">Tên sản phẩm</th>
+                        <th class="min-w-125px text-dark display-2">Số lượng</th>
+                        <th class="min-w-125px text-dark text-center display-2">Giá</th>
+                        <th class="min-w-125px text-dark display-2 ">Thời gian</th>
+                        <th class="min-w-125px text-dark display-2">Trạng Thái</th>
+                        <th class="min-w-125px text-dark display-2">Hành động</th>
                     </tr>
                     <!--end::Table row-->
                     </thead>
@@ -131,6 +126,7 @@
         $("#tabel-order").DataTable({
             dom: "<'row'<'col-sm-6 d-flex align-items-center justify-conten-start'l><'col-sm-6 d-flex align-items-center justify-content-end'f>><'table-responsive'tr><'row'<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i><'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>>",
             order: [[5, "desc"]],
+            reponsive: true,
         });
     });
     //handle click on .delete-btn button
@@ -265,13 +261,11 @@
     let updateSelectInTabel = () => {
         $(".sellect-2").select2();
     }
+    let validatePriceToVND = (price) => {
+        return new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(price)
+    }
     let getHTMLRowTabel = (data) => {
         return `<tr>
-                        <td>
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="1"/>
-                            </div>
-                        </td>
                         <td ><p class="group-tabel-name"-tabel>` + data.group_tabel_name + `</p></td>
                         <td style="display: none"><p class="id-group-tabel">` + data.id_group_tabel + `</p></td>
                         <td style="display: none"><p class="id-ordercf-tabel">` + data.id + `</p></td>
@@ -281,12 +275,12 @@
                         <td><p class="name-product-tabel">` + data.name_product + `</p></td>
                         <td class="w-175px">
                             <div class="input-group mb-5">
-                                <span class="input-group-text btn btn-dark text-center down-count-tabel">-</span>
+                                <span class="input-group-text btn btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count-tabel">-</span>
                                 <input type="text" value="` + data.count + `" class="form-control text-center text-count-tabel"/>
-                                <span class="input-group-text btn btn-dark text-center down-up-tabel ">+</span>
+                                <span class="input-group-text btn btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-up-tabel ">+</span>
                             </div>
                         </td>
-                        <td><p class="price-product-tabel">` + data.price_product + `</p></td>
+                        <td class="text-center"><p class="price-product-tabel">` + validatePriceToVND(data.price_product) + `</p></td>
                         <td style="display: none" class="total-price-tabel"><p class="total-product-table">` + data.total_price + `</p></td>
                         <td class="time-order-tabel"><p class="total-product-table">` + data.time_order + `</p></td>
                         <td data-status = "` + data.status + `" class="status-tabel">
@@ -323,7 +317,7 @@
             var idOrdercf = $(this).find(".id-idOrdercf-tabel").text();
             var id_group_table = $(this).find(".id-group-tabel").text();
             var status = $(this).find(".sellect-2").val();
-            if(tabel_group_id === "all"){
+            if (tabel_group_id === "all") {
                 tabel_group_id = id_group_table;
             }
             console.log(id_group_table)
@@ -406,8 +400,7 @@
             $(".text-count").val(1);
         }
     );
-</script>
-<script>
+
     let update_data = (tabel_group_id) => {
         let url;
         if (tabel_group_id == "all") {
@@ -541,29 +534,58 @@
                                         $(this).attr("disabled", true);
                                     }
                                 });
-                                select.select2("val", current_status);
-                                var tabel_group_id = $("#id-table-select").val();
-                                toastr.success("Cập nhật thành công");
-                                update_data(tabel_group_id);
-                            } else {
+                                data_invoice = {
+                                    idGroupTable: id_group_tabel,
+                                }
+                                $.ajax({
+                                    url: "/invoice/store-one",
+                                    method: "POST",
+                                    contentType: "application/json",
+                                    data: JSON.stringify(data_invoice),
+                                    success: function (result) {
+                                        var idInvoice = result;
+                                        console.log(result)
+                                        var data_invoice_details = {
+                                            idInvoice: idInvoice,
+                                            idProduct: id_product,
+                                            quantity: count,
+                                        }
+                                        console.log(data_invoice_details);
+                                        $.ajax(
+                                            {
+                                                url: "/detailInvoice/store",
+                                                method: "POST",
+                                                contentType: "application/json",
+                                                data: JSON.stringify(data_invoice_details),
+                                                success: function (result){
+                                                    if (result.check == true){
+                                                        select.select2("val", current_status);
+                                                        var tabel_group_id = $("#id-table-select").val();
+                                                        toastr.success("Cập nhật thành công");
+                                                        update_data(tabel_group_id);
+                                                    }
+                                                }
+                                            }
+                                        )
 
+
+                                    }
+                                })
+
+                            } else {
                                 toastr.error("Cập nhật thất bại");
                             }
                         }
                     });
-
-                    //disable option except current
-
-                }
-                else if(res.dismiss == 'cancel'){
+                } else if (res.dismiss == 'cancel') {
                     select.select2("val", current_status);
                 }
-            }) ;
-        }
-        else {
+            });
+        } else {
             $(this).closest("tr").find(".status-tabel").attr("data-status", status);
         }
     });
+    //validate price
 
 
 </script>

@@ -7,6 +7,7 @@ import java.time.Instant;
 @Entity
 public class DetailInvoice {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDetailInvoice", nullable = false, length = 15)
     private String id;
 
