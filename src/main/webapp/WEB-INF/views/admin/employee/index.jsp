@@ -54,29 +54,16 @@
                         <th class ="text-center ">SĐT</th>
                         <th class ="text-center">Hệ Số Lương</th>
                         <th class ="text-center" >Chức Năng</th>
+                        <th>Mã Nhân Viên</th>
+                        <th>Hình Ảnh</th>
+                        <th>Họ & Tên</th>
+                        <th>SĐT</th>
+                        <th>Hệ Số Lương</th>
+                        <th class ="justify-content-center d-flex" >Chức Năng</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="item" items="${DanhSach}">
-<<<<<<< Updated upstream
-                        <tr>
-                            <th scope="row" class ="text-center">${item.id}</th>
-                            <td class ="text-center">
-                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                    <img class="w-90"
-                                         src="${pageContext.request.contextPath}/admin/assets/img/avatar.jpg"></div>
-                            <td class ="text-center">${ item.name}</td>
-                            <td class ="text-center">${ item.phoneNumber}</td>
-                            <td class ="text-center">${ item.coefficientsSalary}</td>
-                            <td  class ="text-center" >
-                                <a href="" class="btn btn-warning mx-1">Sửa</a>
-                                <a href="admin/employee/view/${item.id}" class="btn btn-success mx-1">Xem</a>
-                                <a href="" class="btn btn-danger mx-1">Xóa</a>
-                                <a href="" class="btn btn-bg-secondary mx-1 ">Khóa</a>
-                            </td>
-                        </tr>
-
-=======
                     <tr>
                         <th scope="row">${item.id}</th>
                         <td><div class ="symbol symbol-circle symbol-50px overflow-hidden me-3">
@@ -94,7 +81,7 @@
                             <a href="" class="btn btn-danger mx-1">Xóa</a>
                         </td>
                     </tr>
->>>>>>> Stashed changes
+
                     </c:forEach>
                     </tbody>
                 </table>
