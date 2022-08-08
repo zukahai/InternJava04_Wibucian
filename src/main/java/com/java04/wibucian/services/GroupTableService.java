@@ -21,10 +21,6 @@ public class GroupTableService {
     @Autowired
     private GroupTableRepository groupTableRepository;
 
-//    public List<GroupTable> findAll() {
-//        return groupTableRepository.findAll();
-//    }
-
     public String save(GroupTableVO vO) {
         GroupTable bean = new GroupTable();
         BeanUtils.copyProperties(vO, bean);
@@ -53,6 +49,10 @@ public class GroupTableService {
     public GroupTableDTO getById(String id) {
         GroupTable original = requireOne(id);
         return toDTO(original);
+    }
+
+    public GroupTable findById(String id) {
+        return groupTableRepository.findById(id).orElse(null);
     }
 
     public Page<GroupTableDTO> query(GroupTableQueryVO vO) {
