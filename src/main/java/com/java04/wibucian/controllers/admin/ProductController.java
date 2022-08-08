@@ -1,7 +1,6 @@
 package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.ProductDTO;
-import com.java04.wibucian.models.Product;
 import com.java04.wibucian.services.ProductService;
 import com.java04.wibucian.vos.ProductQueryVO;
 import com.java04.wibucian.vos.ProductUpdateVO;
@@ -11,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

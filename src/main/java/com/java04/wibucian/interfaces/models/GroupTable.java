@@ -1,4 +1,4 @@
-package com.java04.wibucian.models;
+package com.java04.wibucian.interfaces.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -75,4 +75,13 @@ public class GroupTable implements Serializable {
 
     @OneToMany(mappedBy = "groupTable")
     private Set<DetailGroupTable> detailGroupTables = new LinkedHashSet<>();
+
+    @Override
+    public String toString() {
+        return "GroupTable{" +
+                "id='" + id + '\'' +
+                ", groupName='" + groupName + '\'' +
+                ", foundedTime=" + foundedTime +
+                '}';
+    }
 }

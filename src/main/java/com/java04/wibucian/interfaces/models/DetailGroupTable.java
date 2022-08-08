@@ -1,12 +1,12 @@
-package com.java04.wibucian.models;
+package com.java04.wibucian.interfaces.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
 public class DetailGroupTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDetailGroupTable", nullable = false, length = 15)
     private String id;
 

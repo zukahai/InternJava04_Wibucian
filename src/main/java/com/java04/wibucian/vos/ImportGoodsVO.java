@@ -11,14 +11,9 @@ import java.util.Date;
 public class ImportGoodsVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "id can not null")
-    private Integer id;
-
-    @NotNull(message = "idImportGoods can not null")
-    private String idImportGoods;
-
     private String idEmployee;
 
+    @NotNull(message = "Ngày nhâp hàng là bắt buộc")
     private Date timeImport;
 
 }

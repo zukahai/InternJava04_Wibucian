@@ -1,10 +1,11 @@
-package com.java04.wibucian.models;
+package com.java04.wibucian.interfaces.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.io.Serializable;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -37,6 +38,9 @@ public class Ingredient {
     @OneToMany(mappedBy = "ingredient")
     private Set<DetailProduct> detailProducts = new LinkedHashSet<>();
 
+    public String getDateFormat() {
+        return this.expiryIngredient == null ? null : new SimpleDateFormat("dd-MM-yyyy").format(Date.from(this.expiryIngredient));
+    }
     public String getId() {
         return id;
     }
