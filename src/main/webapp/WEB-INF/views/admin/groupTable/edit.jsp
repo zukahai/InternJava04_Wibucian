@@ -13,38 +13,31 @@
                 <div class="card-header cursor-pointer">
                     <!--begin::Card title-->
                     <div class="card-title m-0">
-                        <h3 class="fw-bold m-0">Thêm bàn</h3>
+                        <h3 class="fw-bold m-0">Sửa thông tin nhóm bàn</h3>
                     </div>
                     <!--end::Card title-->
                     <!--begin::Action-->
-                    <a href="admin/table/" class="btn btn-primary align-self-center">Danh sách bàn</a
+                    <a href="admin/groupTable/" class="btn btn-primary align-self-center">Danh sách nhóm bàn</a
             >
             <!--end::Action-->
         </div>
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
-            <form action="/admin/table" method="post">
+            <form action="/admin/groupTable/edit" method="post">
                 <div class="rounded border p-5">
                     <div class="form-floating my-5">
-                        <select class="form-select" data-control="select2" id="idTypeTable" name="idTypeTable" data-placeholder="Select an option">
-                            <c:forEach var="item" items="${typeTables}">
-                                <option value="${item.id}">${item.id} - ${item.typeName}</option>
-                            </c:forEach>
-                        </select>
-                        <label for="idTypeTable">Loại bàn</label>
+                        <input type="groupName" class="form-control" id="idGroupTable" name="idGroupTable" value="${groupTable.id}" readonly/>
+                        <label for="idGroupTable">Mã nhóm bàn</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="number" class="form-control" id="capacity" name="capacity" value="1"/>
-                        <label for="capacity">Sức chứa</label>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" id="describe" name="describe" placeholder="" rows="6" placeholder="Mô tả">Đây là mô tả</textarea>
+                        <input type="groupName" class="form-control" id="groupName" name="groupName" value="${groupTable.groupName}"/>
+                        <label for="groupName">Tên nhóm bàn</label>
                     </div>
                 </div>
 
                 <div class="text-center my-5">
-                    <button class="btn btn-primary" type="submit">Thêm</button>
+                    <button class="btn btn-success" onClicktype="submit">Sửa</button>
                 </div>
             </form>
         </div>
