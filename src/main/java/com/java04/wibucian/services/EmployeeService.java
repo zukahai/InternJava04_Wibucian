@@ -44,6 +44,10 @@ public class EmployeeService {
         Employee original = requireOne(id);
         return toDTO(original);
     }
+    public Employee findById(String id) {
+       return requireOne(id);
+    }
+
 
     public Page<EmployeeDTO> query(EmployeeQueryVO vO) {
         throw new UnsupportedOperationException();

@@ -32,7 +32,7 @@
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
-
+            <c:if test="${tablecfs.size() > 0}">
             <form action="/admin/detailGroupTable/view/${groupTable.id}" method="post">
                 <div class="rounded border row  d-flex justify-content-between h-100">
                     <div class="col col-10 form-floating my-5">
@@ -47,9 +47,8 @@
                         <button class="btn btn-primary align-middle" type="submit">Thêm</button>
                     </div>
                 </div>
-
-
             </form>
+            </c:if>
 
 <!--end::Input group-->
             <div class="table-responsive">
@@ -94,7 +93,6 @@
         var row = $(this).closest("tr");
         var id = $(this).attr("data-id");
         console.log(id);
-
         swal.fire({
             title: "Bạn có chắc chắn muốn xóa?",
             text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
@@ -120,11 +118,6 @@
                 })
             }
         });
-
-
     });
-
     //handel on change id-select-product
 </script>
-
-
