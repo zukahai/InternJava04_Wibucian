@@ -1,34 +1,109 @@
 package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.GroupTableDTO;
+import com.java04.wibucian.models.GroupTable;
+import com.java04.wibucian.models.TypeTable;
+import com.java04.wibucian.services.DetailGroupTableService;
 import com.java04.wibucian.services.GroupTableService;
-import com.java04.wibucian.vos.GroupTableQueryVO;
-import com.java04.wibucian.vos.GroupTableUpdateVO;
-import com.java04.wibucian.vos.GroupTableVO;
+import com.java04.wibucian.vos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 
 @Validated
-@RestController
-@RequestMapping("/groupTable")
+@Controller
+@RequestMapping("admin/groupTable")
 public class GroupTableController {
 
     @Autowired
     private GroupTableService groupTableService;
 
+    @GetMapping("/")
+    public String Home(ModelMap modelMap)throws Exception {
+        modelMap.addAttribute("groupTables", groupTableService.findAll());
+        return "admin/groupTable/index";
+    }
+
+    @GetMapping("/create")
+    public String createProductPage(ModelMap modelMap) throws Exception {
+        return "admin/groupTable/create";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String HomeEdit(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
+        GroupTable groupTable = groupTableService.findById(id);
+        modelMap.addAttribute("groupTable", groupTable);
+        return "admin/groupTable/edit";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
+        try {
+            groupTableService.delete(id);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", true);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", false);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        }
+    }
+
+    @RequestMapping(value = "/deleteDetail/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<Object> deleteDetail(@PathVariable("id") String id) {
+        try {
+            groupTableService.deleteDetail(id);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", true);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", false);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String createNewProduct(ModelMap modelMap,  @RequestBody MultiValueMap<String, String> formData) throws Exception {
+        String nameGroupTable = formData.get("groupName").get(0);
+        groupTableService.save(nameGroupTable);
+        System.out.println(nameGroupTable);
+        return "redirect:/admin/groupTable/";
+    }
+
+    @RequestMapping(value = "/edit",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String editTable(ModelMap modelMap,
+                            @Valid GroupTableUpdateVO groupTableUpdateVO,
+                            @RequestBody MultiValueMap<String, String> formData) throws Exception {
+        String idTable =  formData.get("idGroupTable").get(0);
+        this.groupTableService.update(idTable, groupTableUpdateVO);
+        return "redirect:/admin/groupTable/";
+    }
+
     @PostMapping
     public String save(@Valid @RequestBody GroupTableVO vO) {
         return groupTableService.save(vO).toString();
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@Valid @NotNull @PathVariable("id") String id) {
-        groupTableService.delete(id);
     }
 
     @PutMapping("/{id}")

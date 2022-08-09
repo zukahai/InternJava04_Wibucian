@@ -2,6 +2,8 @@ package com.java04.wibucian.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -22,6 +24,15 @@ public class ImportGoods {
 
     @OneToMany(mappedBy = "importGoods")
     private Set<DetailImportGoods> detailImportGoods = new LinkedHashSet<>();
+
+
+    @Transient
+    private String dateFormat;
+
+    public String getDateFormat() {
+        return this.timeImport == null ? null : new SimpleDateFormat("dd-MM-yyyy").format(Date.from(this.timeImport));
+    }
+
 
     public String getId() {
         return id;
@@ -54,4 +65,6 @@ public class ImportGoods {
     public void setDetailImportGoods(Set<DetailImportGoods> detailImportGoods) {
         this.detailImportGoods = detailImportGoods;
     }
+
+
 }

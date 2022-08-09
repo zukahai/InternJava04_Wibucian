@@ -11,10 +11,8 @@ import java.util.Date;
 public class OrdercfVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "id can not null")
     private Integer id;
 
-    @NotNull(message = "idOrdercf can not null")
     private String idOrdercf;
 
     private String idGroupTable;
@@ -24,5 +22,7 @@ public class OrdercfVO implements Serializable {
     private Integer quantity;
 
     private Date timeOrder;
+
+    private Integer status;
 
 }

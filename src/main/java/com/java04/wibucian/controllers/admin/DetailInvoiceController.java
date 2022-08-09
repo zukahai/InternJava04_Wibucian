@@ -5,13 +5,16 @@ import com.java04.wibucian.services.DetailInvoiceService;
 import com.java04.wibucian.vos.DetailInvoiceQueryVO;
 import com.java04.wibucian.vos.DetailInvoiceUpdateVO;
 import com.java04.wibucian.vos.DetailInvoiceVO;
+import com.java04.wibucian.vos.InvoiceVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 
 @Validated
 @RestController
@@ -24,6 +27,24 @@ public class DetailInvoiceController {
     @PostMapping
     public String save(@Valid @RequestBody DetailInvoiceVO vO) {
         return detailInvoiceService.save(vO).toString();
+    }
+    @RequestMapping(value = {"/store","/store/"}, method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Object> store (@Valid @RequestBody DetailInvoiceVO vO){
+       try{
+           System.out.println(vO);
+           detailInvoiceService.save(vO);
+           HashMap<String, Object> map = new HashMap<>();
+           map.put("check", true);
+           map.put("value", "test");
+           return ResponseEntity.ok().body(map);
+       }
+       catch (Exception e){
+           HashMap<String, Object> map = new HashMap<>();
+           map.put("check", false);
+           map.put("value", "test");
+           return ResponseEntity.ok().body(map);
+       }
     }
 
     @DeleteMapping("/{id}")

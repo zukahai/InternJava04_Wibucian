@@ -3,7 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <jsp:include page="../includes/hd.jsp"></jsp:include>
         <jsp:include page="../includes/header.jsp"></jsp:include>
-        <jsp:include page="../includes/sidebar2.jsp"></jsp:include>
+        <jsp:include page="../includes/sidebar.jsp"></jsp:include>
         <jsp:include page="../includes/container.jsp"></jsp:include>
         <div class="content flex-column-fluid" id="kt_content">
 
@@ -23,12 +23,11 @@
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
-            <form action="/admin/typeTable" method="post">
+            <form action="/admin/typeTable/create" method="post">
                 <div class="rounded border p-5">
-
                     <div class="form-floating my-5">
                         <input type="text" class="form-control" id="typeName" name="typeName" placeholder="VIP"/>
-                        <label for="typeName">Tên loại sản phẩm</label>
+                        <label for="typeName">Tên loại bàn</label>
                     </div>
                     <div class="form-floating my-5">
                         <input type="number" class="form-control" id="price" name="price" placeholder="0" value="0"/>
