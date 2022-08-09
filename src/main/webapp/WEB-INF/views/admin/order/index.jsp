@@ -30,7 +30,6 @@
                     <c:forEach items="${groupTables}" var="item">
                         <option value="${item.id}">${item.groupName}</option>
                     </c:forEach>
-
                 </select>
             </div>
             <div class="add-product-layout">
@@ -76,8 +75,6 @@
                         <select id="id-select-status" class="form-select form-select-solid" data-control="select2"
                                 data-placeholder="Chọn Trạng Thái">
                             <option value="1">Đang Chờ</option>
-                            <option value="2">Đã Xong</option>
-                            <option value="3">Đã Huỷ</option>
                         </select>
                     </div>
                     <div class="col">

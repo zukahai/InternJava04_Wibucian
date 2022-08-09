@@ -5,6 +5,8 @@
 <jsp:include page="../includes/sidebar1.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="vi_VN"/>
 <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
     <!--begin::Card header-->
     <div class="card-header cursor-pointer">
@@ -49,7 +51,7 @@
                         <td>${item.employee.name}</td>
                         <td>${item.groupTable.groupName}</td>
                         <td>${item.customerName}</td>
-                        <td>${item.totalMoney}</td>
+                        <td><fmt:formatNumber pattern="#,###" value="${item.totalMoney}"/> ₫</td>
                         <td>
                             <c:if test="${item.status == 1}">
                                 <span class="badge badge-danger">Chưa thanh toán</span>
@@ -59,17 +61,20 @@
                             </c:if>
                         </td>
                         <td class="text-center">
-                            <a href="/invoice/detail/${item.id}" data-action="${item.id}" class="btn btn-icon btn-primary  btn-sm btn-icon-md btn-circle"
-                                      data-toggle="tooltip" data-placement="top" title="Sửa">
+                            <a href="/invoice/detail/${item.id}" data-action="${item.id}"
+                               class="btn btn-icon btn-primary  btn-sm btn-icon-md btn-circle"
+                               data-toggle="tooltip" data-placement="top" title="Sửa">
                                 <i class="fa fa-edit"></i>
                             </a>
 
-                            <a href="/invoice/bill/${item.id}" data-action="${item.id}" class="btn btn-icon btn-success  btn-sm btn-icon-md btn-circle"
-                                  data-toggle="tooltip" data-placement="top" title="Thanh Toán">
+                            <a href="/invoice/bill/${item.id}" data-action="${item.id}"
+                               class="btn btn-icon btn-success  btn-sm btn-icon-md btn-circle"
+                               data-toggle="tooltip" data-placement="top" title="Thanh Toán">
                                 <i class="fa fa-money-bill"></i>
                             </a>
 
-                            <span data-action="${item.id}" class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
+                            <span data-action="${item.id}"
+                                  class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
                                   data-toggle="tooltip" data-placement="top" title="Xóa">
                                 <i class="fa fa-trash"></i>
                             </span>
@@ -85,5 +90,37 @@
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
 <script>
+
+    $(document).on("click", ".delete-btn", function () {
+        var id = $(this).attr("data-action");
+        var url = "/invoice/" + id;
+        var that = $(this);
+        swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa?',
+            text: "Bạn sẽ không thể khôi phục lại dữ liệu này!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Vâng, xóa nó!',
+            cancelButtonText: 'Không, hủy bỏ!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: url,
+                    type: "DELETE",
+                    success: function (resutl) {
+                        console.log(resutl);
+                        if (resutl.check == true) {
+                            toastr.success(resutl.value);
+                            that.closest("tr").remove();
+                        } else {
+                            toastr.error(resutl.value);
+                        }
+                    }
+                });
+            }
+        });
+    });
 
 </script>

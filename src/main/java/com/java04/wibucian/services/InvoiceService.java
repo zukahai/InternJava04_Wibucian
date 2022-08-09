@@ -32,17 +32,15 @@ public class InvoiceService {
     @Autowired
     private InvoiceNoMapPingRepository invoiceNoMapPingRepository;
 
-    @Autowired
-    ProductRepository productRepository;
+    @Autowired ProductRepository productRepository;
 
     public List<InvoiceNoMapPing> getAllInvoiceNoMapPing() {
         return invoiceNoMapPingRepository.findAll();
     }
 
-    public List<Product> findAllProduct() {
+    public List<Product> findAllProduct(){
         return productRepository.findAll();
     }
-
     public List<Invoice> findAll() {
         return invoiceRepository.findAll();
     }
@@ -122,11 +120,9 @@ public class InvoiceService {
                 Employee employee = employeeRepository.findById(vO.getIdEmployee()).orElseThrow(() -> new NoSuchElementException());
                 bean.setEmployee(employee);
             }
-            if (vO.getCustomerName() != null) {
-                bean.setCustomerName(vO.getCustomerName());
-            }
             invoiceRepository.save(bean);
-        } else {
+        }
+        else {
             throw new NoSuchElementException();
         }
     }
@@ -171,3 +167,4 @@ public class InvoiceService {
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
 }
+
