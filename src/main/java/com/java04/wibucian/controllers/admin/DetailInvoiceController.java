@@ -46,6 +46,23 @@ public class DetailInvoiceController {
            return ResponseEntity.ok().body(map);
        }
     }
+    @GetMapping(value = {"/delete/{id}","/delete/{id}/"})
+    @ResponseBody
+    public ResponseEntity<Object> delete_2 (@PathVariable("id") String id){
+        try{
+            detailInvoiceService.delete(id);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", true);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        }
+        catch (Exception e){
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", false);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        }
+    }
 
     @DeleteMapping("/{id}")
     public void delete(@Valid @NotNull @PathVariable("id") String id) {
@@ -53,11 +70,22 @@ public class DetailInvoiceController {
     }
 
     @PutMapping("/{id}")
-    public void update(@Valid @NotNull @PathVariable("id") String id,
-                       @Valid @RequestBody DetailInvoiceUpdateVO vO) {
-        detailInvoiceService.update(id, vO);
+    @ResponseBody
+    public ResponseEntity<Object> update(@Valid @NotNull @PathVariable("id") String id, @Valid @RequestBody DetailInvoiceUpdateVO vO) {
+        try {
+            System.out.println(vO);
+            detailInvoiceService.update(id, vO);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", true);
+            map.put("value", "ok");
+            return ResponseEntity.ok().body(map);
+        } catch (Exception e) {
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", false);
+            map.put("value", "Lỗi");
+            return ResponseEntity.ok().body(map);
+        }
     }
-
     @GetMapping("/{id}")
     public DetailInvoiceDTO getById(@Valid @NotNull @PathVariable("id") String id) {
         return detailInvoiceService.getById(id);

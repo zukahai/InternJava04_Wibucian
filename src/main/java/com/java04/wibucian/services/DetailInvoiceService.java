@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -30,24 +33,55 @@ public class DetailInvoiceService {
 
     public String save(DetailInvoiceVO vO) {
         DetailInvoice bean = new DetailInvoice();
-        BeanUtils.copyProperties(vO, bean);
-        Invoice invoice = invoiceRepository.findById(vO.getIdInvoice()).orElseThrow(()-> new NoSuchElementException());
-        Product product = productRepository.findById(vO.getIdProduct()).orElseThrow(() -> new NoSuchElementException());
-        bean.setProduct(product);
-        bean.setInvoice(invoice);
-        bean.setTotalMoney(product.getPrice()*vO.getQuantity());
-        bean = detailInvoiceRepository.save(bean);
+        DetailInvoice detailInvoice = detailInvoiceRepository.findByIdProduct(vO.getIdProduct(), vO.getIdInvoice());
+        if (detailInvoice != null) {
+            DetailInvoiceUpdateVO detailInvoiceUpdateVO = new DetailInvoiceUpdateVO();
+            BeanUtils.copyProperties(detailInvoice, detailInvoiceUpdateVO);
+            detailInvoiceUpdateVO.setQuantity(detailInvoiceUpdateVO.getQuantity() + vO.getQuantity());
+            update(detailInvoice.getId(), detailInvoiceUpdateVO);
+        } else {
+            BeanUtils.copyProperties(vO, bean);
+            Invoice invoice = invoiceRepository.findById(vO.getIdInvoice()).orElseThrow(() -> new NoSuchElementException());
+            Product product = productRepository.findById(vO.getIdProduct()).orElseThrow(() -> new NoSuchElementException());
+            bean.setProduct(product);
+            bean.setInvoice(invoice);
+            bean.setDateTime(Instant.now());
+            bean.setTotalMoney(product.getPrice() * vO.getQuantity());
+            Double totalMoney = invoice.getTotalMoney();
+            if (totalMoney == null) {
+                totalMoney = 0.0;
+            }
+            totalMoney += bean.getTotalMoney();
+            invoice.setTotalMoney(totalMoney);
+            invoiceRepository.save(invoice);
+            detailInvoiceRepository.save(bean);
+        }
         return bean.getId();
     }
-
     public void delete(String id) {
         detailInvoiceRepository.deleteById(id);
     }
-
     public void update(String id, DetailInvoiceUpdateVO vO) {
         DetailInvoice bean = requireOne(id);
+        Product product = bean.getProduct();
+        Double currentTotalMoney = bean.getTotalMoney();
+        Double totalMoney = product.getPrice()*vO.getQuantity();
+        bean.setTotalMoney(totalMoney);
+        bean.setDateTime(Instant.now());
+        Invoice invoice = bean.getInvoice();
+        Double totalMoneyInvoice = invoice.getTotalMoney();
+        if (totalMoneyInvoice == null) {
+            totalMoneyInvoice = 0.0;
+        }
+        totalMoneyInvoice = totalMoneyInvoice - currentTotalMoney + totalMoney;
+        System.out.println(totalMoneyInvoice);
+        invoice.setTotalMoney(totalMoneyInvoice);
         BeanUtils.copyProperties(vO, bean);
         detailInvoiceRepository.save(bean);
+        invoiceRepository.save(invoice);
+    }
+    public List<Product> findAllProduct(){
+        return productRepository.findAll();
     }
 
     public DetailInvoiceDTO getById(String id) {

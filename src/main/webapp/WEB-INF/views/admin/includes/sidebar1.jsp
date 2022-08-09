@@ -422,7 +422,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item active">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="${pageContext.request.contextPath}/ordercf">
+                        <a class="menu-link" href="${pageContext.request.contextPath}/invoice">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
