@@ -1,6 +1,7 @@
 package com.java04.wibucian.vos;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -10,7 +11,6 @@ import java.util.Date;
 @Data
 public class EmployeeVO implements Serializable {
     private static final long serialVersionUID = 1L;
-
     @NotNull(message = "id can not null")
     private Integer id;
 
@@ -35,6 +35,7 @@ public class EmployeeVO implements Serializable {
     @NotNull(message = "gender can not null")
     private String gender;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDay;
 
     @NotNull(message = "maritalStatus can not null")
