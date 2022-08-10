@@ -1,7 +1,10 @@
 package com.java04.wibucian.security;
 
+import com.java04.wibucian.commons.Role;
 import com.java04.wibucian.models.Account;
+import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.repositories.AccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,28 +17,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service("myUserDetailService")
 public class MyUserDetailsService implements UserDetailsService {
 
-    private AccountRepository repository;
-
-    public MyUserDetailsService(AccountRepository repository) {
-        this.repository = repository;
-    }
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-//        if(!username.equals("admin")) throw new UsernameNotFoundException("User not found");
-//        GrantedAuthority role = new SimpleGrantedAuthority("ROLE_ADMIN");
-//        return new User("admin", "1234", List.of(role));
-
-        Optional<Account> accountOptional = repository.findAccountById(username);
-        if (accountOptional.isPresent()) {
-            Account account = accountOptional.get();
-            GrantedAuthority role = new SimpleGrantedAuthority(account.getRole() == 1 ? "ROLE_ADMIN" : "ROLE_STAFF");
-            return new User(account.getId(), account.getPassword(), List.of(role));
-        }
-        throw new UsernameNotFoundException("User not found");
+    public UserDetails loadUserByUsername(String username) throws
+            UsernameNotFoundException {
+        Account account = this.accountRepository.findById(username)
+                                                .orElseThrow(
+                                                        () -> new UsernameNotFoundException(
+                                                                "User not found"));
+        Employee employee = account.getEmployee();
+        GrantedAuthority role = new SimpleGrantedAuthority(
+                account.getRole() == Role.ADMIN.getValue()
+                        ? Role.ADMIN.toString()
+                        : Role.STAFF.toString());
+        CustomUserDetail user =
+                new CustomUserDetail(account.getId(), account.getPassword(),
+                                     List.of(role));
+        user.setEmployee(employee);
+        return user;
     }
 }

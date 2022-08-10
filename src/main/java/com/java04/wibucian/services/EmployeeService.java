@@ -23,32 +23,42 @@ public class EmployeeService {
     public String save(EmployeeVO vO) {
         Employee bean = new Employee();
         BeanUtils.copyProperties(vO, bean);
-        if(vO.getIdEmployee()!=null) bean.setId(vO.getIdEmployee());
+        if (vO.getIdEmployee() != null) {
+            bean.setId(vO.getIdEmployee());
+        }
         bean = employeeRepository.save(bean);
         return bean.getId();
     }
 
-//    public List<Employee> findAll() {
-//        return this.employeeRepository.findAll();
-//    }
+    //    public List<Employee> findAll() {
+    //        return this.employeeRepository.findAll();
+    //    }
 
     public void delete(String id) {
         employeeRepository.deleteById(id);
     }
 
-    public void update(String id, EmployeeUpdateVO vO) {
-        Employee bean = requireOne(id);
-        BeanUtils.copyProperties(vO, bean);
-        employeeRepository.save(bean);
+    // update bằng ID, sẽ được admin sử dụng để update nhân viên
+    public void update(String employeeId, EmployeeUpdateVO employeeUpdateVO) {
+        Employee employee = requireOne(employeeId);
+        BeanUtils.copyProperties(employeeUpdateVO, employee);
+        employeeRepository.save(employee);
     }
-    public List<Employee> findAll(){
+
+    // update bằng employee object, sẽ được nhân viên sử dụng để update thông tin cá nhân
+    public void update(Employee employee, EmployeeUpdateVO employeeUpdateVO) {
+        BeanUtils.copyProperties(employeeUpdateVO, employee);
+        employeeRepository.save(employee);
+    }
+
+    public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
 
-//    public EmployeeDTO getById(String id) {
-//        Employee original = requireOne(id);
-//        return toDTO(original);
-//    }
+    //    public EmployeeDTO getById(String id) {
+    //        Employee original = requireOne(id);
+    //        return toDTO(original);
+    //    }
 
     public Employee getById(String id) {
         return requireOne(id);
@@ -58,14 +68,15 @@ public class EmployeeService {
         throw new UnsupportedOperationException();
     }
 
-    private EmployeeDTO toDTO(Employee original) {
-        EmployeeDTO bean = new EmployeeDTO();
-        BeanUtils.copyProperties(original, bean);
-        return bean;
+    public EmployeeDTO toDTO(Employee original) {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        BeanUtils.copyProperties(original, employeeDTO);
+        return employeeDTO;
     }
 
     private Employee requireOne(String id) {
         return employeeRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
+                                 .orElseThrow(() -> new NoSuchElementException(
+                                         "Resource not found: " + id));
     }
 }

@@ -9,7 +9,7 @@ public class Account {
     @Column(name = "idAccount", nullable = false, length = 15)
     private String id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idEmployee")
     private Employee employee;
 

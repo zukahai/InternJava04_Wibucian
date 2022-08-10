@@ -762,6 +762,19 @@
 				<!--end:Menu link-->
 				<!--begin:Menu sub-->
 				<div class="menu-sub menu-sub-accordion">
+					<div class="menu-item">
+						<!--begin:Menu link-->
+						<a
+								class="menu-link"
+								href="admin/workPlan"
+						>
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Lên kế hoạch làm việc</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
 					<!--begin:Menu item-->
 					<div class="menu-item">
 						<!--begin:Menu link-->
@@ -812,7 +825,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/shift/rotate"
+								href="admin/shiftRotate"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
