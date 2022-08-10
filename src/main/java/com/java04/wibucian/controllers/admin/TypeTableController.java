@@ -52,6 +52,7 @@ public class TypeTableController {
         page = (page > toltalPage) ? toltalPage : page;
         Pageable pageable = PageRequest.of(page - 1, limit);
         modelMap.addAttribute("page", page);
+        modelMap.addAttribute("toltalPage", toltalPage);
         modelMap.addAttribute("typeTables", typeTableService.findAllHaiZuka(pageable));
         return "admin/typeTable/index";
     }
