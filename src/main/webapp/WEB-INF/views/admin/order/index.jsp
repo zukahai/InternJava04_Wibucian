@@ -519,7 +519,7 @@
                     );
                     console.log(JSON.stringify(data));
                     $.ajax({
-                        url: "/ordercf/store",
+                        url: "/ordercf/store-final",
                         contentType: "application/json",
                         type: "POST",
                         data: JSON.stringify(data),
