@@ -82,6 +82,33 @@
             </div>
         </div>
         <!--end::Card body-->
+        <%--Begin::Pagination--%>
+        <c:if test="${totalPage > 1}">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <c:if test="${page > 1}">
+                        <li class="page-item">
+                            <a class="page-link" href="/admin/detailGroupTable/view/${groupTable.id}/page/${page - 1}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link"  href="/admin/detailGroupTable/view/${groupTable.id}/page/${page - 1}" >${page - 1}</a></li>
+                    </c:if>
+                    <li class="page-item active"><a class="page-link" href="#" >${page}</a></li>
+                    <c:if test="${page < totalPage}">
+                        <li class="page-item"><a class="page-link"  href="/admin/detailGroupTable/view/${groupTable.id}/page/${page + 1}" >${page + 1}</a></li>
+                        <li class="page-item">
+                            <a class="page-link"  href="/admin/detailGroupTable/view/${groupTable.id}/page/${page + 1}"  aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
+        </c:if>
+        <%--End::Pagination--%>
     </div>
 </div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>

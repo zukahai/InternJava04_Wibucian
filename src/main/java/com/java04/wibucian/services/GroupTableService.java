@@ -3,6 +3,7 @@ package com.java04.wibucian.services;
 import com.java04.wibucian.dtos.GroupTableDTO;
 import com.java04.wibucian.models.DetailGroupTable;
 import com.java04.wibucian.models.GroupTable;
+import com.java04.wibucian.models.Tablecf;
 import com.java04.wibucian.repositories.DetailGroupTableRepository;
 import com.java04.wibucian.repositories.GroupTableRepository;
 import com.java04.wibucian.vos.GroupTableQueryVO;
@@ -11,9 +12,11 @@ import com.java04.wibucian.vos.GroupTableVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -90,4 +93,20 @@ public class GroupTableService {
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
 
+    public List<GroupTable> findAll() {return groupTableRepository.findAll();}
+
+    public List<GroupTable> findAllHaiZuka(Pageable pageable) {
+        int start = pageable.getPageNumber() * pageable.getPageSize();
+        List<GroupTable> all = groupTableRepository.findAll();
+        List<GroupTable> answer = new ArrayList();
+
+        for (int i = start; i < start + pageable.getPageSize() && i < all.size(); i++) {
+            answer.add(all.get(i));
+        }
+        return answer;
+    }
+
+    public int getTotalPage(int limit) {
+        return (int) Math.ceil(groupTableRepository.findAll().size() / (float)limit);
+    }
 }

@@ -11,8 +11,10 @@ import com.java04.wibucian.vos.TablecfVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -89,5 +91,20 @@ public class TablecfService {
 
     public List<Tablecf> findAll(){
         return tablecfRepository.findAll();
+    }
+
+    public List<Tablecf> findAllHaiZuka(Pageable pageable) {
+        int start = pageable.getPageNumber() * pageable.getPageSize();
+        List<Tablecf> all = tablecfRepository.findAll();
+        List<Tablecf> answer = new ArrayList();
+
+        for (int i = start; i < start + pageable.getPageSize() && i < all.size(); i++) {
+            answer.add(all.get(i));
+        }
+        return answer;
+    }
+
+    public int getTotalPage(int limit) {
+        return (int) Math.ceil(tablecfRepository.findAll().size() / (float)limit);
     }
 }

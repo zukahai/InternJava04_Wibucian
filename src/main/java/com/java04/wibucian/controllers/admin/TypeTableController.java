@@ -9,6 +9,8 @@ import com.java04.wibucian.vos.TypeTableUpdateVO;
 import com.java04.wibucian.vos.TypeTableVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,13 +27,18 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("admin/typeTable")
 public class TypeTableController {
-
+    public static final int limit = 5;
     @Autowired
     private TypeTableService typeTableService;
 
     @GetMapping("/")
     public String Home(ModelMap modelMap)throws Exception {
-        modelMap.addAttribute("typeTables", typeTableService.findAll());
+        int page = 1;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        int totalPage = typeTableService.getTotalPage(limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("typeTables", typeTableService.findAllHaiZuka(pageable));
         return "admin/typeTable/index";
     }
 
@@ -43,6 +50,18 @@ public class TypeTableController {
         return "admin/typeTable/edit";
     }
 
+    @GetMapping("/page/{page}")
+    public String HomePage(ModelMap modelMap, @Valid @NotNull @PathVariable("page") int page)throws Exception {
+        int totalPage = typeTableService.getTotalPage(limit);
+        page = (page < 1) ? 1 : page;
+        page = (page > totalPage) ? totalPage : page;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("typeTables", typeTableService.findAllHaiZuka(pageable));
+        return "admin/typeTable/index";
+    }
+
     @GetMapping("/create")
     public String createTypeTablePage(ModelMap modelMap) throws Exception {
         return "admin/typeTable/create";
@@ -51,7 +70,6 @@ public class TypeTableController {
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String createTypeTable(ModelMap modelMap, @Valid TypeTableVO typeTableVO) throws Exception {
         String productId = this.typeTableService.save(typeTableVO);
-        System.out.println(typeTableVO);
         return "redirect:/admin/typeTable/";
     }
 

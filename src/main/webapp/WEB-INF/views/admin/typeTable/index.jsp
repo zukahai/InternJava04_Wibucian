@@ -46,8 +46,14 @@
                             <td>${  item.typeName }</td>
                             <td>${  item.price }</td>
                             <td class="d-flex align-center justify-content-center">
-                                <a href="admin/typeTable/edit/${item.id}" class="btn btn-success m mx-1">Sửa</a>
-                                <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
+                                <a href="admin/typeTable/edit/${item.id}" class="btn btn-icon btn-success btn-sm btn-icon-md btn-circle mx-1"
+                                       title="Sửa">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle mx-1"
+                                      data-toggle="tooltip" data-placement="top" data-id="${item.id}" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </span>
                             </td>
                             <!--end::Action=-->
                         </tr>
@@ -57,7 +63,33 @@
             </div>
         </div>
         <!--end::Card body-->
+        <c:if test="${totalPage > 1}">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <c:if test="${page > 1}">
+                        <li class="page-item">
+                            <a class="page-link" href="/admin/typeTable/page/${page - 1}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="/admin/typeTable/page/${page - 1}">${page - 1}</a></li>
+                    </c:if>
+                    <li class="page-item active"><a class="page-link" href="#" >${page}</a></li>
+                    <c:if test="${page < totalPage}">
+                        <li class="page-item"><a class="page-link" href="/admin/typeTable/page/${page + 1}">${page + 1}</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="/admin/typeTable/page/${page + 1}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
+        </c:if>
     </div>
+
 </div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>

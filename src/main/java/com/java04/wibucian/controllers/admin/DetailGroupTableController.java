@@ -10,6 +10,8 @@ import com.java04.wibucian.vos.DetailGroupTableVO;
 import com.java04.wibucian.vos.TypeTableUpdateVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,7 +28,7 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("admin/detailGroupTable")
 public class DetailGroupTableController {
-
+    public static final int limit = 5;
     @Autowired
     private DetailGroupTableService detailGroupTableService;
     private GroupTableService groupTableService;
@@ -39,9 +41,34 @@ public class DetailGroupTableController {
 
     @GetMapping("/view/{id}")
     public String HomeView(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
-        modelMap.addAttribute("tablecfList", detailGroupTableService.getByIdGroupTable(id));
         modelMap.addAttribute("groupTable", groupTableService.findById(id));
         modelMap.addAttribute("tablecfs", detailGroupTableService.getTableNotMerged());
+
+        int page = 1;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        int totalPage = detailGroupTableService.getTotalPageByIdGroup(limit, id);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("tablecfList", detailGroupTableService.getByIdGroupTableHaiZuka(id, pageable));
+        return "admin/groupTable/detail";
+    }
+
+    @GetMapping("/view/{id}/page/{page}")
+    public String HomePage(ModelMap modelMap,
+                           @Valid @NotNull @PathVariable("page") int page,
+                           @Valid @NotNull @PathVariable("id") String id)throws Exception {
+        modelMap.addAttribute("groupTable", groupTableService.findById(id));
+        modelMap.addAttribute("tablecfs", detailGroupTableService.getTableNotMerged());
+
+        int totalPage = detailGroupTableService.getTotalPageByIdGroup(limit, id);
+        page = (page < 1) ? 1 : page;
+        page = (page > totalPage) ? totalPage : page;
+
+        Pageable pageable = PageRequest.of(page - 1, limit);
+
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("tablecfList", detailGroupTableService.getByIdGroupTableHaiZuka(id, pageable));
         return "admin/groupTable/detail";
     }
 
