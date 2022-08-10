@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
-<jsp:include page="../includes/sidebar2.jsp"></jsp:include>
+<jsp:include page="../includes/sidebar.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
 <div class="content flex-column-fluid" id="kt_content">
 
@@ -41,11 +41,11 @@
                                         <div class="fv-row mb-7">
                                             <label class="d-block fw-semibold fs-6 mb-5">Avatar</label>
                                             <style>.image-input-placeholder {
-                                                background-image: url("/admin/assets/file-upload/${employee.srcEmployee}");
+                                                background-image: url(/admin/assets/file-upload/);
                                             }
 
                                             [data-theme="dark"] .image-input-placeholder {
-                                                background-image: url("/admin/assets/file-upload/${employee.srcEmployee}");
+                                                background-image: url(/admin/assets/file-upload/);
                                             }</style>
                                             <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
                                                 <div class="image-input-wrapper w-150px h-150px"
@@ -68,6 +68,7 @@
                                         </div>
                                         <!--end::Avatar-->
                                         <!--begin::Name-->
+
                                     <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">${employee.id}</a>
                                     <div class="mb-15">
                                         <!--begin::Badge-->
@@ -123,7 +124,7 @@
                                     </tr>
                                     <tr>
                                         <td>Ngày sinh</td>
-                                        <td><input type="date" class="form-control" id="employeeBirthday" name="birthDay" value="${employee.birthDay}"/></td>
+                                        <td><input type="date" class="form-control" id="employeeBirthday" name="birthDay" value="${employee.birthDay}" min="2018-01-01" max="2100-01-02"/></td>
 
                                     </tr>
                                     <tr>

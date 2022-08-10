@@ -67,8 +67,9 @@ public class EmployeeController {
     @RequestMapping(value = "/update/{id}",
             method = RequestMethod.POST,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String update(ModelMap modelMap, @Valid EmployeeUpdateVO employeeUpdateVO, @PathVariable("id") String idEmployee
-    ) throws Exception {
+    public String update(ModelMap modelMap, @Valid EmployeeUpdateVO employeeUpdateVO, @PathVariable("id") String idEmployee,
+    @RequestBody MultiValueMap<String, String> formData) throws Exception {
+        System.out.println(employeeUpdateVO);
         try {
             String fileName = StringUtils.cleanPath(employeeUpdateVO.getAvatar().getOriginalFilename());
 //            Path path = Paths.get("src/main/resources/static/admin/assets/file-upload"); mở cía database lên
@@ -80,6 +81,7 @@ public class EmployeeController {
             File file = new File(classLoader.getResource(".").getFile() + "static/admin/assets/file-upload/" + filePath);
 //            File file = new File(path.resolve(filePath).toUri()); this line to save file in src/main/resource
             employeeUpdateVO.getAvatar().transferTo(file);
+            System.out.println(employeeUpdateVO.getAvatar());
 
             employeeUpdateVO.setSrcEmployee(filePath);
 
@@ -87,7 +89,7 @@ public class EmployeeController {
 //
 //            String employeeId = this.employeeService.save(employeeUpdateVO); // chạy thử
             // String idEmployee =  formData.get("idEmployee").get(0);
-//            System.out.println(employeeUpdateVO);
+            System.out.println(employeeUpdateVO);
             this.employeeService.update(idEmployee, employeeUpdateVO);
             return "redirect:/admin/employee/";
         } catch (Exception e) {

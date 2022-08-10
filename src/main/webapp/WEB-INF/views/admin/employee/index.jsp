@@ -4,7 +4,7 @@
 <base href="/">
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
-<jsp:include page="../includes/sidebar1.jsp"></jsp:include>
+<jsp:include page="../includes/sidebar.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
 <div class="content flex-column-fluid" id="kt_content">
 
@@ -45,7 +45,7 @@
             <!--begin::Input group-->
             <!--end::Input group-->
             <div class="table-responsive">
-                <table class="table table-row-bordered gy-5">
+                <table class="table tabel-employee table-row-bordered gy-5">
                     <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
                         <th>Mã Nhân Viên</th>
@@ -86,6 +86,9 @@
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
 <script>
+    $(".tabel-employee").DataTable({
+        dom: "<'row'<'col-sm-6 d-flex align-items-center justify-conten-start'l><'col-sm-6 d-flex align-items-center justify-content-end'f>><'table-responsive'tr><'row'<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i><'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>>",
+    })
     //handle on click delete-btn
     $(document).on("click", ".delete-btn", function () {
         var row = $(this).closest("tr");

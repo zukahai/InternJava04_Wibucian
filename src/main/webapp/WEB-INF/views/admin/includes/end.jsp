@@ -1,5 +1,3 @@
-
-<!--end::Scrolltop-->
 <!--begin::Javascript-->
 
 <!--begin::Global Javascript Bundle(used by all pages)-->

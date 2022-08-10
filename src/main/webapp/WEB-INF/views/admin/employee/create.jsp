@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
-<jsp:include page="../includes/sidebar2.jsp"></jsp:include>
+<jsp:include page="../includes/sidebar.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
 <div class="content flex-column-fluid" id="kt_content">
 
@@ -66,7 +66,7 @@
                 </div>
                 <div class="form-floating my-5">
                     <input type="date" class="form-control" id="employeeBirthday" name="birthDay" placeholder="VIP"/>
-                    <label for="employeePhone">Ngày sinh</label>
+                    <label for="employeeBirthday">Ngày sinh</label>
                 </div>
                 <div class="form-floating">
                     <select class="form-select h-100" id="employeeGender" name="gender"
