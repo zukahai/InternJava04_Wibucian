@@ -43,22 +43,22 @@ public class Employee {
     @Column(name = "CoefficientsSalary")
     private Float coefficientsSalary;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private Set<ImportGoods> importGoods = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "employeeCreate")
+    @OneToMany(mappedBy = "employeeCreate", fetch = FetchType.LAZY)
     private Set<ShiftRotate> shiftRotatesRequest = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "employeeChange")
+    @OneToMany(mappedBy = "employeeChange", fetch = FetchType.LAZY)
     private Set<ShiftRotate> shiftRotatesAccept = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private Set<Invoice> invoices = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private Set<Shift> shifts = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "employeeChange")
+    @OneToMany(mappedBy = "employeeChange", fetch = FetchType.LAZY)
     private Set<Shift> shiftsRotateWork = new LinkedHashSet<>();
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "employee")

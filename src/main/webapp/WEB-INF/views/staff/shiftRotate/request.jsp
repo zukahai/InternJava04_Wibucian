@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <base href="/">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../includes/hd.jsp"></jsp:include>
-<jsp:include page="../includes/header.jsp"></jsp:include>
-<jsp:include page="../includes/sidebar.jsp"></jsp:include>
-<jsp:include page="../includes/container.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/hd.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/header.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/sidebar1.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/container.jsp"></jsp:include>
 
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -16,8 +16,7 @@
 			<div class="d-flex justify-content-center align-items-lg-start flex-column h-100px">
 				<!--begin::Card title-->
 				<div class="card-title m-0">
-					<h3 class="fw-bold m-0">Dach sách yêu cầu xoay ca đang chờ
-						được phê duyệt
+					<h3 class="fw-bold m-0">Dach sách yêu cầu xoay ca chờ được chấp nhân
 					</h3>
 				</div>
 			</div>
@@ -37,13 +36,10 @@
 								Nhân viên yêu cầu
 							</th>
 							<th colspan="3" class="border-bottom border-end text-center">
-								Ca làm viêc yêu cầu
-							</th>
-							<th colspan="2" class="border-bottom border-end text-center">
-								Nhân viên nhận xoay ca
+								Ca làm viêc của nhân yêu cầu
 							</th>
 							<th colspan="3" class="border-bottom border-end text-center">
-								Ca làm việc đổi
+								Ca làm việc của bạn
 							</th>
 							<th colspan="2"
 								class="align-middle border-end w-300px">
@@ -57,10 +53,6 @@
 							<th class="min-w-125px border-end text-center">Mã ca làm</th>
 							<th class="min-w-125px border-end text-center">Ngày</th>
 							<th class="min-w-125px border-end text-center">Buổi</th>
-							<th class="min-w-125px border-end text-center">Mã nhân viên
-							</th>
-							<th class="min-w-125px border-end text-center">Tên nhân viên
-							</th>
 							<th class="min-w-125px border-end text-center">Mã ca làm</th>
 							<th class="min-w-125px border-end text-center">Ngày</th>
 							<th class="min-w-125px border-end text-center">Buổi</th>
@@ -74,15 +66,14 @@
 		<!--end::Card body-->
 	</div>
 </div>
-<jsp:include page="../includes/footer.jsp"></jsp:include>
-<jsp:include page="../includes/end.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/footer.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/end.jsp"></jsp:include>
 
 <script>
     const setUpButtons = () => {
         const actionButtons = document.querySelectorAll(".action-btn")
 
         actionButtons.forEach(button => {
-            console.log(button)
             button.addEventListener("click", async (e) => {
                 const shiftRotateId = button.getAttribute("shiftrotateid")
                 const action = button.getAttribute("action")
@@ -97,7 +88,7 @@
 
         const request = async (shiftRotateId, action) => {
             const response = await fetch(
-                "${contextPath}/admin/shiftRotate/" + shiftRotateId,
+                "${contextPath}/staff/shiftRotate/accept/" + shiftRotateId,
                 {
                     method: "PATCH",
                     body  : new URLSearchParams({
@@ -120,7 +111,7 @@
 
     const dataTable = $("#kt_datatable_complex_header")
         .DataTable({
-                       ajax        : "${contextPath}/admin/shiftRotate/pending",
+                       ajax        : "${contextPath}/staff/shiftRotate/request/api",
                        columnDefs  : [
                            {
                                orderable: false,
@@ -198,26 +189,15 @@
                                // render : function (data, type, row) {
                                //     return row[data]
                                // },
-                               data   : "employeeChangeId",
-                               targets: 6,
-                           },
-                           {
-                               data   : "employeeChangeName",
-                               targets: 7,
-                           },
-                           {
-                               // render : function (data, type, row) {
-                               //     return row[data]
-                               // },
                                data   : "shiftExchangeId",
-                               targets: 8,
+                               targets: 6,
                            },
                            {
                                data   : "shiftExchangeDate",
                                render : (data) => {
                                    return data.split("T")[0]
                                },
-                               targets: 9,
+                               targets: 7,
                            },
                            {
                                data   : "shiftExchangeCode",
@@ -231,7 +211,7 @@
                                            return "Tối";
                                    }
                                },
-                               targets: 10,
+                               targets: 8,
                            },
                        ],
                        order       : [[1, 'asc']],
@@ -239,7 +219,7 @@
                            setUpButtons()
                        },
                        language    : {
-                           emptyTable: "Không có yêu cầu xoay ca nào cần được phê duyệt"
+                           emptyTable: "Không có yêu cầu xoay ca nào cần được chấp nhận"
                        }
                    });
 

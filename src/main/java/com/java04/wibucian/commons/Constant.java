@@ -49,10 +49,10 @@ public class Constant {
     public static final String SHIFT_REQUEST_CLOSE_CRON = "59 59 23 ? * FRI";
 
     // thời gian mở review đăng ký ca làm việc, vào 00:00:00 thứ 7 hàng tuần
-    public static final String SHIFT_REQUEST_REVIEW_OPEN_CRON = "00:00:00 ? * SAT";
+    public static final String SHIFT_REQUEST_REVIEW_OPEN_CRON = "00 00 00 ? * SAT";
 
     // thời gian đóng review đăng ký ca làm việc, vào 23:59:59 thứ 7 hàng tuần
-    public static final String SHIFT_REQUEST_REVIEW_CLOSE_CRON = "59:59:23 ? * SAT";
+    public static final String SHIFT_REQUEST_REVIEW_CLOSE_CRON = "59 59 23 ? * SAT";
 
     // các mốc thời gian hạn cuối để phê duyệt một yêu cầu xoay ca, trước lúc bắt đầu
     // các ca làm 3 tiếng

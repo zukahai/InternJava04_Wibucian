@@ -195,9 +195,8 @@ public class ShiftService {
                                                                            + employeeId
                                                                            + " không "
                                                                            + "tồn tại"));
-        this.shiftRepository.findByEmployeeAndShiftDateAndShiftCodeAndRequestShift(employee,
-                                                                    shift.getShiftDate(),
-                                                                    shift.getShiftCode(), true)
+        this.shiftRepository.findByEmployeeAndShiftDateAndShiftCodeAndRequestShift(
+                    employee, shift.getShiftDate(), shift.getShiftCode(), true)
                             .ifPresent(shift1 -> {
                                 throw new BadRequestException(
                                         "Nhân viên đã đăng ký ca trong cùng buổi");
@@ -236,6 +235,7 @@ public class ShiftService {
 
     /**
      * Kiểm tra xem đã chốt lịch làm việc cho tuần tiếp theo chưa
+     *
      * @return
      */
     public boolean isAlreadyApprovedForNextWeek() {
@@ -246,14 +246,34 @@ public class ShiftService {
 
     /**
      * Lấy tất cả các ca làm việc đã chốt trong một khoảng thời gian
+     *
      * @param start
      * @param end
+     *
      * @return
      */
     public List<ShiftDTO> findAllShiftsBetween(Calendar start, Calendar end) {
         return this.shiftRepository.findAllByRequestShiftAndShiftDateBetween(false,
                                                                              start.getTime(),
                                                                              end.getTime())
+                                   .stream()
+                                   .map(this::toDTO)
+                                   .toList();
+    }
+
+    /**
+     * Lấy tất cả các ca làm việc của nhân viên trong một khoảng thời gian
+     *
+     * @param start
+     * @param end
+     *
+     * @return
+     */
+    public List<ShiftDTO> findAllShiftsOfEmployeeBetween(Employee employee,
+                                                         Calendar start, Calendar end) {
+        return this.shiftRepository.findAllShiftsBelongToEmployeeBetween(employee,
+                                                                         start.getTime(),
+                                                                         end.getTime())
                                    .stream()
                                    .map(this::toDTO)
                                    .toList();
@@ -291,7 +311,7 @@ public class ShiftService {
 
     /**
      * Phương thức dùng để query tất cả các record đăng ký ca làm việc trong tuần tiếp
-     * theo
+     * theo của admin
      *
      * @return
      */
@@ -427,9 +447,8 @@ public class ShiftService {
         }
 
         // nếu đã đăng ký trước đó thì không cho phép đăng ký nữa
-        this.shiftRepository.findByEmployeeAndShiftDateAndShiftCodeAndRequestShift(employee,
-                                                                    shiftVO.getShiftDate(),
-                                                                    shiftVO.getShiftCode(), true)
+        this.shiftRepository.findByEmployeeAndShiftDateAndShiftCodeAndRequestShift(
+                    employee, shiftVO.getShiftDate(), shiftVO.getShiftCode(), true)
                             .ifPresent((shift) -> {
                                 throw new BadRequestException("Đã đăng ký ca làm việc");
                             });

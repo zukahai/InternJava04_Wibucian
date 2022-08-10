@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <base href="/">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../includes/hd.jsp"></jsp:include>
-<jsp:include page="../includes/header.jsp"></jsp:include>
-<jsp:include page="../includes/sidebar.jsp"></jsp:include>
-<jsp:include page="../includes/container.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/hd.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/header.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/sidebar1.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/container.jsp"></jsp:include>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <%--<c:set var="totalNormalRequest" value="${t}"/>--%>
@@ -12,23 +12,23 @@
 <div class="content flex-column-fluid" id="kt_content">
 	<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
 		<c:choose>
-			<c:when test="${isInShiftApproveTime eq false}">
+			<c:when test="${isInShiftRequestTime eq false}">
 				<div class="card-body p-9 fs-2 text-center">Xin lỗi, hiện tại không phải
-					là thời gian chốt ca làm việc.
+					là thời gian đăng ký ca làm việc
 				</div>
 			</c:when>
-			<c:when test="${isAlreadyApprovedForNextWeek eq true}">
-				<div class="card-body p-9 fs-2 text-center">
-					Lịch làm việc đã được chốt
-				</div>
-			</c:when>
+<%--			<c:when test="${isAlreadyApprovedForNextWeek eq true}">--%>
+<%--				<div class="card-body p-9 fs-2 text-center">--%>
+<%--					Lịch làm việc đã được chốt--%>
+<%--				</div>--%>
+<%--			</c:when>--%>
 			<c:otherwise>
 				<!--begin::Card header-->
 				<div class="card-header flex-row">
 					<div class="d-flex justify-content-center align-items-lg-start flex-column h-100px">
 						<!--begin::Card title-->
 						<div class="card-title m-0">
-							<h3 class="fw-bold m-0">Đăng ký lịch làm việc</h3>
+							<h3 class="fw-bold m-0">Đăng ký ca làm việc</h3>
 						</div>
 						<div class="card-title mt-2">
 							<p class="fst-italic m-0 fw-bold">Thời gian: từ ${weekStart}
@@ -135,10 +135,6 @@
 							</tbody>
 						</table>
 					</div>
-					<a class="btn btn-primary w-200px d-block mx-auto mt-5"
-					   href="${contextPath}/admin/shift/request/approve">
-						Submit
-					</a>
 				</div>
 				<!--end::Card body-->
 			</c:otherwise>
@@ -157,7 +153,7 @@
     </c:forEach>
 
     const deleteShift = async (shiftID) => {
-        const url = "${contextPath}/admin/shift/staff/request/" + shiftID
+        const url = "${contextPath}/staff/shift/request/" + shiftID
         const response = await fetch(url, {
             method: "DELETE"
         })
@@ -178,7 +174,7 @@
     }
 
     const createShift = async (idEmployee, shiftDate, shiftCode) => {
-        const url = "${contextPath}/admin/shift/staff/request"
+        const url = "${contextPath}/staff/shift/request"
         const response = await fetch(url, {
             method: "POST",
             body: new URLSearchParams({
@@ -262,8 +258,8 @@
         })
     })
 </script>
-<jsp:include page="../includes/footer.jsp"></jsp:include>
-<jsp:include page="../includes/end.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/footer.jsp"></jsp:include>
+<jsp:include page="../../admin/includes/end.jsp"></jsp:include>
 
 <%--<div class="menu-item px-3 bg-secondary">--%>
 <%--	<div--%>
