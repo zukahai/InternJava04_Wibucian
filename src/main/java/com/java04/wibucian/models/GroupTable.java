@@ -1,9 +1,6 @@
 package com.java04.wibucian.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.LinkedHashSet;
@@ -12,6 +9,7 @@ import java.util.Set;
 @Entity
 public class GroupTable implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idGroupTable", nullable = false, length = 15)
     private String id;
 
@@ -77,4 +75,13 @@ public class GroupTable implements Serializable {
 
     @OneToMany(mappedBy = "groupTable")
     private Set<DetailGroupTable> detailGroupTables = new LinkedHashSet<>();
+
+    @Override
+    public String toString() {
+        return "GroupTable{" +
+                "id='" + id + '\'' +
+                ", groupName='" + groupName + '\'' +
+                ", foundedTime=" + foundedTime +
+                '}';
+    }
 }

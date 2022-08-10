@@ -53,4 +53,12 @@ public class TypeTable {
         this.tablecfs = tablecfs;
     }
 
+    @Override
+    public String toString() {
+        return "TypeTable{" +
+                "id='" + id + '\'' +
+                ", typeName='" + typeName + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

@@ -19,7 +19,8 @@ import javax.validation.constraints.NotNull;
 @Controller
 @RequestMapping("admin/shift")
 public class ShiftController {
-
+//clone code của đứa khác vể thử cái backup
+    //để t thử cái product service ni xem có lỗi y vậy k rồi có gì báo lại
     @Autowired
     private ShiftService shiftService;
 

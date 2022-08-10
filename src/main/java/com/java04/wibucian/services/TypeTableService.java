@@ -42,6 +42,10 @@ public class TypeTableService {
         return toDTO(original);
     }
 
+    public TypeTable findById(String id) {
+        return requireOne(id);
+    }
+
     public Page<TypeTableDTO> query(TypeTableQueryVO vO) {
         throw new UnsupportedOperationException();
     }

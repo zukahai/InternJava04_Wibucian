@@ -30,6 +30,17 @@ public class Product  {
     @Column(name = "productName", nullable = false, length = 100)
     private String productName;
 
+    @Column(name = "price")
+    private double price;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @OneToMany(mappedBy = "product")
     private Set<DetailInvoice> detailInvoices = new LinkedHashSet<>();
 

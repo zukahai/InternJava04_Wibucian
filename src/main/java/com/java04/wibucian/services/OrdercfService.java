@@ -1,8 +1,8 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.OrdercfDTO;
-import com.java04.wibucian.models.Ordercf;
-import com.java04.wibucian.repositories.OrdercfRepository;
+import com.java04.wibucian.models.*;
+import com.java04.wibucian.repositories.*;
 import com.java04.wibucian.vos.OrdercfQueryVO;
 import com.java04.wibucian.vos.OrdercfUpdateVO;
 import com.java04.wibucian.vos.OrdercfVO;
@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -19,18 +21,46 @@ public class OrdercfService {
     @Autowired
     private OrdercfRepository ordercfRepository;
 
+    @Autowired
+    private OrdercfNoMapPingRepository ordercfNoMapPingRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private ProductNoMapPingRepository productNoMapPingRepository;
+
+    @Autowired
+    private GroupTableRepository groupTableRepository;
+
+    @Autowired
+    private GroupTableNoMapPingRepository groupTableNoMapPingRepository;
+
     public String save(OrdercfVO vO) {
         Ordercf bean = new Ordercf();
-        BeanUtils.copyProperties(vO, bean);
-        bean = ordercfRepository.save(bean);
+        if(vO.getIdOrdercf() == null){
+            BeanUtils.copyProperties(vO, bean);
+            Product product = productRepository.findById(vO.getIdProduct()).orElseThrow(() -> new NoSuchElementException());
+            GroupTable groupTable = groupTableRepository.findById(vO.getIdGroupTable()).orElseThrow(() -> new NoSuchElementException());
+            bean.setProduct(product);
+            bean.setGroupTable(groupTable);
+            bean.setTimeOrder(Instant.now());
+            bean = ordercfRepository.save(bean);
+        }
+        if(vO.getId()!= null){
+            System.out.println(vO.getId());
+            update(String.valueOf(vO.getIdOrdercf()), vO);
+        }
         return bean.getId();
+
     }
 
+   //delete return json
     public void delete(String id) {
         ordercfRepository.deleteById(id);
     }
 
-    public void update(String id, OrdercfUpdateVO vO) {
+    public void update(String id, OrdercfVO vO) {
         Ordercf bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
         ordercfRepository.save(bean);
@@ -55,4 +85,21 @@ public class OrdercfService {
         return ordercfRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
+
+    public List<Ordercf> findALl() {
+        return ordercfRepository.findAll();
+    }
+
+    public List<OrdercfNoMapPing> findByGroupTableId(String id) {
+        return ordercfNoMapPingRepository.findByGroupTableId(id);
+    }
+    public ProductNoMapPing findByProductId(String id) {
+        return productNoMapPingRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
+    }
+    //findByGroupTableId(String groupTableId);
+    public GroupTableNoMapPing findGroupTableId(String id) {
+        return groupTableNoMapPingRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
+    }
+
+
 }

@@ -9,6 +9,7 @@ import java.util.Set;
 @Entity
 public class Invoice {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idInvoice", nullable = false, length = 15)
     private String id;
 
@@ -31,6 +32,17 @@ public class Invoice {
 
     @Column(name = "totalMoney")
     private Double totalMoney;
+
+    @Column(name = "status")
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public Double getTotalMoney() {
         return totalMoney;
@@ -82,6 +94,20 @@ public class Invoice {
 
     public Set<DetailInvoice> getDetailInvoices() {
         return detailInvoices;
+    }
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "id='" + id + '\'' +
+                ", employee=" + employee +
+                ", groupTable=" + groupTable +
+                ", customerName='" + customerName + '\'' +
+                ", dateTime=" + dateTime +
+                ", detailInvoices=" + detailInvoices +
+                ", totalMoney=" + totalMoney +
+                ", status=" + status +
+                '}';
     }
 
     public void setDetailInvoices(Set<DetailInvoice> detailInvoices) {
