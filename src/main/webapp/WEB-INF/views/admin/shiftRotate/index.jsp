@@ -6,6 +6,7 @@
 <jsp:include page="../includes/sidebar.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
 
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <div class="content flex-column-fluid" id="kt_content">
@@ -19,67 +20,54 @@
 						được phê duyệt
 					</h3>
 				</div>
-				<div class="card-title mt-2">
-					<p class="fst-italic m-0 fw-bold">Thời gian: từ ${weekStart}
-						đến ${weekEnd} </p>
-				</div>
 			</div>
 		</div>
 		<div class="card-body p-9">
 			<!--end::Input group-->
 			<div class="table-responsive">
-				<table class="table table-row-bordered table-striped gy-5">
+				<table id="kt_datatable_complex_header"
+					   class="table table-striped table-row-bordered gy-5 gs-7 border rounded w-100">
 					<thead>
-						<tr class="fw-bold fs-6 text-gray-800 row row-cols-6">
-							<%--									<th class="col text-center">Mã xoay ca</th>--%>
-							<th class="col col-1 text-center">
+						<tr class="fw-bold fs-6 text-gray-800 px-7">
+							<th rowspan="2"
+								class="align-middle border-bottom border-end min-w-50px">
 								STT
 							</th>
-							<th class="col text-center">
-								Mã nhân viên 1
+							<th colspan="2" class="border-bottom border-end text-center">
+								Nhân viên yêu cầu
 							</th>
-							<th class="col text-center">
-								Mã ca làm 1
+							<th colspan="3" class="border-bottom border-end text-center">
+								Ca làm viêc yêu cầu
 							</th>
-							<th class="col text-center">Mã nhân viên 2</th>
-							<th class="col text-center">Mã ca làm 2</th>
-							<th class="col text-center col-3">Hành động</th>
+							<th colspan="2" class="border-bottom border-end text-center">
+								Nhân viên nhận xoay ca
+							</th>
+							<th colspan="3" class="border-bottom border-end text-center">
+								Ca làm việc đổi
+							</th>
+							<th colspan="2"
+								class="align-middle border-end w-300px">
+							</th>
+						</tr>
+						<tr class="fw-bold fs-6 text-gray-800 px-7">
+							<th class="min-w-125px border-end text-center">Mã nhân viên
+							</th>
+							<th class="min-w-125px border-end text-center">Tên nhân viên
+							</th>
+							<th class="min-w-125px border-end text-center">Mã ca làm</th>
+							<th class="min-w-125px border-end text-center">Ngày</th>
+							<th class="min-w-125px border-end text-center">Buổi</th>
+							<th class="min-w-125px border-end text-center">Mã nhân viên
+							</th>
+							<th class="min-w-125px border-end text-center">Tên nhân viên
+							</th>
+							<th class="min-w-125px border-end text-center">Mã ca làm</th>
+							<th class="min-w-125px border-end text-center">Ngày</th>
+							<th class="min-w-125px border-end text-center">Buổi</th>
+							<th class="min-w-125px"></th>
+							<th class="min-w-125px"></th>
 						</tr>
 					</thead>
-					<tbody>
-						<c:forEach var="shiftRotate" items="${shiftRotatesToBeApproved}"
-								   varStatus="loop">
-							<tr class="fw-bold fs-6 text-gray-800 row row-cols-6">
-								<th class="col col-1 d-flex align-items-center justify-content-center">
-										${loop.index + 1}
-								</th>
-								<th class="col col-2 d-flex align-items-center justify-content-center">
-										${shiftRotate.employeeCreate.id}
-								</th>
-								<th class="col col-2 d-flex align-items-center justify-content-center">
-										${shiftRotate.shift.id}
-								</th>
-								<th class="col col-2 d-flex align-items-center justify-content-center">
-										${shiftRotate.employeeChange.id}
-								</th>
-								<th class="col col-2 d-flex align-items-center justify-content-center">
-										${shiftRotate.shiftExchange.id}
-								</th>
-								<th class="col col-3 text-center">
-									<button class="btn btn-primary action-btn"
-											shiftRotateId="${shiftRotate.id}"
-											action="true">
-										Chấp nhận
-									</button>
-									<button class="btn btn-danger action-btn"
-											shiftRotateId="${shiftRotate.id}"
-											action="false">
-										Từ chối
-									</button>
-								</th>
-							</tr>
-						</c:forEach>
-					</tbody>
 				</table>
 			</div>
 		</div>
@@ -90,40 +78,190 @@
 <jsp:include page="../includes/end.jsp"></jsp:include>
 
 <script>
-    const actionButtons = document.querySelectorAll(".action-btn")
+    const setUpButtons = () => {
+        const actionButtons = document.querySelectorAll(".action-btn")
 
-    actionButtons.forEach(button => {
-        button.addEventListener("click", async (e) => {
-            const shiftRotateId = button.getAttribute("shiftrotateid")
-			const action = button.getAttribute("action")
-			const {data, error} = await request(shiftRotateId, action)
-			if (error) {
-                window.alert(error)
-				return
-			}
-            window.location.reload()
+        actionButtons.forEach(button => {
+            console.log(button)
+            button.addEventListener("click", async (e) => {
+                const shiftRotateId = button.getAttribute("shiftrotateid")
+                const action = button.getAttribute("action")
+                const {data, error} = await request(shiftRotateId, action)
+                if (error) {
+                    window.alert(error)
+                    return
+                }
+                window.location.reload()
+            })
         })
-    })
 
-    const request = async (shiftRotateId, action) => {
-        const response = await fetch("${contextPath}/admin/shiftRotate/" + shiftRotateId,
-                                     {
-                                         method: "PATCH",
-                                         body: new URLSearchParams({
-                                                                       shiftRotateId,
-                                                                       approve: action
-                                                                   })
-                                     })
-        const responseData = await response.json()
-        // status khác 200 nghĩa là có lỗi
-        if (response.status !== 200) {
+        const request = async (shiftRotateId, action) => {
+            const response = await fetch(
+                "${contextPath}/admin/shiftRotate/" + shiftRotateId,
+                {
+                    method: "PATCH",
+                    body  : new URLSearchParams({
+                                                    shiftRotateId,
+                                                    approve: action
+                                                })
+                })
+            const responseData = await response.json()
+            // status khác 200 nghĩa là có lỗi
+            if (response.status !== 200) {
+                return {
+                    error: "Không thể thực hiện"
+                }
+            }
             return {
-                error: "Không thể thực hiện"
+                data: "OK"
             }
         }
-        return {
-            data: "OK"
-        }
     }
+
+    const dataTable = $("#kt_datatable_complex_header")
+        .DataTable({
+                       ajax        : "${contextPath}/admin/shiftRotate/pending",
+                       columnDefs  : [
+                           {
+                               orderable: false,
+                               targets  : -2,
+                               data     : null,
+                               render   : function (data, type, row) {
+                                   return `<button class="btn btn-primary action-btn d-block mx-auto"
+                                   shiftRotateId="` + row.id +
+                                          `" action="true">
+                                          Chấp nhận
+                                               </button>`
+                               }
+                           },
+                           {
+                               orderable: false,
+                               targets  : -1,
+                               data     : null,
+                               render   : function (data, type, row) {
+                                   return `<button class="btn btn-warning action-btn w-100px d-block mx-auto"
+                                   shiftRotateId="` + row.id +
+                                          `" action="false">
+                                          Từ chối
+                                               </button>`
+                               }
+                           },
+                           {
+                               orderable     : false,
+                               defaultContent: "-",
+                               targets       : 0,
+                           },
+                           {
+                               data   : "employeeId",
+                               render : function (data, type, row) {
+                                   <%--return `<a href="${contextPath}/">` + data + `</a>`--%>
+                                   return data
+                               },
+                               targets: 1,
+                           },
+                           {
+                               data   : "employeeName",
+                               targets: 2,
+                           },
+                           {
+                               // render : function (data, type, row) {
+                               //     return row[data]
+                               // },
+                               data   : "shiftId",
+                               targets: 3,
+                           },
+                           {
+                               data   : "shiftDate",
+                               render : (data) => {
+                                   return data.split("T")[0]
+                               },
+                               targets: 4,
+                           },
+                           {
+                               // render : function (data, type, row) {
+                               //     return row[data]
+                               // },
+                               data   : "shiftCode",
+                               render : (data) => {
+                                   switch (data) {
+                                       case 1:
+                                           return "Sáng";
+                                       case 2:
+                                           return "Chiều";
+                                       case 3:
+                                           return "Tối";
+                                   }
+                               },
+                               targets: 5,
+                           },
+                           {
+                               // render : function (data, type, row) {
+                               //     return row[data]
+                               // },
+                               data   : "employeeChangeId",
+                               targets: 6,
+                           },
+                           {
+                               data   : "employeeChangeName",
+                               targets: 7,
+                           },
+                           {
+                               // render : function (data, type, row) {
+                               //     return row[data]
+                               // },
+                               data   : "shiftExchangeId",
+                               targets: 8,
+                           },
+                           {
+                               data   : "shiftExchangeDate",
+                               render : (data) => {
+                                   return data.split("T")[0]
+                               },
+                               targets: 9,
+                           },
+                           {
+                               data   : "shiftExchangeCode",
+                               render : (data) => {
+                                   switch (data) {
+                                       case 1:
+                                           return "Sáng";
+                                       case 2:
+                                           return "Chiều";
+                                       case 3:
+                                           return "Tối";
+                                   }
+                               },
+                               targets: 10,
+                           },
+                       ],
+                       order       : [[1, 'asc']],
+                       drawCallback: function () {
+                           setUpButtons()
+                       },
+                       language    : {
+                           emptyTable: "Không có yêu cầu xoay ca nào cần được phê duyệt"
+                       }
+                   });
+
+    dataTable.on('order.dt', function () {
+        let i = 1;
+
+        dataTable.cells(null, 0, {order: 'applied'})
+                 .every(function (cell) {
+                     this.data(i++);
+                 });
+    })
+             .draw();
 </script>
+
+<style>
+    th {
+        padding: 0;
+
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
 

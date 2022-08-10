@@ -30,6 +30,10 @@ public class EmployeeService {
         return bean.getId();
     }
 
+    //    public List<Employee> findAll() {
+    //        return this.employeeRepository.findAll();
+    //    }
+
     public void delete(String id) {
         employeeRepository.deleteById(id);
     }
@@ -51,14 +55,14 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public EmployeeDTO getById(String id) {
-        Employee original = requireOne(id);
-        return toDTO(original);
-    }
-    public Employee findById(String id) {
-       return requireOne(id);
-    }
+    //    public EmployeeDTO getById(String id) {
+    //        Employee original = requireOne(id);
+    //        return toDTO(original);
+    //    }
 
+    public Employee getById(String id) {
+        return requireOne(id);
+    }
 
     public Page<EmployeeDTO> query(EmployeeQueryVO vO) {
         throw new UnsupportedOperationException();

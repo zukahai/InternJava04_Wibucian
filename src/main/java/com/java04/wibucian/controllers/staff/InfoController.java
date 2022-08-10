@@ -1,10 +1,7 @@
 package com.java04.wibucian.controllers.staff;
 
-import com.java04.wibucian.dtos.EmployeeDTO;
 import com.java04.wibucian.dtos.ShiftDTO;
-import com.java04.wibucian.models.Account;
 import com.java04.wibucian.models.Employee;
-import com.java04.wibucian.repositories.AccountRepository;
 import com.java04.wibucian.security.CustomUserDetail;
 import com.java04.wibucian.services.ShiftService;
 import com.java04.wibucian.vos.EmployeeUpdateVO;
@@ -15,14 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.security.Principal;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/staff/info")
@@ -30,9 +24,6 @@ public class InfoController {
 
     @Autowired
     private EmployeeService employeeService;
-
-    @Autowired
-    private AccountRepository repository;
 
     @Autowired
     private ShiftService shiftService;
@@ -53,12 +44,7 @@ public class InfoController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/edit")
-    public String editStaffProfilePage(Model model, Principal principal) {
-        String id=principal.getName();
-
-        Optional<Account> accountOptional=repository.findById(id);
-        Employee employee=accountOptional.get().getEmployee();
-        model.addAttribute("employee",employee);
+    public String editStaffProfilePage() {
         return "staff/info/edit";
     }
 
