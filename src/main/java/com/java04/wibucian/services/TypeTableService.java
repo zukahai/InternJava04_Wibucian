@@ -9,8 +9,10 @@ import com.java04.wibucian.vos.TypeTableVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -63,5 +65,20 @@ public class TypeTableService {
 
     public List<TypeTable> findAll(){
         return typeTableRepository.findAll();
+    }
+
+    public List<TypeTable> findAll(Pageable pageable) {
+        return typeTableRepository.findAll(pageable).getContent();
+    }
+
+    public List<TypeTable> findAllHaiZuka(Pageable pageable) {
+        int start = pageable.getPageNumber() * pageable.getPageSize();
+        List<TypeTable> all = typeTableRepository.findAll();
+        List<TypeTable> answer = new ArrayList();
+
+        for (int i = start; i < start + pageable.getPageSize() && i < all.size(); i++) {
+            answer.add(all.get(i));
+        }
+        return answer;
     }
 }
