@@ -55,64 +55,77 @@
 										<c:forEach var="shiftOfDay"
 												   items="${shiftsOfDay}">
 											<td class="col d-flex flex-column gap-5 align-items-center justify-content-center">
-												<c:forEach var="shiftNo"
-														   items="${[0, 1]}">
-													<c:choose>
-														<c:when test="${not empty shiftRequestsForNextWeek[day][shiftOfDay]}">
-															<c:set var="shift"
-																   value="${shiftRequestsForNextWeek[day][shiftOfDay][shiftNo]}"/>
-														</c:when>
-														<c:otherwise>
-															<c:set var="shift"
-																   value="${null}"/>
-														</c:otherwise>
-													</c:choose>
-													<c:choose>
-														<c:when test="${not empty shift}">
-															<c:set var="employeeId"
-																   value="${shift.employee.id}"/>
-															<c:set var="employeeName"
-																   value="${shift.employee.name}"/>
-															<c:set var="shiftId"
-																   value="${shift.id}"/>
-															<c:set var="shiftDate"
-																   value="${shift.shiftDate}"/>
-															<c:set var="shiftCode"
-																   value="${shift.shiftCode}"/>
-														</c:when>
-														<c:otherwise>
-															<c:set var="employeeId"
-																   value=""/>
-															<c:set var="employeeName"
-																   value=""/>
-															<c:set var="shiftId"
-																   value=""/>
-															<c:set var="shiftDate"
-																   value=""/>
-															<c:set var="shiftCode"
-																   value=""/>
-														</c:otherwise>
-													</c:choose>
-													<div>
-														<input type="text"
-															   class="form-control w-200px h-40px text-center input${day.value}${shiftOfDay.value}${shiftNo}"
-															   id="input-employee"
-															   value="${employeeId}"
-															   shiftId="${shiftId}"
-															   dayOfWeek="${day.value}"
-															   shiftOfDay="${shiftOfDay.value}"
-															   shiftNo="${shiftNo}"
-															   data-kt-menu-trigger="click"
-															   data-kt-menu-placement="bottom-start"
-															   data-kt-menu-overflow="true"
-															   data-kt-menu-offset="0, 0"/>
-														<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-primary fw-bold w-200px mh-200px overflow-auto z-index-3"
-															 data-kt-menu="true"
-															 id="dropdown-employee${day.value}${shiftOfDay.value}${shiftNo}"
-														>
+												<c:set var="work" value="${true}"/>
+												<c:forEach var="workPlan"
+														   items="${workPlansForNextWeek[day][shiftOfDay]}">
+													<c:if test="${workPlan.work eq false}">
+														<div class="text-danger">Nghỉ
 														</div>
-													</div>
+														<c:set var="work"
+															   value="${false}"/>
+													</c:if>
 												</c:forEach>
+												<c:if test="${work eq true}">
+													<c:forEach var="shiftNo"
+															   items="${[0, 1]}">
+														<c:choose>
+															<c:when test="${not empty shiftRequestsForNextWeek[day][shiftOfDay]}">
+																<c:set var="shift"
+																	   value="${shiftRequestsForNextWeek[day][shiftOfDay][shiftNo]}"/>
+															</c:when>
+															<c:otherwise>
+																<c:set var="shift"
+																	   value="${null}"/>
+															</c:otherwise>
+														</c:choose>
+														<c:choose>
+															<c:when test="${not empty shift}">
+																<c:set var="employeeId"
+																	   value="${shift.employee.id}"/>
+																<c:set var="employeeName"
+																	   value="${shift.employee.name}"/>
+																<c:set var="shiftId"
+																	   value="${shift.id}"/>
+																<c:set var="shiftDate"
+																	   value="${shift.shiftDate}"/>
+																<c:set var="shiftCode"
+																	   value="${shift.shiftCode}"/>
+															</c:when>
+															<c:otherwise>
+																<c:set var="employeeId"
+																	   value=""/>
+																<c:set var="employeeName"
+																	   value=""/>
+																<c:set var="shiftId"
+																	   value=""/>
+																<c:set var="shiftDate"
+																	   value=""/>
+																<c:set var="shiftCode"
+																	   value=""/>
+															</c:otherwise>
+														</c:choose>
+														<div>
+															<input type="text"
+																   class="form-control w-200px h-40px text-center input${day.value}${shiftOfDay.value}${shiftNo}"
+																   id="input-employee"
+																   value="${employeeId}"
+																   shiftId="${shiftId}"
+																   dayOfWeek="${day.value}"
+																   shiftOfDay="${shiftOfDay.value}"
+																   shiftNo="${shiftNo}"
+																   data-kt-menu-trigger="click"
+																   data-kt-menu-placement="bottom-start"
+																   data-kt-menu-overflow="true"
+																   data-kt-menu-offset="0, 0"/>
+															<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-primary fw-bold w-200px mh-200px overflow-auto z-index-3"
+																 data-kt-menu="true"
+																 id="dropdown-employee${day.value}${shiftOfDay.value}${shiftNo}"
+															>
+															</div>
+														</div>
+													</c:forEach>
+												</c:if>
+											
 											</td>
 										</c:forEach>
 									</tr>
@@ -287,7 +300,7 @@
         input) => {
         if (timeoutHolder) {
             clearTimeout(timeoutHolder)
-		}
+        }
         // kiểm tra shiftId, nếu rỗng => tạo mới shift, ngược lại update shift
         if (shiftId.trim() === "") {
             // TODO: handle post create (get returned shiftId value and attach to input attribute)

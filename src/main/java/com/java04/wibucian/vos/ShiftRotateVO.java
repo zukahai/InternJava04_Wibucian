@@ -10,16 +10,14 @@ import java.io.Serializable;
 public class ShiftRotateVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "id can not null")
-    private Integer id;
-
-    @NotNull(message = "idShiftRotate can not null")
-    private String idShiftRotate;
-
-    private String idShift;
-
     private String idEmployee;
 
+    @NotNull(message = "Mã ca làm việc không được trống")
+    private String idShift;
+
+    @NotNull(message = "Mã nhân viên nhận yêu cầu không được trống")
     private String idEmployeeChange;
 
+    @NotNull(message = "Mã ca làm việc trao đổi không được trống")
+    private String idShiftExchange;
 }

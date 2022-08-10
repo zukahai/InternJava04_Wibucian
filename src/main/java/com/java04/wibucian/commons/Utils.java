@@ -1,7 +1,10 @@
 package com.java04.wibucian.commons;
 
+import com.java04.wibucian.exception.BadRequestException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -64,4 +67,21 @@ public class Utils {
         result[1] = date + "T" + shiftOfDay.getEndTime();
         return result;
     }
+
+    public static Calendar getCalendarInstanceFromFormat(String input, String format) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(sdf.parse(input));
+            return calendar;
+        } catch (ParseException e) {
+            throw new BadRequestException();
+        }
+    }
+
+    public static long hoursBetween(Calendar from, Calendar to) {
+        long result = ChronoUnit.HOURS.between(from.toInstant(), to.toInstant()) * from.compareTo(to);
+        return result;
+    }
+
 }

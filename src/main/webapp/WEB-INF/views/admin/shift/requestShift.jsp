@@ -29,7 +29,7 @@
 					<div class="d-flex justify-content-center align-items-lg-start flex-column h-100px">
 						<!--begin::Card title-->
 						<div class="card-title m-0">
-							<h3 class="fw-bold m-0">Danh sách đăng ký lịch làm việc</h3>
+							<h3 class="fw-bold m-0">Đăng ký lịch làm việc</h3>
 						</div>
 						<div class="card-title mt-2">
 							<p class="fst-italic m-0 fw-bold">Thời gian: từ ${weekStart}
@@ -56,68 +56,79 @@
 										<c:forEach var="shiftOfDay"
 												   items="${shiftsOfDay}">
 											<td class="col d-flex flex-column gap-5 align-items-center justify-content-center">
-												<c:set var="canManipulate" value="false"/>
-												<c:forEach var="shiftNo"
-														   items="${[0, 1]}">
-													<c:if test="${canManipulate eq false}">
-														<c:set var="shift"
-															   value="${shiftRequestsForNextWeek[day][shiftOfDay][shiftNo]}"/>
-														<c:choose>
-															<c:when test="${empty shift}">
-																<c:set var="canManipulate"
-																	   value="${true}"/>
-																<c:set var="shiftId"
-																	   value=""/>
-															</c:when>
-															<c:otherwise>
-																<c:choose>
-																	<c:when test="${shift.employee.id eq employeeId}">
-																		<c:set var="shiftId"
-																			   value="${shift.id}"/>
-																		<c:set var="canManipulate"
-																			   value="${true}"/>
-																		<c:set var="isChecked"
-																			   value="${true}"/>
-																		<c:set var="colorClass">
-																			<c:choose>
-																				<c:when test="${shift.overtimeRequest eq false}">
-																					${"form-check-success"}
-																				</c:when>
-																				<c:otherwise>
-																					${"form-check-warning"}
-																				</c:otherwise>
-																			</c:choose>
-																		</c:set>
-																	</c:when>
-																	<c:when test="${shift.overtimeRequest eq true and totalNormalRequest < 3}">
-																		<c:set var="shiftId"
-																			   value=""/>
-																		<c:set var="canManipulate"
-																			   value="${true}"/>
-																		<c:set var="isChecked"
-																			   value="${false}"/>
-																	</c:when>
-																</c:choose>
-															</c:otherwise>
-														</c:choose>
+												<c:set var="work" value="${true}"/>
+												<c:forEach var="workPlan" items="${workPlansForNextWeek[day][shiftOfDay]}">
+													<c:if test="${workPlan.work eq false}">
+														<c:set var="work"
+															   value="${false}"/>
+														<div class="text-danger">Nghỉ</div>
 													</c:if>
 												</c:forEach>
-												<div class="form-check form-check-custom ${colorClass} form-check-solid">
-													<input class="form-check-input shift-request-checkbox"
-														   shiftId="${shiftId}"
-														   shiftDay="${day.value}"
-														   shiftCode="${shiftOfDay.value}"
-														   type="checkbox"
-														   <c:if test="${canManipulate eq false}">disabled
-														   checked
-														   style="background: gray; border: 1px solid gray;" </c:if>
+												<c:if test="${work eq true}">
+													<c:set var="canManipulate"
+														   value="false"/>
+													<c:forEach var="shiftNo"
+															   items="${[0, 1]}">
+														<c:if test="${canManipulate eq false}">
+															<c:set var="shift"
+																   value="${shiftRequestsForNextWeek[day][shiftOfDay][shiftNo]}"/>
 															<c:choose>
-																<c:when test="${not empty shift and (shift.employee.id eq employeeId)}">
-																	checked
+																<c:when test="${empty shift}">
+																	<c:set var="canManipulate"
+																		   value="${true}"/>
+																	<c:set var="shiftId"
+																		   value=""/>
 																</c:when>
+																<c:otherwise>
+																	<c:choose>
+																		<c:when test="${shift.employee.id eq employeeId}">
+																			<c:set var="shiftId"
+																				   value="${shift.id}"/>
+																			<c:set var="canManipulate"
+																				   value="${true}"/>
+																			<c:set var="isChecked"
+																				   value="${true}"/>
+																			<c:set var="colorClass">
+																				<c:choose>
+																					<c:when test="${shift.overtimeRequest eq false}">
+																						${"form-check-success"}
+																					</c:when>
+																					<c:otherwise>
+																						${"form-check-warning"}
+																					</c:otherwise>
+																				</c:choose>
+																			</c:set>
+																		</c:when>
+																		<c:when test="${shift.overtimeRequest eq true and totalNormalRequest < 3}">
+																			<c:set var="shiftId"
+																				   value=""/>
+																			<c:set var="canManipulate"
+																				   value="${true}"/>
+																			<c:set var="isChecked"
+																				   value="${false}"/>
+																		</c:when>
+																	</c:choose>
+																</c:otherwise>
 															</c:choose>
-													/>
-												</div>
+														</c:if>
+													</c:forEach>
+													<div class="form-check form-check-custom ${colorClass} form-check-solid">
+														<input class="form-check-input shift-request-checkbox"
+															   shiftId="${shiftId}"
+															   shiftDay="${day.value}"
+															   shiftCode="${shiftOfDay.value}"
+															   type="checkbox"
+															   <c:if test="${canManipulate eq false}">disabled
+															   checked
+															   style="background: gray; border: 1px solid gray;" </c:if>
+																<c:choose>
+																	<c:when test="${not empty shift and (shift.employee.id eq employeeId)}">
+																		checked
+																	</c:when>
+																</c:choose>
+														/>
+													</div>
+												</c:if>
 											</td>
 										</c:forEach>
 									</tr>
@@ -152,7 +163,7 @@
             method: "DELETE"
         })
         const responseData = await response.json()
-		console.log(responseData)
+        console.log(responseData)
         // status khác 200 nghĩa là xảy ra lỗi
         if (response.status !== 200) {
             return {
@@ -206,7 +217,7 @@
             const shiftId = input.getAttribute("shiftid")
             const shiftDate = input.getAttribute("shiftday")
             const shiftCode = input.getAttribute("shiftcode")
-			
+
             if (isChecked && shiftId === "") {
                 // check -> tạo mới
                 const {
@@ -219,8 +230,8 @@
                 }
                 setTimeout(() => {
                     input.checked = true
-				})
-				console.log(data)
+                })
+                console.log(data)
                 input.setAttribute("shiftid", data.shift.id)
                 if (data.shift.overtimeRequest) {
                     input.parentElement.classList.remove("form-check-success")
@@ -229,9 +240,9 @@
                 }
                 input.parentElement.classList.remove("form-check-warning")
                 input.parentElement.classList.add("form-check-success")
-				return
+                return
             }
-			
+
             // unchecked -> delete shift
             if (!isChecked && shiftId) {
                 const {
@@ -248,7 +259,7 @@
                 input.setAttribute("shiftid", "")
                 input.parentElement.classList.remove("form-check-warning")
                 input.parentElement.classList.remove("form-check-success")
-			}
+            }
         })
     })
 </script>
