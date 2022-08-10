@@ -9,6 +9,8 @@ import com.java04.wibucian.vos.TypeTableUpdateVO;
 import com.java04.wibucian.vos.TypeTableVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,7 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("admin/typeTable")
 public class TypeTableController {
-
+    public static final int limit = 4;
     @Autowired
     private TypeTableService typeTableService;
 
@@ -41,6 +43,17 @@ public class TypeTableController {
         TypeTable typeTable = typeTableService.findById(id);
         modelMap.addAttribute("typeTable", typeTable);
         return "admin/typeTable/edit";
+    }
+
+    @GetMapping("/page/{page}")
+    public String HomePage(ModelMap modelMap, @Valid @NotNull @PathVariable("page") int page)throws Exception {
+        int toltalPage = typeTableService.getTotalPage(limit);
+        page = (page < 1) ? 1 : page;
+        page = (page > toltalPage) ? toltalPage : page;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("typeTables", typeTableService.findAllHaiZuka(pageable));
+        return "admin/typeTable/index";
     }
 
     @GetMapping("/create")
