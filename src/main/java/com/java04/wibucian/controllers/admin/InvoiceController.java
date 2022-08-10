@@ -28,12 +28,12 @@ public class InvoiceController {
         System.out.println(vO);
         return invoiceService.save(vO).toString();
     }
-    @RequestMapping(value ={"store-one/", "store-one"}, method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<Object> storeOne(@Valid @RequestBody InvoiceVO vO) {
-        vO.setIdEmployee("Employee00005");
-        return ResponseEntity.ok().body(invoiceService.save_one(vO));
-    }
+//    @RequestMapping(value ={"store-one/", "store-one"}, method = RequestMethod.POST)
+//    @ResponseBody
+//    public ResponseEntity<Object> storeOne(@Valid @RequestBody InvoiceVO vO) {
+//        vO.setIdEmployee("Employee00005");
+//        return ResponseEntity.ok().body(invoiceService.save_one(vO));
+//    }
 
     @DeleteMapping("/{id}")
     public void delete(@Valid @NotNull @PathVariable("id") String id) {

@@ -19,23 +19,35 @@
                 data-kt-menu="true"
         >
             <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click" class="menu-item here menu-accordion">
+            <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                 <!--begin:Menu link-->
                 <span class="menu-link">
-                    <span class="menu-icon">
-                        <i class="fas fa-house"></i>
-                    </span>
-                    <span class="menu-title">Quản lí quán cà phê</span>
-                    <span class="menu-arrow"></span>
-                </span>
+                                                <span class="menu-icon">
+                                                    <i class="fas fa-house"></i>
+                                                </span>
+                                                <span class="menu-title">Dashboards</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
                 <!--end:Menu link-->
                 <!--begin:Menu sub-->
                 <div class="menu-sub menu-sub-accordion">
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
+                        <a class="menu-link active" href="../../demo14/dist/index.html">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                            <span class="menu-title">Default</span>
+
+                            <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
                         <a
-                                class="menu-link active"
+                                class="menu-link"
                                 href="../../demo14/dist/dashboards/ecommerce.html"
                         >
                                                         <span class="menu-bullet">
@@ -301,6 +313,132 @@
                 <!--end:Menu content-->
             </div>
             <!--end:Menu item-->
+            <!--begin:Menu item-->
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <!--begin:Menu link-->
+                <span class="menu-link">
+                                                <span class="menu-icon">
+                                                    <!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
+                                                    <span class="svg-icon svg-icon-2">
+                                                        <svg
+                                                                width="24"
+                                                                height="24"
+                                                                viewBox="0 0 24 24"
+                                                                fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                    d="M20 14H18V10H20C20.6 10 21 10.4 21 11V13C21 13.6 20.6 14 20 14ZM21 19V17C21 16.4 20.6 16 20 16H18V20H20C20.6 20 21 19.6 21 19ZM21 7V5C21 4.4 20.6 4 20 4H18V8H20C20.6 8 21 7.6 21 7Z"
+                                                                    fill="currentColor"
+                                                            />
+                                                            <path
+                                                                    opacity="0.3"
+                                                                    d="M17 22H3C2.4 22 2 21.6 2 21V3C2 2.4 2.4 2 3 2H17C17.6 2 18 2.4 18 3V21C18 21.6 17.6 22 17 22ZM10 7C8.9 7 8 7.9 8 9C8 10.1 8.9 11 10 11C11.1 11 12 10.1 12 9C12 7.9 11.1 7 10 7ZM13.3 16C14 16 14.5 15.3 14.3 14.7C13.7 13.2 12 12 10.1 12C8.10001 12 6.49999 13.1 5.89999 14.7C5.59999 15.3 6.19999 16 7.39999 16H13.3Z"
+                                                                    fill="currentColor"
+                                                            />
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                </span>
+                                                <span class="menu-title">User Profile</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                <div class="menu-sub menu-sub-accordion">
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a
+                                class="menu-link"
+                                href="../../demo14/dist/pages/user-profile/overview.html"
+                        >
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                            <span class="menu-title">Overview</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a
+                                class="menu-link"
+                                href="../../demo14/dist/pages/user-profile/projects.html"
+                        >
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                            <span class="menu-title">Projects</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a
+                                class="menu-link"
+                                href="../../demo14/dist/pages/user-profile/campaigns.html"
+                        >
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                            <span class="menu-title">Campaigns</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a
+                                class="menu-link"
+                                href="../../demo14/dist/pages/user-profile/documents.html"
+                        >
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                            <span class="menu-title">Documents</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a
+                                class="menu-link"
+                                href="../../demo14/dist/pages/user-profile/followers.html"
+                        >
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                            <span class="menu-title">Followers</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a
+                                class="menu-link"
+                                href="../../demo14/dist/pages/user-profile/activity.html"
+                        >
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                            <span class="menu-title">Activity</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                </div>
+                <!--end:Menu sub-->
+            </div>
             <!-- Begin HoangDH33-->
 
             <%--                                https://preview.keenthemes.com/good/documentation/icons/duotune.html--%>
@@ -423,8 +561,9 @@
                 </div>
                 <!--end:Menu sub-->
             </div>
+            <!--end:Menu item HaiPD7-->
+
             <!-- End HoangDH33 -->
-            <!--begin:Menu item HieuNQ6-->
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <!--begin:Menu link-->
                 <span class="menu-link">
@@ -451,7 +590,7 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </span>
-                                                <span class="menu-title">Quản lí nhân Viên</span>
+                                                <span class="menu-title">Nhân Viên</span>
                                                 <span class="menu-arrow"></span>
                                             </span>
                 <!--end:Menu link-->
@@ -477,12 +616,72 @@
                         <!--begin:Menu link-->
                         <a
                                 class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/projects.html"
+                                href="admin/employee/create"
                         >
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
-                            <span class="menu-title">Thêm nhân viên</span>
+                            <span class="menu-title">Thêm Nhân Viên</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a
+                                class="menu-link"
+                                href="../../demo14/dist/pages/user-profile/campaigns.html"
+                        >
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                            <span class="menu-title">Campaigns</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a
+                                class="menu-link"
+                                href="../../demo14/dist/pages/user-profile/documents.html"
+                        >
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                            <span class="menu-title">Documents</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a
+                                class="menu-link"
+                                href="../../demo14/dist/pages/user-profile/followers.html"
+                        >
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                            <span class="menu-title">Followers</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a
+                                class="menu-link"
+                                href="../../demo14/dist/pages/user-profile/activity.html"
+                        >
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                            <span class="menu-title">Activity</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
@@ -490,86 +689,7 @@
                 </div>
                 <!--end:Menu sub-->
             </div>
-            <!--end:Menu item HieuNQ6
-            <!--begin:Menu item HaiPD7-->
-            <%--                                https://preview.keenthemes.com/good/documentation/icons/duotune.html--%>
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                                                <span class="menu-icon">
-                                                    <!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg
-                                                                width="24"
-                                                                height="24"
-                                                                viewBox="0 0 24 24"
-                                                                fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                        >
-                                                            <path opacity="0.3" d="M5 8.04999L11.8 11.95V19.85L5 15.85V8.04999Z" fill="currentColor"/>
-                                                            <path d="M20.1 6.65L12.3 2.15C12 1.95 11.6 1.95 11.3 2.15L3.5 6.65C3.2 6.85 3 7.15 3 7.45V16.45C3 16.75 3.2 17.15 3.5 17.25L11.3 21.75C11.5 21.85 11.6 21.85 11.8 21.85C12 21.85 12.1 21.85 12.3 21.75L20.1 17.25C20.4 17.05 20.6 16.75 20.6 16.45V7.45C20.6 7.15 20.4 6.75 20.1 6.65ZM5 15.85V7.95L11.8 4.05L18.6 7.95L11.8 11.95V19.85L5 15.85Z" fill="currentColor"/>urrentColor"
-                                                            />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </span>
-                                                <span class="menu-title">Quản lí bàn</span>
-                                                <span class="menu-arrow"></span>
-                                            </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="admin/groupTable/"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Nhóm bàn</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="admin/table/"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title"> Bàn</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="admin/typeTable/"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Loại bàn</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-
-                </div>
-                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item HaiPD7-->
+            <!--end:Menu item-->
             <!--begin:Menu item-->
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <!--begin:Menu link-->
