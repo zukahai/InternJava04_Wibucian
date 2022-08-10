@@ -23,6 +23,7 @@ public class EmployeeService {
     public String save(EmployeeVO vO) {
         Employee bean = new Employee();
         BeanUtils.copyProperties(vO, bean);
+        if(vO.getIdEmployee()!=null) bean.setId(vO.getIdEmployee());
         bean = employeeRepository.save(bean);
         return bean.getId();
     }

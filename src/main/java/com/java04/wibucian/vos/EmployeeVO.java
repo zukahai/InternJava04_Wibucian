@@ -1,6 +1,7 @@
 package com.java04.wibucian.vos;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 import net.bytebuddy.utility.nullability.UnknownNull;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,7 +36,8 @@ public class EmployeeVO implements Serializable {
     @NotNull(message = "gender can not null")
     private String gender;
 
-    private String birthDay;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthDay;
 
     @NotNull(message = "maritalStatus can not null")
     private String maritalStatus;

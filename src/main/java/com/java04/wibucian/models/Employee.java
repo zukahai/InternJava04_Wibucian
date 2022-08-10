@@ -41,7 +41,7 @@ public class Employee {
     private String maritalStatus;
 
     @Column(name = "CoefficientsSalary")
-    private Double coefficientsSalary;
+    private Float coefficientsSalary;
 
     @OneToMany(mappedBy = "employee")
     private Set<ImportGoods> importGoods = new LinkedHashSet<>();
@@ -136,11 +136,11 @@ public class Employee {
         this.maritalStatus = maritalStatus;
     }
 
-    public Double getCoefficientsSalary() {
+    public Float getCoefficientsSalary() {
         return coefficientsSalary;
     }
 
-    public void setCoefficientsSalary(Double coefficientsSalary) {
+    public void setCoefficientsSalary(Float coefficientsSalary) {
         this.coefficientsSalary = coefficientsSalary;
     }
 
