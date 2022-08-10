@@ -13,9 +13,11 @@ import com.java04.wibucian.vos.DetailGroupTableVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -101,5 +103,37 @@ public class DetailGroupTableService {
     private DetailGroupTable requireOne(String id) {
         return detailGroupTableRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
+    }
+
+    public List<DetailGroupTable> findAllHaiZuka(Pageable pageable) {
+        int start = pageable.getPageNumber() * pageable.getPageSize();
+        List<DetailGroupTable> all = detailGroupTableRepository.findAll();
+        List<DetailGroupTable> answer = new ArrayList();
+
+        for (int i = start; i < start + pageable.getPageSize() && i < all.size(); i++) {
+            answer.add(all.get(i));
+        }
+        return answer;
+    }
+
+    public List<DetailGroupTable> getByIdGroupTableHaiZuka(String idGroupTable, Pageable pageable) {
+        int start = pageable.getPageNumber() * pageable.getPageSize();
+        GroupTable groupTable = groupTableRepository.findById(idGroupTable).orElse(null);
+        List<DetailGroupTable> all = detailGroupTableRepository.getByGroupTable(groupTable);
+        List<DetailGroupTable> answer = new ArrayList();
+
+        for (int i = start; i < start + pageable.getPageSize() && i < all.size(); i++) {
+            answer.add(all.get(i));
+        }
+        return answer;
+    }
+
+    public int getTotalPage(int limit) {
+        return (int) Math.ceil(detailGroupTableRepository.findAll().size() / (float)limit);
+    }
+
+    public int getTotalPageByIdGroup(int limit, String idGroupTable) {
+        GroupTable groupTable = groupTableRepository.findById(idGroupTable).orElse(null);
+        return (int) Math.ceil(detailGroupTableRepository.getByGroupTable(groupTable).size() / (float)limit);
     }
 }

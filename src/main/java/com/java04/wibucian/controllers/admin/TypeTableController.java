@@ -27,13 +27,18 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("admin/typeTable")
 public class TypeTableController {
-    public static final int limit = 4;
+    public static final int limit = 5;
     @Autowired
     private TypeTableService typeTableService;
 
     @GetMapping("/")
     public String Home(ModelMap modelMap)throws Exception {
-        modelMap.addAttribute("typeTables", typeTableService.findAll());
+        int page = 1;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        int totalPage = typeTableService.getTotalPage(limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("typeTables", typeTableService.findAllHaiZuka(pageable));
         return "admin/typeTable/index";
     }
 
@@ -47,12 +52,12 @@ public class TypeTableController {
 
     @GetMapping("/page/{page}")
     public String HomePage(ModelMap modelMap, @Valid @NotNull @PathVariable("page") int page)throws Exception {
-        int toltalPage = typeTableService.getTotalPage(limit);
+        int totalPage = typeTableService.getTotalPage(limit);
         page = (page < 1) ? 1 : page;
-        page = (page > toltalPage) ? toltalPage : page;
+        page = (page > totalPage) ? totalPage : page;
         Pageable pageable = PageRequest.of(page - 1, limit);
         modelMap.addAttribute("page", page);
-        modelMap.addAttribute("toltalPage", toltalPage);
+        modelMap.addAttribute("totalPage", totalPage);
         modelMap.addAttribute("typeTables", typeTableService.findAllHaiZuka(pageable));
         return "admin/typeTable/index";
     }

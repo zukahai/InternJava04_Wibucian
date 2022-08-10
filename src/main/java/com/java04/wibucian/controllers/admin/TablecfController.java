@@ -11,6 +11,8 @@ import com.java04.wibucian.vos.TablecfVO;
 import com.java04.wibucian.vos.TypeTableUpdateVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,11 +25,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 
+
 @Validated
 @Controller
 @RequestMapping("admin/table")
 public class TablecfController {
-
+    public static final int limit = 5;
     @Autowired
     private TablecfService tablecfService;
     private TypeTableService typeTableService;
@@ -38,7 +41,24 @@ public class TablecfController {
 
     @GetMapping("/")
     public String Home(ModelMap modelMap)throws Exception {
-        modelMap.addAttribute("tables", tablecfService.findAll());
+        int page = 1;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        int totalPage = tablecfService.getTotalPage(limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("tables", tablecfService.findAllHaiZuka(pageable));
+        return "admin/table/index";
+    }
+
+    @GetMapping("/page/{page}")
+    public String HomePage(ModelMap modelMap, @Valid @NotNull @PathVariable("page") int page)throws Exception {
+        int totalPage = tablecfService.getTotalPage(limit);
+        page = (page < 1) ? 1 : page;
+        page = (page > totalPage) ? totalPage : page;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("tables", tablecfService.findAllHaiZuka(pageable));
         return "admin/table/index";
     }
 
