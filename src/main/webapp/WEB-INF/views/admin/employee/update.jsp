@@ -23,6 +23,7 @@
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="row mt-10">
+            <form action="/admin/employee/update/${employee.id}" method="post" enctype="multipart/form-data">
             <div class="col">
                 <div class="content flex-column-fluid" id="">
                     <!--begin::Layout-->
@@ -67,7 +68,12 @@
                                         </div>
                                         <!--end::Avatar-->
                                         <!--begin::Name-->
-                                        <input type="text" class="form-control" id="employeeName" name="name" placeholder="${employee.name}"/>
+                                    <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">${employee.id}</a>
+                                    <div class="mb-15">
+                                        <!--begin::Badge-->
+                                        <div class="badge badge-lg badge-light-primary d-inline">Nhân viên</div>
+                                        <!--begin::Badge-->
+                                    </div>
                                         <!--<label for="employeeName">${employee.name}</label>-->
                                         <!--end::Name-->
                                         <!--begin::Position-->
@@ -90,23 +96,26 @@
                                     <!--begin::Table body-->
                                     <tbody class="fs-6 fw-semibold text-gray-600">
                                     <tr>
-                                        <td>Mã nhân viên</td>
-                                        <td><a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">${employee.id}</a></td>
+                                        <td>Tên nhân viên</td>
+                                        <td>
+                                                <input type="text"  class="form-control" id="employeeName" name="name" placeholder="VIP" value="${employee.name}"/>
+                                                <!--<label for="name">Tên loại bàn</label>-->
+                                        </td>
 
                                     </tr>
                                     <tr>
                                         <td>Địa Chỉ</td>
-                                        <td><input type="text" class="form-control" id="employeeAddress" name="address" placeholder="${employee.address}"/>
+                                        <td><input type="text" class="form-control" id="employeeAddress" name="address" value="${employee.address}"/>
 
                                     </tr>
                                     <tr>
                                         <td>Email</td>
-                                        <td><input type="text" class="form-control" id="employeeEmail" name="email" placeholder="${employee.email}"/></td>
+                                        <td><input type="text" class="form-control" id="employeeEmail" name="email" value="${employee.email}"/></td>
 
                                     </tr>
                                     <tr>
                                         <td>Giới Tính</td>
-                                        <td> <select class="form-select h-100" id="employeeGender" name="gender" aria-label="Floating label select example" placeholder="${employee.gender}" >
+                                        <td> <select class="form-select h-100" id="employeeGender" name="gender" aria-label="Floating label select example" value="${employee.gender}" >
                                             <option value="Nam">Nam</option>
                                             <option value="Nữ">Nữ</option>
                                             <option value="Khác">Khác</option>
@@ -114,12 +123,12 @@
                                     </tr>
                                     <tr>
                                         <td>Ngày sinh</td>
-                                        <td><input type="date" class="form-control" id="employeeBirthday" name="birthDay" placeholder="${employee.birthDay}"/></td>
+                                        <td><input type="date" class="form-control" id="employeeBirthday" name="birthDay" value="${employee.birthDay}"/></td>
 
                                     </tr>
                                     <tr>
                                         <td>Tình trạng</td>
-                                        <td><select class="form-select h-100" id="employeeStatus" name="maritalStatus" aria-label="Floating label select example" placeholder="${employee.maritalStatus}">
+                                        <td><select class="form-select h-100" id="employeeStatus" name="maritalStatus" aria-label="Floating label select example" value="${employee.maritalStatus}">
 
                                             <option value="Độc thân">Độc thân</option>
                                             <option value="Đã kết hôn">Đã kết hôn</option>
@@ -127,11 +136,11 @@
                                     </tr>
                                     <tr>
                                         <td>Số điện thoại</td>
-                                        <td><input type="text" class="form-control" id="employeePhone" name="phoneNumber" placeholder="${employee.phoneNumber}"/></td>
+                                        <td><input type="text" class="form-control" id="employeePhone" name="phoneNumber" value="${employee.phoneNumber}"/></td>
                                     </tr>
                                     <tr>
                                         <td>Hệ số lương</td>
-                                        <td><input value="0" type="number" class="form-control" id="employeeSalary" name="coefficientsSalary" placeholder="${employee.coefficientsSalary}"/>
+                                        <td><input value="0" type="number" class="form-control" id="employeeSalary" name="coefficientsSalary" value="${employee.coefficientsSalary}"/>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -144,10 +153,9 @@
 
                 </div>
                 <div class="text-center my-5">
-                    <a href="admin/employee/update/" button class="btn btn-primary" type="submit">Cập nhật</a></button>
+                    <button class="btn btn-primary" type="submit">Cập nhật</button>
                 </div>
+            </form>
             </div>
-
-
             <jsp:include page="../includes/footer.jsp"></jsp:include>
             <jsp:include page="../includes/end.jsp"></jsp:include>
