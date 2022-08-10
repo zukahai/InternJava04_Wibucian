@@ -15,12 +15,15 @@
     <div class="card-header cursor-pointer">
         <!--begin::Card title-->
         <div class="card-title m-0">
-            <h3 class="fw-bold m-0">Order</h3>
+            <h3 class="fw-bold m-0"><a href="${pageContext.request.contextPath}/invoice">Danh sách hoá đơn</a></h3>
         </div>
         <!--end::Card title-->
         <!--begin::Action-->
         <c:if test="${invoice.status != 2}">
-            <span class="btn btn-primary align-self-center save-data">Thanh Toán</span>
+            <span class="btn btn-primary align-self-center invoice-save">
+                <i class="fa fa-file-invoice"></i>
+                Thanh Toán
+            </span>
         </c:if>
         <!--end::Action-->
     </div>
@@ -60,7 +63,8 @@
                 <!--end::Card title-->
                 <!--begin::Action-->
                 <c:if test="${invoice.status != 2}">
-                    <span class="btn btn-primary align-self-center add-detail">Thêm chi tiết</span>
+                    <span class="btn btn-primary align-self-center add-detail"><i
+                            class="fa fa-plus"></i>Thêm chi tiết</span>
                 </c:if>
                 <!--end::Action-->
             </div>
@@ -74,12 +78,13 @@
                         <thead>
                         <!--begin::Table row-->
                         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                            <th scope="col" class="min-w-100px">Id chi tiết hoá đơn</th>
-                            <th scope="col" class="min-w-100px">Tên sản phẩm</th>
-                            <th scope="col" class="min-w-100px">Số lượng</th>
-                            <th scope="col" class="min-w-100px">Tổng tiền</th>
+                            <th scope="col" class="min-w-100px"><h5>Id chi tiết hoá đơn</h5></th>
+                            <th scope="col" class="min-w-100px"><h5>Tên sản phẩm</h5></th>
+                            <th scope="col" class="min-w-100px"><h5>Số lượng</h5></th>
+                            <th scope="col" class="min-w-100px"><h5>Giảm giá</h5></th>
+                            <th scope="col" class="min-w-100px"><h5>Tổng tiền</h5></th>
                             <c:if test="${invoice.status != 2}">
-                                <th scope="col" class="min-w-100px">Hành động</th>
+                                <th scope="col" class="min-w-100px"><h4>Hành động</h4></th>
                             </c:if>
                         </tr>
                         <!--end::Table row-->
@@ -93,8 +98,20 @@
                                 <td><p data-price="${item.product.price}" data-id="item.product.id"
                                        class="id-product-tabel">${item.product.productName}</p></td>
                                 <td><p class="quantity-table">${item.quantity}</p></td>
-                                <td><p data-price="${item.totalMoney}" class="total-money-price">
-                                    <fmt:formatNumber pattern="#,###" value="${item.totalMoney}"/> ₫</p></td>
+                                <c:set var="totalPrice" value="${item.quantity * item.product.price}"/>
+                                <c:set var="totalPriceDiscount" value="${item.totalMoney}"/>
+                                <c:set var="total" value="${item.product.price * item.quantity}"/>
+                                <c:set var="pcent" value="${(total-totalPriceDiscount)/total*100}"/>
+                                <td><p class="sale-table">${pcent} %</p></td>
+                                <td>
+                                    <div>
+
+                                        <p class="total-table text-d"><s><fmt:formatNumber pattern="#,###"
+                                                                                           value="${total}"/> ₫</s></p>
+                                        <p data-price="${item.totalMoney}" class="total-money-price"><fmt:formatNumber
+                                                pattern="#,###" value="${item.totalMoney}"/> ₫</p>
+                                    </div>
+                                </td>
                                 <c:if test="${invoice.status != 2}">
                                     <td>
                                 <span data-action="${item.id}"
@@ -113,23 +130,45 @@
                         </c:forEach>
                         </tbody>
                         <tfoot class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                        <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                            <th scope="col" class="min-w-100px">Tổng cộng</th>
+                        <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0 h4">
+                            <th scope="col" class="min-w-100px text-black-50 display-1"><h3>Tổng cộng</h3></th>
                             <th scope="col" class="min-w-100px"></th>
                             <th scope="col" class="min-w-100px"></th>
-                            <th scope="col" class="min-w-100px"><p data-price="${invoice.totalMoney}" class="total-money-price-end"><fmt:setLocale
+                            <th scope="col" class="min-w-100px"></th>
+                            <th scope="col" class="min-w-100px"><h3 data-price="${invoice.totalMoney}"
+                                                                    class="total-money-price-end"><fmt:setLocale
                                     value="vi_VN"/>
-                                <fmt:formatNumber pattern="#,###" value="${invoice.totalMoney}"/> ₫</p></th>
+                                <fmt:formatNumber pattern="#,###" value="${invoice.totalMoney}"/> ₫</h3></th>
                         </tr>
                         </tfoot>
                     </table>
+                    <div class="card">
+                        <div class="card-header">
+                            <!--begin::Card title-->
+                            <div class="card-title m-0">
+                                <h3 class="fw-bold m-0"></h3>
+                            </div>
+                            <!--end::Card title-->
+                            <!--begin::Action-->
+                            <c:if test="${invoice.status != 2}">
+                                <span class="btn btn-primary align-self-center invoice-save">
+                                    <i class="fa fa-file-invoice"></i>
+                                    Thanh Toán
+                                </span>
+                            </c:if>
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+
+                    </div>
                 </div>
                 <!--end::Wrapper-->
             </div>
         </div>
     </div>
     <div id="modal-edit-detail" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
+        <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title"></h3>
@@ -167,8 +206,8 @@
             </div>
         </div>
     </div>
-    <div id="modal-add-detail" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
+    <div id="modal-add-detail" role="dialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title-add-detail"></h3>
@@ -363,8 +402,28 @@
         })
     });
 
-    ///sum total money in all row
-
-
+    ///handel invoice-save
+    $(document).on("click", ".invoice-save", function () {
+        var id = $('.id-invoice').val();
+        var name = $('.name-customer-invoice').val();
+        let data = {
+            idInvoice: id,
+            status: 2
+        }
+        $.ajax({
+            url: "/invoice/" + id,
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (result) {
+                if (result.check == true) {
+                    toastr.success("Cập nhật thành công");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 2000);
+                }
+            }
+        })
+    });
 
 </script>
