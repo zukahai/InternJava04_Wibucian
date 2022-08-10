@@ -8,18 +8,21 @@ import java.util.Date;
 
 
 @Data
-public class DetailInvoiceVO implements Serializable {
+public class InvoiceNoMapPingVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @NotNull(message = "id can not null")
     private Integer id;
 
-    private String idDetailInvoice;
-
+    @NotNull(message = "idInvoice can not null")
     private String idInvoice;
 
-    private String idProduct;
+    private String idEmployee;
 
-    private Integer quantity;
+    private String idGroupTable;
+
+    @NotNull(message = "customerName can not null")
+    private String customerName;
 
     private Date dateTime;
 

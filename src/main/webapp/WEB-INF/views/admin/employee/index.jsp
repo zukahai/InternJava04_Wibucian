@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<base href="/">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<base href="/">
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <jsp:include page="../includes/sidebar1.jsp"></jsp:include>
@@ -16,9 +18,9 @@
             <!--end::Card title-->
             <!--begin::Action-->
             <a
-                    href="../../demo14/dist/account/settings.html"
+                    href="admin/employee/create"
                     class="btn btn-primary align-self-center"
-            >Edit Profile</a
+            >Thêm Nhân Viên</a
             >
             <!--end::Action-->
         </div>
@@ -26,22 +28,22 @@
         <!--begin::Card body-->
         <div class="card-body p-9">
             <!--begin::Input group-->
-<!--end::Input group-->
+            <!--end::Input group-->
 
-<!--begin::Input group-->
-<!--end::Input group-->
+            <!--begin::Input group-->
+            <!--end::Input group-->
 
-<!--begin::Input group-->
-<!--end::Input group-->
+            <!--begin::Input group-->
+            <!--end::Input group-->
 
-<!--begin::Input group-->
-<!--end::Input group-->
+            <!--begin::Input group-->
+            <!--end::Input group-->
 
-<!--begin::Input group-->
-<!--end::Input group-->
+            <!--begin::Input group-->
+            <!--end::Input group-->
 
-<!--begin::Input group-->
-<!--end::Input group-->
+            <!--begin::Input group-->
+            <!--end::Input group-->
             <div class="table-responsive">
                 <table class="table table-row-bordered gy-5">
                     <thead>
@@ -51,35 +53,28 @@
                         <th>Họ & Tên</th>
                         <th>SĐT</th>
                         <th>Hệ Số Lương</th>
-                        <th>Trạng Thái</th>
-                        <th>Chức Năng</th>
+                        <th class ="justify-content-center d-flex" >Chức Năng</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="item" items="${DanhSach}">
-                    <tr>
-                        <th scope="row">${item.id}</th>
-                        <td>${ item.srcEmployee}</td>
-                        <td>${ item.name}</td>
-                        <td>${ item.phoneNumber}</td>
-                        <td>${ item.CoefficientsSalary}</td>
-                        <td>
-                            <a href="" class="btn btn-warning mx-1">Hoạt động</a>
-                        </td>
-                        <td>
-                            <a href="" class="btn btn-warning mx-1">Sửa</a>
-                            <a href="" class="btn btn-success mx-1">Xem</a>
-                            <a href="" class="btn btn-danger mx-1">Xóa</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>$170,750</td>
-                    </tr
+
+                        <tr>
+                            <th scope="row">${item.id}</th>
+                            <td>
+                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                    <img class="w-140"
+                                         src="${pageContext.request.contextPath}/admin/assets/file-upload/${item.srcEmployee}">
+                            <td>${ item.name}</td>
+                            <td>${ item.phoneNumber}</td>
+                            <td>${ item.coefficientsSalary}</td>
+                            <td  class ="justify-content-center d-flex" >
+                                <a href="admin/employee/update/${item.id}" class="btn btn-warning mx-1">Sửa</a>
+                                <a href="admin/employee/view/${item.id}" class="btn btn-success mx-1">Xem</a>
+                                <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
+                                <a href="" class="btn btn-bg-secondary mx-1 ">Khóa</a>
+                            </td>
+                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -90,4 +85,38 @@
 </div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
+<script>
+    //handle on click delete-btn
+    $(document).on("click", ".delete-btn", function () {
+        var row = $(this).closest("tr");
+        var id = $(this).attr("data-id");
+        console.log(id);
+        swal.fire({
+            title: "Bạn có chắc chắn muốn xóa?",
+            text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Đồng ý",
+            cancelButtonText: "Hủy bỏ"
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: "/admin/employee/delete/" + id,
+                    type: "GET",
+                    success: function (result) {
+                        if (result.check === true) {
+                            toastr.success("Xóa thành công");
+                            row.remove();
+                        } else {
+                            toastr.error("Xóa thất bại: Tồn tại thông tin nhân viên này");
+                        }
+                    }
+                })
+            }
+        });
+    });
+    //handel on change id-select-product
+</script>
 

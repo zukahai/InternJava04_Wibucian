@@ -120,7 +120,6 @@
         var row = $(this).closest("tr");
         var id = $(this).attr("data-id");
         console.log(id);
-
         swal.fire({
             title: "Bạn có chắc chắn muốn xóa?",
             text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
@@ -146,11 +145,6 @@
                 })
             }
         });
-
-
     });
-
     //handel on change id-select-product
 </script>
-
-

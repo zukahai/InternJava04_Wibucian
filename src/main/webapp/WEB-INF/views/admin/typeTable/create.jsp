@@ -30,7 +30,7 @@
                         <label for="typeName">Tên loại bàn</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="number" class="form-control" id="price" name="price" placeholder="0"/>
+                        <input type="number" class="form-control" id="price" name="price" placeholder="0" value="0"/>
                         <label for="price">Giá</label>
                     </div>
 
