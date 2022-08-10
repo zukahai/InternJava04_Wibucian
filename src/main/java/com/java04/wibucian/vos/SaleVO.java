@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -11,17 +13,26 @@ import java.util.Date;
 public class SaleVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "id can not null")
-    private Integer id;
-
-    @NotNull(message = "idSale can not null")
-    private String idSale;
-
     @NotNull(message = "pcent can not null")
     private String pcent;
 
-    private Date timeStart;
+    private String timeStart;
 
-    private Date timeEnd;
+    private String timeEnd;
 
+    public Date getTimeStart() {
+        try {
+            return new SimpleDateFormat("dd-MM-yyyy").parse(this.timeStart);
+        } catch (ParseException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    public Date getTimeEnd() {
+        try {
+            return new SimpleDateFormat("dd-MM-yyyy").parse(this.timeEnd);
+        } catch (ParseException e) {
+            throw new RuntimeException();
+        }
+    }
 }

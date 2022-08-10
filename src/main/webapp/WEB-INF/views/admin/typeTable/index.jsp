@@ -27,12 +27,12 @@
         <!--begin::Card body-->
         <div class="card-body p-9">
 
-<!--end::Input group-->
+            <!--end::Input group-->
             <div class="table-responsive">
                 <table class="table table-row-bordered gy-5">
                     <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
-<%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
+                        <%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
                         <th>Mã loại bàn</th>
                         <th>Tên loại bàn</th>
                         <th>Giá</th>

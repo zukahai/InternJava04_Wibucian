@@ -1,35 +1,101 @@
 package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.TypeProductDTO;
+import com.java04.wibucian.models.TypeProduct;
+import com.java04.wibucian.models.TypeTable;
 import com.java04.wibucian.services.TypeProductService;
-import com.java04.wibucian.vos.TypeProductQueryVO;
-import com.java04.wibucian.vos.TypeProductUpdateVO;
-import com.java04.wibucian.vos.TypeProductVO;
+import com.java04.wibucian.vos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 
 @Validated
-@RestController
-@RequestMapping("/typeProduct")
+@Controller
+@RequestMapping("admin/typeProduct")
 public class TypeProductController {
+
+
+    private TypeProduct TypeProductService;
+
+    @GetMapping("/")
+    public String Home(ModelMap modelMap) throws Exception {
+
+        modelMap.addAttribute("typeProduct", typeProductService.findAll());
+        return "admin/typeProduct/index";
+    }
+
+    @GetMapping("/create")
+    public String createProductPage(ModelMap modelMap) throws Exception {
+        return "admin/typeProduct/create";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String createNewTypeProduct(ModelMap modelMap, @Valid TypeProductVO typeProductVO) throws Exception {
+        String productId = this.typeProductService.save(typeProductVO);
+        return "redirect:/admin/typeProduct/";
+    }
+
+    //edit
+
+    @GetMapping("/edit/{id}")
+    public String HomeEdit(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id) throws Exception {
+        TypeProduct typeProduct = typeProductService.findById(id);
+        modelMap.addAttribute("typeProduct", typeProduct);
+        return "admin/typeProduct/edit";
+    }
+
+    @RequestMapping(value = "/edit/{id}",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String editTypeProduct(ModelMap modelMap,
+                                  @Valid TypeProductUpdateVO typeProductUpdateVO,
+                                  @PathVariable("id") String typeProductId) throws Exception {
+        this.typeProductService.update(typeProductId, typeProductUpdateVO);
+        return "redirect:/admin/typeProduct/";
+    }
+    //edit
+
+    //delete
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
+        try {
+            typeProductService.delete(id);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", true);
+            map.put("value", "test");
+            return ResponseEntity.ok()
+                    .body(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", false);
+            map.put("value", "test");
+            return ResponseEntity.ok()
+                    .body(map);
+        }
+    }
+    //delete
 
     @Autowired
     private TypeProductService typeProductService;
 
     @PostMapping
     public String save(@Valid @RequestBody TypeProductVO vO) {
-        return typeProductService.save(vO).toString();
+        return typeProductService.save(vO)
+                .toString();
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@Valid @NotNull @PathVariable("id") String id) {
-        typeProductService.delete(id);
-    }
 
     @PutMapping("/{id}")
     public void update(@Valid @NotNull @PathVariable("id") String id,
