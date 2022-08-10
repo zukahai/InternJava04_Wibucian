@@ -4,6 +4,7 @@ package com.java04.wibucian.vos;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data

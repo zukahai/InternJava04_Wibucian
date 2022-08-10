@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +62,41 @@ public class EmployeeController {
         modelMap.addAttribute("employee", employee);
         return "admin/employee/update";
     }
+
+
+    @RequestMapping(value = "/update/{id}",
+            method = RequestMethod.POST,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String update(ModelMap modelMap, @Valid EmployeeUpdateVO employeeUpdateVO, @PathVariable("id") String idEmployee
+    ) throws Exception {
+        try {
+            String fileName = StringUtils.cleanPath(employeeUpdateVO.getAvatar().getOriginalFilename());
+//            Path path = Paths.get("src/main/resources/static/admin/assets/file-upload"); mở cía database lên
+
+            ClassLoader classLoader = getClass().getClassLoader();
+            String filePath = String.valueOf(System.currentTimeMillis()) + "." + fileName.split("\\.")[1];
+//            System.out.println(fileName);
+//            System.out.println(classLoader.getResource(".").getFile() + "static/admin/assets/file-upload/" + filePath);
+            File file = new File(classLoader.getResource(".").getFile() + "static/admin/assets/file-upload/" + filePath);
+//            File file = new File(path.resolve(filePath).toUri()); this line to save file in src/main/resource
+            employeeUpdateVO.getAvatar().transferTo(file);
+
+            employeeUpdateVO.setSrcEmployee(filePath);
+
+
+//
+//            String employeeId = this.employeeService.save(employeeUpdateVO); // chạy thử
+            // String idEmployee =  formData.get("idEmployee").get(0);
+//            System.out.println(employeeUpdateVO);
+            this.employeeService.update(idEmployee, employeeUpdateVO);
+            return "redirect:/admin/employee/";
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return "Lỗi tè le";
+        }
+
+    }
+
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String createNewEmployee(ModelMap modelMap, @Valid EmployeeVO employeeVO) throws Exception {
