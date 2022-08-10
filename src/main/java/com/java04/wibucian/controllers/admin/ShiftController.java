@@ -194,4 +194,71 @@ public class ShiftController {
         return ResponseEntity.ok()
                              .body(this.shiftService.findAllShiftsBetween(start, end));
     }
+
+    // toàn bộ của staff
+    @PostMapping("/staff/request")
+    @ResponseBody
+    public ResponseEntity<ShiftDTO> staffCreateShift(@Valid StaffShiftVO staffShiftVO) {
+        staffShiftVO.setIdEmployee("Employee00002");
+        return ResponseEntity.ok()
+                             .body(this.shiftService.createShift(staffShiftVO,
+                                                                 staffShiftVO.getIdEmployee()));
+    }
+
+    @DeleteMapping("/staff/request/{shiftId}")
+    @ResponseBody
+    public ResponseEntity<Boolean> staffDeleteShift(
+            @Valid @PathVariable("shiftId") String shiftId) {
+        return ResponseEntity.ok()
+                             .body(this.shiftService.delete(shiftId,
+                                                            this.employeeService.getById(
+                                                                    "Employee00002")));
+    }
+
+    @GetMapping("/staff/request")
+    public String getOwnShiftRequestForNextWeek(Model model) {
+        boolean isInShiftRequestTime = this.shiftService.isInShiftRequestTime();
+        if (isInShiftRequestTime) {
+            Calendar firstDayOfNextWeek = Utils.getFirstDayOfNextWeek();
+            Calendar lastDayOfNextWeek = Utils.getLastDayOfNextWeek();
+            model.addAttribute("totalNormalRequest",
+                               this.shiftService.getNormalRequestOfEmployeeForDateBetween(
+                                       this.employeeService.getById("Employee00002"),
+                                       firstDayOfNextWeek, lastDayOfNextWeek));
+            model.addAttribute("daysOfWeek", DayOfWeek.values());
+            model.addAttribute("shiftsOfDay", ShiftOfDay.values());
+            model.addAttribute("shiftRequestsForNextWeek",
+                               this.shiftService.getAllShiftRequestsForNextWeak());
+            model.addAttribute("workPlansForNextWeek",
+                               this.workPlanService.getWorkPlanForNextWeek());
+
+            model.addAttribute("weekStart",
+                               Utils.getDateFormat(firstDayOfNextWeek.getTime(),
+                                                   Constant.DD_MM_YYYY_FORMAT));
+            model.addAttribute("weekEnd", Utils.getDateFormat(lastDayOfNextWeek.getTime(),
+                                                              Constant.DD_MM_YYYY_FORMAT));
+            model.addAttribute("employeeId", "Employee00002");
+            Map<Integer, String> weekDayMapping = new HashMap<>();
+            while (firstDayOfNextWeek.compareTo(lastDayOfNextWeek) <= 0) {
+                weekDayMapping.put(firstDayOfNextWeek.get(Calendar.DAY_OF_WEEK),
+                                   Utils.getDateFormat(firstDayOfNextWeek.getTime(),
+                                                       Constant.DD_MM_YYYY_FORMAT));
+                firstDayOfNextWeek.add(Calendar.DATE, 1);
+            }
+            model.addAttribute("weekDayMapping", weekDayMapping);
+
+        }
+        model.addAttribute("isInShiftRequestTime", isInShiftRequestTime);
+        return "admin/shift/requestShift";
+    }
+
+    //    @PostMapping("/staff/request")
+    //    @ResponseBody
+    //    public ResponseEntity<ShiftDTO> staffRequestShift(@Valid StaffShiftVO
+    //    staffShiftVO) {
+    //        staffShiftVO.setIdEmployee("Employee00004");
+    //        return ResponseEntity.ok()
+    //                             .body(this.shiftService.createShift(staffShiftVO,
+    //                                                                 "Employee00004"));
+    //    }
 }

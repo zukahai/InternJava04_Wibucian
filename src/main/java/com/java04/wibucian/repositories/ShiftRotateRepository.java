@@ -1,6 +1,5 @@
 package com.java04.wibucian.repositories;
 
-import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.models.Shift;
 import com.java04.wibucian.models.ShiftRotate;
 import org.springframework.data.domain.Page;
@@ -15,10 +14,7 @@ import java.util.Optional;
 
 public interface ShiftRotateRepository extends JpaRepository<ShiftRotate, String>,
         JpaSpecificationExecutor<ShiftRotate> {
-    List<ShiftRotate> getAllByStatusOrderByCreateTimeDesc(int status);
-
-    List<ShiftRotate> getAllByStatusAndEmployeeChangeOrderByCreateTimeDesc(Integer status,
-                                                                           Employee employeeChange);
+    Page<ShiftRotate> getAllByStatus(int status, Pageable pageable);
 
     List<ShiftRotate> getAllByShiftOrShiftExchangeAndStatusNot(Shift shift,
                                                                Shift shiftExchange,

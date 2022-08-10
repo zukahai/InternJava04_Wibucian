@@ -42,52 +42,20 @@ public class ShiftRotateService {
     /**
      * Phương thức dùng để lấy tất cả các yêu cầu xoay ca cần được phê duyệt
      *
-     * @return
-     */
-    public List<ShiftRotateDTO> getAllShiftRotatesToBeApproved() {
-        return this.shiftRotateRepository.getAllByStatusOrderByCreateTimeDesc(
-                           ShiftRotateStatus.ACCEPTED.getValue())
-                                         .stream()
-                                         .map(this::toDTO)
-                                         .toList();
-    }
-
-    /**
-     * Phương thức dùng để lấy tất cả các yêu cầu xoay ca được request của nhân viên
+     * @param page page thứ bao nhiêu
      *
      * @return
      */
-    public List<ShiftRotateDTO> getAllShiftRotatesToBeAccepted(Employee employee) {
-        return this.shiftRotateRepository.getAllByStatusAndEmployeeChangeOrderByCreateTimeDesc(
-                           ShiftRotateStatus.CREATED.getValue(), employee)
-                                         .stream()
-                                         .map(this::toDTO)
-                                         .toList();
+    public Page<ShiftRotate> getAllShiftRotatesToBeApproved(int page) {
+        Pageable pageable = PageRequest.of(page, PAGE_SIZE, Sort.by("acceptTime"));
+        return this.shiftRotateRepository.getAllByStatus(
+                ShiftRotateStatus.ACCEPTED.getValue(), pageable);
     }
 
-    private ShiftRotateDTO toDTO(ShiftRotate shiftRotate) {
-        ShiftRotateDTO shiftRotateDTO = new ShiftRotateDTO();
-        BeanUtils.copyProperties(shiftRotate, shiftRotateDTO);
-        Employee employeeCreate = shiftRotate.getEmployeeCreate();
-        Employee employeeChange = shiftRotate.getEmployeeChange();
-        Shift shift = shiftRotate.getShift();
-        Shift shiftExchange = shiftRotate.getShiftExchange();
-
-        shiftRotateDTO.setEmployeeId(employeeCreate.getId());
-        shiftRotateDTO.setEmployeeName(employeeCreate.getName());
-
-        shiftRotateDTO.setEmployeeChangeId(employeeChange.getId());
-        shiftRotateDTO.setEmployeeChangeName(employeeChange.getName());
-
-        shiftRotateDTO.setShiftId(shift.getId());
-        shiftRotateDTO.setShiftDate(shift.getShiftDate());
-        shiftRotateDTO.setShiftCode(shift.getShiftCode());
-
-        shiftRotateDTO.setShiftExchangeId(shiftExchange.getId());
-        shiftRotateDTO.setShiftExchangeDate(shiftExchange.getShiftDate());
-        shiftRotateDTO.setShiftExchangeCode(shiftExchange.getShiftCode());
-
-        return shiftRotateDTO;
+    private ShiftRotateDTO toDTO(ShiftRotate original) {
+        ShiftRotateDTO bean = new ShiftRotateDTO();
+        BeanUtils.copyProperties(original, bean);
+        return bean;
     }
 
     private ShiftRotate requireOne(String shiftRotateId) {
@@ -336,14 +304,12 @@ public class ShiftRotateService {
         this.scanForPendingShiftRotate(currentDate.getTime(),
                                        ShiftOfDay.MORNING.getValue());
     }
-
     @Scheduled(cron = Constant.AFTERNOON_SHIFT_ROTATE_CLOSE_CRON)
     public void scanForPendingShiftRotateOfAfternoonShift() {
         Calendar currentDate = Utils.currentDateWithoutTime();
         this.scanForPendingShiftRotate(currentDate.getTime(),
                                        ShiftOfDay.AFTERNOON.getValue());
     }
-
     @Scheduled(cron = Constant.EVENING_SHIFT_ROTATE_CLOSE_CRON)
     public void scanForPendingShiftRotateOfEveningShift() {
         Calendar currentDate = Utils.currentDateWithoutTime();
