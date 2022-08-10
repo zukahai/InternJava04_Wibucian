@@ -1,6 +1,7 @@
 package com.java04.wibucian.vos;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -12,6 +13,8 @@ public class ProductVO implements Serializable {
 
     @NotNull(message = "Product type can not null")
     private String idProductType;
+
+    private MultipartFile avatar;
 
     @NotNull(message = "Describe can not null")
     private String describe;

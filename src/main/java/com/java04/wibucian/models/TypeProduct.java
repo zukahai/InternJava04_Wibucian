@@ -1,9 +1,6 @@
 package com.java04.wibucian.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -11,6 +8,7 @@ import java.util.Set;
 @Entity
 public class TypeProduct {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idTypeProduct", nullable = false, length = 15)
     private String id;
 
@@ -43,4 +41,5 @@ public class TypeProduct {
     public void setProducts(Set<Product> products) {
         this.products = products;
     }
-}
+
+    }

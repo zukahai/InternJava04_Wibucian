@@ -31,14 +31,14 @@ public class Product  {
     @Column(name = "productName", nullable = false, length = 100)
     private String productName;
 
-    @Column(name = "price")
-    private double price;
+    @Column(name="price")
+    private float price;
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

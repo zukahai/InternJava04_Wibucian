@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
-<jsp:include page="../includes/sidebar1.jsp"></jsp:include>
+<jsp:include page="../includes/sidebar.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
 <div class="content flex-column-fluid" id="kt_content">
 
@@ -17,7 +17,7 @@
             <!--end::Card title-->
             <!--begin::Action-->
             <a
-                    href="admin/product/create"
+                    href="admin/sale/create"
                     class="btn btn-primary align-self-center"
             >Thêm sản phẩm</a
             >
@@ -37,24 +37,27 @@
                         <th>Ảnh</th>
                         <th>Tên sản phẩm</th>
                         <th>Thể loại</th>
-                        <th>Giá</th>
+                        <th>Giảm giá (%)</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Thời gian kết thúc</th>
                         <th class="d-flex align-center justify-content-center">Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="item" items="${getlist}">
+                    <c:forEach var="item" items="${productSale}">
                         <tr>
                             <th scope="row">${  item.id }</th>
-                            <td><div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                <img class="w-140"
-                                     src="${pageContext.request.contextPath}/admin/assets/file-upload/${item.srcImage}"></div></td>
+                            <td>${  item.srcImage }</td>
                             <td>${  item.productName }</td>
-                            <td>${  item.productType.productName }</td>
-                            <td>${  item.price }</td>
+                            <td>${  item.productType.id }</td>
+                            <td>${  item.sale.pcent }</td>
+                            <td>${  item.sale.timeStart }</td>
+                            <td>${  item.sale.timeEnd }</td>
+
                             <td class="d-flex align-center justify-content-center">
-                                <a href="admin/product/detail/${item.id}" class="btn btn-warning mx-1">Xem</a>
-                                <a href="admin/product/edit/${ item.id }" class="btn btn-success mx-1">Sửa</a>
-                                <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
+                                <a href="" class="btn btn-warning mx-1">Xem</a>
+                                <a href="" class="btn btn-success mx-1">Sửa</a>
+                                <a href="" class="btn btn-danger mx-1">Xoá</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -68,42 +71,3 @@
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
 
-
-<script>
-    //handle on click delete-btn
-    $(document).on("click", ".delete-btn", function () {
-        var row = $(this).closest("tr");
-        var id = $(this).attr("data-id");
-        console.log(id);
-
-        swal.fire({
-            title: "Bạn có chắc chắn muốn xóa?",
-            text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Đồng ý",
-            cancelButtonText: "Hủy bỏ"
-        }).then(function (result) {
-            if (result.value) {
-                $.ajax({
-                    url: "/admin/product/delete/" + id,
-                    type: "GET",
-                    success: function (result) {
-                        if (result.check === true) {
-                            toastr.success("Xóa thành công");
-                            row.remove();
-                        } else {
-                            toastr.error("Xóa thất bại");
-                        }
-                    }
-                })
-            }
-        });
-
-
-    });
-
-    //handel on change id-select-product
-</script>
