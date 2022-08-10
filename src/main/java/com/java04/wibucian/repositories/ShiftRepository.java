@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ShiftRepository extends JpaRepository<Shift, String>, JpaSpecificationExecutor<Shift> {
-    // query records theo nhân viên, ngày làm việc và ca làm việc
-    public Optional<Shift> findByEmployeeAndShiftDateAndShiftCode(Employee employee, Date shiftDate,
-                                                                  int shiftCode);
+    // query records theo nhân viên, ngày làm việc, ca làm việc và trạng thái
+    public Optional<Shift> findByEmployeeAndShiftDateAndShiftCodeAndRequestShift(
+            Employee employee, Date shiftDate, Integer shiftCode, boolean requestShift);
 
     // query record theo ngày làm và ca làm, sắp xếp theo thời gian đăng ký
     public List<Shift> findAllByShiftDateAndShiftCodeOrderByRequestTimeDesc(Date shiftDate, int shiftCode);

@@ -13,7 +13,8 @@ import org.springframework.web.client.HttpClientErrorException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalExceptionHandler {
     @ExceptionHandler({Exception.class})
-    public @ResponseBody ResponseEntity<String> accessDenied() {
+    public @ResponseBody ResponseEntity<String> exception(Exception e) {
+        e.printStackTrace();
         return ResponseEntity.internalServerError()
                              .body("Internal Server Error");
     }

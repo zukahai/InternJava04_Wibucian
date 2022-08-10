@@ -6,14 +6,12 @@ import com.java04.wibucian.commons.ShiftOfDay;
 import com.java04.wibucian.commons.Utils;
 import com.java04.wibucian.dtos.ShiftDTO;
 import com.java04.wibucian.models.Employee;
-import com.java04.wibucian.models.Shift;
 import com.java04.wibucian.services.EmployeeService;
 import com.java04.wibucian.services.ShiftService;
-import com.java04.wibucian.validations.annotation.ValidDate;
+import com.java04.wibucian.services.WorkPlanService;
 import com.java04.wibucian.validations.annotation.ValidISO8061Date;
 import com.java04.wibucian.vos.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.DatatypeConverter;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -35,13 +32,12 @@ import java.util.Map;
 @Controller
 @RequestMapping("admin/shift")
 public class ShiftController {
-//clone code của đứa khác vể thử cái backup
-    //để t thử cái product service ni xem có lỗi y vậy k rồi có gì báo lại
     @Autowired
     private ShiftService shiftService;
-
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private WorkPlanService workPlanService;
 
     @ModelAttribute("contextPath")
     public String getContextPath(HttpServletRequest request) {
@@ -99,6 +95,8 @@ public class ShiftController {
             model.addAttribute("shiftsOfDay", ShiftOfDay.values());
             model.addAttribute("shiftRequestsForNextWeek",
                                this.shiftService.getAllShiftRequestsForNextWeak());
+            model.addAttribute("workPlansForNextWeek",
+                               this.workPlanService.getWorkPlanForNextWeek());
             Calendar firstDayOfNextWeek = Utils.getFirstDayOfNextWeek();
             Calendar lastDayOfNextWeek = Utils.getLastDayOfNextWeek();
             model.addAttribute("weekStart",
@@ -107,8 +105,7 @@ public class ShiftController {
             model.addAttribute("weekEnd", Utils.getDateFormat(lastDayOfNextWeek.getTime(),
                                                               Constant.DD_MM_YYYY_FORMAT));
 
-        }
-        model.addAttribute("isInShiftRequestTime", isInShiftRequestTime);
+        } model.addAttribute("isInShiftRequestTime", isInShiftRequestTime);
         return "admin/shift/request";
     }
 
@@ -134,6 +131,8 @@ public class ShiftController {
             model.addAttribute("shiftsOfDay", ShiftOfDay.values());
             model.addAttribute("shiftRequestsForNextWeek",
                                this.shiftService.getAllShiftRequestsForNextWeak());
+            model.addAttribute("workPlansForNextWeek",
+                               this.workPlanService.getWorkPlanForNextWeek());
             Calendar firstDayOfNextWeek = Utils.getFirstDayOfNextWeek();
             Calendar lastDayOfNextWeek = Utils.getLastDayOfNextWeek();
             model.addAttribute("weekStart",
@@ -155,6 +154,10 @@ public class ShiftController {
         return "admin/shift/preview";
     }
 
+    /**
+     * Xem lịch làm việc
+     * @return
+     */
     @GetMapping("/all")
     public String getShiftHistory() {
         return "/admin/shift/index";
@@ -226,6 +229,8 @@ public class ShiftController {
             model.addAttribute("shiftsOfDay", ShiftOfDay.values());
             model.addAttribute("shiftRequestsForNextWeek",
                                this.shiftService.getAllShiftRequestsForNextWeak());
+            model.addAttribute("workPlansForNextWeek",
+                               this.workPlanService.getWorkPlanForNextWeek());
 
             model.addAttribute("weekStart",
                                Utils.getDateFormat(firstDayOfNextWeek.getTime(),
@@ -247,12 +252,13 @@ public class ShiftController {
         return "admin/shift/requestShift";
     }
 
-//    @PostMapping("/staff/request")
-//    @ResponseBody
-//    public ResponseEntity<ShiftDTO> staffRequestShift(@Valid StaffShiftVO staffShiftVO) {
-//        staffShiftVO.setIdEmployee("Employee00004");
-//        return ResponseEntity.ok()
-//                             .body(this.shiftService.createShift(staffShiftVO,
-//                                                                 "Employee00004"));
-//    }
+    //    @PostMapping("/staff/request")
+    //    @ResponseBody
+    //    public ResponseEntity<ShiftDTO> staffRequestShift(@Valid StaffShiftVO
+    //    staffShiftVO) {
+    //        staffShiftVO.setIdEmployee("Employee00004");
+    //        return ResponseEntity.ok()
+    //                             .body(this.shiftService.createShift(staffShiftVO,
+    //                                                                 "Employee00004"));
+    //    }
 }

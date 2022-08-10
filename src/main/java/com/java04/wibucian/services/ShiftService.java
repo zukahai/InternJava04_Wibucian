@@ -8,20 +8,19 @@ import com.java04.wibucian.exception.NotFoundException;
 import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.models.Shift;
 import com.java04.wibucian.models.ShiftApprove;
+import com.java04.wibucian.models.WorkPlan;
 import com.java04.wibucian.repositories.EmployeeRepository;
 import com.java04.wibucian.repositories.ShiftApproveRepository;
 import com.java04.wibucian.repositories.ShiftRepository;
+import com.java04.wibucian.repositories.WorkPlanRepository;
 import com.java04.wibucian.vos.AdminShiftVO;
-import com.java04.wibucian.vos.ShiftQueryVO;
 import com.java04.wibucian.vos.ShiftUpdateVO;
 import com.java04.wibucian.vos.ShiftVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -34,9 +33,10 @@ public class ShiftService {
     private ShiftRepository shiftRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
-
     @Autowired
     private ShiftApproveRepository shiftApproveRepository;
+    @Autowired
+    private WorkPlanRepository workPlanRepository;
 
     /**
      * Phương thức dùng để tạo ca làm việc mới
@@ -78,8 +78,8 @@ public class ShiftService {
      * @return Mã ca làm việc vừa tạo
      */
     private ShiftDTO adminCreateShift(Employee employee, Calendar currentDate,
-                                    Calendar firstDayOfNextWeek,
-                                    Calendar lastDayOfNextWeek, ShiftVO shiftVO) {
+                                      Calendar firstDayOfNextWeek,
+                                      Calendar lastDayOfNextWeek, ShiftVO shiftVO) {
         Shift shift = null;
         // check xem ca làm đó đã có đủ người đăng ký chưa
         // nếu có nhiều hơn 2 ca đăng ký thì throw
@@ -110,8 +110,8 @@ public class ShiftService {
      * @return Mã ca làm việc vừa tạo
      */
     private ShiftDTO staffCreateShift(Employee employee, Calendar currentDate,
-                                    Calendar firstDayOfNextWeek,
-                                    Calendar lastDayOfNextWeek, ShiftVO shiftVO) {
+                                      Calendar firstDayOfNextWeek,
+                                      Calendar lastDayOfNextWeek, ShiftVO shiftVO) {
         Shift shift = null;
         // check số ca đăng ký chính thức của nhân viên, nếu vượt quá số lượng tối đa
         // thì chỉ cho phép đăng ký dự bị, ngược lại thì có thể đăng ký bình thường
@@ -195,9 +195,9 @@ public class ShiftService {
                                                                            + employeeId
                                                                            + " không "
                                                                            + "tồn tại"));
-        this.shiftRepository.findByEmployeeAndShiftDateAndShiftCode(employee,
+        this.shiftRepository.findByEmployeeAndShiftDateAndShiftCodeAndRequestShift(employee,
                                                                     shift.getShiftDate(),
-                                                                    shift.getShiftCode())
+                                                                    shift.getShiftCode(), true)
                             .ifPresent(shift1 -> {
                                 throw new BadRequestException(
                                         "Nhân viên đã đăng ký ca trong cùng buổi");
@@ -211,10 +211,9 @@ public class ShiftService {
 
     /**
      * Phương thức dùng để xác nhận các đăng ký ca làm việc cho tuần tiếp theo
-     *
-     * @return Kết quả thực hiện
      */
-    public boolean approveShiftRequest() {
+    @Scheduled(cron = Constant.SHIFT_REQUEST_REVIEW_CLOSE_CRON)
+    public void approveShiftRequest() {
         if (!this.isInShiftApproveTime()) {
             throw new AccessDeniedException("Không thể thực hiện tác vụ");
         }
@@ -233,15 +232,24 @@ public class ShiftService {
         shiftApprove.setApproveTime(new Date().toInstant());
         shiftApprove.setApproveFor(firstDayOfNextWeek.getTime());
         shiftApproveRepository.save(shiftApprove);
-        return true;
     }
 
+    /**
+     * Kiểm tra xem đã chốt lịch làm việc cho tuần tiếp theo chưa
+     * @return
+     */
     public boolean isAlreadyApprovedForNextWeek() {
         Calendar firstDayOfNextWeek = Utils.getFirstDayOfNextWeek();
         return this.shiftApproveRepository.findByApproveFor(firstDayOfNextWeek.getTime())
                                           .isPresent();
     }
 
+    /**
+     * Lấy tất cả các ca làm việc đã chốt trong một khoảng thời gian
+     * @param start
+     * @param end
+     * @return
+     */
     public List<ShiftDTO> findAllShiftsBetween(Calendar start, Calendar end) {
         return this.shiftRepository.findAllByRequestShiftAndShiftDateBetween(false,
                                                                              start.getTime(),
@@ -254,10 +262,6 @@ public class ShiftService {
     public ShiftDTO getById(String id) {
         Shift original = requireOne(id);
         return toDTO(original);
-    }
-
-    public Page<ShiftDTO> query(ShiftQueryVO vO) {
-        throw new UnsupportedOperationException();
     }
 
     private ShiftDTO toDTO(Shift shift) {
@@ -391,6 +395,14 @@ public class ShiftService {
                                             Calendar firstDayOfNextWeek,
                                             Calendar lastDayOfNextWeek, ShiftVO shiftVO,
                                             boolean adminCreateShift) {
+        // check xem buổi làm việc có được mở không
+        WorkPlan workPlan = this.workPlanRepository.findByShiftDateAndShiftCode(
+                                        shiftVO.getShiftDate(), shiftVO.getShiftCode())
+                                                   .orElse(null);
+        if (workPlan == null || !workPlan.getWork()) {
+            throw new BadRequestException("Ca làm việc không mở");
+        }
+
         // check xem có nhân viên không
         if (employee == null) {
             throw new NotFoundException("Nhân viên không tồn tại");
@@ -415,9 +427,9 @@ public class ShiftService {
         }
 
         // nếu đã đăng ký trước đó thì không cho phép đăng ký nữa
-        this.shiftRepository.findByEmployeeAndShiftDateAndShiftCode(employee,
+        this.shiftRepository.findByEmployeeAndShiftDateAndShiftCodeAndRequestShift(employee,
                                                                     shiftVO.getShiftDate(),
-                                                                    shiftVO.getShiftCode())
+                                                                    shiftVO.getShiftCode(), true)
                             .ifPresent((shift) -> {
                                 throw new BadRequestException("Đã đăng ký ca làm việc");
                             });

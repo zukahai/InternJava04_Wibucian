@@ -30,7 +30,7 @@
 							<div class="px-4">Đăng ký bình thường</div>
 						</div>
 						<div class="d-flex justify-content-center align-items-center pt-2">
-							<div class="h-20px w-20px bg-danger"></div>
+							<div class="h-20px w-20px bg-warning"></div>
 							<div class="px-4">Đăng ký dự bị</div>
 						</div>
 					</div>
@@ -41,16 +41,13 @@
 						<table class="table table-row-bordered table-striped gy-5">
 							<thead>
 								<tr class="fw-bold fs-6 text-gray-800 row row-cols-4">
-										<%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
 									<th class="col text-center"></th>
 									<th class="col text-center">Sáng</th>
 									<th class="col text-center">Chiều</th>
 									<th class="col text-center">Tối</th>
 								</tr>
 							</thead>
-								<%--							<div>${daysOfWeek}</div>--%>
 							<tbody>
-								<div id="kt_docs_fullcalendar_populated"></div>
 								<c:forEach var="day" items="${daysOfWeek}">
 									<tr class="row row-cols-4">
 										<td class="col d-flex align-items-center justify-content-center">${day}</td>
@@ -66,10 +63,16 @@
 														</c:when>
 														<c:otherwise>
 															<c:set var="textColor"
-																   value="text-danger"/>
+																   value="text-warning"/>
 														</c:otherwise>
 													</c:choose>
 													<div class="${textColor}">${shift.employee.id}</div>
+												</c:forEach>
+												<c:forEach var="workPlan"
+														   items="${workPlansForNextWeek[day][shiftOfDay]}">
+													<c:if test="${workPlan.work eq false}">
+														<div class="text-danger">Nghỉ</div>
+													</c:if>
 												</c:forEach>
 											</td>
 										</c:forEach>
