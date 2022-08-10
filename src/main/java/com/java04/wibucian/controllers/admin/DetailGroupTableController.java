@@ -65,7 +65,6 @@ public class DetailGroupTableController {
         page = (page > totalPage) ? totalPage : page;
 
         Pageable pageable = PageRequest.of(page - 1, limit);
-        System.out.println(page + " " + id);
 
         modelMap.addAttribute("page", page);
         modelMap.addAttribute("totalPage", totalPage);

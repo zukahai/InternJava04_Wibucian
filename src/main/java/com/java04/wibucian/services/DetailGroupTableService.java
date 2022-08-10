@@ -50,9 +50,6 @@ public class DetailGroupTableService {
         bean.setGroupTable(groupTable);
         bean.setGroupTime(Instant.now());
 
-        System.out.println("table " + table);
-        System.out.println("GroupTable " + groupTable);
-
         bean = detailGroupTableRepository.save(bean);
         return bean.getId();
     }
