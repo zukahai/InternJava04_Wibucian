@@ -4,6 +4,8 @@ import com.java04.wibucian.services.InvoiceService;
 import com.java04.wibucian.vos.InvoiceUpdateVO;
 import com.java04.wibucian.vos.InvoiceVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,11 +23,7 @@ public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
 
-    @GetMapping
-    public String index(ModelMap modelMap) {
-        modelMap.addAttribute("listInvoice", invoiceService.findAll());
-        return "/admin/invoice/index";
-    }
+
 
     @GetMapping(value = {"/detail/{id}"})
     public String detail(@PathVariable String id, ModelMap modelMap) {
@@ -71,6 +69,39 @@ public class InvoiceController {
             return ResponseEntity.ok().body(map);
         }
     }
+    //paginate page
+    @GetMapping(value = {"/{page}", "/", ""})
+    public String paginate(@PathVariable(required = false) String page, ModelMap modelMap, @RequestParam(defaultValue = "10") int limit) {
+        //check page != null
+        if (page == null) {
+            page = "1";
+        }
+        int pageInt;
+        try {
+             pageInt = Integer.parseInt(page);
+        } catch (Exception e) {
+            return "redirect:/invoice";
+        }
+        Pageable pageable = PageRequest.of(pageInt - 1, limit);
+        int allPage = invoiceService.getTotalPage(limit);
+        int count = invoiceService.getCount();
+        System.out.println(pageInt);
+        if (limit > count || limit<=0) {
+            limit = 10;
+        }
+        if (pageInt > allPage) {
+            return "redirect:/invoice/paginate/";
+        }
+        if (pageInt < 1 ) {
+            return "redirect:/invoice/paginate/";
+        }
+        modelMap.addAttribute("currentPage", pageInt);
+        modelMap.addAttribute("allPage", allPage);
+        modelMap.addAttribute(("limit"), limit);
+        modelMap.addAttribute("listInvoice", invoiceService.getPage(pageable));
+        return "/admin/invoice/index";
+    }
+
 
 }
 

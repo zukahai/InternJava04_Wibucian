@@ -9,6 +9,7 @@ import com.java04.wibucian.vos.InvoiceVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -169,6 +170,15 @@ public class InvoiceService {
     private Invoice requireOne(String id) {
         return invoiceRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
+    }
+    public List<Invoice> getPage(Pageable pageable) {
+        return invoiceRepository.findAll(pageable).getContent();
+    }
+    public int getTotalPage(int limit) {
+        return (int) Math.ceil((double) getCount() / limit);
+    }
+    public int getCount() {
+        return (int) invoiceRepository.count();
     }
 }
 
