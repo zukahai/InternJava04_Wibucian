@@ -2,8 +2,8 @@ package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.ProductDTO;
 import com.java04.wibucian.models.Product;
-import com.java04.wibucian.models.Sale;
 import com.java04.wibucian.models.TypeProduct;
+import com.java04.wibucian.repositories.DetailProductRepository;
 import com.java04.wibucian.repositories.ProductRepository;
 import com.java04.wibucian.repositories.SaleRepository;
 import com.java04.wibucian.repositories.TypeProductRepository;
@@ -11,9 +11,7 @@ import com.java04.wibucian.vos.ProductQueryVO;
 import com.java04.wibucian.vos.ProductUpdateVO;
 import com.java04.wibucian.vos.ProductVO;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,19 +20,16 @@ import java.util.NoSuchElementException;
 @Service
 public class ProductService {
 
-//    @Autowired
     private ProductRepository productRepository;
-//
-//    @Autowired
     private SaleRepository saleRepository;
-//
-//    @Autowired
     private TypeProductRepository typeProductRepository;
+    private DetailProductService detailProductService;
 
-    public ProductService(ProductRepository productRepository, SaleRepository saleRepository, TypeProductRepository typeProductRepository) {
+    public ProductService(ProductRepository productRepository, SaleRepository saleRepository, TypeProductRepository typeProductRepository, DetailProductService detailProductService) {
         this.productRepository = productRepository;
         this.saleRepository = saleRepository;
         this.typeProductRepository = typeProductRepository;
+        this.detailProductService = detailProductService;
     }
 
 
@@ -95,5 +90,11 @@ public class ProductService {
     private Product requireOne(String id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
+    }
+
+    public void updatePrice(String idProduct) {
+        Product product = productRepository.findById(idProduct).orElse(null);
+        product.setPrice(detailProductService.getProductSellPrice(idProduct));
+        productRepository.save(product);
     }
 }

@@ -39,10 +39,12 @@ public class DetailProductController {
 
     @GetMapping("/view/{idProduct}")
     public String HomeView(ModelMap modelMap, @Valid @NotNull @PathVariable("idProduct") String idProduct)throws Exception {
+        productService.updatePrice(idProduct);
         modelMap.addAttribute("product", productService.findById(idProduct));
         modelMap.addAttribute("ingredients", detailProductService.getIngredientNotSelect(idProduct));
         modelMap.addAttribute("detailProducts", detailProductService.findAllByProductId(idProduct));
         modelMap.addAttribute("priceProduct", detailProductService.getPriceProductFormIngerdienrt(idProduct));
+        modelMap.addAttribute("priceSell", detailProductService.getProductSellPrice(idProduct));
         return "admin/product/detailIngredient";
     }
 
@@ -73,6 +75,7 @@ public class DetailProductController {
         String idIngredient = formData.get("idIngredient").get(0);
         Float quantity = Float.parseFloat(formData.get("quantity").get(0));
         detailProductService.save(id, idIngredient, quantity);
+        productService.updatePrice(id);
         return "redirect:/admin/detailProduct/view/" + id;
     }
 

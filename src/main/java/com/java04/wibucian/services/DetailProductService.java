@@ -89,6 +89,12 @@ public class DetailProductService {
         return price;
     }
 
+    public Float getProductSellPrice(String idProduct) {
+        int profit = 80; // profit(%)
+        return (1 + profit / 100f) * getPriceProductFormIngerdienrt(idProduct);
+    }
+
+
     public Page<DetailProductDTO> query(DetailProductQueryVO vO) {
         throw new UnsupportedOperationException();
     }

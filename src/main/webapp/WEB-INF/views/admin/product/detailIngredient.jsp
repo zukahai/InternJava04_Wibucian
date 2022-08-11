@@ -38,7 +38,7 @@
                     <div class="col col-8 form-floating my-5">
                         <select class="form-select" data-control="select2" id="idIngredient" name="idIngredient" data-placeholder="Select an option">
                             <c:forEach var="item" items="${ingredients}">
-                                <option value="${item.id}">${item.id} - ${item.ingredientName}</option>
+                                <option value="${item.id}">${item.id} - ${item.ingredientName}    ( ${item.unit} )</option>
                             </c:forEach>
                         </select>
                         <label for="idIngredient">Nguyên liệu</label>
@@ -72,7 +72,7 @@
                         <tr>
                             <th scope="row">${  item.ingredient.id }</th>
                             <th scope="row">${  item.ingredient.ingredientName }</th>
-                            <th scope="row">${  item.ingredient.price } (VND/${ item.ingredient.unit})</th>
+                            <th scope="row"><fmt:formatNumber value="${item.ingredient.price}" maxFractionDigits = "3" type="number"/> (VND/${ item.ingredient.unit})</th>
                             <th scope="row">${ item.quantity } ${ item.ingredient.unit }</th>
                             <th scope="row" class="text-center"><fmt:formatNumber value="${  item.ingredient.price * item.quantity}" maxFractionDigits = "3" type="number"/></th>
                             <td class="d-flex align-center justify-content-center">
@@ -87,12 +87,13 @@
                     </c:forEach>
                     <c:if test="${detailProducts.size() > 0}">
                         <tr>
-                            <th class="text-center" colspan="4" scope="row">Tổng tiền thành phần của sản phẩm ${product.productName}:</th>
-                            <th scope="row" class="text-center"><fmt:formatNumber value="${priceProduct}" maxFractionDigits = "3" type="number"/></th>
+                            <th class="text-center text-primary" colspan="4" scope="row">Tổng tiền thành phần của sản phẩm ${product.productName}:</th>
+                            <th scope="row" class="text-center text-primary"><fmt:formatNumber value="${priceProduct}" maxFractionDigits = "3" type="number"/></th>
                         </tr>
                     </c:if>
                     </tbody>
                 </table>
+                <h1 class="text-center">Giá bán ra: <span class="text-danger"><fmt:formatNumber value="${priceSell}" maxFractionDigits = "3" type="number"/> VND</span></h1>
             </div>
         </div>
         <!--end::Card body-->
