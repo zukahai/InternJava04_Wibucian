@@ -84,7 +84,48 @@
                 </tbody>
             </table>
         </div>
+        <ul class="pagination">
+            <c:if test="${ allPage > 1}">
+                <c:if test="${ currentPage > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="/invoice/${currentPage - 1}?limit=${limit}">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${ currentPage == 1}">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="/invoice/${currentPage - 1}?limit=${limit}">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    </li>
+                </c:if>
+                <c:forEach var="i" begin="1" end="${allPage}">
+                    <c:if test="${ i == currentPage}">
+                        <li class="page-item active"><a href="/invoice/${i}?limit=${limit}" class="page-link">${i}</a></li>
+                    </c:if>
+                    <c:if test="${ i != currentPage}">
+                        <li class="page-item"><a href="/invoice/${i}?limit=${limit}" class="page-link">${i}</a></li>
+                    </c:if>
+                </c:forEach>
+                <c:if test="${ currentPage == allPage}">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="/invoice/${currentPage + 1}?limit=${limit}">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${ currentPage < allPage}">
+                    <li class="page-item ">
+                        <a class="page-link" href="/invoice/${currentPage + 1}?limit=${limit}">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </c:if>
+            </c:if>
+        </ul>
     </div>
+</div>
 
 </div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>

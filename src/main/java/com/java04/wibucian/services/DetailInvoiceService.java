@@ -44,15 +44,16 @@ public class DetailInvoiceService {
             BeanUtils.copyProperties(vO, bean);
             Invoice invoice = invoiceRepository.findById(vO.getIdInvoice()).orElseThrow(() -> new NoSuchElementException());
             Product product = productRepository.findById(vO.getIdProduct()).orElseThrow(() -> new NoSuchElementException());
-            Instant now = Instant.now();
             Double salePrice = product.getPrice();
             Sale sale = product.getSale();
-            Instant sale_start = sale.getTimeStart();
-            Instant sale_end = sale.getTimeEnd();
-            bean.setProduct(product);
-            if (now.isAfter(sale_start) && now.isBefore(sale_end)) {
-                salePrice = salePrice - (salePrice * Double.parseDouble(sale.getPcent()) / 100);
-                bean.setProduct(product);
+            if (sale != null) {
+                Instant now = Instant.now();
+                Instant sale_start = sale.getTimeStart();
+                Instant sale_end = sale.getTimeEnd();
+                if (now.isAfter(sale_start) && now.isBefore(sale_end)) {
+                    salePrice = salePrice - (salePrice * Double.parseDouble(sale.getPcent()) / 100);
+                    bean.setProduct(product);
+                }
             }
             bean.setProduct(product);
             bean.setInvoice(invoice);
@@ -76,15 +77,19 @@ public class DetailInvoiceService {
         DetailInvoice bean = requireOne(id);
         Product product = bean.getProduct();
         Double currentTotalMoney = bean.getTotalMoney();
-        Instant now = Instant.now();
-        Sale sale = product.getSale();
-        Instant sale_start = sale.getTimeStart();
-        Instant sale_end = sale.getTimeEnd();
-        bean.setProduct(product);
         Double salePrice = product.getPrice();
-        if (now.isAfter(sale_start) && now.isBefore(sale_end)) {
-            salePrice = salePrice - (salePrice * Double.parseDouble(sale.getPcent()) / 100);
+
+        Sale sale = product.getSale();
+        if (sale != null){
+            Instant now = Instant.now();
+            Instant sale_start = sale.getTimeStart();
+            Instant sale_end = sale.getTimeEnd();
+            bean.setProduct(product);
+            if (now.isAfter(sale_start) && now.isBefore(sale_end)) {
+                salePrice = salePrice - (salePrice * Double.parseDouble(sale.getPcent()) / 100);
+            }
         }
+
         Double totalMoney = salePrice * vO.getQuantity();
         bean.setTotalMoney(totalMoney);
         bean.setDateTime(Instant.now());
