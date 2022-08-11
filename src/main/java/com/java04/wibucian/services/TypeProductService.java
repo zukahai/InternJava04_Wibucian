@@ -10,8 +10,11 @@ import com.java04.wibucian.vos.TypeProductVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -67,4 +70,25 @@ public class TypeProductService {
     public TypeProduct findById(String id) {
         return requireOne(id);
     }
+
+    public List<TypeProduct> findAll(Pageable pageable) {
+        return typeProductRepository.findAll(pageable).getContent();
+    }
+
+    public List<TypeProduct> findAllHoang(Pageable pageable) {
+        int start = pageable.getPageNumber() * pageable.getPageSize();
+        List<TypeProduct> all = typeProductRepository.findAll();
+        List<TypeProduct> answer = new ArrayList();
+
+        for (int i = start; i < start + pageable.getPageSize() && i < all.size(); i++) {
+            answer.add(all.get(i));
+        }
+        return answer;
+    }
+
+    public int getTotalPage(int limit) {
+        return (int) Math.ceil(typeProductRepository.count() / (float)limit);
+    }
 }
+
+

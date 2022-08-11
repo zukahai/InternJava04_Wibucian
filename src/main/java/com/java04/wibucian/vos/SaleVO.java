@@ -22,7 +22,7 @@ public class SaleVO implements Serializable {
 
     public Date getTimeStart() {
         try {
-            return new SimpleDateFormat("dd-MM-yyyy").parse(this.timeStart);
+            return new SimpleDateFormat("yyyy-MM-dd").parse(this.timeStart);
         } catch (ParseException e) {
             throw new RuntimeException();
         }
@@ -30,7 +30,7 @@ public class SaleVO implements Serializable {
 
     public Date getTimeEnd() {
         try {
-            return new SimpleDateFormat("dd-MM-yyyy").parse(this.timeEnd);
+            return new SimpleDateFormat("yyyy-MM-dd").parse(this.timeEnd);
         } catch (ParseException e) {
             throw new RuntimeException();
         }

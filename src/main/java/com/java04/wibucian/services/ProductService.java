@@ -9,9 +9,11 @@ import com.java04.wibucian.vos.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -121,5 +123,24 @@ public class ProductService {
     private Product requireOne(String id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
+    }
+
+    public List<Product> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable).getContent();
+    }
+
+    public List<Product> findAllHoang(Pageable pageable) {
+        int start = pageable.getPageNumber() * pageable.getPageSize();
+        List<Product> all = productRepository.findAll();
+        List<Product> answer = new ArrayList();
+
+        for (int i = start; i < start + pageable.getPageSize() && i < all.size(); i++) {
+            answer.add(all.get(i));
+        }
+        return answer;
+    }
+
+    public int getTotalPage(int limit) {
+        return (int) Math.ceil(productRepository.count() / (float)limit);
     }
 }
