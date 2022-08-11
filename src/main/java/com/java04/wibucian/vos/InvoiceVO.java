@@ -21,7 +21,7 @@ public class InvoiceVO implements Serializable {
 
     private String customerName;
 
-    private Float toltalMoney;
+    private Double toltalMoney;
 
     private Date dateTime;
 

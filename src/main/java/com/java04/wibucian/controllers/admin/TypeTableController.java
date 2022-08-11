@@ -38,7 +38,7 @@ public class TypeTableController {
         int totalPage = typeTableService.getTotalPage(limit);
         modelMap.addAttribute("page", page);
         modelMap.addAttribute("totalPage", totalPage);
-        modelMap.addAttribute("typeTables", typeTableService.findAllHaiZuka(pageable));
+        modelMap.addAttribute("typeTables", typeTableService.findAll(pageable));
         return "admin/typeTable/index";
     }
 
@@ -50,7 +50,7 @@ public class TypeTableController {
         Pageable pageable = PageRequest.of(page - 1, limit);
         modelMap.addAttribute("page", page);
         modelMap.addAttribute("totalPage", totalPage);
-        modelMap.addAttribute("typeTables", typeTableService.findAllHaiZuka(pageable));
+        modelMap.addAttribute("typeTables", typeTableService.findAll(pageable));
         return "admin/typeTable/index";
     }
 

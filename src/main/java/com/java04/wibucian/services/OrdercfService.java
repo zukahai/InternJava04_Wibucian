@@ -9,9 +9,12 @@ import com.java04.wibucian.vos.OrdercfVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -38,24 +41,26 @@ public class OrdercfService {
 
     public String save(OrdercfVO vO) {
         Ordercf bean = new Ordercf();
-        if(vO.getIdOrdercf() == null){
+        if (vO.getId() == null) {
             BeanUtils.copyProperties(vO, bean);
             Product product = productRepository.findById(vO.getIdProduct()).orElseThrow(() -> new NoSuchElementException());
+            Sale sale = product.getSale();
+            Instant now = Instant.now();
+            Instant sale_start = sale.getTimeStart();
+            Instant sale_end = sale.getTimeEnd();
             GroupTable groupTable = groupTableRepository.findById(vO.getIdGroupTable()).orElseThrow(() -> new NoSuchElementException());
             bean.setProduct(product);
             bean.setGroupTable(groupTable);
             bean.setTimeOrder(Instant.now());
             bean = ordercfRepository.save(bean);
-        }
-        if(vO.getId()!= null){
-            System.out.println(vO.getId());
+        } else if (vO.getId() != null) {
             update(String.valueOf(vO.getIdOrdercf()), vO);
         }
         return bean.getId();
-
     }
 
-   //delete return json
+
+    //delete return json
     public void delete(String id) {
         ordercfRepository.deleteById(id);
     }
@@ -69,6 +74,11 @@ public class OrdercfService {
     public OrdercfDTO getById(String id) {
         Ordercf original = requireOne(id);
         return toDTO(original);
+    }
+
+    public OrdercfNoMapPing getByIdNoMapPing(String id) {
+        OrdercfNoMapPing original = ordercfNoMapPingRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
+        return original;
     }
 
     public Page<OrdercfDTO> query(OrdercfQueryVO vO) {
@@ -86,20 +96,25 @@ public class OrdercfService {
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
 
-    public List<Ordercf> findALl() {
+    public List<Ordercf> findAll() {
         return ordercfRepository.findAll();
     }
 
     public List<OrdercfNoMapPing> findByGroupTableId(String id) {
         return ordercfNoMapPingRepository.findByGroupTableId(id);
     }
+
     public ProductNoMapPing findByProductId(String id) {
         return productNoMapPingRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
     }
+
     //findByGroupTableId(String groupTableId);
     public GroupTableNoMapPing findGroupTableId(String id) {
         return groupTableNoMapPingRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
     }
 
+    public List<OrdercfNoMapPing> findAllNoMapp() {
+        return ordercfNoMapPingRepository.findAll(Sort.by(Sort.Direction.ASC, "timeOrder"));
+    }
 
 }
