@@ -12,11 +12,15 @@
         <div class="card-header cursor-pointer">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Quản lý nhập hàng</h3>
+                <h3 class="fw-bold m-0">Danh sách nhập hàng</h3>
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
-            <span class="btn btn-primary add-new-importgood align-self-center">Thêm nhập hàng</span>
+            <a
+                    href="admin/importgoods/create/"
+                    class="btn btn-primary align-self-center"
+            >Thêm nhập hàng</a
+            >
             <!--end::Action-->
         </div>
         <!--begin::Card header-->
@@ -37,23 +41,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="item" items="${importgoods}">
+                    <c:forEach var="item" items="${nhaphang}">
                         <tr>
                             <th scope="row">${  item.id }</th>
-                            <td>${  item.employee.name }</td>
+                            <td>${  item.employee.id }</td>
                             <td>${  item.dateFormat }</td>
-                            <td class="text-center">
-                                <a href="/admin/importgoods/${item.id}" data-action="${item.id}"
-                                   class="btn btn-icon btn-primary  btn-sm btn-icon-md btn-circle"
-                                   data-toggle="tooltip" data-placement="top" title="Sửa">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-
-                                <span data-action="${item.id}"
-                                      class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
-                                      data-toggle="tooltip" data-placement="top" title="Xóa">
-                                <i class="fa fa-trash"></i>
-                            </span>
+                            <td>
+                                <a href="" class="btn btn-warning mx-1">Xem</a>
+                                <a href="admin/importgoods/edit/${ item.id }" class="btn btn-success mx-1">Sửa</a>
+                                <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
                             </td>
                         </tr>
                     </c:forEach>
@@ -66,24 +62,42 @@
 </div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
-<script !src="">
-    $('.add-new-importgood').click(function () {
-        $.ajax({
-            url: '${pageContext.request.contextPath}/admin/importgoods',
-            type: 'POST',
-            data: JSON.stringify({}),
-            contentType: 'application/json',
-            success: function (result) {
-               if(result.check == true){
-                   toastr.success("Thêm nguyên liệu thành công");
-                   setTimeout(function () {
-                       window.location.href = '${pageContext.request.contextPath}/admin/importgoods/'+result.value.idImportGoods;
-                   }, 1000);
-               }
-               else {
-                   toastr.error("Thêm nguyên liệu thất bại");
-               }
+
+<script>
+    //handle on click delete-btn
+    $(document).on("click", ".delete-btn", function () {
+        var row = $(this).closest("tr");
+        var id = $(this).attr("data-id");
+        console.log(id);
+
+        swal.fire({
+            title: "Bạn có chắc chắn muốn xóa?",
+            text: "Sau khi xóa, bạn sẽ không thể phục hồi dữ liệu này!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Đồng ý",
+            cancelButtonText: "Hủy bỏ"
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: "/admin/importgoods/delete/" + id,
+                    type: "GET",
+                    success: function (result) {
+                        if (result.check === true) {
+                            toastr.success("Xóa thành công");
+                            row.remove();
+                        } else {
+                            toastr.error("Xóa thất bại: Tồn tại bàn có loại bàn này");
+                        }
+                    }
+                })
             }
         });
+
+
     });
+
+    //handel on change id-select-product
 </script>
