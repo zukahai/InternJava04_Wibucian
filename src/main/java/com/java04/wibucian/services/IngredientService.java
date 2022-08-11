@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -54,5 +55,9 @@ public class IngredientService {
     private Ingredient requireOne(String id) {
         return ingredientRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
+    }
+
+    public List<Ingredient> findAll() {
+        return ingredientRepository.findAll();
     }
 }

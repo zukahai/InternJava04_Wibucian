@@ -38,16 +38,8 @@ public class TypeTableController {
         int totalPage = typeTableService.getTotalPage(limit);
         modelMap.addAttribute("page", page);
         modelMap.addAttribute("totalPage", totalPage);
-        modelMap.addAttribute("typeTables", typeTableService.findAllHaiZuka(pageable));
+        modelMap.addAttribute("typeTables", typeTableService.findAll(pageable));
         return "admin/typeTable/index";
-    }
-
-
-    @GetMapping("/edit/{id}")
-    public String HomeEdit(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
-        TypeTable typeTable = typeTableService.findById(id);
-        modelMap.addAttribute("typeTable", typeTable);
-        return "admin/typeTable/edit";
     }
 
     @GetMapping("/page/{page}")
@@ -58,8 +50,15 @@ public class TypeTableController {
         Pageable pageable = PageRequest.of(page - 1, limit);
         modelMap.addAttribute("page", page);
         modelMap.addAttribute("totalPage", totalPage);
-        modelMap.addAttribute("typeTables", typeTableService.findAllHaiZuka(pageable));
+        modelMap.addAttribute("typeTables", typeTableService.findAll(pageable));
         return "admin/typeTable/index";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String HomeEdit(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
+        TypeTable typeTable = typeTableService.findById(id);
+        modelMap.addAttribute("typeTable", typeTable);
+        return "admin/typeTable/edit";
     }
 
     @GetMapping("/create")

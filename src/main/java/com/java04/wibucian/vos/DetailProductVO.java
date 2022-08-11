@@ -10,16 +10,10 @@ import java.io.Serializable;
 public class DetailProductVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "id can not null")
-    private Integer id;
-
-    @NotNull(message = "idDetailProduct can not null")
-    private String idDetailProduct;
-
     private String idProduct;
 
     private String idIngredient;
 
-    private Integer quantity;
+    private Float quantity;
 
 }

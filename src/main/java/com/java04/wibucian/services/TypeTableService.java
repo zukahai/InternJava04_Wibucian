@@ -83,6 +83,6 @@ public class TypeTableService {
     }
 
     public int getTotalPage(int limit) {
-        return (int) Math.ceil(typeTableRepository.findAll().size() / (float)limit);
+        return (int) Math.ceil(typeTableRepository.count() / (float)limit);
     }
 }
