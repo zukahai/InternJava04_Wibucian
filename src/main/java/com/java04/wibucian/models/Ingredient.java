@@ -1,17 +1,16 @@
 package com.java04.wibucian.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 public class Ingredient {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idIngredient", nullable = false, length = 15)
     private String id;
 
@@ -19,10 +18,10 @@ public class Ingredient {
     private String ingredientName;
 
     @Column(name = "expiryIngredient")
-    private Instant expiryIngredient;
+    private Date expiryIngredient;
 
     @Column(name = "price", nullable = false)
-    private Double price;
+    private Float price;
 
     @Column(name = "origin", nullable = false, length = 100)
     private String origin;
@@ -53,19 +52,19 @@ public class Ingredient {
         this.ingredientName = ingredientName;
     }
 
-    public Instant getExpiryIngredient() {
+    public Date getExpiryIngredient() {
         return expiryIngredient;
     }
 
-    public void setExpiryIngredient(Instant expiryIngredient) {
+    public void setExpiryIngredient(Date expiryIngredient) {
         this.expiryIngredient = expiryIngredient;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

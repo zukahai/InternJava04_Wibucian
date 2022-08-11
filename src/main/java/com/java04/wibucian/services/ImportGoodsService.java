@@ -41,6 +41,10 @@ public class ImportGoodsService {
         return importGoodsRepository.findAll();
     }
 
+    public ImportGoods findById(String id) {
+        return requireOne(id);
+    }
+
     public ImportGoodsDTO getById(String id) {
         ImportGoods original = requireOne(id);
         return toDTO(original);

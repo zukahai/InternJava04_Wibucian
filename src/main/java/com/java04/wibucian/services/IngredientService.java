@@ -40,6 +40,10 @@ public class IngredientService {
     public List<Ingredient> findAll(){
         return ingredientRepository.findAll();
     }
+
+    public Ingredient findById(String id) {
+        return requireOne(id);
+    }
     public IngredientDTO getById(String id) {
         Ingredient original = requireOne(id);
         return toDTO(original);

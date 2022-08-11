@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -11,16 +13,12 @@ import java.util.Date;
 public class IngredientVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "id can not null")
-    private Integer id;
 
-    @NotNull(message = "idIngredient can not null")
-    private String idIngredient;
 
     @NotNull(message = "ingredientName can not null")
     private String ingredientName;
 
-    private Date expiryIngredient;
+    private String expiryIngredient;
 
     @NotNull(message = "price can not null")
     private Float price;
@@ -30,5 +28,12 @@ public class IngredientVO implements Serializable {
 
     @NotNull(message = "unit can not null")
     private String unit;
-
+    public Date getexpiryIngredient() {
+        System.out.println(this.expiryIngredient);
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(this.expiryIngredient);
+        } catch(ParseException e) {
+            throw new RuntimeException("Ngày không hợp lệ");
+        }
+    }
 }
