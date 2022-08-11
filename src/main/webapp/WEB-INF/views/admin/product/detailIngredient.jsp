@@ -44,7 +44,7 @@
                         <label for="idIngredient">Nguyên liệu</label>
                     </div>
                     <div class="col col-2 form-floating my-5 text-center justify-content-center align-items-center d-inline-flex">
-                        <input type="groupName" class="form-control" id="quantity" name="quantity" placeholder="0"/>
+                        <input type="groupName" class="form-control" id="quantity" name="quantity" value="0"/>
                         <label for="quantity">Số lượng</label>
                     </div>
                     <div class="col col-2 text-center justify-content-center align-items-center d-inline-flex p-2">
@@ -63,7 +63,7 @@
                         <th>Tên nguyên liệu</th>
                         <th>Đơn giá</th>
                         <th>Lượng</th>
-                        <th>Thành tiền (VND)</th>
+                        <th class="text-center">Thành tiền (VND)</th>
                         <th class="d-flex align-center justify-content-center">Hành động</th>
                     </tr>
                     </thead>
@@ -74,16 +74,23 @@
                             <th scope="row">${  item.ingredient.ingredientName }</th>
                             <th scope="row">${  item.ingredient.price } (VND/${ item.ingredient.unit})</th>
                             <th scope="row">${ item.quantity } ${ item.ingredient.unit }</th>
-                            <th scope="row">${  item.ingredient.price * item.quantity}</th>
+                            <th scope="row" class="text-center"><fmt:formatNumber value="${  item.ingredient.price * item.quantity}" maxFractionDigits = "3" type="number"/></th>
                             <td class="d-flex align-center justify-content-center">
                                 <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
                                       data-toggle="tooltip" data-placement="top" data-id="${item.id}" title="Xóa">
                                     <i class="fa fa-trash"></i>
                                 </span>
                             </td>
+
                             <!--end::Action=-->
                         </tr>
                     </c:forEach>
+                    <c:if test="${detailProducts.size() > 0}">
+                        <tr>
+                            <th class="text-center" colspan="4" scope="row">Tổng tiền thành phần của sản phẩm ${product.productName}:</th>
+                            <th scope="row" class="text-center"><fmt:formatNumber value="${priceProduct}" maxFractionDigits = "3" type="number"/></th>
+                        </tr>
+                    </c:if>
                     </tbody>
                 </table>
             </div>
@@ -117,6 +124,7 @@
                     success: function (result) {
                         if (result.check === true) {
                             toastr.success("Xóa thành công");
+                            window.location.reload();
                             row.remove();
                         } else {
                             toastr.error("Xóa thất bại");

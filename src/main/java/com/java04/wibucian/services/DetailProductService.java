@@ -81,6 +81,14 @@ public class DetailProductService {
         return detailProductRepository.findAllByProductId(id);
     }
 
+    public Float getPriceProductFormIngerdienrt(String idProduct){
+        Float price = 0f;
+        for(DetailProduct detailProduct : detailProductRepository.findAllByProductId(idProduct)){
+            price += (detailProduct.getQuantity() * Float.valueOf(detailProduct.getIngredient().getPrice().toString()));
+        }
+        return price;
+    }
+
     public Page<DetailProductDTO> query(DetailProductQueryVO vO) {
         throw new UnsupportedOperationException();
     }

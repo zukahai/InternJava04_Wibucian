@@ -42,6 +42,7 @@ public class DetailProductController {
         modelMap.addAttribute("product", productService.findById(idProduct));
         modelMap.addAttribute("ingredients", detailProductService.getIngredientNotSelect(idProduct));
         modelMap.addAttribute("detailProducts", detailProductService.findAllByProductId(idProduct));
+        modelMap.addAttribute("priceProduct", detailProductService.getPriceProductFormIngerdienrt(idProduct));
         return "admin/product/detailIngredient";
     }
 
