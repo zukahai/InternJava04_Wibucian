@@ -20,6 +20,6 @@ public class DetailProductVO implements Serializable {
 
     private String idIngredient;
 
-    private Integer quantity;
+    private Float quantity;
 
 }
