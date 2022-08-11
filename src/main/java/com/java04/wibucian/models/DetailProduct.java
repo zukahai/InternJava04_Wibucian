@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Entity
 public class DetailProduct {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDetailProduct", nullable = false, length = 15)
     private String id;
 

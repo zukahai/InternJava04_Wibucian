@@ -78,6 +78,10 @@ public class ProductService {
         return toDTO(original);
     }
 
+    public Product findById(String id) {
+        return requireOne(id);
+    }
+
     public Page<ProductDTO> query(ProductQueryVO vO) {
         throw new UnsupportedOperationException();
     }
