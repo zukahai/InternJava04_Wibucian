@@ -1,0 +1,4 @@
+use wibucian go
+
+alter table Sale
+    add name nvarchar(100) not null

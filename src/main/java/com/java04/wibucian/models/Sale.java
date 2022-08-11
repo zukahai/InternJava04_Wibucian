@@ -3,6 +3,7 @@ package com.java04.wibucian.models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -25,16 +26,16 @@ public class Sale  {
     @Column(name = "timeEnd")
     private Instant timeEnd;
 
-    public Instant getTimeEnd() {
-        return timeEnd;
+    public Date getTimeEnd() {
+        return Date.from(this.timeEnd);
     }
 
     public void setTimeEnd(Instant timeEnd) {
         this.timeEnd = timeEnd;
     }
 
-    public Instant getTimeStart() {
-        return timeStart;
+    public Date getTimeStart() {
+        return Date.from(this.timeStart);
     }
 
     public void setTimeStart(Instant timeStart) {

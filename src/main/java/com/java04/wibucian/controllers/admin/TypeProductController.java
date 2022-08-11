@@ -1,12 +1,16 @@
 package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.TypeProductDTO;
+import com.java04.wibucian.models.Product;
+import com.java04.wibucian.models.Sale;
 import com.java04.wibucian.models.TypeProduct;
 import com.java04.wibucian.models.TypeTable;
 import com.java04.wibucian.services.TypeProductService;
 import com.java04.wibucian.vos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,22 +22,40 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
+import java.util.Set;
 
 @Validated
 @Controller
 @RequestMapping("admin/typeProduct")
 public class TypeProductController {
 
+    public static final int limit = 5;
 
     private TypeProduct TypeProductService;
 
     @GetMapping("/")
     public String Home(ModelMap modelMap) throws Exception {
-
-        modelMap.addAttribute("typeProduct", typeProductService.findAll());
+        int page = 1;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        int totalPage = typeProductService.getTotalPage(limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("typeProduct", typeProductService.findAll(pageable));
         return "admin/typeProduct/index";
     }
 
+
+    @GetMapping("/page/{page}")
+    public String HomePage(ModelMap modelMap, @Valid @NotNull @PathVariable("page") int page)throws Exception {
+        int totalPage = typeProductService.getTotalPage(limit);
+        page = (page < 1) ? 1 : page;
+        page = (page > totalPage) ? totalPage : page;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("typeProduct", typeProductService.findAll(pageable));
+        return "admin/typeProduct/index";
+    }
     @GetMapping("/create")
     public String createProductPage(ModelMap modelMap) throws Exception {
         return "admin/typeProduct/create";
@@ -74,15 +96,13 @@ public class TypeProductController {
             HashMap<String, Object> map = new HashMap<>();
             map.put("check", true);
             map.put("value", "test");
-            return ResponseEntity.ok()
-                    .body(map);
+            return ResponseEntity.ok().body(map);
         } catch (Exception e) {
             e.printStackTrace();
             HashMap<String, Object> map = new HashMap<>();
             map.put("check", false);
             map.put("value", "test");
-            return ResponseEntity.ok()
-                    .body(map);
+            return ResponseEntity.ok().body(map);
         }
     }
     //delete

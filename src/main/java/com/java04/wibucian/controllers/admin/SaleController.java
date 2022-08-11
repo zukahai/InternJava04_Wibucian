@@ -11,6 +11,8 @@ import com.java04.wibucian.vos.SaleUpdateVO;
 import com.java04.wibucian.vos.SaleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,8 @@ public class SaleController {
     @Autowired
     private SaleService saleService;
     private ProductService productService;
+
+    public static final int limit = 5;
        public SaleController(SaleService saleService, ProductService productService) {
         this.saleService = saleService;
         this.productService = productService;
@@ -39,16 +43,41 @@ public class SaleController {
     @GetMapping("/")
     public String Home(ModelMap modelMap)throws Exception {
 
-        modelMap.addAttribute("sale", saleService.findAll());
+        int page = 1;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        int totalPage = saleService.getTotalPage(limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("sale", saleService.findAll(pageable));
+
+       // modelMap.addAttribute("sale", saleService.findAll());
         return "admin/sale/index";
     }
 
+
+    @GetMapping("/page/{page}")
+    public String HomePage(ModelMap modelMap, @Valid @NotNull @PathVariable("page") int page)throws Exception {
+        int totalPage = saleService.getTotalPage(limit);
+        page = (page < 1) ? 1 : page;
+        page = (page > totalPage) ? totalPage : page;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("sale", saleService.findAll(pageable));
+        return "admin/sale/index";
+    }
     //edit
     @GetMapping("/edit/{id}")
     public String HomeEdit(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
         Sale sale = saleService.findById(id);
         modelMap.addAttribute("sale", sale);
         return "admin/sale/edit";
+    }
+    @GetMapping(value = "/detail/{id}")
+    public String detail(ModelMap modelMap,@Valid @NotNull @PathVariable("id") String id) throws Exception{
+           Sale sale = saleService.findById(id);
+           modelMap.addAttribute("sale", sale);
+           return "admin/sale/detail";
     }
 
     @RequestMapping(value = "/edit",
@@ -81,14 +110,12 @@ public class SaleController {
             return ResponseEntity.ok().body(map);
         }
     }
-
-
     //delete
 
     //edit
 
     @GetMapping("/create")
-    public String createSaletPage(ModelMap modelMap) throws Exception {
+    public String createSalePage(ModelMap modelMap) throws Exception {
         modelMap.addAttribute("sale", this.saleService.findAll());
         return "admin/sale/create";
     }

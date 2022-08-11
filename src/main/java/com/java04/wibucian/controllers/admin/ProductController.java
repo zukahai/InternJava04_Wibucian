@@ -8,6 +8,8 @@ import com.java04.wibucian.services.TypeProductService;
 import com.java04.wibucian.vos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,7 @@ public class ProductController {
 
 
     private SaleService saleService;
+    public static final int limit = 5;
 
 
     public ProductController(TypeProductService typeProductService, SaleService saleService) {
@@ -47,7 +50,25 @@ public class ProductController {
 
     @GetMapping("/")
     public String Home(ModelMap modelMap) throws Exception {
-        modelMap.addAttribute("getlist", productService.listAll());
+        int page = 1;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        int totalPage = typeProductService.getTotalPage(limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("product", productService.findAll(pageable));
+        //modelMap.addAttribute("getlist", productService.listAll());
+        return "admin/product/index";
+    }
+
+    @GetMapping("/page/{page}")
+    public String HomePage(ModelMap modelMap, @Valid @NotNull @PathVariable("page") int page)throws Exception {
+        int totalPage = productService.getTotalPage(limit);
+        page = (page < 1) ? 1 : page;
+        page = (page > totalPage) ? totalPage : page;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("product", productService.findAll(pageable));
         return "admin/product/index";
     }
 
