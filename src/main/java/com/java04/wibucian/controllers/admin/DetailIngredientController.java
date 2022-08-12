@@ -1,4 +1,4 @@
-package com.java04.wibucian.controllers;
+package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.DetailIngredientDTO;
 import com.java04.wibucian.services.DetailIngredientService;
@@ -7,6 +7,8 @@ import com.java04.wibucian.vos.DetailIngredientUpdateVO;
 import com.java04.wibucian.vos.DetailIngredientVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +16,18 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Validated
-@RestController
-@RequestMapping("/detailIngredient")
+@Controller
+@RequestMapping("admin/detailIngredient")
 public class DetailIngredientController {
 
     @Autowired
     private DetailIngredientService detailIngredientService;
+
+    @GetMapping("/")
+    public String Home(ModelMap modelMap)throws Exception {
+        modelMap.addAttribute("detailIngredients", detailIngredientService.findAll());
+        return "admin/ingredient/detail";
+    }
 
     @PostMapping
     public String save(@Valid @RequestBody DetailIngredientVO vO) {

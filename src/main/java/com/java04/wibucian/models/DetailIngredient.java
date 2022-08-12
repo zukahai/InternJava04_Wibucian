@@ -2,6 +2,10 @@ package com.java04.wibucian.models;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 @Entity
 public class DetailIngredient {
@@ -60,6 +64,14 @@ public class DetailIngredient {
 
     public void setDateTime(Instant dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String formatTime(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime( FormatStyle.MEDIUM )
+                .withLocale( Locale.UK )
+                .withZone( ZoneId.systemDefault() );
+
+        return formatter.format( this.dateTime );
     }
 
 }
