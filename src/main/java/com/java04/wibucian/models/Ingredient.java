@@ -37,6 +37,17 @@ public class Ingredient {
     @OneToMany(mappedBy = "ingredient")
     private Set<DetailProduct> detailProducts = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "idIngredient")
+    private Set<DetailIngredient> detailIngredients = new LinkedHashSet<>();
+
+    public Set<DetailIngredient> getDetailIngredients() {
+        return detailIngredients;
+    }
+
+    public void setDetailIngredients(Set<DetailIngredient> detailIngredients) {
+        this.detailIngredients = detailIngredients;
+    }
+
     public String getId() {
         return id;
     }
