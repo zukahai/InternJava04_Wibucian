@@ -89,9 +89,11 @@ public class DetailProductService {
         return price;
     }
 
-    public Float getProductSellPrice(String idProduct) {
+    public Double getProductSellPrice(String idProduct) {
         int profit = 80; // profit(%)
-        return (1 + profit / 100f) * getPriceProductFormIngerdienrt(idProduct);
+        Double priceSell = (1 + profit / 100.0) * getPriceProductFormIngerdienrt(idProduct);
+        priceSell = Math.ceil(priceSell / 1000);
+        return priceSell * 1000;
     }
 
 
