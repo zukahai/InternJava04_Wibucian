@@ -36,7 +36,7 @@ public class EmployeeVO implements Serializable {
     private String gender;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birthDay;
+    private String birthDay;
 
     @NotNull(message = "maritalStatus can not null")
     private String maritalStatus;

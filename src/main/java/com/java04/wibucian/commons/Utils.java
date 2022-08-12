@@ -18,10 +18,10 @@ public class Utils {
         Calendar currentDate = Calendar.getInstance();
         currentDate.setTime(new Date());
         if (currentDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-            currentDate.add(Calendar.DATE, -1);
-            currentDate.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//            currentDate.add(Calendar.DATE, -1);
+//            currentDate.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
         } else {
-            currentDate.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//            currentDate.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
         }
 
         return currentDate;
@@ -80,8 +80,15 @@ public class Utils {
     }
 
     public static long hoursBetween(Calendar from, Calendar to) {
-        long result = ChronoUnit.HOURS.between(from.toInstant(), to.toInstant()) * from.compareTo(to);
+        long result = ChronoUnit.HOURS.between(from.toInstant(), to.toInstant());
         return result;
+    }
+
+    public static Calendar getCalendarInstanceFromDateAndHHMMSSTimeString(Date date,
+                                                              String hh_mm_ss) {
+        return Utils.getCalendarInstanceFromFormat(
+                Utils.getDateFormat(date, Constant.DD_MM_YYYY_FORMAT) + " " + hh_mm_ss,
+                Constant.DD_MM_YYYY_HH_MM_SS_FORMAT);
     }
 
 }

@@ -75,10 +75,10 @@ public class ShiftController {
                              .body(shiftService.update(shiftId, shiftUpdateVO));
     }
 
-    @GetMapping("/{id}")
-    public ShiftDTO getById(@Valid @NotNull @PathVariable("id") String id) {
-        return shiftService.getById(id);
-    }
+//    @GetMapping("/{id}")
+//    public ShiftDTO getById(@Valid @NotNull @PathVariable("id") String id) {
+//        return shiftService.getById(id);
+//    }
 
     /**
      * Xem tất cả các đăng ký ca làm việc cho tuần tiếp theo

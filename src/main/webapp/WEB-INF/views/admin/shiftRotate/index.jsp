@@ -78,6 +78,18 @@
 <jsp:include page="../includes/end.jsp"></jsp:include>
 
 <script>
+    const getDDMMYYYYFormat = (input) => {
+        const day = new Date(input);
+        const yyyy = day.getFullYear();
+        let mm = day.getMonth() + 1; // Months start at 0!
+        let dd = day.getDate();
+
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+
+        return dd + '-' + mm + '-' + yyyy
+    }
+    
     const setUpButtons = () => {
         const actionButtons = document.querySelectorAll(".action-btn")
 
@@ -173,7 +185,7 @@
                            {
                                data   : "shiftDate",
                                render : (data) => {
-                                   return data.split("T")[0]
+                                  return getDDMMYYYYFormat(data)
                                },
                                targets: 4,
                            },
@@ -215,7 +227,7 @@
                            {
                                data   : "shiftExchangeDate",
                                render : (data) => {
-                                   return data.split("T")[0]
+                                   return getDDMMYYYYFormat(data)
                                },
                                targets: 9,
                            },

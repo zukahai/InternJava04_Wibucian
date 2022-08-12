@@ -4,6 +4,7 @@ import com.java04.wibucian.commons.*;
 import com.java04.wibucian.dtos.ShiftDTO;
 import com.java04.wibucian.exception.AccessDeniedException;
 import com.java04.wibucian.exception.BadRequestException;
+import com.java04.wibucian.exception.ForbiddenException;
 import com.java04.wibucian.exception.NotFoundException;
 import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.models.Shift;
@@ -279,9 +280,8 @@ public class ShiftService {
                                    .toList();
     }
 
-    public ShiftDTO getById(String id) {
-        Shift original = requireOne(id);
-        return toDTO(original);
+    public Shift getById(String shiftId) {
+        return requireOne(shiftId);
     }
 
     private ShiftDTO toDTO(Shift shift) {
@@ -454,5 +454,54 @@ public class ShiftService {
                             });
 
     }
+
+    public Optional<Shift> getCurrentShiftOfEmployee(Employee employee) {
+        Date shiftDate = Utils.currentDateWithoutTime()
+                              .getTime();
+        int shiftCode = getShiftCodeFromCurrentDate();
+        if (shiftCode == 0) return Optional.empty();
+        Optional<Shift> t = this.shiftRepository.getCurrentShiftOfEmployee(employee, shiftDate,
+                                                              shiftCode);
+        return t;
+    }
+
+    private int getShiftCodeFromCurrentDate() {
+        Calendar current = Utils.getCurrentDate();
+        Date currentDateWithoutTime = Utils.currentDateWithoutTime()
+                                           .getTime();
+        Calendar morningShiftStartTime =
+                Utils.getCalendarInstanceFromDateAndHHMMSSTimeString(
+                        currentDateWithoutTime, Constant.MORNING_SHIFT_START_TIME);
+        Calendar morningShiftEndTime =
+                Utils.getCalendarInstanceFromDateAndHHMMSSTimeString(
+                        currentDateWithoutTime, Constant.MORNING_SHIFT_END_TIME);
+        Calendar afternoonShiftStartTime =
+                Utils.getCalendarInstanceFromDateAndHHMMSSTimeString(
+                        currentDateWithoutTime, Constant.AFTERNOON_SHIFT_START_TIME);
+        Calendar afternoonShiftEndTime =
+                Utils.getCalendarInstanceFromDateAndHHMMSSTimeString(
+                        currentDateWithoutTime, Constant.AFTERNOON_SHIFT_END_TIME);
+        Calendar eveningShiftStartTime =
+                Utils.getCalendarInstanceFromDateAndHHMMSSTimeString(
+                        currentDateWithoutTime, Constant.EVENING_SHIFT_START_TIME);
+        Calendar eveningShiftEndTime =
+                Utils.getCalendarInstanceFromDateAndHHMMSSTimeString(
+                        currentDateWithoutTime, Constant.EVENING_SHIFT_END_TIME);
+
+        if (current.compareTo(morningShiftStartTime) >= 0
+                && current.compareTo(morningShiftEndTime) < 1) {
+            return ShiftOfDay.MORNING.getValue();
+        }
+        if (current.compareTo(afternoonShiftStartTime) >= 0
+                && current.compareTo(afternoonShiftEndTime) < 1) {
+            return ShiftOfDay.AFTERNOON.getValue();
+        }
+        if (current.compareTo(eveningShiftStartTime) >= 0
+                && current.compareTo(eveningShiftEndTime) < 1) {
+            return ShiftOfDay.EVENING.getValue();
+        }
+        return 0;
+    }
+
 
 }

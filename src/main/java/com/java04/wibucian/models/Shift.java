@@ -37,6 +37,17 @@ public class Shift {
     @Column(name = "shiftCode")
     private Integer shiftCode;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "shift")
+    private RollCall rollCall;
+
+    public RollCall getRollCall() {
+        return rollCall;
+    }
+
+    public void setRollCall(RollCall rollCall) {
+        this.rollCall = rollCall;
+    }
+
     public Integer getShiftCode() {
         return shiftCode;
     }

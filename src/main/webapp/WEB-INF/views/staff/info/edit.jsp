@@ -31,7 +31,8 @@
 		<!--begin::Card body-->
 		<div class="card-body p-9 ">
 			<!--begin::Input group-->
-			<form class="wrapper p-0 px-20 d-flex flex-column align-items-center">
+			<form class="wrapper p-0 px-20 d-flex flex-column align-items-center"
+				  action="${contextPath}/staff/info/edit" method="post">
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Mã nhân viên</div>
 					<div class="col w-300px">${employee.id}</div>
@@ -73,7 +74,7 @@
 				</h4>
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Ngày sinh</div>
-					<input type="date"
+					<input type="text"
 						   class="form-control w-250px h-40px maritalStatus"
 						   value="${employee.birthDay}"
 						   name="birthDay"
