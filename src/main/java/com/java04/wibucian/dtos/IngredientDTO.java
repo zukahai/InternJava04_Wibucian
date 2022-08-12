@@ -19,6 +19,8 @@ public class IngredientDTO implements Serializable {
 
     private Float price;
 
+    private Double quantity;
+
     private String origin;
 
     private String unit;
