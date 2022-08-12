@@ -44,6 +44,15 @@
                        value="${invoice.employee.name}" readonly class="form-control form-control-solid"
                        placeholder="Example input"/>
             </div>
+            <c:if test="${invoice.status == 2}">
+                <div class="mb-10">
+                    <label for="name-employee-invoice" class="required form-label">Ngày thanh toán</label>
+                    <input data-value="${invoice.dateTime}" id="date-bill-invoice" type="text"
+                           value="${invoice.dateTime}" readonly class="form-control form-control-solid"
+                           placeholder="Example input"/>
+                </div>
+            </c:if>
+
             <div class="mb-10 form-inline ">
                 <label for="name-customer-invoice" class="required form-label">Tên khách hàng</label>
                 <div class="input-group">
@@ -156,6 +165,19 @@
                                     Thanh Toán
                                 </span>
                             </c:if>
+                            <c:if test="${invoice.status == 2}">
+                                <div>
+                                    <span class="btn btn-primary align-self-center invoice-qr-code">
+                                    <i class="fa fa-file-invoice"></i>
+                                    Xem lại thanh toán
+                                </span>
+                                    <span class="btn btn-primary align-self-center invoice-print">
+                                    <i class="fa fa-print"></i>
+                                    In hóa đơn
+                                </span>
+                                </div>
+                            </c:if>
+
                         </div>
                         <div class="card-body">
 
@@ -206,6 +228,7 @@
             </div>
         </div>
     </div>
+
     <div id="modal-add-detail" role="dialog" class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -247,6 +270,41 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary save-btn-add-detail">Lưu lại</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-show-qr-code" class="modal fade" tabindex="-1">
+        <div class=" modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title"></h3>
+                    <!--begin::Close-->
+                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                         aria-label="Close">
+                        <span class="svg-icon svg-icon-1"></span>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <div class="modal-body">
+                    <div class="mb-10">
+                        <label class="required form-label ">Tên Khách Hàng</label>
+                        <input data-action="" readonly type="text"
+                               class="form-control form-control-solid customer-detail-invoice"/>
+                    </div>
+                    <div class="mb-10">
+                        <label class="required form-label">Tổng số tiền</label>
+                        <input data-action="" readonly type="text"
+                               class="form-control form-control-solid total-price-invoice"/>
+                    </div>
+                    <div class="d-flex justify-content-center shadow-lg">
+                        <img src="" class="qr-code-modal" alt="">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary save-btn">Lưu lại</button>
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </div>
@@ -418,12 +476,56 @@
             success: function (result) {
                 if (result.check == true) {
                     toastr.success("Cập nhật thành công");
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 2000);
+                    $('.invoice-save').hide();
+                    let id = $('#id-invoice').val();
+                    let name = $('#name-customer-invoice').val();
+                    let total_price = $('.total-money-price-end').text().trim();
+                    console.log(id, name, total_price)
+                    $('#modal-show-qr-code').find('.modal-title').text("Mã QR đơn hàng " + id);
+                    $('#modal-show-qr-code').find('.customer-detail-invoice').val(name);
+                    $('#modal-show-qr-code').find('.total-price-invoice').val(total_price);
+                    $('#modal-show-qr-code').modal('show');
+                    $.ajax({
+                        url: "/qrcode/",
+                        contentType: "application/json",
+                        type: "POST",
+                        data: JSON.stringify({
+                            content: "Hải Okoko",
+                            width: 200,
+                            height: 200
+                        }),
+                        success: function (resutl) {
+                            $(".qr-code-modal").attr("src", `data:image/png;base64,` + resutl);
+                        }
+                    });
                 }
             }
         })
     });
+    //handel .invoice-qr-code btn
+    $(document).on('click', '.invoice-qr-code', function () {
+        let id = $('#id-invoice').val();
+        let name = $('#name-customer-invoice').val();
+        let total_price = $('.total-money-price-end').text().trim();
+        console.log(id, name, total_price)
+        $('#modal-show-qr-code').find('.modal-title').text("Mã QR đơn hàng " + id);
+        $('#modal-show-qr-code').find('.customer-detail-invoice').val(name);
+        $('#modal-show-qr-code').find('.total-price-invoice').val(total_price);
+        $('#modal-show-qr-code').modal('show');
+        $.ajax({
+            url: "/qrcode/",
+            contentType: "application/json",
+            type: "POST",
+            data: JSON.stringify({
+                content: "Tên khách hàng: " + name + '\n\n' + "Tổng số tiền: " + total_price,
+                width: 200,
+                height: 200
+            }),
+            success: function (resutl) {
+                $(".qr-code-modal").attr("src", `data:image/png;base64,` + resutl);
+            }
+        });
+    });
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
