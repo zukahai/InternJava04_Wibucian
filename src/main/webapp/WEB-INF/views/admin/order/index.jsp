@@ -30,7 +30,6 @@
                     <c:forEach items="${groupTables}" var="item">
                         <option value="${item.id}">${item.groupName}</option>
                     </c:forEach>
-
                 </select>
             </div>
             <div class="add-product-layout">
@@ -60,7 +59,7 @@
                             <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count "
                                   id="down-count">-</span>
                             <input type="text" value="1" class="form-control text-center text-count " id="count"/>
-                            <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle "
+                            <span class="input-group-text btn  abtn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle "
                                   id="up-count">+</span>
                         </div>
                     </div>
@@ -76,8 +75,6 @@
                         <select id="id-select-status" class="form-select form-select-solid" data-control="select2"
                                 data-placeholder="Chọn Trạng Thái">
                             <option value="1">Đang Chờ</option>
-                            <option value="2">Đã Xong</option>
-                            <option value="3">Đã Huỷ</option>
                         </select>
                     </div>
                     <div class="col">
@@ -124,7 +121,7 @@
 <script !src="">
     $(document).ready(function () {
         $("#tabel-order").DataTable({
-            dom: "<'row'<'col-sm-6 d-flex align-items-center justify-conten-start'l><'col-sm-6 d-flex align-items-center justify-content-end'f>><'table-responsive'tr><'row'<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i><'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>>",
+            dom: 'Bfrtip',
             order: [[5, "desc"]],
             reponsive: true,
         });
@@ -522,7 +519,7 @@
                     );
                     console.log(JSON.stringify(data));
                     $.ajax({
-                        url: "/ordercf/store",
+                        url: "/ordercf/store-final",
                         contentType: "application/json",
                         type: "POST",
                         data: JSON.stringify(data),
@@ -585,7 +582,16 @@
             $(this).closest("tr").find(".status-tabel").attr("data-status", status);
         }
     });
-    //validate price
+    //handle on change count-tabel
+    let data_temp = [];
+    <c:forEach items="${groupTables}" var="item">
+            console.log("${item.id}")
+            data_temp.push({
+                id: "${item.id}",
+                name: "${item.groupName}"
+            })
+    </c:forEach>
+    console.log(data_temp)
 
 
 </script>

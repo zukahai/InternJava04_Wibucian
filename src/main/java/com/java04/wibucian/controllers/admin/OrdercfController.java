@@ -46,9 +46,30 @@ public class OrdercfController {
     public ResponseEntity<Object> store(@RequestBody List<OrdercfVO> ordercfList) {
         try {
             for(OrdercfVO ordercfVO: ordercfList){
+                if (ordercfVO.getStatus() != 2){
+                    ordercfService.save(ordercfVO);
+                }
+            }
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", true);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", false);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        }
+    }
+    @RequestMapping(value = {"/store-final","/store-final/"}, method = RequestMethod.POST,
+            produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<Object> store_final(@RequestBody List<OrdercfVO> ordercfList) {
+        try {
+            for(OrdercfVO ordercfVO: ordercfList){
                 ordercfService.save(ordercfVO);
             }
-
             HashMap<String, Object> map = new HashMap<>();
             map.put("check", true);
             map.put("value", "test");

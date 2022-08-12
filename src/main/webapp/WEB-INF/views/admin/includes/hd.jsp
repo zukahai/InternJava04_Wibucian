@@ -10,7 +10,7 @@
 
     </title>
     <meta charset="utf-8" />
-
+    <meta charset="UTF-8">
     <meta
             property="og:title"
             content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular, Asp.Net Core, Blazor, Django, Flask &amp; Laravel Admin Dashboard Theme"
@@ -27,6 +27,7 @@
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
     <link href="/admin/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/admin/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
