@@ -15,12 +15,13 @@
         <div class="card-header cursor-pointer">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Nguyên liệu</h3>
+                <h3 class="fw-bold m-0">Nguyên liệu:</h3>
+                <h2 class="text-info mx-2">${Ingredient.ingredientName}</h2>
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
             <a
-                    href="admin/groupTable/create/"
+                    href="admin/Ingredient/"
                     class="btn btn-primary align-self-center"
             >Quay về kho nguyên liệu</a
             >
@@ -55,10 +56,10 @@
                             </td>
                             <th>${  item.formatTime() }</th>
                             <c:if test="${item.valueChange >= 0}">
-                                <td class="text-center text-success">${ item.valueChange } </td>
+                                <td class="text-center font-weight-bold text-success">${ item.valueChange } </td>
                             </c:if>
                             <c:if test="${item.valueChange < 0}">
-                                <td class="text-center text-danger">${ -item.valueChange } </td>
+                                <td class="text-center font-weight-bold text-danger">${ -item.valueChange } </td>
                             </c:if>
 
                             <td>${ item.content } </td>
