@@ -20,6 +20,8 @@ public class IngredientVO implements Serializable {
     @NotNull(message = "ingredientName can not null")
     private String ingredientName;
 
+    private Double quantity;
+
     private Date expiryIngredient;
 
     @NotNull(message = "price can not null")
