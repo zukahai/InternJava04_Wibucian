@@ -10,7 +10,6 @@ import java.util.Locale;
 @Entity
 public class DetailIngredient {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDetailIngredient", nullable = false, length = 15)
     private String id;
 
