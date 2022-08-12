@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 
@@ -13,7 +14,6 @@ public class ImportGoodsVO implements Serializable {
 
     private String idEmployee;
 
-    @NotNull(message = "Ngày nhâp hàng là bắt buộc")
-    private Date timeImport;
+    private Instant timeImport;
 
 }

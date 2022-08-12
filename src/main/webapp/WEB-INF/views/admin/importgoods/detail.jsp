@@ -1,6 +1,9 @@
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.Instant" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <base href="/">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <jsp:include page="../includes/sidebar.jsp"></jsp:include>
@@ -8,24 +11,45 @@
 <div class="content flex-column-fluid" id="kt_content">
 
     <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+
         <!--begin::Card header-->
         <div class="card-header cursor-pointer">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Danh sách nhập hàng</h3>
+                <h3 class="fw-bold m-0">Đơn hàng: </h3>
+                <h2 class="text-info">&nbsp ${importgoods.ingredientName}</h2>
+                <h2>&nbsp [${importgoods.id}]</h2>
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
             <a
-                    href="admin/importgoods/create/"
+                    href="admin/importgoods/"
                     class="btn btn-primary align-self-center"
-            >Thêm nhập hàng</a
+            >Danh sách nhập hàng</a
             >
             <!--end::Action-->
         </div>
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
+
+            <form action="/admin/detailImportGoods/view/${importgoods.id}" method="post">
+                <div class="rounded border row  d-flex justify-content-between h-100">
+                    <div class="col col-10 form-floating my-5">
+                        <select class="form-select" data-control="select2" id="idTable" name="idTable" data-placeholder="Select an option">
+                            <c:forEach var="item" items="${tablecfs}">
+                                <option value="${item.id}">${item.id} - ${item.importgoods.ingredientName}</option>
+                            </c:forEach>
+                        </select>
+                        <label for="idTable">Chọn nguyên liệu</label>
+                    </div>
+                    <div class="col text-center justify-content-center align-items-center d-inline-flex p-2">
+                        <button class="btn btn-primary align-middle" type="submit">Thêm</button>
+                    </div>
+                </div>
+
+
+            </form>
 
             <!--end::Input group-->
             <div class="table-responsive">
@@ -34,54 +58,29 @@
                     <tr class="fw-bold fs-6 text-gray-800">
                         <%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
                         <th>ID</th>
-                        <th>Nhân viên nhập hàng</th>
-                        <th>Thời gian nhập</th>
-                        <th> Hành động</th>
-                        <th>&nbsp;</th>
+                        <th>Mã nguyên liệu</th>
+                        <th>Mã nhập hàng</th>
+                        <th>Số lượng</th>
+                        <th class="d-flex align-center justify-content-center">Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="item" items="${nhaphang}">
+                    <c:forEach var="item" items="${ingredientList}">
                         <tr>
-                            <th scope="row">${  item.id }</th>
-                            <td>${  item.employee.id}</td>
-                            <td>${  item.dateFormat }</td>
-                            <td>
-                                <a href="admin/detailImportGoods/view/${item.id}" class="btn btn-info mx-1">Chi tiết</a>
-                                <a href="admin/importgoods/edit/${ item.id }" class="btn btn-success mx-1">Sửa</a>
-                                <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
-
+                            <th scope="row">${  item.ingredient.id }</th>
+                            <th scope="row">${  item.ingredient.ingredient.ingredientName }</th>
+                            <td>${ item.quantity } </td>
+                            <td class="d-flex align-center justify-content-center">
+                                <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
+                                      data-toggle="tooltip" data-placement="top" data-id="${item.id}" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </span>
                             </td>
+                            <!--end::Action=-->
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-                <c:if test="${totalPage > 1}">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <c:if test="${page > 1}">
-                                <li class="page-item">
-                                    <a class="page-link" href="/admin/importgoods/page/${page - 1}" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="/admin/importgoods/page/${page - 1}">${page - 1}</a></li>
-                            </c:if>
-                            <li class="page-item active"><a class="page-link" href="#" >${page}</a></li>
-                            <c:if test="${page < totalPage}">
-                                <li class="page-item"><a class="page-link" href="/admin/importgoods/page/${page + 1}">${page + 1}</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="/admin/importgoods/page/${page + 1}" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </c:if>
-                        </ul>
-                    </nav>
-                </c:if>
-
             </div>
         </div>
         <!--end::Card body-->
@@ -116,7 +115,7 @@
                             toastr.success("Xóa thành công");
                             row.remove();
                         } else {
-                            toastr.error("Xóa thất bại: ");
+                            toastr.error("Xóa thất bại");
                         }
                     }
                 })
@@ -128,3 +127,5 @@
 
     //handel on change id-select-product
 </script>
+
+

@@ -10,7 +10,7 @@
     <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
         <div class="card-header cursor-pointer">
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Thêm Nguyên Liệu</h3>
+                <h3 class="fw-bold m-0">Sửa Nguyên Liệu</h3>
             </div>
             <a href="admin/ingredient/" class="btn btn-primary align-self-center">Danh sách nguyên liệu</a
             >
@@ -19,7 +19,7 @@
             <form action="/admin/ingredient/edit" method="post">
                 <div class="form-floating my-5">
                     <input type="text" class="form-control" id="ingredientId" name="ingredientId" value="${xemdanhsach.id}"readonly/>
-                    <label for="ingredientName">Tên nguyên liệu</label>
+                    <label for="ingredientName">ID</label>
                 </div>
                 <div class="form-floating my-5">
                     <input type="text" class="form-control" id="ingredientName" name="ingredientName" value="${xemdanhsach.ingredientName}"/>
