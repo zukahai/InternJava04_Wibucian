@@ -1,7 +1,7 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.EmployeeDTO;
-import com.java04.wibucian.interfaces.models.Employee;
+import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.repositories.EmployeeRepository;
 import com.java04.wibucian.vos.EmployeeQueryVO;
 import com.java04.wibucian.vos.EmployeeUpdateVO;
@@ -56,9 +56,9 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
-    public List<Employee> findAll() {
-        return employeeRepository.findAll();
-    }
+//    public List<Employee> findAll() {
+//        return employeeRepository.findAll();
+//    }
 
     public EmployeeDTO getDTOById(String id) {
         Employee original = requireOne(id);

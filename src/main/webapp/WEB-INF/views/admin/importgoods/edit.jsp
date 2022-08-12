@@ -6,40 +6,33 @@
 <jsp:include page="../includes/sidebar.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
 <div class="content flex-column-fluid" id="kt_content">
+
     <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
-        <!--begin::Card header-->
         <div class="card-header cursor-pointer">
-            <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Dach sách nhập hàng</h3>
+                <h3 class="fw-bold m-0">Sửa Nhập Hàng</h3>
             </div>
-            <!--end::Card title-->
-            <!--begin::Action-->
             <a href="admin/importgoods/" class="btn btn-primary align-self-center">Danh sách nhập hàng</a
             >
-            <!--end::Action-->
         </div>
-        <!--begin::Card header-->
-        <!--begin::Card body-->
         <div class="card-body p-9">
             <form action="/admin/importgoods/edit" method="post">
-                <div class="rounded border p-5">
-                    <div class="form-floating my-5">
-                        <input type="text" class="form-control" id="idImportGoods" name="idImportGoods" value="${idImportGoods.id}" readonly/>
-                        <label for="idImportGoods">Mã nhập hàng</label>
-                    </div>
-                    <div class="form-floating my-5">
-                        <input type="text" class="form-control" id="idEmployee" name="idEmployee" placeholder="VIP" value="${importGoods.idEmployee}"/>
-                        <label for="idEmployee">Nhân viên nhập hàng</label>
-                    </div>
-                    <div class="form-floating my-5">
-                        <input type="number" class="form-control" id="timeImport" name="timeImport" placeholder="0" value="${importGoods.timeImport}"/>
-                        <label for="timeImport">Thơi gian nhập</label>
-                    </div>
-
+                <div class="form-floating my-5">
+                    <input type="text" class="form-control" id="importgoodsId" name="importgoodsId" value="${nhaphang.id}"readonly/>
+                    <label for="importgoodsId">ID</label>
                 </div>
+                <div class="form-floating my-5">
+                    <input type="text" class="form-control" id="idEmployee" name="idEmployee" value="${nhaphang.employee.id}"readonly/>
+                    <label for="idEmployee">Người nhập hàng</label>
+                </div>
+                <div class="form-floating my-5">
+                    <input type="date" class="form-control" id="timeImport" name="timeImport" value="${nhaphang.timeImport}"/>
+                    <label for="timeImport">Thời gian nhập</label>
+                </div>
+
+
                 <div class="text-center my-5">
-                    <button class="btn btn-success" type="submit">Sửa</button>
+                    <button class="btn btn-primary" type="submit">Sửa</button>
                 </div>
             </form>
         </div>

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <base href="/">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <jsp:include page="../includes/sidebar.jsp"></jsp:include>
@@ -38,7 +39,7 @@
                         <th>Giá</th>
                         <th>Nguồn gốc</th>
                         <th>Đơn vị</th>
-                        <th>Trạng thái</th>
+                        <th>Hạn sử dụng</th>
 
                         <th class="d-flex align-center justify-content-center">Hành động</th>
                     </tr>
@@ -51,9 +52,11 @@
                             <td>${  item.price }</td>
                             <td>${  item.origin }</td>
                             <td>${  item.unit }</td>
-                            <td>${  item.expiryIngredient }</td>
+
+                            <td><fmt:formatDate pattern="dd-MM-yyyy"
+                                                value="${  item.expiryIngredient }"/></td>
                             <td class="d-flex align-center justify-content-center">
-                                <a href="" class="btn btn-warning mx-1">Xem</a>
+
                                 <a href="admin/ingredient/edit/${ item.id }" class="btn btn-success mx-1">Sửa</a>
                                 <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
                             </td>
@@ -62,6 +65,32 @@
                     </c:forEach>
                     </tbody>
                 </table>
+                <c:if test="${totalPage > 1}">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <c:if test="${page > 1}">
+                                <li class="page-item">
+                                    <a class="page-link" href="/admin/ingredient/page/${page - 1}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="/admin/ingredient/page/${page - 1}">${page - 1}</a></li>
+                            </c:if>
+                            <li class="page-item active"><a class="page-link" href="#" >${page}</a></li>
+                            <c:if test="${page < totalPage}">
+                                <li class="page-item"><a class="page-link" href="/admin/ingredient/page/${page + 1}">${page + 1}</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="/admin/ingredient/page/${page + 1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </c:if>
+                        </ul>
+                    </nav>
+                </c:if>
+
             </div>
         </div>
         <!--end::Card body-->

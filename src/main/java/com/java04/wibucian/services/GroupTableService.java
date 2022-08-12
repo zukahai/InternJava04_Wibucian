@@ -75,6 +75,10 @@ public class GroupTableService {
         return toDTO(original);
     }
 
+    public GroupTable findById(String id) {
+        return groupTableRepository.findById(id).orElse(null);
+    }
+
     public Page<GroupTableDTO> query(GroupTableQueryVO vO) {
         throw new UnsupportedOperationException();
     }

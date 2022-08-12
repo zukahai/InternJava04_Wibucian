@@ -1,4 +1,4 @@
-package com.java04.wibucian.interfaces.models;
+package com.java04.wibucian.models;
 
 import javax.persistence.*;
 import java.time.Instant;

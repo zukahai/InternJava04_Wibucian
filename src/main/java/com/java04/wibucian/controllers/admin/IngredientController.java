@@ -7,6 +7,8 @@ import com.java04.wibucian.services.IngredientService;
 import com.java04.wibucian.vos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,14 +26,39 @@ import java.util.HashMap;
 @RequestMapping("admin/ingredient")
 public class IngredientController {
 
+    public static final int limit = 5;
+
     @Autowired
     private IngredientService ingredientService;
+
+    //phan trang
     @GetMapping("/")
     public String Home(ModelMap modelMap)throws Exception {
-        System.out.println("Hello");
-        modelMap.addAttribute("xemdanhsach", ingredientService.findAll());
+        int page = 1;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        int totalPage = ingredientService.getTotalPage(limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("xemdanhsach", ingredientService.findAll(pageable));
+        //modelMap.addAttribute("xemdanhsach", ingredientService.findAll());
         return "admin/ingredient/index";
     }
+
+
+
+    @GetMapping("/page/{page}")
+    public String HomePage(ModelMap modelMap, @Valid @NotNull @PathVariable("page") int page)throws Exception {
+        int totalPage = ingredientService.getTotalPage(limit);
+        page = (page < 1) ? 1 : page;
+        page = (page > totalPage) ? totalPage : page;
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        modelMap.addAttribute("page", page);
+        modelMap.addAttribute("totalPage", totalPage);
+        modelMap.addAttribute("xemdanhsach", ingredientService.findAll(pageable));
+        return "admin/ingredient/index";
+    }
+
+    //phan trang
 
     @GetMapping("/add")
    public String add(ModelMap modelMap)throws Exception {

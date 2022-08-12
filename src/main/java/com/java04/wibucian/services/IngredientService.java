@@ -1,7 +1,6 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.IngredientDTO;
-import com.java04.wibucian.models.ImportGoods;
 import com.java04.wibucian.models.Ingredient;
 import com.java04.wibucian.repositories.IngredientRepository;
 import com.java04.wibucian.vos.IngredientQueryVO;
@@ -10,8 +9,10 @@ import com.java04.wibucian.vos.IngredientVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -65,5 +66,25 @@ public class IngredientService {
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
 
+    // phan trang
+    public List<Ingredient> findAll(Pageable pageable) {
+        return ingredientRepository.findAll(pageable).getContent();
+    }
 
+    public List<Ingredient> findAllNamZuka(Pageable pageable) {
+        int start = pageable.getPageNumber() * pageable.getPageSize();
+        List<Ingredient> all = ingredientRepository.findAll();
+        List<Ingredient> answer = new ArrayList();
+
+        for (int i = start; i < start + pageable.getPageSize() && i < all.size(); i++) {
+            answer.add(all.get(i));
+        }
+        return answer;
+    }
+
+    public int getTotalPage(int limit) {
+        return (int) Math.ceil(ingredientRepository.count() / (float)limit);
+    }
+
+    // phan trang
 }

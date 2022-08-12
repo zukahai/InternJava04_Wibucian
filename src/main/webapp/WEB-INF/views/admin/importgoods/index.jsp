@@ -36,7 +36,7 @@
                         <th>ID</th>
                         <th>Nhân viên nhập hàng</th>
                         <th>Thời gian nhập</th>
-                        <th>Hành động</th>
+                        <th> Hành động</th>
                         <th>&nbsp;</th>
                     </tr>
                     </thead>
@@ -44,17 +44,44 @@
                     <c:forEach var="item" items="${nhaphang}">
                         <tr>
                             <th scope="row">${  item.id }</th>
-                            <td>${  item.employee.id }</td>
+                            <td>${  item.employee.id}</td>
                             <td>${  item.dateFormat }</td>
                             <td>
-                                <a href="" class="btn btn-warning mx-1">Xem</a>
+                                <a href="admin/detailImportGoods/view/${item.id}" class="btn btn-info mx-1">Chi tiết</a>
                                 <a href="admin/importgoods/edit/${ item.id }" class="btn btn-success mx-1">Sửa</a>
                                 <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
+
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
+                <c:if test="${totalPage > 1}">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <c:if test="${page > 1}">
+                                <li class="page-item">
+                                    <a class="page-link" href="/admin/importgoods/page/${page - 1}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="/admin/importgoods/page/${page - 1}">${page - 1}</a></li>
+                            </c:if>
+                            <li class="page-item active"><a class="page-link" href="#" >${page}</a></li>
+                            <c:if test="${page < totalPage}">
+                                <li class="page-item"><a class="page-link" href="/admin/importgoods/page/${page + 1}">${page + 1}</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="/admin/importgoods/page/${page + 1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </c:if>
+                        </ul>
+                    </nav>
+                </c:if>
+
             </div>
         </div>
         <!--end::Card body-->
@@ -89,7 +116,7 @@
                             toastr.success("Xóa thành công");
                             row.remove();
                         } else {
-                            toastr.error("Xóa thất bại: Tồn tại bàn có loại bàn này");
+                            toastr.error("Xóa thất bại: ");
                         }
                     }
                 })

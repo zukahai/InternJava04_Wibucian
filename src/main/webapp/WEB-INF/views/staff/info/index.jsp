@@ -69,7 +69,12 @@
 				</h4>
 				<h4 class="row w-75 row-cols-2 mb-10">
 					<div class="col">Trạng thái hôn nhân</div>
-					<div class="col w-300px">${employee.maritalStatus}</div>
+					<div class="col w-300px">
+						<c:choose>
+							<c:when test="${employee.maritalStatus eq 'married'}">Đã kết hôn</c:when>
+							<c:otherwise>Độc thân</c:otherwise>
+						</c:choose>
+					</div>
 				</h4>
 			</div>
 			<!--end::Input group-->
