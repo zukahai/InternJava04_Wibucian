@@ -15,9 +15,6 @@ public class ShiftRotateVO implements Serializable {
     @NotNull(message = "Mã ca làm việc không được trống")
     private String idShift;
 
-    @NotNull(message = "Mã nhân viên nhận yêu cầu không được trống")
-    private String idEmployeeChange;
-
     @NotNull(message = "Mã ca làm việc trao đổi không được trống")
     private String idShiftExchange;
 }

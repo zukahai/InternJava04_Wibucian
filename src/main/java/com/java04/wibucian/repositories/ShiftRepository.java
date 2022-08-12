@@ -26,9 +26,9 @@ public interface ShiftRepository
                                                                 Date secondDate);
 
     // query toàn bộ records ca làm trong mốc thời gian cụ thể của một nhân viên
-    @Query("SELECT t from Shift t WHERE t.requestShift = FALSE AND (t.employee = "
+    @Query("SELECT t from Shift t WHERE t.requestShift = FALSE AND ((t.employee = "
             + ":employee AND t.employeeChange IS NULL) OR (t.employeeChange = "
-            + ":employee) AND t.shiftDate BETWEEN :firstDay AND :secondDay")
+            + ":employee)) AND t.shiftDate BETWEEN :firstDay AND :secondDay")
     public List<Shift> findAllShiftsBelongToEmployeeBetween(Employee employee,
                                                             Date firstDay,
                                                             Date secondDay);
@@ -41,8 +41,9 @@ public interface ShiftRepository
                                                                     Date firstDay,
                                                                     Date lastDay);
 
-    //    public List<Shift> findAllByRequestShiftAndShiftDateBetween(boolean
-    //    requestShift,
-    //                                                                Date firstDate,
-    //                                                                Date shiftDate2);
+    @Query("SELECT s FROM Shift s WHERE ((s.employee = :employee AND s.employeeChange IS"
+            + " NULL) OR s.employeeChange = :employee) AND s.shiftDate = :shiftDate AND "
+            + "s.shiftCode = :shiftCode")
+    public Optional<Shift> getCurrentShiftOfEmployee(Employee employee, Date shiftDate,
+                                                     int shiftCode);
 };

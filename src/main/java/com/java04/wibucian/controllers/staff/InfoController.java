@@ -1,15 +1,12 @@
 package com.java04.wibucian.controllers.staff;
 
-import com.java04.wibucian.dtos.ShiftDTO;
 import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.security.CustomUserDetail;
 import com.java04.wibucian.services.ShiftService;
 import com.java04.wibucian.vos.EmployeeUpdateVO;
-import com.java04.wibucian.vos.StaffShiftVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.java04.wibucian.services.EmployeeService;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -48,21 +45,10 @@ public class InfoController {
         return "staff/info/edit";
     }
 
-    //    @RequestMapping(method = RequestMethod.POST, value = "/shift")
-    //    @ResponseBody
-    //    public ResponseEntity<ShiftDTO> staffRequestShift(@Valid StaffShiftVO shiftVO) {
-    //        // TODO: Fetch employeeID
-    //        shiftVO.setIdEmployee("Employee00002");
-    //        return ResponseEntity.ok()
-    //                             .body(this.shiftService.createShift(shiftVO,
-    //                                                                 shiftVO
-    //                                                                 .getIdEmployee()));
-    //    }
-
     @PostMapping(value = "/edit", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public void updateEmployee(HttpServletResponse response,
-                               @Valid EmployeeUpdateVO employeeUpdateVO,
-                               @ModelAttribute("employee") Employee employee) throws
+    public void updateEmployee(
+            @ModelAttribute(value = "employee", binding = false) Employee employee,
+            HttpServletResponse response, @Valid EmployeeUpdateVO employeeUpdateVO) throws
             IOException {
         employeeService.update(employee, employeeUpdateVO);
         response.sendRedirect("/staff/info");

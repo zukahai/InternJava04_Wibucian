@@ -61,27 +61,6 @@ public class ShiftRotateController {
                                                                              shiftRotateVO));
     }
 
-//    @PostMapping(value = "/accept/{shiftRotateId}",
-//                 consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-//    public ResponseEntity<Boolean> acceptShiftRotate(
-//            @Valid ShiftRotateUpdateVO shiftRotateUpdateVO) {
-//        Employee employee =
-//                this.employeeService.getById(shiftRotateUpdateVO.getIdEmployee());
-//        return ResponseEntity.ok()
-//                             .body(this.shiftRotateService.acceptShiftRotateRequest(
-//                                     employee, shiftRotateUpdateVO));
-//    }
-
-    @PostMapping(value = "/cancel/{shiftRotateId}",
-                 consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<Boolean> cancelShiftRotate(String idEmployee, @PathVariable(
-            "shiftRotateId") String shiftRotateId) {
-        Employee employee = this.employeeService.getById(idEmployee);
-        return ResponseEntity.ok()
-                             .body(this.shiftRotateService.cancelShiftRotateRequest(
-                                     employee, shiftRotateId));
-    }
-
 
     /**
      * Request mapping với endpoint /admin/shiftRotate/{shiftRotateId}, method PATCH, dùng

@@ -23,10 +23,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ShiftRotateService {
@@ -58,8 +55,29 @@ public class ShiftRotateService {
      * @return
      */
     public List<ShiftRotateDTO> getAllShiftRotatesToBeAccepted(Employee employee) {
+        List<ShiftRotateDTO> list =
+                this.shiftRotateRepository.getAllByStatusAndEmployeeChangeOrderByCreateTimeDesc(
+                            ShiftRotateStatus.CREATED.getValue(), employee)
+                                          .stream()
+                                          .map(this::toDTO)
+                                          .toList();
         return this.shiftRotateRepository.getAllByStatusAndEmployeeChangeOrderByCreateTimeDesc(
                            ShiftRotateStatus.CREATED.getValue(), employee)
+                                         .stream()
+                                         .map(this::toDTO)
+                                         .toList();
+    }
+
+    /**
+     * Phương thức dùng để lấy tất cả các yêu cầu xoay ca của employee với status CREATED
+     * hoặc ACCEPTED
+     *
+     * @return
+     */
+    public List<ShiftRotateDTO> getOwnShiftRotates(Employee employee) {
+        return this.shiftRotateRepository.getPendingShiftRotatesOfEmployee(employee,
+                                                                           ShiftRotateStatus.CREATED.getValue(),
+                                                                           ShiftRotateStatus.ACCEPTED.getValue())
                                          .stream()
                                          .map(this::toDTO)
                                          .toList();
@@ -114,30 +132,21 @@ public class ShiftRotateService {
                                     .orElseThrow(() -> new NotFoundException(
                                             "Ca làm việc không tồn tại"));
         // check nhân viên nhận xoay ca có tồn tại không
-        Employee employeeChange =
-                this.employeeRepository.findById(shiftRotateVO.getIdEmployeeChange())
-                                       .orElseThrow(() -> new NotFoundException(
-                                               "Nhân viên không tồn tại"));
+        Employee employeeChange = shiftExchange.getEmployee();
+
         // check ownership
         if (!shift.getEmployee()
                   .getId()
-                  .equals(employee.getId()) || !shiftExchange.getEmployee()
-                                                             .getId()
-                                                             .equals(employeeChange.getId())) {
+                  .equals(employee.getId())) {
             throw new ForbiddenException("Không thể tạo yêu cầu xoay ca");
         }
         // check xem có yêu cầu xoay ca với chính mình không =))
         if (employee.getId()
-                    .equals(employeeChange.getId())) {
+                    .equals(shiftExchange.getEmployee()
+                                         .getId())) {
             throw new BadRequestException("Are you kidding me");
         }
-        // check xem ca làm đã có xoay ca chưa, có rồi thì throw (chỉ cho phép xoay ca
-        // 1 lần)
-        if (shift.getEmployeeChange() != null
-                || shiftExchange.getEmployeeChange() != null) {
-            throw new BadRequestException("Chỉ có thể xoay ca 1 lần");
-        }
-        // nếu đã có yêu cầu xoay ca đang trong hàng đợi, throw
+        // nếu đã có yêu cầu xoay ca giống đang trong hàng đợi, throw
         this.shiftRotateRepository.findExistPendingShiftRotate(shift, shiftExchange,
                                                                ShiftRotateStatus.CREATED.getValue(),
                                                                ShiftRotateStatus.ACCEPTED.getValue())
@@ -167,33 +176,9 @@ public class ShiftRotateService {
                                 throw new BadRequestException(
                                         "Buổi xoay ca trùng buổi làm");
                             }));
-        // check giờ tạo yêu cầu xoay ca, chỉ cho phép yêu cầu xoay ca trễ nhất là 12
-        // tiếng trước giờ bắt đầu ca làm việc
-        Calendar current = Utils.getCurrentDate();
-        String shiftStartFormat =
-                Utils.getDateFormat(shift.getShiftDate(), Constant.DD_MM_YYYY_FORMAT)
-                        + " " + ShiftOfDayConversion.getShiftOfDayFromValue(
-                                                            shift.getShiftCode())
-                                                    .getStartTime();
-        String shiftExchangeStartFormat =
-                Utils.getDateFormat(shiftExchange.getShiftDate(),
-                                    Constant.DD_MM_YYYY_FORMAT) + " "
-                        + ShiftOfDayConversion.getShiftOfDayFromValue(
-                                                      shiftExchange.getShiftCode())
-                                              .getStartTime();
-        Calendar shiftStart = Utils.getCalendarInstanceFromFormat(shiftStartFormat,
-                                                                  Constant.DD_MM_YYYY_HH_MM_SS_FORMAT);
-        Calendar shiftExchangeStart =
-                Utils.getCalendarInstanceFromFormat(shiftExchangeStartFormat,
-                                                    Constant.DD_MM_YYYY_HH_MM_SS_FORMAT);
-
-        if (Utils.hoursBetween(shiftStart, current)
-                >= Constant.MIN_HOURS_TO_CREATE_SHIFT_ROTATE_REQUEST
-                || Utils.hoursBetween(shiftExchangeStart, current)
-                >= Constant.MIN_HOURS_TO_CREATE_SHIFT_ROTATE_REQUEST) {
-            throw new BadRequestException(
-                    "Giờ tạo yêu cầu xoay ca phải trước giờ bắt đầu ca làm việc ít nhất"
-                            + " 12 tiếng");
+        // check giờ tạo yêu cầu xoay ca và ca làm đã từng xoay ca chưa
+        if (!canBeRotate(shift) || !canBeRotate(shiftExchange)) {
+            throw new BadRequestException("Không thể tạo yêu cầu xoay ca");
         }
         // ok
         ShiftRotate shiftRotate = new ShiftRotate();
@@ -365,7 +350,90 @@ public class ShiftRotateService {
         });
         allPendingShiftRotates.forEach(shiftRotate -> {
             shiftRotate.setStatus(ShiftRotateStatus.REJECTED.getValue());
+            shiftRotate.setRejectTime(new Date().toInstant());
         });
         this.shiftRotateRepository.saveAll(allPendingShiftRotates);
+    }
+
+    public void checkCanCreateShiftRotate(Employee employee, Shift shift) {
+        // check ownership
+        if (!shift.getEmployee()
+                  .getId()
+                  .equals(employee.getId())) {
+            throw new ForbiddenException("Không phải chủ ca làm việc");
+        }
+
+        // check xem ca làm có thể xoay ca không
+        if (!canBeRotate(shift)) {
+            throw new BadRequestException("Không thể tạo yêu cầu xoay ca");
+        }
+    }
+
+    private boolean canBeRotate(Shift shift) {
+        // nếu là ca làm đăng ký, chưa phải là chính thức, throw
+        if (shift.getRequestShift()) {
+            return false;
+        }
+        // đã xoay ca thì không thể xoay ca nữa
+        if (shift.getEmployeeChange() != null) {
+            return false;
+        }
+
+        // check thời gian tạo yêu cầu
+        Calendar current = Utils.getCurrentDate();
+        String shiftStartFormat =
+                Utils.getDateFormat(shift.getShiftDate(), Constant.DD_MM_YYYY_FORMAT)
+                        + " " + ShiftOfDayConversion.getShiftOfDayFromValue(
+                                                            shift.getShiftCode())
+                                                    .getStartTime();
+        Calendar shiftStart = Utils.getCalendarInstanceFromFormat(shiftStartFormat,
+                                                                  Constant.DD_MM_YYYY_HH_MM_SS_FORMAT);
+
+        return Utils.hoursBetween(current, shiftStart)
+                >= Constant.MIN_HOURS_TO_CREATE_SHIFT_ROTATE_REQUEST;
+    }
+
+    public Map<DayOfWeek, Map<ShiftOfDay, List<Shift>>> getCandidateShiftToRotate(
+            Employee employee, Shift shift) {
+        List<String> shiftIds =
+                this.shiftRotateRepository.getCandidateShiftsToRotate(employee.getId(),
+                                                                      shift.getShiftDate(),
+                                                                      shift.getShiftCode(),
+                                                                      shift.getId());
+        List<Shift> shiftList = this.shiftRepository.findAllById(shiftIds);
+        return convertShiftList(shiftList.stream()
+                                         .filter(this::canBeRotate)
+                                         .toList());
+    }
+
+    private Map<DayOfWeek, Map<ShiftOfDay, List<Shift>>> convertShiftList(
+            List<Shift> shiftList) {
+        Map<DayOfWeek, Map<ShiftOfDay, List<Shift>>> result = new HashMap<>();
+        Calendar utilCalendar = Calendar.getInstance();
+        for (Shift shift : shiftList) {
+            utilCalendar.setTime(shift.getShiftDate());
+            DayOfWeek dayOfWeek = DayOfWeekConversion.getDayOfWeekFromValue(
+                    utilCalendar.get(Calendar.DAY_OF_WEEK));
+            ShiftOfDay shiftOfDay =
+                    ShiftOfDayConversion.getShiftOfDayFromValue(shift.getShiftCode());
+
+            // check xem dữ liệu của ngày làm việc có tồn tại không
+            Map<ShiftOfDay, List<Shift>> shiftOfDayToShiftListMap = result.get(dayOfWeek);
+            if (shiftOfDayToShiftListMap == null) {
+                shiftOfDayToShiftListMap = new HashMap<>();
+            }
+
+            // check xem dữ liệu của buổi làm việc có tồn tại không
+            List<Shift> shifts = shiftOfDayToShiftListMap.get(shiftOfDay);
+            if (shifts == null) {
+                shifts = new ArrayList<>();
+            }
+
+            // add dữ liệu
+            shifts.add(shift);
+            shiftOfDayToShiftListMap.put(shiftOfDay, shifts);
+            result.put(dayOfWeek, shiftOfDayToShiftListMap);
+        }
+        return result;
     }
 }

@@ -3,14 +3,12 @@ package com.java04.wibucian.vos;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class EmployeeUpdateVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -20,12 +18,11 @@ public class EmployeeUpdateVO implements Serializable {
     @NotNull(message = "address can not null")
     private String address;
 
-    @NotNull(message = "email can not null")
-    private String email;
-
     @NotNull(message = "phoneNumber can not null")
     private String phoneNumber;
 
-    @NotNull(message = "maritalStatus can not null")
-    private String maritalStatus;
+//    @NotNull(message = "maritalStatus can not null")
+//    private String maritalStatus;
+
+//    private String birthDay;
 }

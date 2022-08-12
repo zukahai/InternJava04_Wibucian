@@ -22,6 +22,10 @@ public class Constant {
     public static final int MIN_HOURS_TO_CREATE_SHIFT_ROTATE_REQUEST = 12;
 
     // định dạng ngày
+
+    public static final String YYYY_MM_FORMAT = "yyyy-MM";
+
+    public static final String MM_YYYY_FORMAT = "MM-yyyy";
     public static final String DD_MM_YYYY_FORMAT = "dd-MM-yyyy";
     public static final String YYYY_MM_DD_FORMAT = "yyyy-MM-dd";
     public static final String DD_MM_YYYY_HH_MM_SS_FORMAT = "dd-MM-yyyy hh:mm:ss";

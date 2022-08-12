@@ -20,10 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.xml.bind.DatatypeConverter;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/staff/shift")
@@ -148,6 +145,8 @@ public class StaffShiftController {
             @Valid @ValidISO8061Date @RequestParam("end") String endTime) {
         Calendar start = DatatypeConverter.parseDateTime(startTime);
         Calendar end = DatatypeConverter.parseDateTime(endTime);
+        Date a = start.getTime();
+        Date b = end.getTime();
         return ResponseEntity.ok()
                              .body(this.shiftService.findAllShiftsOfEmployeeBetween(
                                      employee, start, end));
