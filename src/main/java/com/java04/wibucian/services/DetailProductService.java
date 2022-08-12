@@ -90,10 +90,11 @@ public class DetailProductService {
     }
 
     public Double getProductSellPrice(String idProduct) {
-        int profit = 80; // profit(%)
-        Double priceSell = (1 + profit / 100.0) * getPriceProductFormIngerdienrt(idProduct);
-        priceSell = Math.ceil(priceSell / 1000);
-        return priceSell * 1000;
+        int profit = 250; // profit(%)
+        int x = 5000;
+        Double priceSell = (profit / 100.0) * getPriceProductFormIngerdienrt(idProduct);
+        priceSell = Math.ceil((priceSell + x) / 1000) * 1000 ;
+        return priceSell;
     }
 
 

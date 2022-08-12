@@ -38,7 +38,7 @@
 <%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
                         <th class="d-flex align-center justify-content-center"></th>
                         <th>Thời gian</th>
-                        <th class="text-center">Giá trị thay đổi</th>
+                        <th class="text-center">Giá trị thay đổi (${Ingredient.unit})</th>
                         <th>Nội dung thay đổi</th>
 
                     </tr>
@@ -56,7 +56,7 @@
                             </td>
                             <th>${  item.formatTime() }</th>
                             <c:if test="${item.valueChange >= 0}">
-                                <td class="text-center font-weight-bold text-success">${ item.valueChange } </td>
+                                <td class="text-center font-weight-bold text-success">${ item.valueChange }  </td>
                             </c:if>
                             <c:if test="${item.valueChange < 0}">
                                 <td class="text-center font-weight-bold text-danger">${ -item.valueChange } </td>
