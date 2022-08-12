@@ -59,7 +59,7 @@
                             <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count "
                                   id="down-count">-</span>
                             <input type="text" value="1" class="form-control text-center text-count " id="count"/>
-                            <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle "
+                            <span class="input-group-text btn  abtn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle "
                                   id="up-count">+</span>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
 <script !src="">
     $(document).ready(function () {
         $("#tabel-order").DataTable({
-            dom: "<'row'<'col-sm-6 d-flex align-items-center justify-conten-start'l><'col-sm-6 d-flex align-items-center justify-content-end'f>><'table-responsive'tr><'row'<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i><'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>>",
+            dom: 'Bfrtip',
             order: [[5, "desc"]],
             reponsive: true,
         });

@@ -10,7 +10,7 @@
 
     </title>
     <meta charset="utf-8" />
-
+    <meta charset="UTF-8">
     <meta
             property="og:title"
             content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular, Asp.Net Core, Blazor, Django, Flask &amp; Laravel Admin Dashboard Theme"

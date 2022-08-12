@@ -87,11 +87,11 @@
                         <thead>
                         <!--begin::Table row-->
                         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                            <th scope="col" class="min-w-100px"><h5>Id chi tiết hoá đơn</h5></th>
                             <th scope="col" class="min-w-100px"><h5>Tên sản phẩm</h5></th>
                             <th scope="col" class="min-w-100px"><h5>Số lượng</h5></th>
                             <th scope="col" class="min-w-100px"><h5>Giảm giá</h5></th>
-                            <th scope="col" class="min-w-100px"><h5>Tổng tiền</h5></th>
+                            <th scope="col" class="min-w-100px"><h5>Giá gốc</h5></th>
+                            <th scope="col" class="min-w-100px"><h5>Giá sau khi giảm</h5></th>
                             <c:if test="${invoice.status != 2}">
                                 <th scope="col" class="min-w-100px"><h4>Hành động</h4></th>
                             </c:if>
@@ -103,7 +103,6 @@
                         <c:forEach items="${invoice.detailInvoices}" var="item">
 
                             <tr class="text-start id-detail-invoice-${item.id}">
-                                <td><p class="id-detail-invoice-table">${item.id}</p></td>
                                 <td><p data-price="${item.product.price}" data-id="item.product.id"
                                        class="id-product-tabel">${item.product.productName}</p></td>
                                 <td><p class="quantity-table">${item.quantity}</p></td>
@@ -113,43 +112,43 @@
                                 <c:set var="pcent" value="${(total-totalPriceDiscount)/total*100}"/>
                                 <td><p class="sale-table">${pcent} %</p></td>
                                 <td>
-                                    <div>
-
-                                        <p class="total-table text-d"><s><fmt:formatNumber pattern="#,###"
-                                                                                           value="${total}"/> ₫</s></p>
-                                        <p data-price="${item.totalMoney}" class="total-money-price"><fmt:formatNumber
-                                                pattern="#,###" value="${item.totalMoney}"/> ₫</p>
-                                    </div>
+                                    <p class="total-table text-d"><s><fmt:formatNumber pattern="#,###"
+                                                                                       value="${total}"/> ₫</s></p>
                                 </td>
-                                <c:if test="${invoice.status != 2}">
-                                    <td>
+                                <td><p data-price="${item.totalMoney}" class="total-money-price">
+                                    <fmt:formatNumber pattern="#,###" value="${item.totalMoney}"/> ₫</p>
+                                    <c:if test="${invoice.status != 2}">
+                                <td>
                                 <span data-action="${item.id}"
                                       class="btn btn-icon btn-primary btn-edit  btn-sm btn-icon-md btn-circle"
                                       data-toggle="tooltip" data-placement="top" title="Sửa">
                                     <i class="fa fa-edit"></i>
                                 </span>
-                                        <span data-action="${item.id}"
-                                              class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
-                                              data-toggle="tooltip" data-placement="top" title="Xóa">
+                                    <span data-action="${item.id}"
+                                          class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
+                                          data-toggle="tooltip" data-placement="top" title="Xóa">
                                 <i class="fa fa-trash"></i>
                             </span>
-                                    </td>
+                                </td>
                                 </c:if>
                             </tr>
                         </c:forEach>
+
                         </tbody>
-                        <tfoot class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                        <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0 h4">
-                            <th scope="col" class="min-w-100px text-black-50 display-1"><h3>Tổng cộng</h3></th>
-                            <th scope="col" class="min-w-100px"></th>
-                            <th scope="col" class="min-w-100px"></th>
-                            <th scope="col" class="min-w-100px"></th>
-                            <th scope="col" class="min-w-100px"><h3 data-price="${invoice.totalMoney}"
-                                                                    class="total-money-price-end"><fmt:setLocale
+
+                        <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><h3>Tổng Tiền</h3></td>
+                            <td><h3 data-price="${invoice.totalMoney}"
+                                    class="total-money-price-end"><fmt:setLocale
                                     value="vi_VN"/>
-                                <fmt:formatNumber pattern="#,###" value="${invoice.totalMoney}"/> ₫</h3></th>
+                                <fmt:formatNumber pattern="#,###" value="${invoice.totalMoney}"/> ₫</h3></td>
                         </tr>
                         </tfoot>
+
                     </table>
                     <div class="card">
                         <div class="card-header">
@@ -179,6 +178,7 @@
                             </c:if>
 
                         </div>
+
                         <div class="card-body">
 
                         </div>
@@ -526,6 +526,86 @@
             }
         });
     });
+    $(document).on("click", '.invoice-print', function (){
+        //click print-datatable
+        $('.print-datatable').click();
+    })
 
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+<script>
+    $('#tabel-invoice').DataTable({
+        <c:if test="${invoice.status == 2}">
+        dom: 'Bfrtip',
+        //custom pdf button
+
+        buttons: [
+            {
+                //hide button print
+                extend: 'pdfHtml5',
+                text: '<i  class="fa fa-print print-datatable"></i>',
+                titleAttr: 'PDF',
+                footer: true,
+                title: 'Danh sách đơn hàng ' + $('#name-customer-invoice').val() + '\n\n' + 'Tổng số tiền: ' + $('.total-money-price-end').text().trim(),
+                //add total price
+
+                customize: function (doc) {
+
+                    doc.styles.tableHeader = {
+                        color: 'black',
+                        background: 'grey',
+                        alignment: 'center'
+                    }
+                    doc.styles = {
+                        subheader: {
+                            fontSize: 10,
+                            bold: true,
+                            color: 'black'
+                        },
+                        tableHeader: {
+                            bold: true,
+                            fontSize: 10.5,
+                            color: 'black'
+                        },
+                        lastLine: {
+                            bold: true,
+                            fontSize: 11,
+                            color: 'blue'
+                        },
+                        defaultStyle: {
+                            fontSize: 10,
+                            color: 'black'
+                        }
+                    }
+                    var objLayout = {
+                        hLineWidth: function (i, node) {
+                            return (i === 0 || i === node.table.body.length) ? 2 : 1;
+                        },
+                        vLineWidth: function (i, node) {
+                            return (i === 0 || i === node.table.body.length) ? 2 : 1;
+                        },
+                        hLineColor: function (i, node) {
+                            return (i === 0 || i === node.table.body.length) ? 'black' : 'black';
+                        },
+                        vLineColor: function (i, node) {
+                            return (i === 0 || i === node.table.body.length) ? 'black' : 'black';
+                        }
+                    }
+                    //add doc Tổng số tiền ở footer
+
+                    doc.content[1].layout = objLayout;
+
+
+                },
+
+
+            },
+
+        ]
+        </c:if>
+
+
+    });
+
+</script>

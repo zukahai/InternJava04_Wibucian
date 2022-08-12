@@ -84,7 +84,6 @@
                 </tbody>
             </table>
         </div>
-        <img src="" class="data-qrcode" >
         <ul class="pagination">
             <c:if test="${ allPage > 1}">
                 <c:if test="${ currentPage > 1}">
@@ -164,21 +163,7 @@
             }
         });
     });
-    $(document).ready(function (){
-        $.ajax({
-            url: "/qrcode/",
-            contentType: "application/json",
-            type: "POST",
-            data: JSON.stringify({
-                content: "Hải Okoko",
-                width: 200,
-                height: 200
-            }),
-            success: function (resutl) {
-                $(".data-qrcode").attr("src", `data:image/png;base64,` + resutl);
-            }
-        });
-    });
+
 
 
 </script>
