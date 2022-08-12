@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.*;
 
 @Service
@@ -111,6 +112,9 @@ public class InvoiceService {
             //check validate not null
             if (vO.getStatus() != null) {
                 bean.setStatus(vO.getStatus());
+                if (vO.getStatus() == 2) {
+                    bean.setDateTime(Instant.now());
+                }
             }
             if (vO.getToltalMoney() != null) {
                 bean.setTotalMoney(vO.getToltalMoney());
@@ -171,12 +175,15 @@ public class InvoiceService {
         return invoiceRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
+
     public List<Invoice> getPage(Pageable pageable) {
         return invoiceRepository.findAll(pageable).getContent();
     }
+
     public int getTotalPage(int limit) {
         return (int) Math.ceil((double) getCount() / limit);
     }
+
     public int getCount() {
         return (int) invoiceRepository.count();
     }
