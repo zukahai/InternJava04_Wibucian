@@ -18,8 +18,8 @@
 
     <!-- BEGIN CSS STYLES -->
     <link rel="stylesheet" href="user/styles/bootstrap.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="fonts/font-awesome/css/line-awesome.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="user/fonts/font-awesome/css/font-awesome.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="user/fonts/font-awesome/css/line-awesome.css" type="text/css" media="all" />
     <link rel="stylesheet" href="user/styles/animate.css" type="text/css" media="all" />
     <link rel="stylesheet" href="user/styles/magnific-popup.css" type="text/css" media="all" />
     <link rel="stylesheet" href="user/styles/splitting.css" type="text/css" media="all" />
