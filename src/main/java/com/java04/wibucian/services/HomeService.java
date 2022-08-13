@@ -35,6 +35,10 @@ public class HomeService {
         return productRepository.findAll();
     }
 
+    public List<Product> findNumberRandomProduct(int n) {
+        return productRepository.findAll().subList(0, n);
+    }
+
     public List<TypeProduct> findAllTypeProduct() {
         return typeProductRepository.findAll();
     }

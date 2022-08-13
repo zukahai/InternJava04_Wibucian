@@ -6,7 +6,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Menu | Quản lí quán cà phê</title>
+    <title>Menu | Wibucian</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -88,7 +88,7 @@
                             <div class="kf-menu-item-col col-xs-12 col-sm-12 col-md-12 col-lg-6 all ${item.productType.id}">
                                 <div class="kf-menu-item element-anim-1 scroll-animate" data-animate="active">
                                     <div class="image kf-image-hover">
-                                        <a href="user/images/menu1.jpg" class="has-popup-image"><img src="user/images/menu1.jpg" alt="" /></a>
+                                        <a href="${item.srcImage}" class="has-popup-image"><img src="${item.srcImage}" alt="" /></a>
                                     </div>
                                     <div class="desc">
                                         <h5 class="name">${item.productName}</h5>
