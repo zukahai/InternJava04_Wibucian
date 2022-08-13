@@ -1,21 +1,16 @@
 package com.java04.wibucian.services;
 
-import com.java04.wibucian.dtos.ProductDTO;
+import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.models.Product;
 import com.java04.wibucian.models.TypeProduct;
+import com.java04.wibucian.repositories.EmployeeRepository;
 import com.java04.wibucian.repositories.ProductRepository;
 import com.java04.wibucian.repositories.SaleRepository;
 import com.java04.wibucian.repositories.TypeProductRepository;
-import com.java04.wibucian.vos.ProductQueryVO;
-import com.java04.wibucian.vos.ProductUpdateVO;
-import com.java04.wibucian.vos.ProductVO;
-import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class HomeService {
@@ -24,12 +19,14 @@ public class HomeService {
     private SaleRepository saleRepository;
     private TypeProductRepository typeProductRepository;
     private DetailProductService detailProductService;
+    private EmployeeRepository employeeRepository;
 
-    public HomeService(ProductRepository productRepository, SaleRepository saleRepository, TypeProductRepository typeProductRepository, DetailProductService detailProductService) {
+    public HomeService(ProductRepository productRepository, SaleRepository saleRepository, TypeProductRepository typeProductRepository, DetailProductService detailProductService, EmployeeRepository employeeRepository) {
         this.productRepository = productRepository;
         this.saleRepository = saleRepository;
         this.typeProductRepository = typeProductRepository;
         this.detailProductService = detailProductService;
+        this.employeeRepository = employeeRepository;
     }
 
     public List<Product> findAllProduct() {
@@ -44,6 +41,10 @@ public class HomeService {
             Collections.swap(all, x, y);
         }
         return all.subList(0, n);
+    }
+
+    public List<Employee> findAllEmployee() {
+        return employeeRepository.findAll();
     }
 
     public List<TypeProduct> findAllTypeProduct() {

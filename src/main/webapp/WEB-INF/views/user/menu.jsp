@@ -31,7 +31,7 @@
                 <!-- location -->
                 <div class="kf-h-group">
                     <i class="fas fa-map-marker-alt"></i>
-                    <em>Địa chỉ :</em> FPT complate Đà Nẵng
+                    <em>Địa chỉ :</em> Nhóm Wibucian, thành phố Đà Nẵng
                 </div>
 
             </div>
@@ -56,6 +56,7 @@
                     <ul>
                         <li><a href="/">Trang chủ<i class=""></i></a></li>
                         <li><a href="/product">Sản phẩm</a></li>
+                        <li><a href="/about">Về chúng tôi</a></li>
                     </ul>
                 </div>
 
@@ -117,7 +118,7 @@
                     <!-- location -->
                     <div class="kf-h-group">
                         <i class="fas fa-map-marker-alt"></i>
-                        <em>Location :</em> 55 main street, new york
+                        <em>Location :</em> Nhóm Wibucian, thành phố Đà Nẵng
                     </div>
 
                 </div>

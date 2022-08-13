@@ -40,7 +40,7 @@
                     <ul>
                         <li>
                             <i class="las la-map-marker"></i>
-                            <em>Địa chỉ :</em>FPT complate - Thành Phố Đà Nẵng
+                            <em>Địa chỉ :</em>Nhóm Wibucian, thành phố Đà Nẵng
                         </li>
                         <li>
                             <i class="las la-envelope-open-text"></i>
