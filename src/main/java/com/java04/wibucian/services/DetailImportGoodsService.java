@@ -78,11 +78,11 @@ public class DetailImportGoodsService {
         HashMap<String, Object> map = new HashMap<>();
         DetailImportGoods bean = requireOne(id);
         if (bean != null) {
-            BeanUtils.copyProperties(vO, bean);
             Ingredient ingredient = bean.getIngredient();
             ingredient.setQuantity(ingredient.getQuantity() - bean.getQuantity() + vO.getQuantity());
-            bean.setIngredient(ingredient);
             detailImportGoodsRepository.save(bean);
+            BeanUtils.copyProperties(vO, bean);
+            bean.setIngredient(ingredient);
             bean = findById(bean.getId());
             map.put("check", true);
             map.put("value", toDTO(bean));

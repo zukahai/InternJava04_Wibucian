@@ -69,8 +69,7 @@ public class OrdercfService {
     public HashMap<String, Object> update(String id, OrdercfUpdateVO vO) {
         HashMap<String, Object> map = new HashMap<>();
         Ordercf ordercf = requireOne(id);
-
-        if (ordercf.getStatus() == 1){
+        if (ordercf.getStatus() == 1 && vO.getStatus() == 1) {
             if (ordercf != null) {
                 Product product = ordercf.getProduct();
                 HashMap<String, Object> checkMap = getMessageUpdate(product.getDetailProducts(), ordercf.getQuantity(), vO.getQuantity());
@@ -191,7 +190,6 @@ public class OrdercfService {
         }
     }
 
-    //delete return json object
     public  HashMap<String, Object> delete(String id) {
         HashMap<String, Object> map = new HashMap<>();
         Ordercf ordercf = requireOne(id);
@@ -200,7 +198,7 @@ public class OrdercfService {
                 updateIngredientUpdate(ordercf.getProduct().getDetailProducts(), ordercf.getQuantity(), 0);
                 map.put("check", true);
                 return map;
-            } else if (ordercf.getStatus() == 2) {
+            } else  {
                ordercfRepository.delete(ordercf);
                 map.put("check", true);
                 return map;
@@ -210,7 +208,6 @@ public class OrdercfService {
             map.put("message", "Không tìm thấy đơn hàng");
             return map;
         }
-        return map;
     }
 
     public OrdercfDTO getById(String id) {

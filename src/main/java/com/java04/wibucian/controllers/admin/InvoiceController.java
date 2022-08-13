@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 @Validated
 @Controller
-@RequestMapping("/invoice")
+@RequestMapping("admin/invoice")
 public class InvoiceController {
 
     @Autowired
