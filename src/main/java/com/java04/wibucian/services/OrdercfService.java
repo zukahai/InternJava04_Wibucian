@@ -44,10 +44,6 @@ public class OrdercfService {
         if (vO.getId() == null) {
             BeanUtils.copyProperties(vO, bean);
             Product product = productRepository.findById(vO.getIdProduct()).orElseThrow(() -> new NoSuchElementException());
-            Sale sale = product.getSale();
-            Instant now = Instant.now();
-            Instant sale_start = sale.getTimeStart();
-            Instant sale_end = sale.getTimeEnd();
             GroupTable groupTable = groupTableRepository.findById(vO.getIdGroupTable()).orElseThrow(() -> new NoSuchElementException());
             bean.setProduct(product);
             bean.setGroupTable(groupTable);
