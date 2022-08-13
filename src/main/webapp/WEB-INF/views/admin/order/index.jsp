@@ -56,11 +56,11 @@
                     <div class="col col-3">
                         <div class="input-group mb-5">
                             <span class="input-group-text me-2" id="basic-addon3">Số lượng</span>
-                            <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count "
-                                  id="down-count">-</span>
-                            <input type="text" value="1" class="form-control text-center text-count " id="count"/>
+                            <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count-edit "
+                                 >-</span>
+                            <input type="text" value="1" class="form-control text-center text-count-edit"/>
                             <span class="input-group-text btn  abtn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle "
-                                  id="up-count">+</span>
+                                  >+</span>
                         </div>
                     </div>
                     <div class="col ">
@@ -88,18 +88,18 @@
 
             <div class="d-flex flex-stack ">
 
-                <table class="table align-middle table-row-dashed fs-6 gy-5 table-responsive" id="tabel-order">
+                <table class="table table-row-dashed fs-6 gy-5 " id="tabel-order">
                     <!--begin::Table head-->
                     <thead>
                     <!--begin::Table row-->
                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0 ">
-                        <th class="min-w-125px text-dark display-2">Tên Bàn</th>
+                        <th class=" text-dark display-2">Tên Bàn</th>
                         <th class="min-w-125px text-dark display-2">Tên sản phẩm</th>
-                        <th class="min-w-125px text-dark display-2">Số lượng</th>
-                        <th class="min-w-125px text-dark text-center display-2">Giá</th>
-                        <th class="min-w-125px text-dark display-2 ">Thời gian</th>
+                        <th class="min-w-100px text-dark display-2">Số lượng</th>
+                        <th class="min-w-100px text-dark text-center display-2">Giá</th>
+                        <th class="min-w-100px text-dark display-2 ">Thời gian</th>
                         <th class="min-w-125px text-dark display-2">Trạng Thái</th>
-                        <th class="min-w-125px text-dark display-2">Hành động</th>
+                        <th class="min-w-100px text-dark display-2">Hành động</th>
                     </tr>
                     <!--end::Table row-->
                     </thead>
@@ -113,8 +113,45 @@
             </div>
         </form>
     </div>
-
-
+</div>
+<div id="modal-edit-order" role="dialog" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title-edit-order"></h3>
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                     aria-label="Close">
+                    <span class="svg-icon svg-icon-1"></span>
+                </div>
+                <!--end::Close-->
+            </div>
+            <div  class="modal-body">
+                <div  class="mb-10">
+                    <label class="required form-label">Id Order</label>
+                    <input data-action="" readonly type="text"
+                           class="form-control form-control-solid id-order-modal"
+                           placeholder="Example input"/>
+                </div>
+                <div  class="mb-10">
+                    <label class="required form-label">Tên Sản phẩm</label>
+                    <input data-action="" readonly type="text"
+                           class="form-control form-control-solid name-ingredient-modal"
+                           placeholder="Example input"/>
+                </div>
+                <div class="input-group mb-5">
+                    <span class="input-group-text me-2" >Số lượng</span>
+                    <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count ">-</span>
+                    <input type="number" value="1" step="1.0" class="form-control text-center text-count-edit" />
+                    <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle ">+</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary save-btn-edit-order">Lưu lại</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
 </div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
@@ -123,7 +160,6 @@
         $("#tabel-order").DataTable({
             dom: 'Bfrtip',
             order: [[5, "desc"]],
-            reponsive: true,
         });
     });
     //handle click on .delete-btn button
@@ -270,13 +306,7 @@
                         <td style="display: none"><p class="count">` + data.count + `</p></td>
                         <td style="display: none"><p class="id-product-tabel">` + data.id_product + `</p></td>
                         <td><p class="name-product-tabel">` + data.name_product + `</p></td>
-                        <td class="w-175px">
-                            <div class="input-group mb-5">
-                                <span class="input-group-text btn btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count-tabel">-</span>
-                                <input type="text" value="` + data.count + `" class="form-control text-center text-count-tabel"/>
-                                <span class="input-group-text btn btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-up-tabel ">+</span>
-                            </div>
-                        </td>
+                        <td><p class="text-count-tabel"></p>` + data.count + `</td>
                         <td class="text-center"><p class="price-product-tabel">` + validatePriceToVND(data.price_product) + `</p></td>
                         <td style="display: none" class="total-price-tabel"><p class="total-product-table">` + data.total_price + `</p></td>
                         <td class="time-order-tabel"><p class="total-product-table">` + data.time_order + `</p></td>
@@ -286,11 +316,10 @@
                                     data-placeholder="Chọn Trạng Thái">
                                     ` + data.option_html + `
                                 </select>
-
-
                             </div>
                         </td>
                         <td class="">
+                            `+ checkStatus(data.status)+`
                             <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
                                   data-toggle="tooltip" data-placement="top" title="Xóa">
                                 <i class="fa fa-trash"></i>
@@ -298,6 +327,18 @@
                         </td>
                     </tr>`
     }
+    let checkStatus = (status) => {
+        if (status != 2) {
+            return `<span class="btn btn-icon btn-primary edit-btn btn-sm btn-icon-md btn-circle" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></span>`
+        }
+        else return ''
+
+    }
+    $(document).on("click",'.edit-btn', function (){
+        $('#modal-edit-order').modal('show');
+        $('.modal-title-edit-order').text('Sửa Đơn Hàng '+$(this).closest('tr').find('.id-ordercf-tabel').text());
+
+    });
     //handle on click save-data
     $(document).on("click", ".save-data", function () {
         ///get data from tabel-order

@@ -61,6 +61,9 @@ public class DetailImportGoodsService {
         HashMap<String, Object> map = new HashMap<>();
         DetailImportGoods detailImportGoods = requireOne(id);
         if (detailImportGoods != null) {
+            Ingredient ingredient = detailImportGoods.getIngredient();
+            ingredient.setQuantity(ingredient.getQuantity() - detailImportGoods.getQuantity());
+            ingredientRepository.save(ingredient);
             detailImportGoodsRepository.delete(detailImportGoods);
             map.put("check", true);
             map.put("value", "Delete success");

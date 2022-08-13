@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 public class OrdercfService {
@@ -36,15 +34,39 @@ public class OrdercfService {
     @Autowired
     private GroupTableRepository groupTableRepository;
 
+    @Autowired IngredientRepository ingredientRepository;
+
     @Autowired
     private GroupTableNoMapPingRepository groupTableNoMapPingRepository;
 
-    public String save(OrdercfVO vO) {
+    public HashMap<String, Object> save(OrdercfVO vO) {
+        HashMap<String, Object> map = new HashMap<>();
         Ordercf bean = new Ordercf();
         if (vO.getId() == null) {
             BeanUtils.copyProperties(vO, bean);
             Product product = productRepository.findById(vO.getIdProduct()).orElseThrow(() -> new NoSuchElementException());
             GroupTable groupTable = groupTableRepository.findById(vO.getIdGroupTable()).orElseThrow(() -> new NoSuchElementException());
+            Set<DetailProduct> detailProducts = product.getDetailProducts();
+            for (DetailProduct detailProduct : detailProducts) {
+                Boolean check = true;
+                String message = "";
+                if (detailProduct.getQuantity() > detailProduct.getIngredient().getQuantity()) {
+                    check = false;
+                    message += "Số lượng của " + detailProduct.getIngredient().getIngredientName() + " không đủ \n";
+                }
+                if (check == false) {
+                    map.put("check", false);
+                    map.put("message", message);
+                    System.out.println(message);
+                    return map;
+                } else {
+                    for (DetailProduct detailProduct1 : detailProducts) {
+                        Ingredient ingredient = detailProduct1.getIngredient();
+                        ingredient.setQuantity(ingredient.getQuantity() - detailProduct1.getQuantity());
+                        ingredientRepository.save(ingredient);
+                    }
+                }
+            }
             bean.setProduct(product);
             bean.setGroupTable(groupTable);
             bean.setTimeOrder(Instant.now());
@@ -52,7 +74,9 @@ public class OrdercfService {
         } else if (vO.getId() != null) {
             update(String.valueOf(vO.getIdOrdercf()), vO);
         }
-        return bean.getId();
+        map.put("check", true);
+        map.put("value", bean);
+        return map;
     }
 
 

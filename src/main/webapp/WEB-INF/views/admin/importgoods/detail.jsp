@@ -220,8 +220,8 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "/detailInvoice/delete/" + id,
-                    type: "GET",
+                    url: "/admin/detailImportGoods/" + id,
+                    type: "Delete",
                     success: function (result) {
                         if (result.check == true) {
                             toastr.success("Xóa thành công");
