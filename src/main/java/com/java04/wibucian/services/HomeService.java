@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -33,6 +34,16 @@ public class HomeService {
 
     public List<Product> findAllProduct() {
         return productRepository.findAll();
+    }
+
+    public List<Product> findNumberRandomProduct(int n) {
+        List<Product> all = productRepository.findAll();
+        for (int i = 0; i < all.size() * all.size(); i++) {
+            int x = (int)(Math.random() * 100000)% all.size();
+            int y = (int)(Math.random() * 100000) % all.size();
+            Collections.swap(all, x, y);
+        }
+        return all.subList(0, n);
     }
 
     public List<TypeProduct> findAllTypeProduct() {
