@@ -31,20 +31,20 @@ public class DetailInvoiceController {
     @RequestMapping(value = {"/store","/store/"}, method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Object> store (@Valid @RequestBody DetailInvoiceVO vO){
-       try{
-           System.out.println(vO);
-           detailInvoiceService.save(vO);
-           HashMap<String, Object> map = new HashMap<>();
-           map.put("check", true);
-           map.put("value", "test");
-           return ResponseEntity.ok().body(map);
-       }
-       catch (Exception e){
-           HashMap<String, Object> map = new HashMap<>();
-           map.put("check", false);
-           map.put("value", "test");
-           return ResponseEntity.ok().body(map);
-       }
+        try{
+            System.out.println(vO);
+            detailInvoiceService.save(vO);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", true);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        }
+        catch (Exception e){
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("check", false);
+            map.put("value", "test");
+            return ResponseEntity.ok().body(map);
+        }
     }
     @GetMapping(value = {"/delete/{id}","/delete/{id}/"})
     @ResponseBody

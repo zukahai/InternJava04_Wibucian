@@ -188,4 +188,3 @@ public class InvoiceService {
         return (int) invoiceRepository.count();
     }
 }
-

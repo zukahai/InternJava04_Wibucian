@@ -585,11 +585,11 @@
     //handle on change count-tabel
     let data_temp = [];
     <c:forEach items="${groupTables}" var="item">
-            console.log("${item.id}")
-            data_temp.push({
-                id: "${item.id}",
-                name: "${item.groupName}"
-            })
+    console.log("${item.id}")
+    data_temp.push({
+        id: "${item.id}",
+        name: "${item.groupName}"
+    })
     </c:forEach>
     console.log(data_temp)
 

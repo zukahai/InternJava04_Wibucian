@@ -78,7 +78,7 @@ public class InvoiceController {
         }
         int pageInt;
         try {
-             pageInt = Integer.parseInt(page);
+            pageInt = Integer.parseInt(page);
         } catch (Exception e) {
             return "redirect:/invoice";
         }
@@ -104,5 +104,3 @@ public class InvoiceController {
 
 
 }
-
-
