@@ -19,8 +19,8 @@
 
     <!-- BEGIN CSS STYLES -->
     <link rel="stylesheet" href="user/styles/bootstrap.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="fonts/font-awesome/css/line-awesome.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="user/fonts/font-awesome/css/font-awesome.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="user/fonts/font-awesome/css/line-awesome.css" type="text/css" media="all" />
     <link rel="stylesheet" href="user/styles/animate.css" type="text/css" media="all" />
     <link rel="stylesheet" href="user/styles/magnific-popup.css" type="text/css" media="all" />
     <link rel="stylesheet" href="user/styles/splitting.css" type="text/css" media="all" />
@@ -83,7 +83,7 @@
                         <div class="kf-team-item element-anim-1 scroll-animate" data-animate="active">
                             <div class="desc">
                                 <h5 class="name">${item.name}</h5>
-                                <div class="subname">${item.gender}</div>
+                                <div class="subname">Giới tính: ${item.gender}</div>
                             </div>
                             <div class="image kf-image-hover">
                                 <img src="${item.srcEmployee}" alt="" />
