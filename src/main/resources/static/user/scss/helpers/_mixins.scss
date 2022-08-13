@@ -1,0 +1,59 @@
+/*Mixins*/
+
+@mixin border-radius($radius){
+	border-radius: $radius;
+	-moz-border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-khtml-border-radius: $radius;
+}
+
+@mixin box-shadow($param){
+	box-shadow: $param;
+	-moz-box-shadow: $param;
+	-webkit-box-shadow: $param;
+	-khtml-box-shadow: $param;
+}
+
+@mixin transition($param){
+	transition: $param;
+	-moz-transition: $param;
+	-webkit-transition: $param;
+	-o-transition: $param;
+}
+
+@mixin transform($param) {
+	transform: $param;
+	-webkit-transform: $param;
+	-moz-transform: $param;
+	-o-transform: $param;
+}
+
+@mixin animate($animation, $duration, $delay, $fill, $count, $easing) {
+	animation-name: $animation;
+	animation-duration: $duration;
+	animation-delay: $delay;
+	animation-fill-mode: $fill;
+	animation-iteration-count: $count;
+	animation-timing-function: $easing;
+	-webkit-animation-name: $animation;
+	-webkit-animation-duration: $duration;
+	-webkit-animation-delay: $delay;
+	-webkit-animation-fill-mode: $fill;
+	-webkit-animation-iteration-count: $count;
+	-webkit-animation-timing-function: $easing;
+}
+
+@mixin background-gradient($color1, $color2, $from: 0%, $to: 100%) {
+	background: $color1; /* Old browsers */
+	background: -moz-linear-gradient($color1 $from, $color2 $to); /* FF3.6-15 */
+	background: -webkit-linear-gradient($color1 $from, $color2 $to); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient($color1 $from, $color2 $to); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+@mixin background-gradient-left($color1, $color2) {
+	background: $color1; /* Old browsers */
+	background: -moz-linear-gradient(left, $color1 0%, $color2 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, $color1 0%, $color2 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, $color1 0%, $color2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color1', endColorstr='$color2',GradientType=1 ); /* IE6-9 */
+}
