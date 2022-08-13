@@ -3,6 +3,7 @@ package com.java04.wibucian.controllers.user;
 import com.java04.wibucian.dtos.EmployeeDTO;
 import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.services.EmployeeService;
+import com.java04.wibucian.services.HomeService;
 import com.java04.wibucian.vos.EmployeeQueryVO;
 import com.java04.wibucian.vos.EmployeeUpdateVO;
 import com.java04.wibucian.vos.EmployeeVO;
@@ -27,11 +28,12 @@ import java.util.HashMap;
 public class HomeController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private HomeService homeService;
 
     @GetMapping("/product")
     public String Home(ModelMap modelMap) throws Exception {
-        modelMap.addAttribute("DanhSach", employeeService.findAll());
+        modelMap.addAttribute("typetables", homeService.findAllTypeProduct());
+        modelMap.addAttribute("products", homeService.findAllProduct());
         return "user/product";
     }
 }
