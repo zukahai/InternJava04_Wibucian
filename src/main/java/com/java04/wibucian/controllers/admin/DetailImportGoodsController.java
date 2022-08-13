@@ -7,6 +7,7 @@ import com.java04.wibucian.vos.DetailImportGoodsUpdateVO;
 import com.java04.wibucian.vos.DetailImportGoodsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,26 +16,29 @@ import javax.validation.constraints.NotNull;
 
 @Validated
 @RestController
-@RequestMapping("/detailImportGoods")
+@RequestMapping("/admin/detailImportGoods")
 public class DetailImportGoodsController {
 
     @Autowired
     private DetailImportGoodsService detailImportGoodsService;
 
     @PostMapping
-    public String save(@Valid @RequestBody DetailImportGoodsVO vO) {
-        return detailImportGoodsService.save(vO).toString();
+    @ResponseBody
+    public ResponseEntity<Object> save(@Valid @RequestBody DetailImportGoodsVO vO) {
+        return ResponseEntity.ok().body(detailImportGoodsService.save(vO));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@Valid @NotNull @PathVariable("id") String id) {
-        detailImportGoodsService.delete(id);
+    @ResponseBody
+    public ResponseEntity<Object> delete(@Valid @NotNull @PathVariable("id") String id) {
+        return ResponseEntity.ok().body( detailImportGoodsService.delete(id));
     }
 
     @PutMapping("/{id}")
-    public void update(@Valid @NotNull @PathVariable("id") String id,
-                       @Valid @RequestBody DetailImportGoodsUpdateVO vO) {
-        detailImportGoodsService.update(id, vO);
+    @ResponseBody
+    public ResponseEntity<Object> update(@Valid @NotNull @PathVariable("id") String id,
+                                         @Valid @RequestBody DetailImportGoodsUpdateVO vO) {
+        return ResponseEntity.ok().body(detailImportGoodsService.update(id, vO));
     }
 
     @GetMapping("/{id}")

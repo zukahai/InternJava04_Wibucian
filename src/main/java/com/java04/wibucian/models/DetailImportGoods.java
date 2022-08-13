@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Entity
 public class DetailImportGoods {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDetailImportGoods", nullable = false, length = 15)
     private String id;
 
@@ -18,7 +19,7 @@ public class DetailImportGoods {
     private ImportGoods importGoods;
 
     @Column(name = "quantity")
-    private Integer quantity;
+    private Float quantity;
 
     public String getId() {
         return id;
@@ -44,12 +45,21 @@ public class DetailImportGoods {
         this.importGoods = importGoods;
     }
 
-    public Integer getQuantity() {
+    public Float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Float quantity) {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return "DetailImportGoods{" +
+                "id='" + id + '\'' +
+                ", ingredient=" + ingredient +
+                ", importGoods=" + importGoods +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
