@@ -331,7 +331,7 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "/detailInvoice/delete/" + id,
+                    url: "/admin/detailInvoice/delete/" + id,
                     type: "GET",
                     success: function (result) {
                         if (result.check == true) {
@@ -376,7 +376,7 @@
             quantity: quantity
         };
         $.ajax({
-            url: "/detailInvoice/" + id,
+            url: "/admin/detailInvoice/" + id,
             contentType: "application/json",
             type: "PUT",
             data: JSON.stringify(data),
@@ -422,7 +422,7 @@
         }
         console.log(JSON.stringify(data));
         $.ajax({
-            url: "/detailInvoice/store",
+            url: "/admin/detailInvoice/store",
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(data),
@@ -445,7 +445,7 @@
             customerName: name
         }
         $.ajax({
-            url: "/invoice/" + id,
+            url: "/admin/invoice/" + id,
             method: "PUT",
             contentType: "application/json",
             data: JSON.stringify(data),
@@ -469,7 +469,7 @@
             status: 2
         }
         $.ajax({
-            url: "/invoice/" + id,
+            url: "/admin/invoice/" + id,
             method: "PUT",
             contentType: "application/json",
             data: JSON.stringify(data),

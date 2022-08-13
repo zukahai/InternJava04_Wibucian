@@ -127,7 +127,7 @@
                 <!--end::Close-->
             </div>
             <div class="modal-body">
-                <div  class="mb-10">
+                <div class="mb-10">
                     <label class="required form-label">Id Order</label>
                     <input data-action="" readonly type="text"
                            class="form-control form-control-solid id-order-modal"
@@ -264,14 +264,10 @@
                    <option value="3">Đã Huỷ</option>`
         }
         if (status == 2) {
-            return `<option disabled value="1">Đang Chờ</option>
-                     <option selected value="2">Đã Xong</option>
-                     <option disabled value="3">Đã Huỷ</option>`
+            return `<option selected value="2">Đã Xong</option>`
         }
         if (status == 3) {
-            return `<option value="1">Đang Chờ</option>
-                    <option value="2">Đã Xong</option>
-                    <option selected value="3">Đã Huỷ</option>`
+            return `<option selected value="3">Đã Huỷ</option>`
         }
     }
     //handel add-product-order button
@@ -284,7 +280,7 @@
         var id_group_table = $("#id-table-select");
         var id_group_table_value = id_group_table.val();
         $.ajax({
-            url: "/ordercf",
+            url: "/admin/ordercf",
             contentType: "application/json",
             type: "POST",
             data: JSON.stringify({
@@ -349,7 +345,7 @@
                     </tr>`
     }
     let checkStatus = (status) => {
-        if (status != 2) {
+        if (status != 2 && status != 3) {
             return `<span class="btn btn-icon btn-primary edit-btn btn-sm btn-icon-md btn-circle" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></span>`
         } else return ''
 
@@ -364,7 +360,7 @@
     });
     $(document).on("click", '.save-btn-edit-order', function () {
         $.ajax({
-            url: "/ordercf/"+ $('.id-order-modal').val(),
+            url: "/admin/ordercf/" + $('.id-order-modal').val(),
             contentType: "application/json",
             type: "PUT",
             data: JSON.stringify({
@@ -423,7 +419,7 @@
         console.log(data);
         //send data to server
         $.ajax({
-            url: "/ordercf/store",
+            url: "/admin/ordercf/store",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(data),
@@ -462,7 +458,7 @@
             }).then(function (result) {
                 if (result.value) {
                     $.ajax({
-                        url: "/ordercf/delete/" + idOrdercf,
+                        url: "/admin/ordercf/delete/" + idOrdercf,
                         type: "GET",
                         success: function (result) {
                             if (result.check === true) {
@@ -496,11 +492,11 @@
         if (table_group_id == "all") {
             var layout = $('.add-product-layout');
             layout.hide();
-            url = "/ordercf/find-all";
+            url = "/admin/ordercf/find-all";
         } else {
             var layout = $('.add-product-layout');
             layout.show();
-            url = "/ordercf/find-by-group-table/" + table_group_id;
+            url = "/admin/ordercf/find-by-group-table/" + table_group_id;
 
         }
         var table = $("#table-order").DataTable();
@@ -514,7 +510,7 @@
                     for (let i = 0; i < result.length; i++) {
                         let item = result[i];
                         $.ajax({
-                            url: "/ordercf/find-product/" + item.idProduct,
+                            url: "/admin/ordercf/find-product/" + item.idProduct,
                             type: "GET",
                             contentType: "application/json",
                             success: function (result) {
@@ -537,7 +533,7 @@
                                     option_html: option_html,
                                 };
                                 $.ajax({
-                                    url: "/ordercf/find-group-table/" + item.idGroupTable,
+                                    url: "/admin/ordercf/find-group-table/" + item.idGroupTable,
                                     type: "GET",
                                     contentType: "application/json",
                                     success: function (result) {
@@ -600,7 +596,7 @@
                     var id_product = select.closest("tr").find(".id-product-table").text();
                     var count = select.closest("tr").find(".text-count-table").text();
                     $.ajax({
-                        url: "/ordercf/store-final/"+id_ordercf,
+                        url: "/admin/ordercf/store-final/" + id_ordercf,
                         contentType: "application/json",
                         type: "PUT",
                         data: JSON.stringify({}),
@@ -616,7 +612,7 @@
                                     idGroupTable: id_group_table,
                                 }
                                 $.ajax({
-                                    url: "/invoice/store-one",
+                                    url: "/admin/invoice/store-one",
                                     method: "POST",
                                     contentType: "application/json",
                                     data: JSON.stringify(data_invoice),
@@ -630,7 +626,7 @@
                                         console.log(JSON.stringify(data_invoice_details))
                                         $.ajax(
                                             {
-                                                url: "/detailInvoice/store",
+                                                url: "/admin/detailInvoice/store",
                                                 method: "POST",
                                                 contentType: "application/json",
                                                 data: JSON.stringify(data_invoice_details),
@@ -641,8 +637,7 @@
                                                         var table_group_id = $("#id-table-select").val();
                                                         toastr.success("Cập nhật thành công");
                                                         update_data(table_group_id);
-                                                    }
-                                                    else {
+                                                    } else {
                                                         select.select2("val", current_status);
                                                         toastr.error("Cập nhật thất bại");
                                                     }
@@ -664,17 +659,48 @@
         } else {
             $(this).closest("tr").find(".status-table").attr("data-status", status);
         }
+        if (status == "3") {
+            var id_ordercf = select.closest("tr").find(".id-idOrdercf-table").text();
+            swal.fire({
+                title: "Bạn có chắc chắn muốn hủy đơn hàng này không?",
+                text: "Sau khi hủy đơn hàng, bạn sẽ không thể phục hồi dữ liệu này!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Đồng ý",
+                cancelButtonText: "Hủy bỏ"
+            }).then(function (res) {
+                if (res.value) {
+                    var id_ordercf = select.closest("tr").find(".id-idOrdercf-table").text();
+                    $.ajax(
+                        {
+                            url: '/admin/ordercf/' + id_ordercf,
+                            method: "PUT",
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                status: status
+                            }),
+                            success: function (result) {
+                                if (result.check == true) {
+                                    select.select2("val", current_status);
+                                    var table_group_id = $("#id-table-select").val();
+                                    toastr.success("Cập nhật thành công");
+                                    update_data(table_group_id);
+                                } else {
+                                    select.select2("val", current_status);
+                                    toastr.error("Cập nhật thất bại");
+                                }
+                            }
+                        }
+                    )
+                } else if (res.dismiss == 'cancel') {
+                    select.select2("val", current_status);
+                }
+            });
+        }
     });
-    //handle on change count-table
-    let data_temp = [];
-    <c:forEach items="${groupTables}" var="item">
-    console.log("${item.id}")
-    data_temp.push({
-        id: "${item.id}",
-        name: "${item.groupName}"
-    })
-    </c:forEach>
-    console.log(data_temp)
+
 
 
 </script>

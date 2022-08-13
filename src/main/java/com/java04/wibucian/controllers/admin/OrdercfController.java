@@ -21,7 +21,7 @@ import java.util.List;
 
 @Validated
 @Controller
-@RequestMapping("/ordercf")
+@RequestMapping("admin/ordercf")
 public class OrdercfController {
     @Autowired
     private ProductService productService;

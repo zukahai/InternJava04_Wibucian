@@ -61,13 +61,13 @@
                             </c:if>
                         </td>
                         <td class="text-center">
-                            <a href="/invoice/detail/${item.id}" data-action="${item.id}"
+                            <a href="/admin/invoice/detail/${item.id}" data-action="${item.id}"
                                class="btn btn-icon btn-primary  btn-sm btn-icon-md btn-circle"
                                data-toggle="tooltip" data-placement="top" title="Sửa">
                                 <i class="fa fa-edit"></i>
                             </a>
 
-                            <a href="/invoice/bill/${item.id}" data-action="${item.id}"
+                            <a href="/admin/invoice/bill/${item.id}" data-action="${item.id}"
                                class="btn btn-icon btn-success  btn-sm btn-icon-md btn-circle"
                                data-toggle="tooltip" data-placement="top" title="Thanh Toán">
                                 <i class="fa fa-money-bill"></i>
@@ -88,36 +88,36 @@
             <c:if test="${ allPage > 1}">
                 <c:if test="${ currentPage > 1}">
                     <li class="page-item">
-                        <a class="page-link" href="/invoice/${currentPage - 1}?limit=${limit}">
+                        <a class="page-link" href="/admin/invoice/${currentPage - 1}?limit=${limit}">
                             <i class="fa fa-angle-left"></i>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${ currentPage == 1}">
                     <li class="page-item disabled">
-                        <a class="page-link" href="/invoice/${currentPage - 1}?limit=${limit}">
+                        <a class="page-link" href="/admin/invoice/${currentPage - 1}?limit=${limit}">
                             <i class="fa fa-angle-left"></i>
                         </a>
                     </li>
                 </c:if>
                 <c:forEach var="i" begin="1" end="${allPage}">
                     <c:if test="${ i == currentPage}">
-                        <li class="page-item active"><a href="/invoice/${i}?limit=${limit}" class="page-link">${i}</a></li>
+                        <li class="page-item active"><a href="/admin/invoice/${i}?limit=${limit}" class="page-link">${i}</a></li>
                     </c:if>
                     <c:if test="${ i != currentPage}">
-                        <li class="page-item"><a href="/invoice/${i}?limit=${limit}" class="page-link">${i}</a></li>
+                        <li class="page-item"><a href="/admin/invoice/${i}?limit=${limit}" class="page-link">${i}</a></li>
                     </c:if>
                 </c:forEach>
                 <c:if test="${ currentPage == allPage}">
                     <li class="page-item disabled">
-                        <a class="page-link" href="/invoice/${currentPage + 1}?limit=${limit}">
+                        <a class="page-link" href="/admin/invoice/${currentPage + 1}?limit=${limit}">
                             <i class="fa fa-angle-right"></i>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${ currentPage < allPage}">
                     <li class="page-item ">
-                        <a class="page-link" href="/invoice/${currentPage + 1}?limit=${limit}">
+                        <a class="page-link" href="/admin/invoice/${currentPage + 1}?limit=${limit}">
                             <i class="fa fa-angle-right"></i>
                         </a>
                     </li>
@@ -134,7 +134,7 @@
 
     $(document).on("click", ".delete-btn", function () {
         var id = $(this).attr("data-action");
-        var url = "/invoice/" + id;
+        var url = "/admin/invoice/" + id;
         var that = $(this);
         swal.fire({
             title: 'Bạn có chắc chắn muốn xóa?',

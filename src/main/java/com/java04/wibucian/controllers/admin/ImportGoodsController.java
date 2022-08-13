@@ -29,7 +29,7 @@ public class ImportGoodsController {
 
 
 
-    @GetMapping("/")
+    @GetMapping()
     public String Home(ModelMap modelMap) throws Exception {
         modelMap.addAttribute("importgoods", importGoodsService.findAll());
         return "admin/importgoods/index";
@@ -61,8 +61,5 @@ public class ImportGoodsController {
         return "admin/importgoods/detail";
     }
 
-    @GetMapping
-    public Page<ImportGoodsDTO> query(@Valid ImportGoodsQueryVO vO) {
-        return importGoodsService.query(vO);
-    }
+
 }
