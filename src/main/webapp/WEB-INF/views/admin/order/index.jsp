@@ -53,14 +53,14 @@
                                    id="price-prod"/>
                         </div>
                     </div>
-                    <div class="col col-3">
+                    <div class="col col-3 count-div">
                         <div class="input-group mb-5">
                             <span class="input-group-text me-2" id="basic-addon3">Số lượng</span>
-                            <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count-edit "
-                                 >-</span>
-                            <input type="text" value="1" class="form-control text-center text-count-edit"/>
+                            <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count "
+                            >-</span>
+                            <input type="text" value="1" class="form-control text-center text-count"/>
                             <span class="input-group-text btn  abtn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle "
-                                  >+</span>
+                            >+</span>
                         </div>
                     </div>
                     <div class="col ">
@@ -88,7 +88,7 @@
 
             <div class="d-flex flex-stack ">
 
-                <table class="table table-row-dashed fs-6 gy-5 " id="tabel-order">
+                <table class="table table-row-dashed fs-6 gy-5 " id="table-order">
                     <!--begin::Table head-->
                     <thead>
                     <!--begin::Table row-->
@@ -126,24 +126,30 @@
                 </div>
                 <!--end::Close-->
             </div>
-            <div  class="modal-body">
+            <div class="modal-body">
                 <div  class="mb-10">
                     <label class="required form-label">Id Order</label>
                     <input data-action="" readonly type="text"
                            class="form-control form-control-solid id-order-modal"
                            placeholder="Example input"/>
                 </div>
-                <div  class="mb-10">
+                <div class="mb-10">
                     <label class="required form-label">Tên Sản phẩm</label>
                     <input data-action="" readonly type="text"
-                           class="form-control form-control-solid name-ingredient-modal"
+                           class="form-control form-control-solid name-product-modal"
+                           placeholder="Example input"/>
+                </div>
+                <div class="mb-10">
+                    <label class="required form-label">Trạng thái</label>
+                    <input data-action="" readonly type="text"
+                           class="form-control form-control-solid status-order-modal"
                            placeholder="Example input"/>
                 </div>
                 <div class="input-group mb-5">
-                    <span class="input-group-text me-2" >Số lượng</span>
-                    <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count ">-</span>
-                    <input type="number" value="1" step="1.0" class="form-control text-center text-count-edit" />
-                    <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle ">+</span>
+                    <span class="input-group-text me-2">Số lượng</span>
+                    <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count-edit ">-</span>
+                    <input type="number" value="1" step="1.0" class="form-control text-center text-count-edit"/>
+                    <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark  up-count-edit btn-sm btn-icon-md btn-circle ">+</span>
                 </div>
             </div>
             <div class="modal-footer">
@@ -157,12 +163,26 @@
 <jsp:include page="../includes/end.jsp"></jsp:include>
 <script !src="">
     $(document).ready(function () {
-        $("#tabel-order").DataTable({
+        $("#table-order").DataTable({
             dom: 'Bfrtip',
             order: [[5, "desc"]],
         });
     });
-    //handle click on .delete-btn button
+    //handle click on down-count-edit
+    $(document).on('click', '.down-count-edit', function () {
+        var edit = $(this).closest('div').find('.text-count-edit');
+        var count = edit.val();
+        if (count > 1) {
+            count--;
+            edit.val(count);
+        }
+    });
+    $(document).on('click', '.up-count-edit', function () {
+        var edit = $(this).closest('div').find('.text-count-edit');
+        var count = edit.val();
+        count++;
+        edit.val(count);
+    });
 
     //handle click on up-count and down-count button
     $(document).on("click", ".up-count", function () {
@@ -196,20 +216,19 @@
         return price_new;
     }
 
-    $(document).on("click", ".down-up-tabel", function () {
-        var count_text = $(this).siblings(".text-count-tabel");
-        var total_price = $(this).closest("tr").find(".total-price-tabel");
-        var price_product = $(this).closest("tr").find(".price-product-tabel");
+    $(document).on("click", ".down-up-table", function () {
+        var count_text = $(this).siblings(".text-count-table");
+        var total_price = $(this).closest("tr").find(".total-price-table");
+        var price_product = $(this).closest("tr").find(".price-product-table");
         var count = parseInt(count_text.val());
         count_text.val(count + 1);
         var price = validatePrice(price_product.text());
         total_price.text(price * (count + 1));
-
     });
-    $(document).on("click", ".down-count-tabel", function () {
-        var count_text = $(this).siblings(".text-count-tabel");
-        var total_price = $(this).closest("tr").find(".total-price-tabel");
-        var price_product = $(this).closest("tr").find(".price-product-tabel");
+    $(document).on("click", ".down-count-table", function () {
+        var count_text = $(this).siblings(".text-count-table");
+        var total_price = $(this).closest("tr").find(".total-price-table");
+        var price_product = $(this).closest("tr").find(".price-product-table");
         var count = parseInt(count_text.val());
         if (count > 1) {
             count_text.val(count - 1);
@@ -228,12 +247,12 @@
         var total_price_value = count * price_product_value;
         total_price.val(total_price_value);
     });
-    //handle on type in text-count-tabel change value of total-price
-    $(document).on("input", ".text-count-tabel", function () {
+    //handle on type in text-count-table change value of total-price
+    $(document).on("input", ".text-count-table", function () {
         var count = parseInt($(this).val());
-        $(this).siblings(".text-count-tabel").val(count);
-        var price_product = $(this).closest("tr").find(".price-product-tabel");
-        var total_price = $(this).closest("tr").find(".total-price-tabel");
+        $(this).siblings(".text-count-table").val(count);
+        var price_product = $(this).closest("tr").find(".price-product-table");
+        var total_price = $(this).closest("tr").find(".total-price-table");
         var price_product_value = validatePrice(price_product.text());
         var total_price_value = count * price_product_value;
         total_price.text(total_price_value);
@@ -257,39 +276,41 @@
     }
     //handel add-product-order button
     $(document).on("click", ".add-product-order", function () {
+        var count = $('.count-div').find(".text-count").val();
+        console.log(count);
         var count = parseInt($(".text-count").val());
         var id_product = $("#id-select-product").val();
         var status = $("#id-select-status").val();
-        var id_group_tabel = $("#id-table-select");
-        var id_group_tabel_value = id_group_tabel.val();
-        updateSelectInTabel();
-        var data = [];
-        data.push(
-            {
-                id: null,
-                idOrdercf: null,
-                idGroupTable: id_group_tabel_value,
+        var id_group_table = $("#id-table-select");
+        var id_group_table_value = id_group_table.val();
+        $.ajax({
+            url: "/ordercf",
+            contentType: "application/json",
+            type: "POST",
+            data: JSON.stringify({
+                idGroupTable: id_group_table_value,
                 idProduct: id_product,
                 quantity: count,
                 status: status,
-            }
-        );
-        $.ajax({
-            url: "/ordercf/store",
-            contentType: "application/json",
-            type: "POST",
-            data: JSON.stringify(data),
+            }),
             success: function (result) {
                 if (result.check === true) {
                     toastr.success("Thêm thành công");
-                    update_data(id_group_tabel_value);
+                    update_data(id_group_table_value);
                 } else {
-                    toastr.error("Thêm thất bại");
+                    console.log(result.message);
+                    Swal.fire({
+                        text: result.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn btn-danger"
+                        }
+                    });
                 }
             }
         });
-
-
     });
     let updateSelectInTabel = () => {
         $(".sellect-2").select2();
@@ -299,18 +320,18 @@
     }
     let getHTMLRowTabel = (data) => {
         return `<tr>
-                        <td ><p class="group-tabel-name"-tabel>` + data.group_tabel_name + `</p></td>
-                        <td style="display: none"><p class="id-group-tabel">` + data.id_group_tabel + `</p></td>
-                        <td style="display: none"><p class="id-ordercf-tabel">` + data.id + `</p></td>
-                        <td style="display: none"><p class="id-idOrdercf-tabel">` + data.idOrdercf + `</p></td>
+                        <td ><p class="group-table-name"-table>` + data.group_table_name + `</p></td>
+                        <td style="display: none"><p class="id-group-table">` + data.id_group_table + `</p></td>
+                        <td style="display: none"><p class="id-ordercf-table">` + data.id + `</p></td>
+                        <td style="display: none"><p class="id-idOrdercf-table">` + data.idOrdercf + `</p></td>
                         <td style="display: none"><p class="count">` + data.count + `</p></td>
-                        <td style="display: none"><p class="id-product-tabel">` + data.id_product + `</p></td>
-                        <td><p class="name-product-tabel">` + data.name_product + `</p></td>
-                        <td><p class="text-count-tabel"></p>` + data.count + `</td>
-                        <td class="text-center"><p class="price-product-tabel">` + validatePriceToVND(data.price_product) + `</p></td>
-                        <td style="display: none" class="total-price-tabel"><p class="total-product-table">` + data.total_price + `</p></td>
-                        <td class="time-order-tabel"><p class="total-product-table">` + data.time_order + `</p></td>
-                        <td data-status = "` + data.status + `" class="status-tabel">
+                        <td style="display: none"><p class="id-product-table">` + data.id_product + `</p></td>
+                        <td><p class="name-product-table">` + data.name_product + `</p></td>
+                        <td><p class="text-count-table">` + data.count + `</p></td>
+                        <td class="text-center"><p class="price-product-table">` + validatePriceToVND(data.price_product) + `</p></td>
+                        <td style="display: none" class="total-price-table"><p class="total-product-table">` + data.total_price + `</p></td>
+                        <td class="time-order-table"><p class="total-product-table">` + data.time_order + `</p></td>
+                        <td data-status = "` + data.status + `" class="status-table">
                             <div class="mb-5 col">
                                 <select class="form-select form-select-solid sellect-2" data-control="select2"
                                     data-placeholder="Chọn Trạng Thái">
@@ -319,7 +340,7 @@
                             </div>
                         </td>
                         <td class="">
-                            `+ checkStatus(data.status)+`
+                            ` + checkStatus(data.status) + `
                             <span class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
                                   data-toggle="tooltip" data-placement="top" title="Xóa">
                                 <i class="fa fa-trash"></i>
@@ -330,39 +351,70 @@
     let checkStatus = (status) => {
         if (status != 2) {
             return `<span class="btn btn-icon btn-primary edit-btn btn-sm btn-icon-md btn-circle" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></span>`
-        }
-        else return ''
+        } else return ''
 
     }
-    $(document).on("click",'.edit-btn', function (){
+    $(document).on("click", '.edit-btn', function () {
+        $('.modal-title-edit-order').text('Sửa Đơn Hàng ' + $(this).closest('tr').find('.id-idOrdercf-table').text());
+        $('.name-product-modal').val($(this).closest('tr').find('.name-product-table').text());
+        $('.id-order-modal').val($(this).closest('tr').find('.id-idOrdercf-table').text());
+        $('.text-count-edit').val($(this).closest('tr').find('.text-count-table').text());
+        $('.status-order-modal').val($(this).closest('tr').find('.status-table').find('.sellect-2').val());
         $('#modal-edit-order').modal('show');
-        $('.modal-title-edit-order').text('Sửa Đơn Hàng '+$(this).closest('tr').find('.id-ordercf-tabel').text());
-
     });
+    $(document).on("click", '.save-btn-edit-order', function () {
+        $.ajax({
+            url: "/ordercf/"+ $('.id-order-modal').val(),
+            contentType: "application/json",
+            type: "PUT",
+            data: JSON.stringify({
+                quantity: $('.text-count-edit').val(),
+                status: $('.status-order-modal').val(),
+            }),
+            success: function (result) {
+                if (result.check === true) {
+                    toastr.success("Sửa thành công");
+                    $('#modal-edit-order').modal('hide');
+                    update_data($("#id-table-select").val());
+                } else {
+                    Swal.fire({
+                        text: result.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn btn-danger"
+                        }
+                    });
+                }
+            }
+        });
+    });
+    //handel down-count-edit
     //handle on click save-data
     $(document).on("click", ".save-data", function () {
-        ///get data from tabel-order
-        var tabel = $("#tabel-order tbody");
+        ///get data from table-order
+        var table = $("#table-order tbody");
         let data = [];
-        tabel.find("tr").each(function () {
-            var tabel_group_id = $("#id-table-select").val();
-            var id_product = $(this).find(".id-product-tabel").text();
-            var name_product = $(this).find(".name-product-tabel").text();
-            var count = $(this).find(".text-count-tabel").val();
-            var price_product = $(this).find(".price-product-tabel").text();
-            var total_price = $(this).find(".total-price-tabel").text();
-            var id_order = $(this).find(".id-ordercf-tabel").text();
-            var idOrdercf = $(this).find(".id-idOrdercf-tabel").text();
-            var id_group_table = $(this).find(".id-group-tabel").text();
+        table.find("tr").each(function () {
+            var table_group_id = $("#id-table-select").val();
+            var id_product = $(this).find(".id-product-table").text();
+            var name_product = $(this).find(".name-product-table").text();
+            var count = $(this).find(".text-count-table").val();
+            var price_product = $(this).find(".price-product-table").text();
+            var total_price = $(this).find(".total-price-table").text();
+            var id_order = $(this).find(".id-ordercf-table").text();
+            var idOrdercf = $(this).find(".id-idOrdercf-table").text();
+            var id_group_table = $(this).find(".id-group-table").text();
             var status = $(this).find(".sellect-2").val();
-            if (tabel_group_id === "all") {
-                tabel_group_id = id_group_table;
+            if (table_group_id === "all") {
+                table_group_id = id_group_table;
             }
             console.log(id_group_table)
             data.push({
                 id: id_order || null,
                 idOrdercf: idOrdercf || null,
-                idGroupTable: tabel_group_id,
+                idGroupTable: table_group_id,
                 idProduct: id_product,
                 quantity: count,
                 status: status,
@@ -378,8 +430,8 @@
             success: function (result) {
                 if (result.check === true) {
                     toastr.success("Thêm thành công");
-                    var tabel_group_id = $("#id-table-select").val();
-                    update_data(tabel_group_id);
+                    var table_group_id = $("#id-table-select").val();
+                    update_data(table_group_id);
                 } else {
                     toastr.error("Thêm thất bại");
                 }
@@ -390,12 +442,12 @@
     });
     //handle on click delete-btn
     $(document).on("click", ".delete-btn", function () {
-        var idOrdercf = $(this).closest("tr").find(".id-idOrdercf-tabel").text() || null;
+        var idOrdercf = $(this).closest("tr").find(".id-idOrdercf-table").text() || null;
         var row = $(this).closest("tr");
 
         if (idOrdercf == 'null') {
             toastr.success("Xóa thành công");
-            $("#tabel-order").DataTable().row(row).remove().draw();
+            $("#table-order").DataTable().row(row).remove().draw();
         }
         if (idOrdercf != 'null') {
             swal.fire({
@@ -415,7 +467,7 @@
                         success: function (result) {
                             if (result.check === true) {
                                 toastr.success("Xóa thành công");
-                                $("#tabel-order").DataTable().row(row).remove().draw();
+                                $("#table-order").DataTable().row(row).remove().draw();
                             } else {
                                 toastr.error("Xóa thất bại");
                             }
@@ -439,20 +491,20 @@
         }
     );
 
-    let update_data = (tabel_group_id) => {
+    let update_data = (table_group_id) => {
         let url;
-        if (tabel_group_id == "all") {
+        if (table_group_id == "all") {
             var layout = $('.add-product-layout');
             layout.hide();
             url = "/ordercf/find-all";
         } else {
             var layout = $('.add-product-layout');
             layout.show();
-            url = "/ordercf/find-by-group-table/" + tabel_group_id;
+            url = "/ordercf/find-by-group-table/" + table_group_id;
 
         }
-        var tabel = $("#tabel-order").DataTable();
-        tabel.clear().draw();
+        var table = $("#table-order").DataTable();
+        table.clear().draw();
         $.ajax({
                 url: url,
                 type: "GET",
@@ -473,8 +525,8 @@
                                 var data = {
                                     status: status,
                                     id: item.id,
-                                    id_group_tabel: item.idGroupTable,
-                                    group_tabel_name: null,
+                                    id_group_table: item.idGroupTable,
+                                    group_table_name: null,
                                     idOrdercf: item.idOrdercf,
                                     id_product: item.idProduct,
                                     name_product: product.productName,
@@ -489,9 +541,9 @@
                                     type: "GET",
                                     contentType: "application/json",
                                     success: function (result) {
-                                        data.group_tabel_name = result.groupName;
+                                        data.group_table_name = result.groupName;
                                         var html = getHTMLRowTabel(data);
-                                        $("#tabel-order").DataTable().row.add($(html)).draw();
+                                        $("#table-order").DataTable().row.add($(html)).draw();
                                         updateSelectInTabel();
                                     }
                                 });
@@ -510,22 +562,22 @@
     }
     //ready function
     $(document).ready(function () {
-        var tabel_group_id = $("#id-table-select").val();
-        update_data(tabel_group_id);
+        var table_group_id = $("#id-table-select").val();
+        update_data(table_group_id);
     });
     //handle on change id-table-select
     $(document).on("change", "#id-table-select", function () {
-        var tabel_group_id = $(this).val();
-        update_data(tabel_group_id);
+        var table_group_id = $(this).val();
+        update_data(table_group_id);
     });
     let dateTimeSqlServerToDateTime = (dateTime) => {
         var date = dateTime.split("T")[0];
         var time = dateTime.split("T")[1].split("+")[0];
         return date + " " + time;
     }
-    //handle on change status-tabel
+    //handle on change status-table
     $(document).on("change", ".sellect-2", function () {
-        var current_status = $(this).closest("tr").find(".status-tabel").attr("data-status");
+        var current_status = $(this).closest("tr").find(".status-table").attr("data-status");
 
         var status = $(this).val();
         var select = $(this);
@@ -542,28 +594,16 @@
                 cancelButtonText: "Hủy bỏ"
             }).then(function (res) {
                 if (res.value) {
-                    var id = select.closest("tr").find(".id-ordercf-tabel").text();
-                    var id_ordercf = select.closest("tr").find(".id-idOrdercf-tabel").text();
-                    var id_group_tabel = select.closest("tr").find(".id-group-tabel").text();
-                    var id_product = select.closest("tr").find(".id-product-tabel").text();
-                    var count = select.closest("tr").find(".text-count-tabel").val();
-                    var data = [];
-                    data.push(
-                        {
-                            id: id,
-                            idOrdercf: id_ordercf,
-                            idGroupTable: id_group_tabel,
-                            idProduct: id_product,
-                            quantity: count,
-                            status: status,
-                        }
-                    );
-                    console.log(JSON.stringify(data));
+                    var id = select.closest("tr").find(".id-ordercf-table").text();
+                    var id_ordercf = select.closest("tr").find(".id-idOrdercf-table").text();
+                    var id_group_table = select.closest("tr").find(".id-group-table").text();
+                    var id_product = select.closest("tr").find(".id-product-table").text();
+                    var count = select.closest("tr").find(".text-count-table").text();
                     $.ajax({
-                        url: "/ordercf/store-final",
+                        url: "/ordercf/store-final/"+id_ordercf,
                         contentType: "application/json",
-                        type: "POST",
-                        data: JSON.stringify(data),
+                        type: "PUT",
+                        data: JSON.stringify({}),
                         success: function (result) {
                             if (result.check === true) {
                                 //disable option exept current
@@ -573,7 +613,7 @@
                                     }
                                 });
                                 data_invoice = {
-                                    idGroupTable: id_group_tabel,
+                                    idGroupTable: id_group_table,
                                 }
                                 $.ajax({
                                     url: "/invoice/store-one",
@@ -582,31 +622,33 @@
                                     data: JSON.stringify(data_invoice),
                                     success: function (result) {
                                         var idInvoice = result;
-                                        console.log(result)
                                         var data_invoice_details = {
                                             idInvoice: idInvoice,
                                             idProduct: id_product,
                                             quantity: count,
                                         }
-                                        console.log(data_invoice_details);
+                                        console.log(JSON.stringify(data_invoice_details))
                                         $.ajax(
                                             {
                                                 url: "/detailInvoice/store",
                                                 method: "POST",
                                                 contentType: "application/json",
                                                 data: JSON.stringify(data_invoice_details),
-                                                success: function (result){
-                                                    if (result.check == true){
+                                                success: function (result) {
+                                                    console.log(result);
+                                                    if (result.check == true) {
                                                         select.select2("val", current_status);
-                                                        var tabel_group_id = $("#id-table-select").val();
+                                                        var table_group_id = $("#id-table-select").val();
                                                         toastr.success("Cập nhật thành công");
-                                                        update_data(tabel_group_id);
+                                                        update_data(table_group_id);
+                                                    }
+                                                    else {
+                                                        select.select2("val", current_status);
+                                                        toastr.error("Cập nhật thất bại");
                                                     }
                                                 }
                                             }
                                         )
-
-
                                     }
                                 })
 
@@ -620,10 +662,10 @@
                 }
             });
         } else {
-            $(this).closest("tr").find(".status-tabel").attr("data-status", status);
+            $(this).closest("tr").find(".status-table").attr("data-status", status);
         }
     });
-    //handle on change count-tabel
+    //handle on change count-table
     let data_temp = [];
     <c:forEach items="${groupTables}" var="item">
     console.log("${item.id}")
