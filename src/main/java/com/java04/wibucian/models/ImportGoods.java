@@ -12,6 +12,7 @@ import java.util.Set;
 @Table(name = "ImportGoods")
 public class ImportGoods {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idImportGoods", nullable = false, length = 15)
     private String id;
 

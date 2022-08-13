@@ -16,11 +16,7 @@
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
-            <a
-                    href="../../demo14/dist/account/settings.html"
-                    class="btn btn-primary align-self-center"
-            >Thêm nguyên liệu</a
-            >
+            <span class="btn btn-primary add-new-importgood align-self-center">Thêm nguyên liệu</span>
             <!--end::Action-->
         </div>
         <!--begin::Card header-->
@@ -36,7 +32,7 @@
                         <th>ID</th>
                         <th>Nhân viên nhập hàng</th>
                         <th>Thời gian nhập</th>
-                            <th>Hành động</th>
+                        <th>Hành động</th>
                         <th>&nbsp;</th>
                     </tr>
                     </thead>
@@ -62,3 +58,24 @@
 </div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
+<script !src="">
+    $('.add-new-importgood').click(function () {
+        $.ajax({
+            url: '${pageContext.request.contextPath}/admin/importgoods',
+            type: 'POST',
+            data: JSON.stringify({}),
+            contentType: 'application/json',
+            success: function (result) {
+               if(result.check == true){
+                   toastr.success("Thêm nguyên liệu thành công");
+                   setTimeout(function () {
+                       window.location.href = '${pageContext.request.contextPath}/admin/importgoods/'+result.value.idImportGoods;
+                   }, 1000);
+               }
+               else {
+                   toastr.error("Thêm nguyên liệu thất bại");
+               }
+            }
+        });
+    });
+</script>
