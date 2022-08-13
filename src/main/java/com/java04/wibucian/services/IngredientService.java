@@ -61,7 +61,5 @@ public class IngredientService {
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
 
-    public List<Ingredient> findAll() {
-        return ingredientRepository.findAll();
-    }
+
 }

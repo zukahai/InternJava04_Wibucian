@@ -27,13 +27,11 @@ public class GroupTableService {
     private GroupTableRepository groupTableRepository;
     private DetailGroupTableRepository detailGroupTableRepository;
 
-<<<<<<< HEAD
     public GroupTableService(DetailGroupTableRepository detailGroupTableRepository) {
         this.detailGroupTableRepository = detailGroupTableRepository;
     }
 
-=======
->>>>>>> 1f48b13 (Update do Nam lam tren nhanh main)
+
     public String save(GroupTableVO vO) {
         GroupTable bean = new GroupTable();
         BeanUtils.copyProperties(vO, bean);

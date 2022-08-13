@@ -72,10 +72,7 @@ public class DetailGroupTableController {
         return "admin/groupTable/detail";
     }
 
-    @PostMapping
-    public String save(@Valid @RequestBody DetailGroupTableVO vO) {
-        return detailGroupTableService.save(vO).toString();
-    }
+
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
