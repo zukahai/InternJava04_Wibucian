@@ -40,12 +40,20 @@
                     <c:forEach var="item" items="${importgoods}">
                         <tr>
                             <th scope="row">${  item.id }</th>
-                            <td>${  item.employee.id }</td>
+                            <td>${  item.employee.name }</td>
                             <td>${  item.dateFormat }</td>
-                            <td>
-                                <a href="" class="btn btn-warning mx-1">Xem</a>
-                                <a href="" class="btn btn-success mx-1">Sửa</a>
-                                <a href="" class="btn btn-danger mx-1">Xoá</a>
+                            <td class="text-center">
+                                <a href="/admin/importgoods/${item.id}" data-action="${item.id}"
+                                   class="btn btn-icon btn-primary  btn-sm btn-icon-md btn-circle"
+                                   data-toggle="tooltip" data-placement="top" title="Sửa">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+
+                                <span data-action="${item.id}"
+                                      class="btn btn-icon btn-danger delete-btn btn-sm btn-icon-md btn-circle"
+                                      data-toggle="tooltip" data-placement="top" title="Xóa">
+                                <i class="fa fa-trash"></i>
+                            </span>
                             </td>
                         </tr>
                     </c:forEach>
