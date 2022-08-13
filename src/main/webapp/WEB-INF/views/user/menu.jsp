@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<base href="/">
 <!-- Header -->
 <header class="kf-header">
 
@@ -9,7 +11,7 @@
                 <!-- hours -->
                 <div class="kf-h-group">
                     <i class="far fa-clock"></i>
-                    <em>opening hours :</em> 08:00 am - 09:00 pm
+                    <em>Giờ mở cửa :</em> 08:00 am - 09:00 pm
                 </div>
 
             </div>
@@ -29,7 +31,7 @@
                 <!-- location -->
                 <div class="kf-h-group">
                     <i class="fas fa-map-marker-alt"></i>
-                    <em>Location :</em> 55 main street, new york
+                    <em>Địa chỉ :</em> FPT complate Đà Nẵng
                 </div>
 
             </div>
@@ -43,7 +45,7 @@
 
                 <!-- logo -->
                 <div class="kf-logo">
-                    <a href="index.html"><img src="user/images/logo.png" alt="" /></a>
+                    <a href="/"><img src="user/images/logo.png" alt="" /></a>
                 </div>
 
             </div>
@@ -52,55 +54,15 @@
                 <!-- main menu -->
                 <div class="kf-main-menu">
                     <ul>
-                        <li>
-                            <a href="index.html">Home<i class="las la-angle-down"></i></a>
-                            <ul>
-                                <li><a href="index.html">Coffee House</a></li>
-                                <li><a href="index-2.html">Restaurant</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="about.html">About</a></li>
-                        <li>
-                            <a href="menu-coffee.html">Menu<i class="las la-angle-down"></i></a>
-                            <ul>
-                                <li><a href="menu-coffee.html">Menu Coffee</a></li>
-                                <li><a href="menu-restaurant.html">Menu Restaurant</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Pages<i class="las la-angle-down"></i></a>
-                            <ul>
-                                <li><a href="services.html">Service</a></li>
-                                <li><a href="reservation.html">Reservation</a></li>
-                                <li><a href="history.html">History</a></li>
-                                <li><a href="team.html">Our Chefs</a></li>
-                                <li><a href="gallery.html">Gallery</a></li>
-                                <li><a href="faq.html">FAQ</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Blog<i class="las la-angle-down"></i></a>
-                            <ul>
-                                <li><a href="blog-grid.html">Blog Grid</a></li>
-                                <li><a href="blog.html">Blog Standard</a></li>
-                                <li><a href="blog-single.html">Blog Single</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contacts.html">Contacts</a></li>
+                        <li><a href="/">Trang chủ<i class=""></i></a></li>
+                        <li><a href="/product">Sản phẩm</a></li>
                     </ul>
                 </div>
 
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 align-right">
-
                 <!-- menu btn -->
                 <a href="#" class="kf-menu-btn"><span></span></a>
-
-                <!-- btn -->
-                <a href="reservation.html" class="kf-btn h-btn">
-                    <span>Book a table</span>
-                </a>
-
             </div>
         </div>
     </div>
@@ -112,44 +74,9 @@
         <div class="kf-main-menu">
             <ul>
                 <li class="has-children">
-                    <a href="index.html">Home</a>
-                    <i class="las la-angle-down"></i>
-                    <ul>
-                        <li><a href="index.html">Coffee House</a></li>
-                        <li><a href="index-2.html">Restaurant</a></li>
-                    </ul>
+                    <a href="/">Trang chủ</a>
                 </li>
-                <li><a href="about.html">About</a></li>
-                <li class="has-children">
-                    <a href="menu-coffee.html">Menu</a>
-                    <i class="las la-angle-down"></i>
-                    <ul>
-                        <li><a href="menu-coffee.html">Menu Coffee</a></li>
-                        <li><a href="menu-restaurant.html">Menu Restaurant</a></li>
-                    </ul>
-                </li>
-                <li class="has-children">
-                    <a href="#">Pages</a>
-                    <i class="las la-angle-down"></i>
-                    <ul>
-                        <li><a href="services.html">Service</a></li>
-                        <li><a href="reservation.html">Reservation</a></li>
-                        <li><a href="history.html">History</a></li>
-                        <li><a href="team.html">Our Chefs</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                    </ul>
-                </li>
-                <li class="has-children">
-                    <a href="#">Blog</a>
-                    <i class="las la-angle-down"></i>
-                    <ul>
-                        <li><a href="blog-grid.html">Blog Grid</a></li>
-                        <li><a href="blog.html">Blog Standard</a></li>
-                        <li><a href="blog-single.html">Blog Single</a></li>
-                    </ul>
-                </li>
-                <li><a href="contacts.html">Contacts</a></li>
+                <li><a href="/product">Sản phẩm</a></li>
             </ul>
         </div>
 
