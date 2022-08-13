@@ -128,4 +128,4 @@ public class DetailInvoiceService {
         return detailInvoiceRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
-
+}
