@@ -79,7 +79,7 @@
                         </thead>
 
                         <tbody class="text-gray-600 fw-semibold">
-                        <c:forEach items="${importGoods.detailImportGoods}" var="item">
+                        <c:forEach items="${importgood.detailImportGoods}" var="item">
 
                             <tr class="text-start id-detail-ingredient-${item.id}">
                                 <td><p class="name-ingredient-tabel">${item.ingredient.ingredientName}</p></td>
@@ -124,7 +124,7 @@
                     <!--end::Close-->
                 </div>
                 <div class="modal-body">
-                    <div hidden class="mb-10">
+                    <div  class="mb-10">
                         <label class="required form-label">Id Hoá Đơn</label>
                         <input data-action="" readonly type="text"
                                class="form-control form-control-solid id-import-good-modal"
@@ -136,8 +136,7 @@
                             <select class="form-select select-2-ingredient form-select-solid" data-control="select2"
                                     data-placeholder="Chọn nguyên liệu">
                                 <c:forEach items="${ingredients}" var="item">
-                                    <option data-name="${product.productName}" data-price="${product.price}"
-                                            value="${product.id}">${product.productName}</option>
+                                    <option value="${item.id}">${item.ingredientName}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -146,13 +145,55 @@
                         <span class="input-group-text me-2" id="basic-addon3">Số lượng</span>
                         <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count "
                               id="down-count">-</span>
-                        <input type="number" value="1" class="form-control text-center text-count " id="count"/>
+                        <input type="number" value="1" class="form-control text-center text-count" id="count"/>
                         <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle "
                               id="up-count">+</span>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary save-btn-add-ingredient">Lưu lại</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-edit-ingredient" role="dialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title-edit-ingredient"></h3>
+                    <!--begin::Close-->
+                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                         aria-label="Close">
+                        <span class="svg-icon svg-icon-1"></span>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <div  class="modal-body">
+                    <div  class="mb-10">
+                        <label class="required form-label">Id chi tiết nhập hàng</label>
+                        <input data-action="" readonly type="text"
+                               class="form-control form-control-solid id-detail-import-good-modal"
+                               placeholder="Example input"/>
+                    </div>
+                    <div  class="mb-10">
+                        <label class="required form-label">Tên nguyên liệu</label>
+                        <input data-action="" readonly type="text"
+                               class="form-control form-control-solid name-ingredient-modal"
+                               placeholder="Example input"/>
+                    </div>
+
+                    <div class="input-group mb-5">
+                        <span class="input-group-text me-2" >Số lượng</span>
+                        <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count "
+                             >-</span>
+                        <input type="number" value="1" step="1.0" class="form-control text-center text-count-edit" />
+                        <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle "
+                              >+</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary save-btn-edit-ingredient">Lưu lại</button>
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </div>
@@ -194,18 +235,19 @@
         });
     });
     $(document).on("click", ".btn-edit", function () {
-        $('.modal-title').text("Sửa chi tiết hoá đơn " + $(this).attr("data-action"));
-        $('.id-detail-invoice').val($(this).attr("data-action"));
-        $('.id-detail-invoice').attr("data-action", $(this).attr("data-action"));
-        $('.id-product-invoice').val($(this).closest("tr").find(".id-product-tabel").text());
-        $('.text-count').val($(this).closest("tr").find(".quantity-table").text());
-        $('#modal-edit-detail').modal('show');
+        $('.modal-title-edit-ingredient').text("Sửa chi tiết hoá đơn " + $(this).attr("data-action"));
+        $('.id-detail-import-good-modal').val($(this).attr("data-action"));
+        $('.id-detail-import-good-modal').attr("data-action", $(this).attr("data-action"));
+        $('.name-ingredient-modal').val($(this).closest("tr").find(".name-ingredient-tabel").text());
+        $('.text-count-edit').val($(this).closest("tr").find(".quantity-table").text());
+        $('#modal-edit-ingredient').modal('show');
     });
     //hadle up-count
     $(document).on("click", ".up-count", function () {
         var count = $('.text-count').val();
         count++;
         $('.text-count').val(count);
+        $('.text-count-edit').val(count);
     });
     //hadle down-count
     $(document).on("click", ".down-count", function () {
@@ -213,30 +255,25 @@
         if (count > 1) {
             count--;
             $('.text-count').val(count);
+            $('.text-count-edit').val(count);
         }
     });
     //handel save-btn
-    $(document).on("click", ".save-btn", function () {
-        var id = $('.id-detail-invoice').attr("data-action");
-        var quantity = $('.text-count').val();
+    $(document).on("click", ".save-btn-edit-ingredient", function () {
+        var id = $('.id-detail-import-good-modal').attr("data-action");
+        var quantity = $('.text-count-edit').val();
         let data = {
-            idDetailInvoice: id,
+            idDetailImportGoods: id,
             quantity: quantity
         };
         $.ajax({
-            url: "/detailInvoice/" + id,
+            url: "/admin/detailImportGoods/" + id,
             contentType: "application/json",
             type: "PUT",
             data: JSON.stringify(data),
             success: function (result) {
                 if (result.check == true) {
                     toastr.success("Cập nhật thành công");
-                    //find row and update
-                    var row = $('.id-detail-invoice-' + id);
-                    row.find(".quantity-table").text(quantity);
-                    row.find(".total-money-price").text(validatePriceToVND(parseInt(quantity) * parseInt(row.find(".id-product-tabel").attr("data-price"))));
-                    toastr.success("Cập nhật thành công");
-                    $('#modal-edit-detail').modal('hide');
                     setTimeout(function () {
                         window.location.reload();
                     }, 1000);
@@ -250,26 +287,28 @@
     let validatePriceToVND = (price) => {
         return new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(price)
     }
-    $('.select-2-product').select2();
+    $('.select-2-ingredient').select2();
     //handel add-detail
     $(document).on("click", ".add-detail", function () {
         $('.modal-title-add-ingredient').text("Thêm chi tiết hoá đơn");
-        $('.id-import-good-modal').val($('.id-import-good').val());
+        $('.id-import-good-modal').val($('#id-import-good').val());
+        $('.text-count').val(1);
         $('#modal-add-ingredient').modal('show');
     });
     //handel save-btn-add-detail
-    $(document).on("click", ".save-btn-add-detail", function () {
-        var id = $('.id-invoice-modal').val();
+    $(document).on("click", ".save-btn-add-ingredient", function () {
+        var id = $('.id-import-good-modal').val();
+        console.log(id);
         var quantity = $('.text-count').val();
-        var idProduct = $('.select-2-product').val();
+        var idIngredient = $('.select-2-ingredient').val();
         let data = {
-            idInvoice: id,
-            idProduct: idProduct,
+            idImportGoods: id,
+            idIngredient: idIngredient,
             quantity: quantity
         }
         console.log(JSON.stringify(data));
         $.ajax({
-            url: "/detailInvoice/store",
+            url: "/admin/detailImportGoods",
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(data),

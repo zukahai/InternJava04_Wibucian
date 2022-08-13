@@ -37,7 +37,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="item" items="${nhaphang}">
+                    <c:forEach var="item" items="${importgoods}">
                         <tr>
                             <th scope="row">${  item.id }</th>
                             <td>${  item.employee.id }</td>
