@@ -180,7 +180,10 @@
                                     </div>
                                     <div class="desc">
                                         <h5 class="name">${item.productName}</h5>
-                                        <div class="subname">2/3 espresso, 1/3 streamed milk</div>
+                                        <div class="subname">${item.getIngredient()}</div>
+                                        <c:if test="${item.getPercentSale() != null}">
+                                            <span class="discount">Giảm giá ${item.getPercentSale()}%</span>
+                                        </c:if>
                                         <div class="price"><fmt:formatNumber value="${ item.price}" maxFractionDigits = "3" type="number"/>VND</div>
                                     </div>
                                 </div>
