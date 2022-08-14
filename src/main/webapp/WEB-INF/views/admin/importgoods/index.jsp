@@ -16,7 +16,7 @@
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
-            <span class="btn btn-primary add-new-importgood align-self-center">Thêm nguyên liệu</span>
+            <span class="btn btn-primary add-new-importgood align-self-center">Thêm nhập hàng</span>
             <!--end::Action-->
         </div>
         <!--begin::Card header-->
