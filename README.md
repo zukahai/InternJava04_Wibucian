@@ -2,6 +2,13 @@
 
 ## 1. Quick link:
 
+* Giao diện người dùng
+  * http://localhost:8080 <br>
+  *Chỉ xem danh thông tin về quán cà phê.* <br>
+  * http://localhost:8080 <br>
+  *Xem thông tin về sản phẩm* <br>
+ 
+
 * Loại bàn
   * http://localhost:8080/admin/typeTable/ <br>
   Xem danh sách loại bàn <br>
@@ -33,7 +40,11 @@
   *Xoá bàn dựa vào* **idTable**
  
  * Nhóm bàn
- 
+   * http://localhost:8080/admin/groupTable/ <br>
+   *Xem danh sách nhóm bàn*
+   * http://localhost:8080/admin/detailGroupTable/view/GTable00001 <br>
+   *Xem danh sách các bàn có trong nhóm bàn* **idGTable** <br>
+   
  * Sản phẩm
    * http://localhost:8080/admin/detailProduct/view/Product00002* <br>
    *Xem chi tiết những nguyên liệu có trong mộy sản phẩm dựa vào* **IdProduct** <br>

@@ -42,4 +42,10 @@ public class HomeController {
         modelMap.addAttribute("products", homeService.findAllProduct());
         return "user/product";
     }
+
+    @GetMapping("/about")
+    public String About(ModelMap modelMap) throws Exception {
+        modelMap.addAttribute("employees", homeService.findAllEmployee());
+        return "user/about";
+    }
 }

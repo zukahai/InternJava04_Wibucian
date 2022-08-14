@@ -2,11 +2,12 @@
 <base href="/">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Menu | Wibucian</title>
+    <title>Về chúng tôi | Wibucian</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,72 +46,68 @@
             </div>
         </div>
     </div>
+
     <jsp:include page="menu.jsp"></jsp:include>
+
     <!-- Wrapper -->
     <div class="wrapper">
 
         <!-- Section Started Inner -->
         <section class="section kf-started-inner">
-            <div class="kf-parallax-bg js-parallax" style="background-image: url(/user/images/service3.png);"></div>
+            <div class="kf-parallax-bg js-parallax" style="background-image: url(user/images/service3.png);"></div>
             <div class="container">
 
                 <h1 class="kf-h-title text-anim-1 scroll-animate" data-splitting="chars" data-animate="active">
-                    Coffee Menu
+                    Về chúng tôi
                 </h1>
 
             </div>
         </section>
 
-        <!-- Section Menu -->
-        <section class="section kf-menu kf-menu-tabs">
+        <!-- Section Team -->
+        <section class="section kf-team section-bg">
             <div class="container">
 
                 <div class="kf-titles align-center">
                     <div class="kf-subtitle element-anim-1 scroll-animate" data-animate="active">
-                        Giải khát cùng
+                        Thành viên trong nhóm
                     </div>
                     <h3 class="kf-title element-anim-1 scroll-animate" data-animate="active">
-                        Wibucian
+                        Thông tin của chúng tôi
                     </h3>
                 </div>
 
-                <div class="kf-filter kf-filter-menu element-anim-1 scroll-animate" data-animate="active">
-                    <a href="#" data-href=".all" class="active">All</a>
-                    <c:forEach var="item" items="${typetables}">
-                        <a href="#" data-href=".${item.id}">${item.productName}</a>
-                    </c:forEach>
-                </div>
-
-                <div class="kf-menu-items" style="background-image: url(user/images/menu_logo.png);">
-                    <div class="row">
-
-                        <c:forEach var="item" items="${products}">
-                            <div class="kf-menu-item-col col-xs-12 col-sm-12 col-md-12 col-lg-6 all ${item.productType.id}">
-                                <div class="kf-menu-item element-anim-1 scroll-animate" data-animate="active">
-                                    <div class="image kf-image-hover">
-                                        <a href="${item.srcImage}" class="has-popup-image"><img src="${item.srcImage}" alt="" /></a>
-                                    </div>
-                                    <div class="desc">
-                                        <h5 class="name">${item.productName}</h5>
-                                        <div class="subname">2/3 espresso, 1/3 streamed milk</div>
-                                        <div class="price"><fmt:formatNumber value="${ item.price}" maxFractionDigits = "3" type="number"/>VND</div>
-                                    </div>
+                <div class="kf-team-items row">
+                    <c:forEach var="item" items="${employees}">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                        <div class="kf-team-item element-anim-1 scroll-animate" data-animate="active">
+                            <div class="desc">
+                                <h5 class="name">${item.name}</h5>
+                                <div class="subname">Giới tính: ${item.gender}</div>
+                            </div>
+                            <div class="image kf-image-hover">
+                                <img src="${item.srcEmployee}" alt="" />
+                                <div class="info">
+                                    <div class="label">${item.email}</div>
+                                    <div class="label">${item.phoneNumber}</div>
+                                </div>
+                                <div class="social">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fab fa-youtube"></i></a>
                                 </div>
                             </div>
-                        </c:forEach>
-
+                        </div>
                     </div>
+                    </c:forEach>
+
                 </div>
 
             </div>
         </section>
 
-        <!-- Section Reservation -->
-        <section class="section kf-reservation kf-section-no-margin">
-            <div class="container">
 
-            </div>
-        </section>
 
         <!-- Section Brands -->
         <div class="section kf-brands">
