@@ -2,6 +2,7 @@ package com.java04.wibucian.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -120,5 +121,26 @@ public class Product  {
 
     public void setDetailProducts(Set<DetailProduct> detailProducts) {
         this.detailProducts = detailProducts;
+    }
+
+    public String getIngredient() {
+        String ans = "";
+        for (DetailProduct detailProduct : detailProducts) {
+            ans = ans + detailProduct.getIngredient().getIngredientName() + ", ";
+        }
+        ans = (ans.length() > 2) ? ans.substring(0, ans.length() - 2) : ans;
+        return ans;
+    }
+
+    public String getPercentSale() {
+        if (getSale() == null)
+            return null;
+        if (getSale().getPcent().equals("0"))
+            return null;
+        if (getSale().getTimeStart().compareTo(Instant.now()) > 0)
+            return null;
+        if (getSale().getTimeEnd().compareTo(Instant.now()) < 0)
+            return null;
+        return getSale().getPcent();
     }
 }
