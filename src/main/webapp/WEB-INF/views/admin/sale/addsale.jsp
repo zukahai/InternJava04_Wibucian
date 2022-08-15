@@ -15,7 +15,7 @@
         <div class="card-header cursor-pointer">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bold m-0">Dach sách đợt giảm giá</h3>
+                <h3 class="fw-bold m-0">Thêm sản phẩm đợt giảm giá</h3>
             </div>
             <!--end::Card title-->
             <!--begin::Action-->
@@ -29,67 +29,19 @@
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
-
-            <!--end::Input group-->
-            <div class="table-responsive">
-                <table class="table table-row-bordered gy-5">
-                    <thead>
-                    <tr class="fw-bold fs-6 text-gray-800">
-                        <%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
-                        <th>Mã đợt giảm giá</th>
-                        <th>Giảm giá</th>
-                        <th>Thời gian bắt đầu</th>
-                        <th>Thời gian kết thúc</th>
-                        <th class="d-flex align-center justify-content-center">Hành động</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="item" items="${sale}">
-                        <tr>
-                            <th scope="row">${  item.id }</th>
-                            <td>${ item.pcent } </td>
-<%--                          <div>${item.timeStart}</div>--%>
-<%--                            <div>${item.timeEnd}</div>--%>
-                            <td><fmt:formatDate pattern="dd-MM-yyyy"
-                                                value="${item.timeStart}"/> </td>
-                            <td><fmt:formatDate pattern="dd-MM-yyyy"
-                                                value="${item.timeEnd}"/> </td>
-                            <td class="d-flex align-center justify-content-center">
-                                <a href="admin/sale/detail/${item.id}" class="btn btn-info mx-1">Chi tiết</a>
-                                <a href="admin/sale/edit/${item.id}" class="btn btn-success mx-1">Sửa</a>
-                                <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
-                            </td>
-                            <!--end::Action=-->
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-                <c:if test="${totalPage > 1}">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <c:if test="${page > 1}">
-                                <li class="page-item">
-                                    <a class="page-link" href="/admin/sale/page/${page - 1}" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="/admin/sale/page/${page - 1}">${page - 1}</a></li>
-                            </c:if>
-                            <li class="page-item active"><a class="page-link" href="#" >${page}</a></li>
-                            <c:if test="${page < totalPage}">
-                                <li class="page-item"><a class="page-link" href="/admin/sale/page/${page + 1}">${page + 1}</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="/admin/sale/page/${page + 1}" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </c:if>
-                        </ul>
-                    </nav>
-                </c:if>
-            </div>
+            <form action="admin/sale/addsale/${id}" method="post">
+                <div class="form-floating my-5">
+                    <select class="form-select" data-control="select2" id="idProduct" name="idProduct" data-placeholder="Select an option">
+                        <c:forEach var="item" items="${products}">
+                            <option value="${item.id}">${item.id} - ${item.productName}</option>
+                        </c:forEach>
+                    </select>
+                    <label for="idProduct">Sản phẩm</label>
+                </div>
+                <div class="text-center my-5">
+                    <button class="btn btn-primary" type="submit">Thêm</button>
+                </div>
+            </form>
         </div>
         <!--end::Card body-->
     </div>

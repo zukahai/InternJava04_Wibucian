@@ -43,6 +43,14 @@
                         </select>
                         <label for="idProductType">Loại sản phẩm</label>
                     </div>
+<%--                    <div class="form-floating my-5">--%>
+<%--                        <select class="form-select" data-control="select2" id="idSale" name="idSale" data-placeholder="Select an option">--%>
+<%--                            <c:forEach var="item" items="${sale}">--%>
+<%--                                <option value="${item.id}" ${(item.id == sale.id) ? "selected" : ""}> ${item.id} </option>--%>
+<%--                            </c:forEach>--%>
+<%--                        </select>--%>
+<%--                        <label for="idProductType">Loại Giảm Giá</label>--%>
+<%--                    </div>--%>
                     <div class="form-floating my-5">
                         <input type="describe" class="form-control" id="describe" name="describe" placeholder="0" value="${product.describe}"/>
                         <label for="describe">Mô tả</label>

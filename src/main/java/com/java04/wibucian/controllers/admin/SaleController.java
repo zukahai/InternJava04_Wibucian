@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
+import java.util.List;
 
 @Validated
 @Controller
@@ -78,6 +79,26 @@ public class SaleController {
            Sale sale = saleService.findById(id);
            modelMap.addAttribute("sale", sale);
            return "admin/sale/detail";
+    }
+
+    @RequestMapping(value = "/addsale/{id}",method = RequestMethod.GET)
+    public String addsale(ModelMap modelMap,@Valid @NotNull @PathVariable("id") String id) throws Exception{
+        List<Product>  products =  productService.findAllNoPage();
+        modelMap.addAttribute("id", id);
+        modelMap.addAttribute("products", products);
+        return "admin/sale/addsale";
+    }
+
+    @RequestMapping(value = "/addsale/{id}",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String addSale(ModelMap modelMap,@Valid @NotNull @PathVariable("id") String id,
+                           @RequestBody MultiValueMap<String, String> formData) throws Exception {
+        System.out.println("Hoang");
+           System.out.println(formData.get("idProduct").get(0));
+           String idProduct = formData.get("idProduct").get(0);
+           productService.updateSale(idProduct, id);
+          return "redirect:/admin/sale/";
     }
 
     @RequestMapping(value = "/edit",
