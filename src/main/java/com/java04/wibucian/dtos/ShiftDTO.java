@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class ShiftDTO implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Integer id;
+    private String id;
 
     private String idShift;
 
@@ -17,8 +17,8 @@ public class ShiftDTO implements Serializable {
 
     private String idEmployeeChange;
 
-    private Date timeStart;
+    private String start;
 
-    private Date timeEnd;
+    private String end;
 
 }

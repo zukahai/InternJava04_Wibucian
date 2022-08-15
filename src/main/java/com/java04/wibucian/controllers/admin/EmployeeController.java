@@ -47,7 +47,7 @@ public class EmployeeController {
     @GetMapping("/view/{id}")
     public String viewEmployeePage(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id) throws Exception {
         modelMap.addAttribute("id", id);
-        Employee employee = employeeService.findById(id);
+        Employee employee = employeeService.getById(id);
         //System.out.println(id)
         modelMap.addAttribute("employee", employee);
         return "admin/employee/view";
@@ -56,7 +56,7 @@ public class EmployeeController {
     @GetMapping("/update/{id}")
     public String updateEmployeePage(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id) throws Exception {
         modelMap.addAttribute("id", id);
-        Employee employee = employeeService.findById(id);
+        Employee employee = employeeService.getById(id);
         //System.out.println(id)
         modelMap.addAttribute("employee", employee);
         return "admin/employee/update";
@@ -117,7 +117,7 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public EmployeeDTO getById(@Valid @NotNull @PathVariable("id") String id) {
-        return employeeService.getById(id);
+        return employeeService.getDTOById(id);
     }
 
     @GetMapping

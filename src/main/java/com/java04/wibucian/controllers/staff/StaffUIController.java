@@ -17,29 +17,11 @@ import java.security.Principal;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/staff/ui")
+@RequestMapping("/staff")
 public class StaffUIController {
-    private AccountRepository repository;
-    private EmployeeService employeeService;
 
-    public StaffUIController(AccountRepository repository,
-                             EmployeeService employeeService) {
-        this.repository = repository;
-        this.employeeService = employeeService;
-    }
-
-    @GetMapping("/update")
-    public String updatePage(Authentication authentication, Model model) {
-        Employee employee =
-                ((CustomUserDetail) authentication.getCredentials()).getEmployee();
-//
-//        String id = principal.getName();
-//        Optional<Account> accountOptional = repository.findById(id);
-//        Employee employee = accountOptional.get()
-//                                           .getEmployee();
-//        Employee employeeDTO = employeeService.getById(employee.getId());
-//        employeeDTO.setIdEmployee(employee.getId());
-        model.addAttribute("employee", employee);
-        return "admin/employee/update";
+    @GetMapping(value = {"", "/"})
+    public String infoPage(Authentication authentication, Model model) {
+        return "redirect:/staff/info";
     }
 }

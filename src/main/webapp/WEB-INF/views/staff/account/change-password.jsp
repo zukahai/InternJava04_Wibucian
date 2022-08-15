@@ -31,7 +31,8 @@
 		<!--begin::Card body-->
 		<div class="card-body p-9 ">
 			<!--begin::Input group-->
-			<form class="wrapper p-0 px-20 d-flex flex-column align-items-center">
+			<form class="wrapper p-0 px-20 d-flex flex-column align-items-center"
+				  method="POST" action="${contextPath}/staff/account/changePassword">
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Mật khẩu cũ</div>
 					<input type="password"
@@ -43,14 +44,7 @@
 					<div class="col">Mật khẩu mới</div>
 					<input type="password"
 						   class="form-control w-300px h-40px newPassword"
-						   name="newPassword"
-					/>
-				</h4>
-				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
-					<div class="col">Nhập lại mật khẩu mới</div>
-					<input type="password"
-						   class="form-control w-300px h-40px repeatPassword"
-						   name="repeatPassword"
+						   name="password"
 					/>
 				</h4>
 				<div class="my-5">

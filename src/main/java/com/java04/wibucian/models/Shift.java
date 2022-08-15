@@ -23,10 +23,10 @@ public class Shift {
 
 
     @Column(name = "isRequestShift")
-    private Boolean isRequestShift;
+    private Boolean requestShift;
 
     @Column(name = "isOvertimeRequest")
-    private Boolean isOvertimeRequest;
+    private Boolean overtimeRequest;
 
     @Column(name = "requestTime")
     private Instant requestTime;
@@ -89,19 +89,19 @@ public class Shift {
     }
 
     public Boolean getRequestShift() {
-        return isRequestShift;
+        return requestShift;
     }
 
     public void setRequestShift(Boolean requestShift) {
-        isRequestShift = requestShift;
+        this.requestShift = requestShift;
     }
 
-    public Boolean getOvertimeRequest() {
-        return isOvertimeRequest;
+    public Boolean isOvertimeRequest() {
+        return overtimeRequest;
     }
 
     public void setOvertimeRequest(Boolean overtimeRequest) {
-        isOvertimeRequest = overtimeRequest;
+        this.overtimeRequest = overtimeRequest;
     }
 
     public Instant getRequestTime() {

@@ -1,7 +1,9 @@
 package com.java04.wibucian.controllers.staff;
 
+import com.java04.wibucian.commons.Constant;
 import com.java04.wibucian.commons.DayOfWeek;
 import com.java04.wibucian.commons.ShiftOfDay;
+import com.java04.wibucian.commons.Utils;
 import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.models.Shift;
 import com.java04.wibucian.models.ShiftRotate;
@@ -20,6 +22,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,8 +102,18 @@ public class StaffShiftRotateController {
                                     Model model) {
         Shift shift = this.shiftService.getById(shiftId);
         this.shiftRotateService.checkCanCreateShiftRotate(employee, shift);
+        Calendar firstDayOfNextWeek = Utils.getFirstDayOfNextWeek();
+        Calendar lastDayOfNextWeek = Utils.getLastDayOfNextWeek();
         model.addAttribute("daysOfWeek", DayOfWeek.values());
         model.addAttribute("shiftsOfDay", ShiftOfDay.values());
+        Map<Integer, String> weekDayMapping = new HashMap<>();
+        while (firstDayOfNextWeek.compareTo(lastDayOfNextWeek) <= 0) {
+            weekDayMapping.put(firstDayOfNextWeek.get(Calendar.DAY_OF_WEEK),
+                               Utils.getDateFormat(firstDayOfNextWeek.getTime(),
+                                                   Constant.DD_MM_YYYY_FORMAT));
+            firstDayOfNextWeek.add(Calendar.DATE, 1);
+        }
+        model.addAttribute("weekDayMapping", weekDayMapping);
         model.addAttribute("shift", shift);
         model.addAttribute("candidateShiftsToRotate",
                            this.shiftRotateService.getCandidateShiftToRotate(employee,

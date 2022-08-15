@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../../admin/includes/hd.jsp"></jsp:include>
 <jsp:include page="../../admin/includes/header.jsp"></jsp:include>
 <jsp:include page="../../admin/includes/sidebar1.jsp"></jsp:include>
@@ -63,7 +64,8 @@
 				</h4>
 				<h4 class="row w-75 row-cols-2 mb-10">
 					<div class="col">Ngày sinh</div>
-					<div class="col w-300px">${employee.birthDay}</div>
+					<div class="col w-300px"><fmt:formatDate pattern="dd-MM-yyyy"
+															 value="${employee.birthDay}"/></div>
 				</h4>
 				<h4 class="row w-75 row-cols-2 mb-10">
 					<div class="col">Trạng thái hôn nhân</div>

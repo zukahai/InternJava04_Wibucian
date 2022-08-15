@@ -63,7 +63,9 @@ public class StaffShiftController {
     public String getOwnShiftRequestForNextWeek(
             @ModelAttribute("employee") Employee employee, Model model) {
         boolean isInShiftRequestTime = this.shiftService.isInShiftRequestTime();
-        if (isInShiftRequestTime) {
+        boolean isInShiftApproveTime = this.shiftService.isInShiftApproveTime();
+        boolean isAlreadyApproved = this.shiftService.isAlreadyApprovedForNextWeek();
+        if (isInShiftRequestTime || isInShiftApproveTime) {
             Calendar firstDayOfNextWeek = Utils.getFirstDayOfNextWeek();
             Calendar lastDayOfNextWeek = Utils.getLastDayOfNextWeek();
             model.addAttribute("totalNormalRequest",
@@ -92,6 +94,8 @@ public class StaffShiftController {
             model.addAttribute("weekDayMapping", weekDayMapping);
         }
         model.addAttribute("isInShiftRequestTime", isInShiftRequestTime);
+        model.addAttribute("isInShiftApproveTime", isInShiftApproveTime);
+        model.addAttribute("isAlreadyApproved", isAlreadyApproved);
         return "staff/shift/request";
     }
 

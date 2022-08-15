@@ -12,7 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -24,6 +26,10 @@ public class AccountService {
     private final Logger LOGGER = LoggerFactory.getLogger(AccountService.class);
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    @Qualifier("customPasswordEncoder")
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public String save(AccountVO vO) {
         Account bean = new Account();
@@ -66,13 +72,12 @@ public class AccountService {
         String userName = updatePassword.getUserName();
         String oldPassword = updatePassword.getOldPassword();
         String password = updatePassword.getPassword();
-        CustomPasswordEncoder customPasswordEncoder = new CustomPasswordEncoder();
         Optional<Account> optionalAccount = accountRepository.findAccountById(userName);
         if (optionalAccount.isPresent()) {
             Account curAccount = optionalAccount.get();
             String encodedPassword = curAccount.getPassword();
-            if (customPasswordEncoder.matches(oldPassword, encodedPassword)) {
-                curAccount.setPassword(customPasswordEncoder.encode(password));
+            if (bCryptPasswordEncoder.matches(oldPassword, encodedPassword)) {
+                curAccount.setPassword(bCryptPasswordEncoder.encode(password));
                 try {
                     accountRepository.save(curAccount);
                     return true;

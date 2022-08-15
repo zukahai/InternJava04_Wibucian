@@ -10,6 +10,8 @@ import com.java04.wibucian.vos.AccountUpdateVO;
 import com.java04.wibucian.vos.AccountVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -36,9 +38,11 @@ public class AccountController {
         System.out.println(productService.listAll());
         return "admin/order/index";
     }
+
     @PostMapping
     public String save(@Valid @RequestBody AccountVO vO) {
-        return accountService.save(vO).toString();
+        return accountService.save(vO)
+                             .toString();
     }
 
     @DeleteMapping("/{id}")
@@ -62,8 +66,13 @@ public class AccountController {
         return accountService.query(vO);
     }
 
-    @PostMapping("changePassword")
-    public Boolean updatePassword(@RequestBody UpdatePassword updatePassword){
-        return accountService.updatePassword(updatePassword);
-    }
+//    @PostMapping(value = "changePassword",
+//                 consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+//    public String updatePassword(UpdatePassword updatePassword, Authentication authentication) {
+//
+//        if (accountService.updatePassword(updatePassword)) {
+//            return "redirect:/staff/info";
+//        }
+//        return "redirect:/staff/account/change-password";
+//    }
 }

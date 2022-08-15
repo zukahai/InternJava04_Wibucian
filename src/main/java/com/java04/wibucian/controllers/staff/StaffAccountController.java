@@ -1,11 +1,13 @@
 package com.java04.wibucian.controllers.staff;
 
 import com.java04.wibucian.models.Employee;
+import com.java04.wibucian.models.UpdatePassword;
 import com.java04.wibucian.security.CustomUserDetail;
 import com.java04.wibucian.services.AccountService;
 import com.java04.wibucian.vos.AccountUpdateVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.java04.wibucian.services.EmployeeService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -38,14 +40,14 @@ public class StaffAccountController {
         return "staff/account/change-password";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/change-password")
-    @ResponseBody
-    public ResponseEntity<Boolean> staffRequestShift(
-            @ModelAttribute("employee") Employee employee,
-            @Valid AccountUpdateVO accountUpdateVO) {
-        // TODO: Fetch employeeID
-//        this.accountService.changePassword(employee, accountUpdateVO);
-        return ResponseEntity.ok()
-                             .body(true);
+    @PostMapping(value = "changePassword",
+                 consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String updatePassword(UpdatePassword updatePassword,
+                                 @ModelAttribute("employee") Employee employee) {
+        updatePassword.setUserName(employee.getAccount().getId());
+        if (accountService.updatePassword(updatePassword)) {
+            return "redirect:/staff/info";
+        }
+        return "redirect:/staff/account/change-password";
     }
 }
