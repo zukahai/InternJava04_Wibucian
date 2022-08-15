@@ -1,9 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../../admin/includes/hd.jsp"></jsp:include>
 <jsp:include page="../../admin/includes/header.jsp"></jsp:include>
 <jsp:include page="../../admin/includes/sidebar1.jsp"></jsp:include>
 <jsp:include page="../../admin/includes/container.jsp"></jsp:include>
+
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -31,10 +33,15 @@
 		<!--begin::Card body-->
 		<div class="card-body p-9 ">
 			<!--begin::Input group-->
-			<form class="wrapper p-0 px-20 d-flex flex-column align-items-center">
+			<form class="wrapper p-0 px-20 d-flex flex-column align-items-center"  action="/staff/update" method="POST">
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Mã nhân viên</div>
 					<div class="col w-300px">${employee.id}</div>
+					<input type="hidden"
+                           class="form-control w-300px h-40px name"
+                           value="${employee.id}"
+                           name="idEmployee"
+                    />
 				</h4>
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Tên nhân viên</div>
@@ -45,6 +52,11 @@
 						   name="name"
 					/>
 				</h4>
+				<input type="hidden"
+                       class="form-control w-300px h-40px address"
+                       value="${employee.srcEmployee}"
+                       name="srcEmployee"
+                />
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Địa chỉ</div>
 					<input type="text"
@@ -57,6 +69,11 @@
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Email</div>
 					<div class="col w-300px">${employee.email}</div>
+					<input type="hidden"
+                       class="form-control w-300px h-40px name"
+                       value="${employee.email}"
+                       name="email"
+                    />
 				</h4>
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Số điện thoại</div>
@@ -70,26 +87,34 @@
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Giới tính</div>
 					<div class="col w-300px">${employee.gender}</div>
+					<input type="hidden"
+                           class="form-control w-300px h-40px name"
+                           value="${employee.gender}"
+                           name="gender"
+                    />
 				</h4>
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Ngày sinh</div>
 					<input type="date"
 						   class="form-control w-250px h-40px maritalStatus"
-						   value="${employee.birthDay}"
+						   value="<fmt:formatDate pattern="yyyy-MM-dd"
+                                                      										value="${employee.birthDay}"/>"
 						   name="birthDay"
 					/>
+
 				</h4>
+
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Trạng thái hôn nhân</div>
 					<div class="form-check form-check-custom form-check-solid justify-content-between">
 						<div class="d-flex align-items-center">
-							<input class="form-check-input mx-3" type="radio"
-								   name="maritalStatus" value="1"/>
+							<input  class="form-check-input mx-3" type="radio"
+								   name="maritalStatus" value="single"/>
 							<span>Độc thân</span>
 						</div>
 						<div class="d-flex align-items-center">
-							<input class="form-check-input mx-3" type="radio" value="2"
-								   name="maritalStatus"/>
+							<input class="form-check-input mx-3" type="radio" value="married"
+								   name="maritalStatus" <c:if test=${employee.maritalStatus eq 'married'}>checked</c:if>/>
 							<span>Đã kết hôn</span>
 						</div>
 					</div>
