@@ -75,7 +75,9 @@
 							<tbody>
 								<c:forEach var="day" items="${daysOfWeek}">
 									<tr class="row row-cols-4">
-										<td class="col d-flex align-items-center justify-content-center fw-bold">${day}</td>
+										<td class="col d-flex align-items-center justify-content-center fw-bold">
+												${weekDayMapping[day.value]}
+										</td>
 										<c:forEach var="shiftOfDay"
 												   items="${shiftsOfDay}">
 											<td class="col d-flex flex-column gap-5 align-items-center justify-content-center">

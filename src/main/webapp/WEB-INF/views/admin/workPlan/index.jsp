@@ -30,6 +30,22 @@
 								đến ${weekEnd} </p>
 						</div>
 					</div>
+					<div class="d-flex justify-content-center align-items-lg-start flex-column h-100px fs-4">
+						<div>
+							<div class="form-check form-check-custom form-check-success form-check-solid mb-2">
+								<input class="form-check-input mx-5"
+									   type="checkbox"
+									   checked disabled
+								/> Có làm việc
+							</div>
+							<div class="form-check form-check-custom form-check-success form-check-solid">
+								<input class="form-check-input mx-5"
+									   type="checkbox"
+									   disabled
+								/> Nghỉ làm việc
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="card-body p-9">
 					<!--end::Input group-->

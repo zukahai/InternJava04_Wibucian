@@ -12,16 +12,11 @@
 <div class="content flex-column-fluid" id="kt_content">
 	<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
 		<c:choose>
-			<c:when test="${isInShiftRequestTime eq false}">
+			<c:when test="${isAlreadyApproved eq true or (isInShiftApproveTime eq false and isInShiftRequestTime eq false)}">
 				<div class="card-body p-9 fs-2 text-center">Xin lỗi, hiện tại không phải
 					là thời gian đăng ký ca làm việc
 				</div>
 			</c:when>
-<%--			<c:when test="${isAlreadyApprovedForNextWeek eq true}">--%>
-<%--				<div class="card-body p-9 fs-2 text-center">--%>
-<%--					Lịch làm việc đã được chốt--%>
-<%--				</div>--%>
-<%--			</c:when>--%>
 			<c:otherwise>
 				<!--begin::Card header-->
 				<div class="card-header flex-row">
@@ -33,6 +28,33 @@
 						<div class="card-title mt-2">
 							<p class="fst-italic m-0 fw-bold">Thời gian: từ ${weekStart}
 								đến ${weekEnd} </p>
+						</div>
+					</div>
+					<div class="d-flex justify-content-center align-items-lg-start flex-column h-100px my-10">
+						<div class="form-check form-check-custom form-check-success form-check-solid mb-3">
+							<input class="form-check-input mx-5"
+								   type="checkbox"
+								   disabled checked
+							/> Đăng ký chính thức
+						</div>
+						<div class="form-check form-check-custom form-check-warning form-check-solid mb-3">
+							<input class="form-check-input mx-5"
+								   type="checkbox"
+								   disabled checked
+							/> Đăng ký dự bị
+						</div>
+						<div class="form-check form-check-custom form-check-warning form-check-solid mb-3">
+							<input class="form-check-input mx-5"
+								   type="checkbox"
+								   disabled checked
+								   style="background: gray;border:1px solid gray"
+							/> Ca làm việc đã đủ slot
+						</div>
+						<div class="form-check form-check-custom form-check-solid">
+							<input class="form-check-input mx-5"
+								   type="checkbox"
+								   disabled
+							/> Ca làm việc có thể đăng ký
 						</div>
 					</div>
 				</div>
@@ -56,11 +78,13 @@
 												   items="${shiftsOfDay}">
 											<td class="col d-flex flex-column gap-5 align-items-center justify-content-center">
 												<c:set var="work" value="${true}"/>
-												<c:forEach var="workPlan" items="${workPlansForNextWeek[day][shiftOfDay]}">
+												<c:forEach var="workPlan"
+														   items="${workPlansForNextWeek[day][shiftOfDay]}">
 													<c:if test="${workPlan.work eq false}">
 														<c:set var="work"
 															   value="${false}"/>
-														<div class="text-danger">Nghỉ</div>
+														<div class="text-danger">Nghỉ
+														</div>
 													</c:if>
 												</c:forEach>
 												<c:if test="${work eq true}">
@@ -117,10 +141,14 @@
 															   shiftDay="${day.value}"
 															   shiftCode="${shiftOfDay.value}"
 															   type="checkbox"
-															   <c:if test="${canManipulate eq false}">disabled
-															   checked
-															   style="background: gray; border: 1px solid gray;" </c:if>
+																<c:if test="${isInShiftApproveTime eq true}">
+																	disabled
+																</c:if>
 																<c:choose>
+																	<c:when test="${canManipulate eq false}">
+																		disabled
+																		style="background: gray; border: 1px solid gray;"
+																	</c:when>
 																	<c:when test="${not empty shift and (shift.employee.id eq employeeId)}">
 																		checked
 																	</c:when>
@@ -163,7 +191,7 @@
         if (response.status !== 200) {
             return {
                 success: false,
-                error: {
+                error  : {
                     message: "Failed"
                 },
             }
@@ -177,10 +205,10 @@
         const url = "${contextPath}/staff/shift/request"
         const response = await fetch(url, {
             method: "POST",
-            body: new URLSearchParams({
-                                          shiftDate: weekDayMapping[shiftDate],
-                                          shiftCode
-                                      })
+            body  : new URLSearchParams({
+                                            shiftDate: weekDayMapping[shiftDate],
+                                            shiftCode
+                                        })
         })
         const responseData = await response.text()
         console.log(responseData)
@@ -188,14 +216,14 @@
         if (response.status !== 200) {
             return {
                 success: false,
-                error: {
+                error  : {
                     message: "Failed"
                 },
             }
         }
         return {
             success: true,
-            data: {
+            data   : {
                 shift: JSON.parse(responseData)
             }
         }

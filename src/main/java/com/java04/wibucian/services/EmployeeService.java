@@ -48,6 +48,7 @@ public class EmployeeService {
     // update bằng employee object, sẽ được nhân viên sử dụng để update thông tin cá nhân
     public void update(Employee employee, EmployeeUpdateVO employeeUpdateVO) {
         BeanUtils.copyProperties(employeeUpdateVO, employee);
+        employee.setBirthDay(employeeUpdateVO.getBirthday());
         employeeRepository.save(employee);
     }
 
