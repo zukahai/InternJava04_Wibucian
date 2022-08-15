@@ -1,6 +1,7 @@
 package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.AccountDTO;
+import com.java04.wibucian.models.UpdatePassword;
 import com.java04.wibucian.services.AccountService;
 import com.java04.wibucian.services.OrdercfService;
 import com.java04.wibucian.services.ProductService;
@@ -59,5 +60,10 @@ public class AccountController {
     @GetMapping
     public Page<AccountDTO> query(@Valid AccountQueryVO vO) {
         return accountService.query(vO);
+    }
+
+    @PostMapping("changePassword")
+    public Boolean updatePassword(@RequestBody UpdatePassword updatePassword){
+        return accountService.updatePassword(updatePassword);
     }
 }
