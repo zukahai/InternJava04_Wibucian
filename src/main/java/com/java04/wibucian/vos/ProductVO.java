@@ -25,4 +25,6 @@ public class ProductVO implements Serializable {
     @NotNull(message = "productName can not null")
     private String productName;
 
+    private String idSale;
+
 }

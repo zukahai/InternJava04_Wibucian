@@ -14,6 +14,12 @@
             <div class="card-title m-0">
                 <h3 class="fw-bold m-0">Danh sách sản phẩm giảm giá</h3>
             </div>
+
+            <a
+                    href="admin/sale/addsale/${sale.id}"
+                    class="btn btn-primary align-self-center"
+            >Thêm sản phẩm</a
+            >
             <!--end::Card title-->
             <!--begin::Action-->
             <!--end::Action-->

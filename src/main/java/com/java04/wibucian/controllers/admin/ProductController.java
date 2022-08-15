@@ -2,6 +2,7 @@ package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.ProductDTO;
 import com.java04.wibucian.models.Product;
+import com.java04.wibucian.models.Sale;
 import com.java04.wibucian.services.ProductService;
 import com.java04.wibucian.services.SaleService;
 import com.java04.wibucian.services.TypeProductService;
@@ -42,12 +43,6 @@ public class ProductController {
         this.typeProductService = typeProductService;
         this.saleService = saleService;
     }
-
-//    @PostMapping
-//    public String save(@Valid @RequestBody ProductVO vO) {
-//        return productService.save(vO).toString();
-//    }
-
     @GetMapping("/")
     public String Home(ModelMap modelMap) throws Exception {
         int page = 1;
@@ -74,9 +69,7 @@ public class ProductController {
 
       @GetMapping("/create")
     public String createProductPage(ModelMap modelMap) throws Exception {
-
-
-               modelMap.addAttribute("typeProduct", this.typeProductService.findAll());
+        modelMap.addAttribute("typeProduct", this.typeProductService.findAll());
         modelMap.addAttribute("sale", this.saleService.findAll());
              return "admin/product/create";
     }
@@ -84,8 +77,11 @@ public class ProductController {
     @GetMapping("/edit/{id}")
     public String HomeEdit(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
       Product product = productService.findById(id);
+        //Sale sale = saleService.findById(id);
        modelMap.addAttribute("typeProduct", typeProductService.findAll());
        modelMap.addAttribute("product", product);
+      // modelMap.addAttribute("sale", sale);
+
         return "admin/product/edit";
     }
 
@@ -110,6 +106,7 @@ public class ProductController {
         modelMap.addAttribute("product", product);
         return "admin/product/detail";
     }
+
 
     //detail
 

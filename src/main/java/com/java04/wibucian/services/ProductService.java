@@ -41,14 +41,11 @@ public class ProductService {
         TypeProduct typeProduct = this.typeProductRepository.findById(vO.getIdProductType())
                 .orElseThrow(() -> new NoSuchElementException());
         BeanUtils.copyProperties(vO, bean);
-        bean.setSale(null);
+        bean.setSale(saleRepository.findById(vO.getIdSale()).orElse(null));
         bean.setProductType(typeProduct);
         bean = productRepository.save(bean);
         return bean.getId();
     }
-
-
-
     public String save(ProductVO vO, String idSale) {
         Product product = new Product();
         BeanUtils.copyProperties(vO, product);
@@ -127,6 +124,16 @@ public class ProductService {
 
     public List<Product> findAll(Pageable pageable) {
         return productRepository.findAll(pageable).getContent();
+    }
+    public List<Product> findAllNoPage( ) {
+        return productRepository.findAll();
+    }
+
+    public void updateSale(String idProduct, String idSale){
+        Product product= productRepository.findById(idProduct).orElse(null);
+        Sale sale = saleRepository.findById(idSale).orElse(null);
+        product.setSale(sale);
+        productRepository.save(product);
     }
 
     public List<Product> findAllHoang(Pageable pageable) {
