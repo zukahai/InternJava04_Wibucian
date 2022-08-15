@@ -32,13 +32,13 @@ public class HomeController {
 
     @GetMapping("/")
     public String Home(ModelMap modelMap) throws Exception {
-        modelMap.addAttribute("typetables", homeService.findAllTypeProduct());
+        modelMap.addAttribute("typetables", homeService.findAllTypeProductHaveProductNotNull());
         modelMap.addAttribute("products", homeService.findNumberRandomProduct(4));
         return "user/index";
     }
     @GetMapping("/product")
     public String Product(ModelMap modelMap) throws Exception {
-        modelMap.addAttribute("typetables", homeService.findAllTypeProduct());
+        modelMap.addAttribute("typetables", homeService.findAllTypeProductHaveProductNotNull());
         modelMap.addAttribute("products", homeService.findAllProduct());
         return "user/product";
     }

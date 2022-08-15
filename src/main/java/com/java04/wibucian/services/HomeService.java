@@ -9,6 +9,7 @@ import com.java04.wibucian.repositories.SaleRepository;
 import com.java04.wibucian.repositories.TypeProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,4 +52,13 @@ public class HomeService {
         return typeProductRepository.findAll();
     }
 
+    public List<TypeProduct> findAllTypeProductHaveProductNotNull() {
+        List<TypeProduct> answer = new ArrayList();
+        for (TypeProduct typeProduct : typeProductRepository.findAll()) {
+            if (typeProduct.getProducts().size() > 0) {
+                answer.add(typeProduct);
+            }
+        }
+        return answer;
+    }
 }
