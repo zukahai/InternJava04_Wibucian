@@ -2,9 +2,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
-<jsp:include page="../includes/sidebar1.jsp"></jsp:include>
+<jsp:include page="../includes/sidebar.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
     <!--begin::Card header-->
     <div class="card-header cursor-pointer">
@@ -14,7 +14,6 @@
         </div>
         <!--end::Card title-->
         <!--begin::Action-->
-        <span class="btn btn-primary align-self-center save-data">Lưu thông tin</span>
         <!--end::Action-->
     </div>
     <!--begin::Card header-->
@@ -48,7 +47,7 @@
                     <div class="col ">
                         <div class="input-group mb-5">
                             <span class="input-group-text me-2">Giá</span>
-                            <input readonly type="text" value="<c:out value="${products[0].price}"></c:out>"
+                            <input readonly type="text" value="<fmt:formatNumber pattern="#,###" value="${products[0].price}"/>"
                                    class="form-control text-center price-product"
                                    id="price-prod"/>
                         </div>
@@ -66,7 +65,7 @@
                     <div class="col ">
                         <div readonly="true" class="input-group mb-5">
                             <span class="input-group-text">Tổng tiền</span>
-                            <input readonly value="<c:out value="${products[0].price}"></c:out>" type="text"
+                            <input readonly value="<fmt:formatNumber pattern="#,###" value="${products[0].price}"/>" type="text"
                                    class="form-control total-price" id="total-price"
                                    aria-describedby="basic-addon3"/>
                         </div>
@@ -194,7 +193,7 @@
         var total_product = $(".total-product");
         var price_product_value = validatePrice(price_product.val());
         var total_price_value = count * price_product_value;
-        total_price.val(total_price_value);
+        total_price.val(validatePriceToVND(total_price_value));
     });
     $(document).on("click", ".down-count", function () {
         var count = parseInt($(this).siblings(".text-count").val());
@@ -206,7 +205,7 @@
             var total_product = $(".total-product");
             var price_product_value = validatePrice(price_product.val());
             var total_price_value = count * price_product_value;
-            total_price.val(total_price_value);
+            total_price.val(validatePriceToVND(total_price_value));
         }
     });
 
@@ -388,54 +387,6 @@
     });
     //handel down-count-edit
     //handle on click save-data
-    $(document).on("click", ".save-data", function () {
-        ///get data from table-order
-        var table = $("#table-order tbody");
-        let data = [];
-        table.find("tr").each(function () {
-            var table_group_id = $("#id-table-select").val();
-            var id_product = $(this).find(".id-product-table").text();
-            var name_product = $(this).find(".name-product-table").text();
-            var count = $(this).find(".text-count-table").val();
-            var price_product = $(this).find(".price-product-table").text();
-            var total_price = $(this).find(".total-price-table").text();
-            var id_order = $(this).find(".id-ordercf-table").text();
-            var idOrdercf = $(this).find(".id-idOrdercf-table").text();
-            var id_group_table = $(this).find(".id-group-table").text();
-            var status = $(this).find(".sellect-2").val();
-            if (table_group_id === "all") {
-                table_group_id = id_group_table;
-            }
-            console.log(id_group_table)
-            data.push({
-                id: id_order || null,
-                idOrdercf: idOrdercf || null,
-                idGroupTable: table_group_id,
-                idProduct: id_product,
-                quantity: count,
-                status: status,
-            });
-        });
-        console.log(data);
-        //send data to server
-        $.ajax({
-            url: "/admin/ordercf/store",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            success: function (result) {
-                if (result.check === true) {
-                    toastr.success("Thêm thành công");
-                    var table_group_id = $("#id-table-select").val();
-                    update_data(table_group_id);
-                } else {
-                    toastr.error("Thêm thất bại");
-                }
-            }
-        })
-
-
-    });
     //handle on click delete-btn
     $(document).on("click", ".delete-btn", function () {
         var idOrdercf = $(this).closest("tr").find(".id-idOrdercf-table").text() || null;
@@ -480,9 +431,9 @@
             var id_product = $(this).val();
             var price_product = $(this).find("option:selected").attr("data-price");
             var name_product = $(this).find("option:selected").attr("data-name");
-            $(".price-product").val(price_product);
+            $(".price-product").val(validatePriceToVND(price_product));
             $(".name-product").val(name_product);
-            $(".total-price").val(price_product);
+            $(".total-price").val(validatePriceToVND(price_product));
             $(".text-count").val(1);
         }
     );
