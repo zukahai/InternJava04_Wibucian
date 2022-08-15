@@ -44,6 +44,10 @@ public class EmployeeController {
     public String createEmployeePage(ModelMap modelMap) throws Exception {
         return "admin/employee/create";
     }
+    @GetMapping("/login")
+    public String LoginEmployeePage(ModelMap modelMap) throws Exception {
+        return "admin/employee/login";
+    }
 
     @GetMapping("/view/{id}")
     public String viewEmployeePage(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id) throws Exception {
@@ -68,11 +72,11 @@ public class EmployeeController {
             method = RequestMethod.POST,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String update(ModelMap modelMap, @Valid EmployeeUpdateVO employeeUpdateVO, @PathVariable("id") String idEmployee,
-    @RequestBody MultiValueMap<String, String> formData) throws Exception {
+                         @RequestParam MultiValueMap<String, String> formData) throws Exception {
         System.out.println(employeeUpdateVO);
         try {
             String fileName = StringUtils.cleanPath(employeeUpdateVO.getAvatar().getOriginalFilename());
-//            Path path = Paths.get("src/main/resources/static/admin/assets/file-upload"); mở cía database lên
+//            Path path = Paths.get("src/main/resources/static/admin/assets/file-upload");
 
             ClassLoader classLoader = getClass().getClassLoader();
             String filePath = String.valueOf(System.currentTimeMillis()) + "." + fileName.split("\\.")[1];
@@ -87,7 +91,7 @@ public class EmployeeController {
 
 
 //
-//            String employeeId = this.employeeService.save(employeeUpdateVO); // chạy thử
+//            String employeeId = this.employeeService.save(employeeUpdateVO);
             // String idEmployee =  formData.get("idEmployee").get(0);
             System.out.println(employeeUpdateVO);
             this.employeeService.update(idEmployee, employeeUpdateVO);

@@ -24,32 +24,32 @@
         <!--begin::Card body-->
         <div class="row mt-10">
             <form action="/admin/employee/update/${employee.id}" method="post" enctype="multipart/form-data">
-            <div class="col">
-                <div class="content flex-column-fluid" id="">
-                    <!--begin::Layout-->
-                    <div class="d-flex flex-column flex-lg-row">
-                        <!--begin::Sidebar-->
-                        <div class="flex-column flex-lg-row-auto w-lg-250px w-xl-350px mb-10">
-                            <!--begin::Card-->
-                            <div class="card mb-5 mb-xl-8">
-                                <!--begin::Card body-->
-                                <div class="card-body">
-                                    <!--begin::Summary-->
-                                    <!--begin::User Info-->
-                                    <div class="d-flex flex-center flex-column py-5">
-                                        <!--begin::Avatar-->
-                                        <div class="fv-row mb-7">
-                                            <label class="d-block fw-semibold fs-6 mb-5">Avatar</label>
-                                            <style>.image-input-placeholder {
-                                                background-image: url(/admin/assets/file-upload/);
-                                            }
+                <div class="col">
+                    <div class="content flex-column-fluid" id="">
+                        <!--begin::Layout-->
+                        <div class="d-flex flex-column flex-lg-row">
+                            <!--begin::Sidebar-->
+                            <div class="flex-column flex-lg-row-auto w-lg-250px w-xl-350px mb-10">
+                                <!--begin::Card-->
+                                <div class="card mb-5 mb-xl-8">
+                                    <!--begin::Card body-->
+                                    <div class="card-body">
+                                        <!--begin::Summary-->
+                                        <!--begin::User Info-->
+                                        <div class="d-flex flex-center flex-column py-5">
+                                            <!--begin::Avatar-->
+                                            <div class="fv-row mb-7">
+                                                <label class="d-block fw-semibold fs-6 mb-5">Avatar</label>
+                                                <style>.image-input-placeholder {
+                                                    background-image: url(/admin/assets/file-upload/);
+                                                }
 
-                                            [data-theme="dark"] .image-input-placeholder {
-                                                background-image: url(/admin/assets/file-upload/);
-                                            }</style>
-                                            <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
-                                                <div class="image-input-wrapper w-150px h-150px"
-                                                     style="background-image: url(/admin/assets/file-upload/${employee.srcEmployee}");"></div>
+                                                [data-theme="dark"] .image-input-placeholder {
+                                                    background-image: url(/admin/assets/file-upload/);
+                                                }</style>
+                                                <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
+                                                    <div class="image-input-wrapper w-150px h-150px"
+                                                         style="background-image: url(/admin/assets/file-upload/${employee.srcEmployee}");"></div>
                                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                                     <i class="bi bi-pencil-fill fs-7"></i>
@@ -69,12 +69,12 @@
                                         <!--end::Avatar-->
                                         <!--begin::Name-->
 
-                                    <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">${employee.id}</a>
-                                    <div class="mb-15">
-                                        <!--begin::Badge-->
-                                        <div class="badge badge-lg badge-light-primary d-inline">Nhân viên</div>
-                                        <!--begin::Badge-->
-                                    </div>
+                                        <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-3">${employee.id}</a>
+                                        <div class="mb-15">
+                                            <!--begin::Badge-->
+                                            <div class="badge badge-lg badge-light-primary d-inline">Nhân viên</div>
+                                            <!--begin::Badge-->
+                                        </div>
                                         <!--<label for="employeeName">${employee.name}</label>-->
                                         <!--end::Name-->
                                         <!--begin::Position-->
@@ -99,8 +99,8 @@
                                     <tr>
                                         <td>Tên nhân viên</td>
                                         <td>
-                                                <input type="text"  class="form-control" id="employeeName" name="name" placeholder="VIP" value="${employee.name}"/>
-                                                <!--<label for="name">Tên loại bàn</label>-->
+                                            <input type="text"  class="form-control" id="employeeName" name="name" placeholder="VIP" value="${employee.name}"/>
+                                            <!--<label for="name">Tên loại bàn</label>-->
                                         </td>
 
                                     </tr>
@@ -124,7 +124,7 @@
                                     </tr>
                                     <tr>
                                         <td>Ngày sinh</td>
-                                        <td><input type="date" class="form-control" id="employeeBirthday" name="birthDay" value="${employee.birthDay}" min="2018-01-01" max="2100-01-02"/></td>
+                                        <td><input type="date" class="form-control" id="employeeBirthday" name="birthDay" value="${employee.birthDay.toString().split(" ")[0]}" /></td>
 
                                     </tr>
                                     <tr>
@@ -154,9 +154,9 @@
 
                 </div>
                 <div class="text-center my-5">
-                    <button class="btn btn-primary" type="submit">Cập nhật</button>
+                    <button class="btn btn-primary" type="submit"> Cập nhật</button>
                 </div>
             </form>
-            </div>
-            <jsp:include page="../includes/footer.jsp"></jsp:include>
-            <jsp:include page="../includes/end.jsp"></jsp:include>
+        </div>
+        <jsp:include page="../includes/footer.jsp"></jsp:include>
+<jsp:include page="../includes/end.jsp"></jsp:include>
