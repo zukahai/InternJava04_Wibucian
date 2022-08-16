@@ -102,22 +102,19 @@ public class StaffShiftRotateController {
                                     Model model) {
         Shift shift = this.shiftService.getById(shiftId);
         this.shiftRotateService.checkCanCreateShiftRotate(employee, shift);
-        Calendar firstDayOfNextWeek = Utils.getFirstDayOfNextWeek();
-        Calendar lastDayOfNextWeek = Utils.getLastDayOfNextWeek();
+        Calendar weekStartDay = Utils.getWeekStartFromDate(shift.getShiftDate());
+        Calendar weekEndDay = Utils.getWeekEndFromDate(shift.getShiftDate());
         model.addAttribute("daysOfWeek", DayOfWeek.values());
         model.addAttribute("shiftsOfDay", ShiftOfDay.values());
-        Map<Integer, String> weekDayMapping = new HashMap<>();
-        while (firstDayOfNextWeek.compareTo(lastDayOfNextWeek) <= 0) {
-            weekDayMapping.put(firstDayOfNextWeek.get(Calendar.DAY_OF_WEEK),
-                               Utils.getDateFormat(firstDayOfNextWeek.getTime(),
-                                                   Constant.DD_MM_YYYY_FORMAT));
-            firstDayOfNextWeek.add(Calendar.DATE, 1);
-        }
-        model.addAttribute("weekDayMapping", weekDayMapping);
-        model.addAttribute("shift", shift);
         model.addAttribute("candidateShiftsToRotate",
                            this.shiftRotateService.getCandidateShiftToRotate(employee,
-                                                                             shift));
+                                                                             shift,
+                                                                             weekStartDay,
+                                                                             weekEndDay));
+        model.addAttribute("shift", shift);
+        model.addAttribute("weekDayMapping",
+                           Utils.getWeekDayMapping(weekStartDay, weekEndDay));
+
         return "staff/shiftRotate/create";
     }
 

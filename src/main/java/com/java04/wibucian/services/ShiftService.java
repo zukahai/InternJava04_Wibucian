@@ -488,6 +488,13 @@ public class ShiftService {
                 Utils.getCalendarInstanceFromDateAndHHMMSSTimeString(
                         currentDateWithoutTime, Constant.EVENING_SHIFT_END_TIME);
 
+        Date a = morningShiftStartTime.getTime();
+        Date b = morningShiftEndTime.getTime();
+        Date c = afternoonShiftStartTime.getTime();
+        Date d = afternoonShiftEndTime.getTime();
+        Date e = eveningShiftStartTime.getTime();
+        Date f = eveningShiftEndTime.getTime();
+
         if (current.compareTo(morningShiftStartTime) >= 0
                 && current.compareTo(morningShiftEndTime) < 1) {
             return ShiftOfDay.MORNING.getValue();

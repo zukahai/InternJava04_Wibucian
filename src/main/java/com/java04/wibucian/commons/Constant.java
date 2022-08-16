@@ -28,7 +28,7 @@ public class Constant {
     public static final String MM_YYYY_FORMAT = "MM-yyyy";
     public static final String DD_MM_YYYY_FORMAT = "dd-MM-yyyy";
     public static final String YYYY_MM_DD_FORMAT = "yyyy-MM-dd";
-    public static final String DD_MM_YYYY_HH_MM_SS_FORMAT = "dd-MM-yyyy hh:mm:ss";
+    public static final String DD_MM_YYYY_HH_MM_SS_FORMAT = "dd-MM-yyyy HH:mm:ss";
 
     // các mốc thời gian bắt đầu và kết thúc ca làm việc
     public static final String MORNING_SHIFT_START_TIME = "07:00:00";

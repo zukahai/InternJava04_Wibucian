@@ -11,11 +11,11 @@ public class ShiftDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private String id;
 
-    private String idShift;
-
     private String idEmployee;
 
     private String idEmployeeChange;
+
+    private boolean overtimeRequest;
 
     private String start;
 

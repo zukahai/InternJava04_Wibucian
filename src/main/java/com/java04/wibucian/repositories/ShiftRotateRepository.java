@@ -41,7 +41,8 @@ public interface ShiftRotateRepository extends JpaRepository<ShiftRotate, String
                                                        int status2);
 
     @Query(value = "SELECT s.idShift\n" + "FROM Shift s\n"
-            + "WHERE s.shiftDate >= cast(getdate() as date)\n"
+            + "WHERE s.shiftDate >= cast(getdate() as date) AND (s.shiftDate BETWEEN "
+            + ":weekStart AND :weekEnd)\n"
             + "AND s.isRequestShift = 'false'\n" + "AND s.idEmployeeChange IS NULL\n"
             + "AND NOT s.idEmployee = :idEmployee\n" + "AND NOT EXISTS\n" + "(SELECT *\n"
             + "FROM Shift s1\n" + "WHERE s1.shiftDate = s.shiftDate\n"
@@ -55,7 +56,9 @@ public interface ShiftRotateRepository extends JpaRepository<ShiftRotate, String
             + "OR (sr.idShiftExchange = s.idShift AND sr.idShift = :shiftId))",
            nativeQuery = true)
     List<String> getCandidateShiftsToRotate(@Param("idEmployee") String idEmployee,
-                                           @Param("shiftDate") Date shiftDate,
-                                           @Param("shiftCode") int shiftCode,
-                                           @Param("shiftId") String shiftId);
+                                            @Param("shiftDate") Date shiftDate,
+                                            @Param("shiftCode") int shiftCode,
+                                            @Param("shiftId") String shiftId,
+                                            @Param("weekStart") Date weekStart,
+                                            @Param("weekEnd") Date weekEnd);
 }

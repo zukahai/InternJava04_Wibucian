@@ -84,14 +84,9 @@ public class StaffShiftController {
             model.addAttribute("weekEnd", Utils.getDateFormat(lastDayOfNextWeek.getTime(),
                                                               Constant.DD_MM_YYYY_FORMAT));
             model.addAttribute("employeeId", employee.getId());
-            Map<Integer, String> weekDayMapping = new HashMap<>();
-            while (firstDayOfNextWeek.compareTo(lastDayOfNextWeek) <= 0) {
-                weekDayMapping.put(firstDayOfNextWeek.get(Calendar.DAY_OF_WEEK),
-                                   Utils.getDateFormat(firstDayOfNextWeek.getTime(),
-                                                       Constant.DD_MM_YYYY_FORMAT));
-                firstDayOfNextWeek.add(Calendar.DATE, 1);
-            }
-            model.addAttribute("weekDayMapping", weekDayMapping);
+            model.addAttribute("weekDayMapping",
+                               Utils.getWeekDayMapping(firstDayOfNextWeek,
+                                                       lastDayOfNextWeek));
         }
         model.addAttribute("isInShiftRequestTime", isInShiftRequestTime);
         model.addAttribute("isInShiftApproveTime", isInShiftApproveTime);
