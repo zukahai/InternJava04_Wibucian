@@ -350,75 +350,18 @@
                         <!--begin:Menu link-->
                         <a
                                 class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/projects.html"
+                                href="admin/product/create/"
                         >
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
-                            <span class="menu-title">Projects</span>
+                            <span class="menu-title">Thêm mới sản phẩm</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/campaigns.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Campaigns</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/documents.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Documents</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/followers.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Followers</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/activity.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Activity</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
+
                     <!--end:Menu item-->
                 </div>
                 <!--end:Menu sub-->
@@ -474,76 +417,18 @@
                         <!--begin:Menu link-->
                         <a
                                 class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/projects.html"
+                                href="admin/typeProduct/create"
                         >
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
-                            <span class="menu-title">Projects</span>
+                            <span class="menu-title">Thêm mới loại sản phẩm</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/campaigns.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Campaigns</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/documents.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Documents</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/followers.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Followers</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/activity.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Activity</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+
                 </div>
                 <!--end:Menu sub-->
             </div>
@@ -598,76 +483,18 @@
                         <!--begin:Menu link-->
                         <a
                                 class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/projects.html"
+                                href="admin/sale/create"
                         >
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
-                            <span class="menu-title">Projects</span>
+                            <span class="menu-title">Thêm mới đợt giảm giá</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/campaigns.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Campaigns</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/documents.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Documents</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/followers.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Followers</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a
-                                class="menu-link"
-                                href="../../demo14/dist/pages/user-profile/activity.html"
-                        >
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-                                                        </span>
-                            <span class="menu-title">Activity</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+
                 </div>
                 <!--end:Menu sub-->
             </div>
