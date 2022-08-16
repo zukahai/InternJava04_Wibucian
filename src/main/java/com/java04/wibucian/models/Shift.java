@@ -26,7 +26,7 @@ public class Shift {
     private Boolean requestShift;
 
     @Column(name = "isOvertimeRequest")
-    private Boolean overtimeRequest;
+    private boolean overtimeRequest;
 
     @Column(name = "requestTime")
     private Instant requestTime;
@@ -65,7 +65,12 @@ public class Shift {
     }
 
     public String getId() {
-        return id;
+        try {
+            int id = Integer.parseInt(this.id);
+            return "Shift" + String.format("%05d", id);
+        } catch (NumberFormatException e) {
+            return this.id;
+        }
     }
 
     public void setId(String id) {
@@ -96,7 +101,7 @@ public class Shift {
         this.requestShift = requestShift;
     }
 
-    public Boolean isOvertimeRequest() {
+    public boolean isOvertimeRequest() {
         return overtimeRequest;
     }
 

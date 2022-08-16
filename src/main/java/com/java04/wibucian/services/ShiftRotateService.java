@@ -350,7 +350,8 @@ public class ShiftRotateService {
         });
         allPendingShiftRotates.forEach(shiftRotate -> {
             shiftRotate.setStatus(ShiftRotateStatus.REJECTED.getValue());
-            shiftRotate.setRejectTime(new Date().toInstant());
+            shiftRotate.setRejectTime(Utils.getCurrentDate()
+                                           .toInstant());
         });
         this.shiftRotateRepository.saveAll(allPendingShiftRotates);
     }
@@ -394,12 +395,14 @@ public class ShiftRotateService {
     }
 
     public Map<DayOfWeek, Map<ShiftOfDay, List<Shift>>> getCandidateShiftToRotate(
-            Employee employee, Shift shift) {
+            Employee employee, Shift shift, Calendar weekStartDay, Calendar weekEndDay) {
         List<String> shiftIds =
                 this.shiftRotateRepository.getCandidateShiftsToRotate(employee.getId(),
                                                                       shift.getShiftDate(),
                                                                       shift.getShiftCode(),
-                                                                      shift.getId());
+                                                                      shift.getId(),
+                                                                      weekStartDay.getTime(),
+                                                                      weekEndDay.getTime());
         List<Shift> shiftList = this.shiftRepository.findAllById(shiftIds);
         return convertShiftList(shiftList.stream()
                                          .filter(this::canBeRotate)

@@ -75,10 +75,10 @@ public class ShiftController {
                              .body(shiftService.update(shiftId, shiftUpdateVO));
     }
 
-//    @GetMapping("/{id}")
-//    public ShiftDTO getById(@Valid @NotNull @PathVariable("id") String id) {
-//        return shiftService.getById(id);
-//    }
+    //    @GetMapping("/{id}")
+    //    public ShiftDTO getById(@Valid @NotNull @PathVariable("id") String id) {
+    //        return shiftService.getById(id);
+    //    }
 
     /**
      * Xem tất cả các đăng ký ca làm việc cho tuần tiếp theo
@@ -105,7 +105,8 @@ public class ShiftController {
             model.addAttribute("weekEnd", Utils.getDateFormat(lastDayOfNextWeek.getTime(),
                                                               Constant.DD_MM_YYYY_FORMAT));
 
-        } model.addAttribute("isInShiftRequestTime", isInShiftRequestTime);
+        }
+        model.addAttribute("isInShiftRequestTime", isInShiftRequestTime);
         return "admin/shift/request";
     }
 
@@ -140,14 +141,9 @@ public class ShiftController {
                                                    Constant.DD_MM_YYYY_FORMAT));
             model.addAttribute("weekEnd", Utils.getDateFormat(lastDayOfNextWeek.getTime(),
                                                               Constant.DD_MM_YYYY_FORMAT));
-            Map<Integer, String> weekDayMapping = new HashMap<>();
-            while (firstDayOfNextWeek.compareTo(lastDayOfNextWeek) <= 0) {
-                weekDayMapping.put(firstDayOfNextWeek.get(Calendar.DAY_OF_WEEK),
-                                   Utils.getDateFormat(firstDayOfNextWeek.getTime(),
-                                                       Constant.DD_MM_YYYY_FORMAT));
-                firstDayOfNextWeek.add(Calendar.DATE, 1);
-            }
-            model.addAttribute("weekDayMapping", weekDayMapping);
+            model.addAttribute("weekDayMapping",
+                               Utils.getWeekDayMapping(firstDayOfNextWeek,
+                                                       lastDayOfNextWeek));
         }
         model.addAttribute("isInShiftApproveTime", isInShiftApproveTime);
         model.addAttribute("isAlreadyApprovedForNextWeek", isAlreadyApprovedForNextWeek);
@@ -156,6 +152,7 @@ public class ShiftController {
 
     /**
      * Xem lịch làm việc
+     *
      * @return
      */
     @GetMapping("/all")
