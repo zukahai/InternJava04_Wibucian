@@ -84,17 +84,41 @@ public class ProductController {
 
         return "admin/product/edit";
     }
+//
+//    @RequestMapping(value = "/edit",
+//            method = RequestMethod.POST,
+//            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+//    public String editProduct(ModelMap modelMap,
+//                            @Valid ProductUpdateVO productUpdateVO,
+//                            @RequestBody MultiValueMap<String, String> formData) throws Exception {
+//        String idProduct =  formData.get("idProduct").get(0);
+//        String idProductType = formData.get("idProductType").get(0);
+//        this.productService.update(idProduct, productUpdateVO, idProductType);
+//        return "redirect:/admin/product/";
+//    }
 
-    @RequestMapping(value = "/edit",
+    @RequestMapping(value = "/edit/{id}",
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String editProduct(ModelMap modelMap,
-                            @Valid ProductUpdateVO productUpdateVO,
-                            @RequestBody MultiValueMap<String, String> formData) throws Exception {
-        String idProduct =  formData.get("idProduct").get(0);
-        String idProductType = formData.get("idProductType").get(0);
-        this.productService.update(idProduct, productUpdateVO, idProductType);
-        return "redirect:/admin/product/";
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String update(ModelMap modelMap, @Valid ProductUpdateVO  productUpdateVO, @PathVariable("id") String idProduct,
+                         @RequestParam MultiValueMap<String, String> formData) throws Exception {
+        System.out.println(productUpdateVO);
+        try {
+            String fileName = StringUtils.cleanPath(productUpdateVO.getAvatar().getOriginalFilename());
+            ClassLoader classLoader = getClass().getClassLoader();
+            if (!fileName.equals("")) {
+                String filePath = String.valueOf(System.currentTimeMillis()) + "." + fileName.split("\\.")[1];
+                File file = new File(classLoader.getResource(".").getFile() + "static/admin/assets/file-upload/" + filePath);
+                productUpdateVO.getAvatar().transferTo(file);
+                productUpdateVO.setSrcImage(filePath);
+            }
+//            System.out.println(employeeUpdateVO.getAvatar());
+            this.productService.update(idProduct, productUpdateVO);
+            return "redirect:/admin/product/";
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return "Lỗi tè le";
+        }
     }
 
     //detail

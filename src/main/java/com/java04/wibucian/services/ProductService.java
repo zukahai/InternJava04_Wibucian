@@ -20,19 +20,16 @@ import java.util.NoSuchElementException;
 @Service
 public class ProductService {
 
-//    @Autowired
     private ProductRepository productRepository;
-//
-//    @Autowired
     private SaleRepository saleRepository;
-//
-//    @Autowired
     private TypeProductRepository typeProductRepository;
+    private DetailProductService detailProductService;
 
-    public ProductService(ProductRepository productRepository, SaleRepository saleRepository, TypeProductRepository typeProductRepository) {
+    public ProductService(ProductRepository productRepository, SaleRepository saleRepository, TypeProductRepository typeProductRepository, DetailProductService detailProductService) {
         this.productRepository = productRepository;
         this.saleRepository = saleRepository;
         this.typeProductRepository = typeProductRepository;
+        this.detailProductService = detailProductService;
     }
 
 
@@ -94,7 +91,11 @@ public class ProductService {
 
     public void update(String id, ProductUpdateVO vO, String idProductType) {
         Product bean = requireOne(id);
+        String oldSrc = bean.getSrcImage();
         BeanUtils.copyProperties(vO, bean);
+        if (vO.getSrcImage().equals("")){
+            bean.setSrcImage(oldSrc);
+        }
 
         TypeProduct typeProduct = typeProductRepository.findById(idProductType).orElse(null);
         bean.setProductType(typeProduct);
@@ -133,6 +134,12 @@ public class ProductService {
         Product product= productRepository.findById(idProduct).orElse(null);
         Sale sale = saleRepository.findById(idSale).orElse(null);
         product.setSale(sale);
+        productRepository.save(product);
+    }
+
+    public void updatePrice(String idProduct) {
+        Product product = productRepository.findById(idProduct).orElse(null);
+        product.setPrice(detailProductService.getProductSellPrice(idProduct));
         productRepository.save(product);
     }
 

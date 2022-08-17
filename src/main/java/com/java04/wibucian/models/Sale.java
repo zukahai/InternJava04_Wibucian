@@ -26,17 +26,18 @@ public class Sale  {
     @Column(name = "timeEnd")
     private Instant timeEnd;
 
-    public Date getTimeEnd() {
-        return Date.from(this.timeEnd);
+    public Instant getTimeStart() {
+        return timeStart;
+    }
+
+    public Instant getTimeEnd() {
+        return timeEnd;
     }
 
     public void setTimeEnd(Instant timeEnd) {
         this.timeEnd = timeEnd;
     }
 
-    public Date getTimeStart() {
-        return Date.from(this.timeStart);
-    }
 
     public void setTimeStart(Instant timeStart) {
         this.timeStart = timeStart;

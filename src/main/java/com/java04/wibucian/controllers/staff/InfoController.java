@@ -7,7 +7,7 @@ import com.java04.wibucian.models.Employee;
 import com.java04.wibucian.repositories.AccountRepository;
 import com.java04.wibucian.security.CustomUserDetail;
 import com.java04.wibucian.services.ShiftService;
-import com.java04.wibucian.vos.EmployeeUpdateVO;
+import com.java04.wibucian.vos.StaffEmployeeUpdateVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.java04.wibucian.services.EmployeeService;
 import org.springframework.http.MediaType;
@@ -55,7 +55,7 @@ public class InfoController {
     @PostMapping(value = "/edit", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public void updateEmployee(
             @ModelAttribute(value = "employee", binding = false) Employee employee,
-            HttpServletResponse response, @Valid EmployeeUpdateVO employeeUpdateVO) throws
+            HttpServletResponse response, @Valid StaffEmployeeUpdateVO employeeUpdateVO) throws
             IOException {
         employeeService.update(employee, employeeUpdateVO);
         response.sendRedirect("/staff/info");

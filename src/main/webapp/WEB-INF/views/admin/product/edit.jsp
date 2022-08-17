@@ -24,7 +24,7 @@
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
-            <form action="/admin/product/edit" method="post">
+            <form action="/admin/product/edit/${product.id}" method="post" enctype="multipart/form-data">
                 <div class="rounded border p-5">
                     <div class="form-floating my-5">
                         <input type="idProduct" class="form-control" id="idProduct" name="idProduct" placeholder="0" value="${product.id}" readonly/>
@@ -55,10 +55,38 @@
                         <input type="describe" class="form-control" id="describe" name="describe" placeholder="0" value="${product.describe}"/>
                         <label for="describe">Mô tả</label>
                     </div>
-                    <div class="form-floating my-5">
-                        <input type="srcImage" class="form-control" id="srcImage" name="srcImage" placeholder="0" value="${product.srcImage}"/>
-                        <label for="describe">Ảnh</label>
+                    <div class="d-flex flex-center flex-column py-5">
+                        <!--begin::Avatar-->
+                        <div class="fv-row mb-7">
+                            <label class="d-block fw-semibold fs-6 mb-5">Ảnh</label>
+                            <style>.image-input-placeholder {
+                                background-image: url(/admin/assets/file-upload/);
+                            }
+
+                            [data-theme="dark"] .image-input-placeholder {
+                                background-image: url(/admin/assets/file-upload/);
+                            }</style>
+                            <div class="image-input image-input-outline image-input-placeholder" data-kt-image-input="true">
+                                <div class="image-input-wrapper w-150px h-150px"
+                                     style="background-image: url(/admin/assets/file-upload/${product.srcImage}");"></div>
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                   data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+                                <input type="file"  name="avatar" accept=".png, .jpg, .jpeg"/>
+                                <input type="hidden" name="srcEmployee"/>
+                            </label>
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                  data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+																				<i class="bi bi-x fs-2"></i>
+																			</span>
+                            <i class="bi bi-x fs-2"></i>
+                            </span>
+                        </div>
+                        <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                        <!--end::Hint-->
                     </div>
+                    <!--end::Avatar-->
+                    <!--begin::Name-->
                 </div>
 
                 <div class="text-center my-5">

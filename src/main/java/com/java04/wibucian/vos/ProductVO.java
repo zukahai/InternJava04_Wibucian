@@ -19,7 +19,7 @@ public class ProductVO implements Serializable {
     @NotNull(message = "Describe can not null")
     private String describe;
 
-    @NotNull(message = "srcImage can not null")
+//    @NotNull(message = "srcImage can not null")
     private String srcImage;
 
     @NotNull(message = "productName can not null")
