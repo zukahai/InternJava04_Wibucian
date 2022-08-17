@@ -94,7 +94,11 @@ public class ProductService {
 
     public void update(String id, ProductUpdateVO vO, String idProductType) {
         Product bean = requireOne(id);
+        String oldSrc = bean.getSrcImage();
         BeanUtils.copyProperties(vO, bean);
+        if (vO.getSrcImage().equals("")){
+            bean.setSrcImage(oldSrc);
+        }
 
         TypeProduct typeProduct = typeProductRepository.findById(idProductType).orElse(null);
         bean.setProductType(typeProduct);
