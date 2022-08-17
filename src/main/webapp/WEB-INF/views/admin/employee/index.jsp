@@ -72,7 +72,6 @@
                                 <a href="admin/employee/update/${item.id}" class="btn btn-warning mx-1">Sửa</a>
                                 <a href="admin/employee/view/${item.id}" class="btn btn-success mx-1">Xem</a>
                                 <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
-                                <a href="" class="btn btn-bg-secondary mx-1 ">Khóa</a>
                             </td>
                         </tr>
                     </c:forEach>

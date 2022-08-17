@@ -31,19 +31,18 @@ public class EmployeeService {
         return bean.getId();
     }
 
-    //    public List<Employee> findAll() {
-    //        return this.employeeRepository.findAll();
-    //    }
-
     public void delete(String id) {
         employeeRepository.deleteById(id);
     }
 
-    // update bằng ID, sẽ được admin sử dụng để update nhân viên
-    public void update(String employeeId, EmployeeUpdateVO employeeUpdateVO) {
-        Employee employee = requireOne(employeeId);
-        BeanUtils.copyProperties(employeeUpdateVO, employee);
-        employeeRepository.save(employee);
+    public void update(String id, EmployeeUpdateVO vO) {
+        Employee bean = requireOne(id);
+        String oldSrc = bean.getSrcEmployee();
+        BeanUtils.copyProperties(vO, bean);
+        if (vO.getSrcEmployee().equals("")) {
+            bean.setSrcEmployee(oldSrc);
+        }
+        employeeRepository.save(bean);
     }
 
     // update bằng employee object, sẽ được nhân viên sử dụng để update thông tin cá nhân

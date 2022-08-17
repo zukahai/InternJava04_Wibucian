@@ -97,7 +97,7 @@ public class GroupTableService {
         return groupTableRepository.findAll();
     }
 
-    public List<GroupTable> findAll() {return groupTableRepository.findAll();}
+//    public List<GroupTable> findAll() {return groupTableRepository.findAll();}
 
     public List<GroupTable> findAllHaiZuka(Pageable pageable) {
         int start = pageable.getPageNumber() * pageable.getPageSize();

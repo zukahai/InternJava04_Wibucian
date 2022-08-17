@@ -76,31 +76,20 @@ public class EmployeeController {
         System.out.println(employeeUpdateVO);
         try {
             String fileName = StringUtils.cleanPath(employeeUpdateVO.getAvatar().getOriginalFilename());
-//            Path path = Paths.get("src/main/resources/static/admin/assets/file-upload");
-
             ClassLoader classLoader = getClass().getClassLoader();
-            String filePath = String.valueOf(System.currentTimeMillis()) + "." + fileName.split("\\.")[1];
-//            System.out.println(fileName);
-//            System.out.println(classLoader.getResource(".").getFile() + "static/admin/assets/file-upload/" + filePath);
-            File file = new File(classLoader.getResource(".").getFile() + "static/admin/assets/file-upload/" + filePath);
-//            File file = new File(path.resolve(filePath).toUri()); this line to save file in src/main/resource
-            employeeUpdateVO.getAvatar().transferTo(file);
-            System.out.println(employeeUpdateVO.getAvatar());
-
-            employeeUpdateVO.setSrcEmployee(filePath);
-
-
-//
-//            String employeeId = this.employeeService.save(employeeUpdateVO);
-            // String idEmployee =  formData.get("idEmployee").get(0);
-            System.out.println(employeeUpdateVO);
+            if (!fileName.equals("")) {
+                String filePath = String.valueOf(System.currentTimeMillis()) + "." + fileName.split("\\.")[1];
+                File file = new File(classLoader.getResource(".").getFile() + "static/admin/assets/file-upload/" + filePath);
+                employeeUpdateVO.getAvatar().transferTo(file);
+                employeeUpdateVO.setSrcEmployee(filePath);
+            }
+//            System.out.println(employeeUpdateVO.getAvatar());
             this.employeeService.update(idEmployee, employeeUpdateVO);
             return "redirect:/admin/employee/";
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return "Lỗi tè le";
         }
-
     }
 
 
