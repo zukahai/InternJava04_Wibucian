@@ -33,7 +33,11 @@ public class EmployeeService {
 
     public void update(String id, EmployeeUpdateVO vO) {
         Employee bean = requireOne(id);
+        String oldSrc = bean.getSrcEmployee();
         BeanUtils.copyProperties(vO, bean);
+        if (vO.getSrcEmployee().equals("")) {
+            bean.setSrcEmployee(oldSrc);
+        }
         employeeRepository.save(bean);
     }
     public List<Employee> findAll(){
