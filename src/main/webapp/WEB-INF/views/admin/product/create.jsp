@@ -79,7 +79,7 @@
                                 <select class="form-select" data-control="select2" id="idSale" name="idSale"
                                         data-placeholder="Select an option">
                                     <c:forEach var="item" items="${sale}">
-                                        <option value="${item.id}">${item.id} - ${item.pcent}%</option>
+                                        <option value="${item.id}">${item.id} - ${item.pcent}</option>
                                     </c:forEach>
                                 </select>
                                 <label for="idSale">Mã sản phẩm Sale</label>

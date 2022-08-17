@@ -137,9 +137,9 @@ public class Product  {
             return null;
         if (getSale().getPcent().equals("0"))
             return null;
-        if (getSale().getTimeStart().compareTo(Instant.now()) > 0)
+        if (getSale().getTimeStart().toInstant().compareTo(Instant.now()) > 0)
             return null;
-        if (getSale().getTimeEnd().compareTo(Instant.now()) < 0)
+        if (getSale().getTimeEnd().toInstant().compareTo(Instant.now()) < 0)
             return null;
         return getSale().getPcent();
     }

@@ -48,8 +48,8 @@ public class DetailInvoiceService {
             Sale sale = product.getSale();
             if (sale != null) {
                 Instant now = Instant.now();
-                Instant sale_start = sale.getTimeStart();
-                Instant sale_end = sale.getTimeEnd();
+                Instant sale_start = sale.getTimeStart().toInstant();
+                Instant sale_end = sale.getTimeEnd().toInstant();
                 if (now.isAfter(sale_start) && now.isBefore(sale_end)) {
                     salePrice = salePrice - (salePrice * Double.parseDouble(sale.getPcent()) / 100);
                     bean.setProduct(product);
@@ -82,8 +82,8 @@ public class DetailInvoiceService {
         Sale sale = product.getSale();
         if (sale != null){
             Instant now = Instant.now();
-            Instant sale_start = sale.getTimeStart();
-            Instant sale_end = sale.getTimeEnd();
+            Instant sale_start = sale.getTimeStart().toInstant();
+            Instant sale_end = sale.getTimeEnd().toInstant();
             bean.setProduct(product);
             if (now.isAfter(sale_start) && now.isBefore(sale_end)) {
                 salePrice = salePrice - (salePrice * Double.parseDouble(sale.getPcent()) / 100);

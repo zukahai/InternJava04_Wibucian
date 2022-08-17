@@ -113,7 +113,7 @@ public class ProductController {
                 productUpdateVO.setSrcImage(filePath);
             }
 //            System.out.println(employeeUpdateVO.getAvatar());
-            this.productService.update(idProduct, productUpdateVO);
+            this.productService.update(idProduct, productUpdateVO, productUpdateVO.getIdProductType());
             return "redirect:/admin/product/";
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

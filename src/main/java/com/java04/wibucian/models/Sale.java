@@ -26,12 +26,12 @@ public class Sale  {
     @Column(name = "timeEnd")
     private Instant timeEnd;
 
-    public Instant getTimeStart() {
-        return timeStart;
+    public Date getTimeStart() {
+        return Date.from(this.timeStart);
     }
 
-    public Instant getTimeEnd() {
-        return timeEnd;
+    public Date getTimeEnd() {
+        return Date.from(this.timeEnd);
     }
 
     public void setTimeEnd(Instant timeEnd) {

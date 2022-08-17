@@ -17,10 +17,10 @@ import java.util.Date;
 public class EmployeeVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "id can not null")
-    private Integer id;
+//    @NotNull(message = "id can not null")
+//    private Integer id;
 
-    @NotNull(message = "idEmployee can not null")
+//    @NotNull(message = "idEmployee can not null")
     private String idEmployee;
 
     @NotNull(message = "name can not null")
@@ -48,7 +48,7 @@ public class EmployeeVO implements Serializable {
     @NotNull(message = "maritalStatus can not null")
     private String maritalStatus;
 
-    private Double coefficientsSalary;
+    private Float coefficientsSalary;
 
     public Date getBirthDay() {
         System.out.println(this.birthDay);
