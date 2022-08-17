@@ -2,7 +2,9 @@ package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.DetailIngredientDTO;
 import com.java04.wibucian.models.DetailIngredient;
+import com.java04.wibucian.models.Ingredient;
 import com.java04.wibucian.repositories.DetailIngredientRepository;
+import com.java04.wibucian.repositories.IngredientRepository;
 import com.java04.wibucian.vos.DetailIngredientQueryVO;
 import com.java04.wibucian.vos.DetailIngredientUpdateVO;
 import com.java04.wibucian.vos.DetailIngredientVO;
@@ -19,6 +21,11 @@ public class DetailIngredientService {
 
     @Autowired
     private DetailIngredientRepository detailIngredientRepository;
+    private IngredientRepository ingredientRepository;
+
+    public DetailIngredientService(IngredientRepository ingredientRepository) {
+        this.ingredientRepository = ingredientRepository;
+    }
 
     public String save(DetailIngredientVO vO) {
         DetailIngredient bean = new DetailIngredient();
@@ -59,6 +66,11 @@ public class DetailIngredientService {
 
     public List<DetailIngredient> findAll() {
         return detailIngredientRepository.findAll();
+    }
+
+    public List<DetailIngredient> findAllByIngredientId(String ingredientId) {
+        Ingredient ingredient = ingredientRepository.findById(ingredientId).orElse(null);
+        return detailIngredientRepository.findAllByIdIngredient(ingredient);
     }
 
 }

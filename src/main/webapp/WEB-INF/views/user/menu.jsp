@@ -45,7 +45,7 @@
 
                 <!-- logo -->
                 <div class="kf-logo">
-                    <a href="/"><img src="user/images/logo.png" alt="" /></a>
+                    <a href="/home"><img src="user/images/logo.png" alt="" /></a>
                 </div>
 
             </div>
@@ -54,7 +54,7 @@
                 <!-- main menu -->
                 <div class="kf-main-menu">
                     <ul>
-                        <li><a href="/">Trang chủ<i class=""></i></a></li>
+                        <li><a href="/home">Trang chủ<i class=""></i></a></li>
                         <li><a href="/product">Sản phẩm</a></li>
                         <li><a href="/about">Về chúng tôi</a></li>
                     </ul>
@@ -75,9 +75,10 @@
         <div class="kf-main-menu">
             <ul>
                 <li class="has-children">
-                    <a href="/">Trang chủ</a>
+                    <a href="/home">Trang chủ</a>
                 </li>
                 <li><a href="/product">Sản phẩm</a></li>
+                <li><a href="/about">Về chúng tôi</a></li>
             </ul>
         </div>
 

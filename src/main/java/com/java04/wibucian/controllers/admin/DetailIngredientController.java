@@ -2,6 +2,7 @@ package com.java04.wibucian.controllers.admin;
 
 import com.java04.wibucian.dtos.DetailIngredientDTO;
 import com.java04.wibucian.services.DetailIngredientService;
+import com.java04.wibucian.services.IngredientService;
 import com.java04.wibucian.vos.DetailIngredientQueryVO;
 import com.java04.wibucian.vos.DetailIngredientUpdateVO;
 import com.java04.wibucian.vos.DetailIngredientVO;
@@ -22,10 +23,22 @@ public class DetailIngredientController {
 
     @Autowired
     private DetailIngredientService detailIngredientService;
+    private IngredientService ingredientService;
+
+    public DetailIngredientController(IngredientService ingredientService) {
+        this.ingredientService = ingredientService;
+    }
 
     @GetMapping("/")
     public String Home(ModelMap modelMap)throws Exception {
         modelMap.addAttribute("detailIngredients", detailIngredientService.findAll());
+        return "admin/ingredient/detail";
+    }
+
+    @GetMapping("/view/{idIngredient}")
+    public String HomeView(ModelMap modelMap, @Valid @NotNull @PathVariable("idIngredient") String idIngredient)throws Exception {
+        modelMap.addAttribute("detailIngredients", detailIngredientService.findAllByIngredientId(idIngredient));
+        modelMap.addAttribute("Ingredient", ingredientService.getById(idIngredient));
         return "admin/ingredient/detail";
     }
 
