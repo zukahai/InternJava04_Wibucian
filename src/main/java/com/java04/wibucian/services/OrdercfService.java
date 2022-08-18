@@ -39,6 +39,8 @@ public class OrdercfService {
 
     @Autowired
     private GroupTableNoMapPingRepository groupTableNoMapPingRepository;
+    @Autowired
+    private DetailIngredientRepository detailIngredientRepository;
 
     public HashMap<String, Object> save(OrdercfVO vO) {
         HashMap<String, Object> map = new HashMap<>();
@@ -54,8 +56,9 @@ public class OrdercfService {
             bean.setGroupTable(groupTable);
             bean.setStatus(1);
             bean.setTimeOrder(Instant.now());
+            String nameProduct = product.getProductName();
             bean = ordercfRepository.save(bean);
-            updateIngredientSave(detailProducts, vO.getQuantity());
+            updateIngredientSave(detailProducts, vO.getQuantity(),nameProduct);
             map.put("check", true);
             map.put("value", toDTO(bean));
             return map;
@@ -74,7 +77,7 @@ public class OrdercfService {
                 Product product = ordercf.getProduct();
                 HashMap<String, Object> checkMap = getMessageUpdate(product.getDetailProducts(), ordercf.getQuantity(), vO.getQuantity());
                 if ((boolean) checkMap.get("check")) {
-                    updateIngredientUpdate(product.getDetailProducts(), ordercf.getQuantity(), vO.getQuantity());
+                    updateIngredientUpdate(product.getDetailProducts(), ordercf.getQuantity(), vO.getQuantity(), product.getProductName());
                     System.out.println(vO.getQuantity());
                     System.out.println(ordercf.getQuantity());
                     BeanUtils.copyProperties(vO, ordercf);
@@ -104,8 +107,9 @@ public class OrdercfService {
             return map;
         }
         if (vO.getStatus() == 3){
+            Product product = ordercf.getProduct();
             ordercf.setStatus(3);
-            updateIngredientUpdate(ordercf.getProduct().getDetailProducts(), ordercf.getQuantity(), 0);
+            updateIngredientUpdate(ordercf.getProduct().getDetailProducts(), ordercf.getQuantity(), 0,product.getProductName());
             ordercfRepository.save(ordercf);
             map.put("check", true);
             map.put("value", toDTO(ordercf));
@@ -167,26 +171,32 @@ public class OrdercfService {
         return map;
     }
 
-    public HashMap<String, Object> updateIngredientUpdate(Set<DetailProduct> detailProducts, int quantityOld, int quantityNew) {
+    public HashMap<String, Object> updateIngredientUpdate(Set<DetailProduct> detailProducts, int quantityOld, int quantityNew, String nameProduct) {
         HashMap<String, Object> map = new HashMap<>();
         int quantity = quantityNew - quantityOld;
         System.out.println(quantity);
         for (DetailProduct detailProduct : detailProducts) {
             Ingredient ingredient = detailProduct.getIngredient();
+            Double currentQuantity = ingredient.getQuantity();
             ingredient.setQuantity(ingredient.getQuantity() - quantity * detailProduct.getQuantity());
+            Double newQuantity = ingredient.getQuantity();
             ingredientRepository.save(ingredient);
+            save(ingredient.getId(),"Cập nhật Order sản phẩm " + nameProduct + "Số lượng "+ quantity, newQuantity - currentQuantity);
         }
         map.put("check", true);
         return map;
     }
 
-    public void updateIngredientSave(Set<DetailProduct> detailProducts, int quantity) {
+    public void updateIngredientSave(Set<DetailProduct> detailProducts, int quantity, String nameProduct) {
         for (DetailProduct detailProduct : detailProducts) {
             Ingredient ingredient = detailProduct.getIngredient();
+            Double currentQuantity = ingredient.getQuantity();
             System.out.println(ingredient.getQuantity());
             System.out.println(detailProduct.getQuantity());
             ingredient.setQuantity(ingredient.getQuantity() - detailProduct.getQuantity() * quantity);
+            Double newQuantity = ingredient.getQuantity();
             ingredientRepository.save(ingredient);
+            save(ingredient.getId(),"Order " + nameProduct + "số lượng " +quantity , newQuantity - currentQuantity);
         }
     }
 
@@ -194,8 +204,9 @@ public class OrdercfService {
         HashMap<String, Object> map = new HashMap<>();
         Ordercf ordercf = requireOne(id);
         if (ordercf != null) {
+            Product product = ordercf.getProduct();
             if (ordercf.getStatus() == 1) {
-                updateIngredientUpdate(ordercf.getProduct().getDetailProducts(), ordercf.getQuantity(), 0);
+                updateIngredientUpdate(ordercf.getProduct().getDetailProducts(), ordercf.getQuantity(), 0, product.getProductName());
                 map.put("check", true);
                 return map;
             } else  {
@@ -256,6 +267,16 @@ public class OrdercfService {
 
     public List<OrdercfNoMapPing> findAllNoMapp() {
         return ordercfNoMapPingRepository.findAll(Sort.by(Sort.Direction.ASC, "timeOrder"));
+    }
+
+    public String save(String idIngredient, String content, Double valueChange) {
+        DetailIngredient bean = new DetailIngredient();
+        bean.setValueChange(valueChange);
+        bean.setIdIngredient(ingredientRepository.findById(idIngredient).orElse(null));
+        bean.setDateTime(Instant.now());
+        bean.setContent(content);
+        bean = detailIngredientRepository.save(bean);
+        return bean.getId();
     }
 
 }

@@ -103,17 +103,17 @@ public class OrdercfController {
             return ResponseEntity.ok().body(null);
         }
     }
-//    @RequestMapping(value = {"/find-all/","/find-all"} , method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-//    @ResponseBody
-//    public ResponseEntity<Object> findAll() {
-//        try {
-//            List<OrdercfNoMapPing> ordercfList = ordercfService.findAllNoMapp();
-//            return ResponseEntity.ok().body(ordercfList);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseEntity.ok().body(null);
-//        }
-//    }
+    @RequestMapping(value = {"/find-all/","/find-all"} , method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<Object> findAll() {
+        try {
+            List<OrdercfNoMapPing> ordercfList = ordercfService.findAllNoMapp();
+            return ResponseEntity.ok().body(ordercfList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok().body(null);
+        }
+    }
     //find Ordercf by findByGroupTableId
     @RequestMapping(value = "/find-group-table/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody

@@ -13,11 +13,10 @@ import com.java04.wibucian.vos.ImportGoodsVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -28,12 +27,27 @@ public class ImportGoodsService {
     @Autowired
     private ImportGoodsRepository importGoodsRepository;
 
-    public String save(ImportGoodsVO vO) {
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
+    public HashMap<String, Object> save(ImportGoodsVO vO) {
+        HashMap<String, Object> map = new HashMap<>();
         ImportGoods bean = new ImportGoods();
+        Employee employee = employeeRepository.findById(vO.getIdEmployee()).orElseThrow(() -> new NoSuchElementException("Employee not found"));
+        vO.setTimeImport(new Date().toString());
         BeanUtils.copyProperties(vO, bean);
-        bean.setTimeImport(vO.getTimeImport());
+        bean.setTimeImport(Instant.now());
+        bean.setEmployee(employee);
         bean = importGoodsRepository.save(bean);
-        return bean.getId();
+        map.put("check", true);
+        map.put("value", findImportGoodsCustom(bean.getId()));
+        return map;
+    }
+    public List<Ingredient> findIngredients() {
+        return ingredientRepository.findAll();
     }
 
     public void delete(String id) {
@@ -58,10 +72,6 @@ public class ImportGoodsService {
         return importGoodsRepository.findAll();
     }
 
-    public ImportGoods findById(String id) {
-        return requireOne(id);
-    }
-
     public ImportGoodsDTO getById(String id) {
         ImportGoods original = requireOne(id);
         return toDTO(original);
@@ -81,22 +91,7 @@ public class ImportGoodsService {
         return importGoodsRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
     }
-
-    public List<ImportGoods> findAll(Pageable pageable) {return importGoodsRepository.findAll(pageable).getContent();}
-
-    public List<ImportGoods> findAllNamZuka(Pageable pageable) {
-        int start = pageable.getPageNumber() * pageable.getPageSize();
-        List<ImportGoods> all = importGoodsRepository.findAll();
-        List<ImportGoods> answer = new ArrayList();
-
-        for (int i = start; i < start + pageable.getPageSize() && i < all.size(); i++) {
-            answer.add(all.get(i));
-        }
-        return answer;
+    public ImportGoods findById(String id) {
+        return importGoodsRepository.findById(id).get();
     }
-
-    public int getTotalPage(int limit) {
-        return (int) Math.ceil(importGoodsRepository.count() / (float)limit);
-    }
-
 }

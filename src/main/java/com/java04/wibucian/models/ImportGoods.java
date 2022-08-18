@@ -2,7 +2,7 @@ package com.java04.wibucian.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.LinkedHashSet;
@@ -21,7 +21,7 @@ public class ImportGoods {
     private Employee employee;
 
     @Column(name = "timeImport")
-    private Date timeImport;
+    private Instant timeImport;
 
     @OneToMany(mappedBy = "importGoods")
     private Set<DetailImportGoods> detailImportGoods = new LinkedHashSet<>();
@@ -31,7 +31,7 @@ public class ImportGoods {
     private String dateFormat;
 
     public String getDateFormat() {
-        return this.timeImport == null ? null : new SimpleDateFormat("dd-MM-yyyy").format(this.timeImport);
+        return this.timeImport == null ? null : new SimpleDateFormat("dd-MM-yyyy").format(Date.from(this.timeImport));
     }
 
 
@@ -51,11 +51,11 @@ public class ImportGoods {
         this.employee = employee;
     }
 
-    public Date getTimeImport() {
+    public Instant getTimeImport() {
         return timeImport;
     }
 
-    public void setTimeImport(Date timeImport) {
+    public void setTimeImport(Instant timeImport) {
         this.timeImport = timeImport;
     }
 

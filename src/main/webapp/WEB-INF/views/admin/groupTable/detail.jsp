@@ -33,47 +33,29 @@
         <!--begin::Card body-->
         <div class="card-body p-9">
             <c:if test="${tablecfs.size() > 0}">
-            <form action="/admin/detailGroupTable/view/${groupTable.id}" method="post">
-                <div class="rounded border row  d-flex justify-content-between h-100">
-                    <div class="col col-10 form-floating my-5">
-                        <select class="form-select" data-control="select2" id="idTable" name="idTable" data-placeholder="Select an option">
-                            <c:forEach var="item" items="${tablecfs}">
-                                <option value="${item.id}">${item.id} - ${item.typeTable.typeName}</option>
-                            </c:forEach>
-                        </select>
-                        <label for="idTable">Chọn bàn</label>
+                <form action="/admin/detailGroupTable/view/${groupTable.id}" method="post">
+                    <div class="rounded border row  d-flex justify-content-between h-100">
+                        <div class="col col-10 form-floating my-5">
+                            <select class="form-select" data-control="select2" id="idTable" name="idTable" data-placeholder="Select an option">
+                                <c:forEach var="item" items="${tablecfs}">
+                                    <option value="${item.id}">${item.id} - ${item.typeTable.typeName}</option>
+                                </c:forEach>
+                            </select>
+                            <label for="idTable">Chọn bàn</label>
+                        </div>
+                        <div class="col text-center justify-content-center align-items-center d-inline-flex p-2">
+                            <button class="btn btn-primary align-middle" type="submit">Thêm</button>
+                        </div>
                     </div>
-                    <div class="col text-center justify-content-center align-items-center d-inline-flex p-2">
-                        <button class="btn btn-primary align-middle" type="submit">Thêm</button>
-                    </div>
-                </div>
-            </form>
+                </form>
             </c:if>
 
-            <form action="/admin/detailGroupTable/view/${groupTable.id}" method="post">
-                <div class="rounded border row  d-flex justify-content-between h-100">
-                    <div class="col col-10 form-floating my-5">
-                        <select class="form-select" data-control="select2" id="idTable" name="idTable" data-placeholder="Select an option">
-                            <c:forEach var="item" items="${tablecfs}">
-                                <option value="${item.id}">${item.id} - ${item.typeTable.typeName}</option>
-                            </c:forEach>
-                        </select>
-                        <label for="idTable">Chọn bàn</label>
-                    </div>
-                    <div class="col text-center justify-content-center align-items-center d-inline-flex p-2">
-                        <button class="btn btn-primary align-middle" type="submit">Thêm</button>
-                    </div>
-                </div>
-
-
-            </form>
-
-<!--end::Input group-->
+            <!--end::Input group-->
             <div class="table-responsive">
                 <table class="table table-row-bordered gy-5">
                     <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
-<%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
+                        <%--                        <th class="table-sort-desc">Mã loại bàn</th>--%>
                         <th>Mã bàn</th>
                         <th>Loại bàn</th>
                         <th>Thời gian gộp nhóm</th>
