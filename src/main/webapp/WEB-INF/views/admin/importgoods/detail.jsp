@@ -186,10 +186,10 @@
                     <div class="input-group mb-5">
                         <span class="input-group-text me-2" >Số lượng</span>
                         <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark btn-sm btn-icon-md btn-circle down-count "
-                             >-</span>
+                        >-</span>
                         <input type="number" value="1" step="1.0" class="form-control text-center text-count-edit" />
                         <span class="input-group-text btn  btn-light-secondary btn-outline text-center text-dark  up-count btn-sm btn-icon-md btn-circle "
-                              >+</span>
+                        >+</span>
                     </div>
                 </div>
                 <div class="modal-footer">
