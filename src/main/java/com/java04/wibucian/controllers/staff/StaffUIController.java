@@ -17,7 +17,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/staff")
+@RequestMapping("staff")
 public class StaffUIController {
 
     @GetMapping(value = {"", "/"})

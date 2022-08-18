@@ -30,9 +30,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("myUserDetailService")
     private UserDetailsService userDetailsService;
-
+    @Autowired
+    @Qualifier("accessAnonymousPathHandler")
+    private AccessAnonymousPathHandler accessAnonymousPathHandler;
     @Autowired
     private CustomPasswordEncoder customPasswordEncoder;
+    @Autowired
+    @Qualifier("customAccessDeniedHandler")
+    private CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
     public DaoAuthenticationProvider authProvider() {
@@ -51,19 +56,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws
             Exception {
-        http.formLogin().defaultSuccessUrl("/");
+        http.formLogin()
+            .defaultSuccessUrl("/")
+            .loginPage("/login");
+
         http.csrf()
             .disable()
             .authorizeRequests()
-            .antMatchers("/admin/")
+            .antMatchers("/admin", "/admin/**")
             .hasAuthority(Role.ADMIN.toString())
-            .antMatchers("/staff/**")
+            .antMatchers("/staff", "/staff/**")
             .hasAuthority(Role.STAFF.toString())
+            .and()
+            .exceptionHandling()
+            .accessDeniedHandler(customAccessDeniedHandler)
             .and()
             .logout()
             .logoutUrl("/logout")
             .invalidateHttpSession(true)
-            .deleteCookies("JSESSIONID");
+            .deleteCookies("JSESSIONID")
+            .logoutSuccessUrl("/");
+
+        // restrict access to anonymous path to only anonymous
+        http.authorizeRequests()
+            .antMatchers("/login")
+            .anonymous()
+            .and()
+            .exceptionHandling()
+            .accessDeniedHandler(accessAnonymousPathHandler);
+
+        http.authorizeRequests()
+            .anyRequest()
+            .permitAll();
     }
 
     @Override

@@ -41,7 +41,7 @@ public class HomeService {
             int y = (int)(Math.random() * 100000) % all.size();
             Collections.swap(all, x, y);
         }
-        return all.subList(0, n);
+        return all.subList(0, Math.min(n, all.size()));
     }
 
     public List<Employee> findAllEmployee() {
