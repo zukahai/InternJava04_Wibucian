@@ -56,7 +56,7 @@
                             <td><fmt:formatDate pattern="dd-MM-yyyy"
                                                 value="${  item.expiryIngredient }"/></td>
                             <td class="d-flex align-center justify-content-center">
-
+                                <a href="admin/detailIngredient/view/${ item.id }" class="btn btn-primary mx-1">Xem chi tiết</a>
                                 <a href="admin/ingredient/edit/${ item.id }" class="btn btn-success mx-1">Sửa</a>
                                 <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
                             </td>

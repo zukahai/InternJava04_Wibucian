@@ -181,7 +181,7 @@ public class OrdercfService {
             ingredient.setQuantity(ingredient.getQuantity() - quantity * detailProduct.getQuantity());
             Double newQuantity = ingredient.getQuantity();
             ingredientRepository.save(ingredient);
-            save(ingredient.getId(),"Cập nhật Order sản phẩm " + nameProduct + "Số lượng "+ quantity, newQuantity - currentQuantity);
+            save(ingredient.getId(),"Cập nhật Order sản phẩm " + nameProduct + " Số lượng "+ quantity, newQuantity - currentQuantity);
         }
         map.put("check", true);
         return map;
@@ -196,7 +196,7 @@ public class OrdercfService {
             ingredient.setQuantity(ingredient.getQuantity() - detailProduct.getQuantity() * quantity);
             Double newQuantity = ingredient.getQuantity();
             ingredientRepository.save(ingredient);
-            save(ingredient.getId(),"Order " + nameProduct + "số lượng " +quantity , newQuantity - currentQuantity);
+            save(ingredient.getId(),"Order " + nameProduct + " số lượng " +quantity , newQuantity - currentQuantity);
         }
     }
 

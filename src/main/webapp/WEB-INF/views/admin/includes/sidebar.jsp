@@ -74,7 +74,7 @@
 					<!--begin:Menu item-->
 					<div class="menu-item active">
 						<!--begin:Menu link-->
-						<a class="menu-link" href="${pageContext.request.contextPath}/admin/invoice">
+						<a class="menu-link" href="${pageContext.request.contextPath}/admin/invoice/statistical">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
                                                         </span>
@@ -127,7 +127,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/employee/"
+								href="/admin/employee/"
 						>
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
@@ -142,7 +142,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/employee/create"
+								href="/admin/employee/create"
 						>
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
@@ -354,7 +354,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/product/"
+								href="/admin/product/"
 						>
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
@@ -369,7 +369,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/typeProduct/"
+								href="/admin/typeProduct/"
 						>
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
@@ -601,7 +601,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/sale/"
+								href="/admin/sale/"
 						>
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
@@ -616,7 +616,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/sale/create"
+								href="/admin/sale/create"
 						>
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
@@ -668,7 +668,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/workPlan"
+								href="/admin/workPlan"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
@@ -682,7 +682,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/shift/request"
+								href="/admin/shift/request"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
@@ -697,7 +697,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/shift/request/preview"
+								href="/admin/shift/request/preview"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
@@ -712,7 +712,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/shift/all"
+								href="/admin/shift/all"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
@@ -727,7 +727,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/shiftRotate"
+								href="/admin/shiftRotate"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
@@ -774,7 +774,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/salary"
+								href="/admin/salary"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
@@ -788,7 +788,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/salary/roll-call"
+								href="/admin/salary/roll-call"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
@@ -803,7 +803,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/salary/calculate"
+								href="/admin/salary/calculate"
 						>
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
@@ -852,7 +852,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/groupTable/"
+								href="/admin/groupTable/"
 						>
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
@@ -867,7 +867,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/table/"
+								href="/admin/table/"
 						>
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
@@ -883,7 +883,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/typeTable/"
+								href="/admin/typeTable/"
 						>
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
@@ -937,7 +937,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/ingredient/"
+								href="/admin/ingredient/"
 						>
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
@@ -953,7 +953,7 @@
 						<!--begin:Menu link-->
 						<a
 								class="menu-link"
-								href="admin/ingredient/create/"
+								href="/admin/ingredient/create/"
 						>
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>

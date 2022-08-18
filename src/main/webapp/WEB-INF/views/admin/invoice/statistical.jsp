@@ -124,7 +124,7 @@
         return `
          <tr class="text-start">
                     <td>` + data.nameProduct + `</td>
-                    <td>` + data.quantity + `</td>
+                    <td><span class="badge badge-success">` + data.quantity + `</span></td>
                     <td>` + validatePriceToVND(data.totalMoney) + `</td>
                     <td>` + validatePriceToVND(data.profitMoney) + `</td>
 
