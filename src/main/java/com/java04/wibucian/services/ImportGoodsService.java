@@ -31,6 +31,7 @@ public class ImportGoodsService {
     public String save(ImportGoodsVO vO) {
         ImportGoods bean = new ImportGoods();
         BeanUtils.copyProperties(vO, bean);
+        bean.setTimeImport(vO.getTimeImport());
         bean = importGoodsRepository.save(bean);
         return bean.getId();
     }

@@ -21,14 +21,14 @@ public class IngredientVO implements Serializable {
     private String expiryIngredient;
 
     @NotNull(message = "price can not null")
-    private Float price;
+    private Double price;
 
     @NotNull(message = "origin can not null")
     private String origin;
 
     @NotNull(message = "unit can not null")
     private String unit;
-    public Date getexpiryIngredient() {
+    public Date getExpiryIngredient() {
         System.out.println(this.expiryIngredient);
         try {
             return new SimpleDateFormat("yyyy-MM-dd").parse(this.expiryIngredient);

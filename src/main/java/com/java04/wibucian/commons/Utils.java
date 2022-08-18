@@ -20,10 +20,10 @@ public class Utils {
         Calendar currentDate = Calendar.getInstance();
         currentDate.setTime(new Date());
         if (currentDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-            currentDate.add(Calendar.DATE, -1);
-            currentDate.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//            currentDate.add(Calendar.DATE, -1);
+//            currentDate.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
         } else {
-            currentDate.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//            currentDate.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
         }
 
         return currentDate;

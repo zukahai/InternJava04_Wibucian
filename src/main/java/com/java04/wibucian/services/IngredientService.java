@@ -36,6 +36,7 @@ public class IngredientService {
     public void update(String id, IngredientUpdateVO vO) {
         Ingredient bean = requireOne(id);
         BeanUtils.copyProperties(vO, bean);
+        bean.setExpiryIngredient(vO.getExpiryIngredient());
         ingredientRepository.save(bean);
     }
 

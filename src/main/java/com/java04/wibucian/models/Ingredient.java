@@ -1,11 +1,8 @@
 package com.java04.wibucian.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.LinkedHashSet;
@@ -14,6 +11,7 @@ import java.util.Set;
 @Entity
 public class Ingredient {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idIngredient", nullable = false, length = 15)
     private String id;
 
@@ -21,7 +19,7 @@ public class Ingredient {
     private String ingredientName;
 
     @Column(name = "expiryIngredient")
-    private Instant expiryIngredient;
+    private Date expiryIngredient;
 
     @Column(name = "price", nullable = false)
     private Double price;
@@ -53,9 +51,9 @@ public class Ingredient {
         this.detailIngredients = detailIngredients;
     }
 
-    public String getDateFormat() {
-        return this.expiryIngredient == null ? null : new SimpleDateFormat("dd-MM-yyyy").format(Date.from(this.expiryIngredient));
-    }
+//    public String getDateFormat() {
+//        return this.expiryIngredient == null ? null : new SimpleDateFormat("dd-MM-yyyy").format(Date.from(this.expiryIngredient));
+//    }
 
     public String getId() {
         return id;
@@ -81,11 +79,11 @@ public class Ingredient {
         this.quantity = quantity;
     }
 
-    public Instant getExpiryIngredient() {
+    public Date getExpiryIngredient() {
         return expiryIngredient;
     }
 
-    public void setExpiryIngredient(Instant expiryIngredient) {
+    public void setExpiryIngredient(Date expiryIngredient) {
         this.expiryIngredient = expiryIngredient;
     }
 
