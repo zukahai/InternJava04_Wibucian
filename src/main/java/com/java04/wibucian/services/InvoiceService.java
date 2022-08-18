@@ -187,4 +187,5 @@ public class InvoiceService {
     public int getCount() {
         return (int) invoiceRepository.count();
     }
+
 }

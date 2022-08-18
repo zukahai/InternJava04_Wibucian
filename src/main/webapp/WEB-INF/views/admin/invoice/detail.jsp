@@ -82,7 +82,7 @@
             <div class="card-body">
                 <!--begin::Wrapper-->
                 <div class="mb-10">
-                    <table class="table table-responsive table-row-bordered" id="tabel-invoice">
+                    <table class="table table-row-dashed table-row-gray-300 gy-7" id="tabel-invoice">
                         <!--begin::Table head-->
                         <thead>
                         <!--begin::Table row-->

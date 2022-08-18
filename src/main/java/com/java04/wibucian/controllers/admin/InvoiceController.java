@@ -101,6 +101,10 @@ public class InvoiceController {
         modelMap.addAttribute("listInvoice", invoiceService.getPage(pageable));
         return "/admin/invoice/index";
     }
+    @RequestMapping(value = {"/statistical"}, method = RequestMethod.GET)
+    public String statistical(ModelMap modelMap) {
+        return "/admin/invoice/statistical";
+    }
 
 
 }

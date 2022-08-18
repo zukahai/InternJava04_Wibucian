@@ -87,7 +87,7 @@
 
             <div class="d-flex flex-stack ">
 
-                <table class="table table-row-dashed fs-6 gy-5 " id="table-order">
+                <table class="table table-row-dashed table-row-gray-300 gy-7" id="table-order">
                     <!--begin::Table head-->
                     <thead>
                     <!--begin::Table row-->
@@ -651,6 +651,7 @@
             });
         }
     });
+
 
 
 

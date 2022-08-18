@@ -1,25 +1,21 @@
 package com.java04.wibucian.services;
 
 import com.java04.wibucian.dtos.DetailInvoiceDTO;
-import com.java04.wibucian.models.DetailInvoice;
-import com.java04.wibucian.models.Invoice;
-import com.java04.wibucian.models.Product;
-import com.java04.wibucian.models.Sale;
+import com.java04.wibucian.models.*;
 import com.java04.wibucian.repositories.DetailInvoiceRepository;
 import com.java04.wibucian.repositories.InvoiceRepository;
 import com.java04.wibucian.repositories.ProductRepository;
 import com.java04.wibucian.vos.DetailInvoiceQueryVO;
 import com.java04.wibucian.vos.DetailInvoiceUpdateVO;
 import com.java04.wibucian.vos.DetailInvoiceVO;
+import com.java04.wibucian.vos.StatisticalResultVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 public class DetailInvoiceService {
@@ -127,5 +123,70 @@ public class DetailInvoiceService {
     private DetailInvoice requireOne(String id) {
         return detailInvoiceRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
+    }
+
+    public List<DetailInvoice> findAllBetweenDate(Instant start, Instant end) {
+        List<DetailInvoice> list = detailInvoiceRepository.findByDateTime(start, end);
+        return list;
+    }
+    public List<StatisticalResultVO> getStatisticalResult(Instant start, Instant end) {
+        List<DetailInvoice> detailInvoices = findAllBetweenDate(start, end);
+        List<String> listIdProduct = new ArrayList<>();
+        List<StatisticalResultVO> statisticalResultVOS = new ArrayList<>();
+        for (DetailInvoice detailInvoice : detailInvoices) {
+            if (!listIdProduct.contains(detailInvoice.getProduct().getId())) {
+                listIdProduct.add(detailInvoice.getProduct().getId());
+                StatisticalResultVO statisticalResultVO = new StatisticalResultVO();
+                statisticalResultVO.setIdProduct(detailInvoice.getProduct().getId());
+                statisticalResultVO.setNameProduct(detailInvoice.getProduct().getProductName());
+                statisticalResultVO.setQuantity(getQuantityByIdProduct(detailInvoice.getProduct().getId()));
+                statisticalResultVO.setTotalMoney(getSumTotalMoneyByIdProduct(detailInvoice.getProduct().getId()));
+                Double totalMoney = statisticalResultVO.getTotalMoney();
+                Double profitMoney = totalMoney - getPrice(detailInvoice.getProduct(), statisticalResultVO.getQuantity());
+                statisticalResultVO.setProfitMoney((double) Math.round(profitMoney));
+                statisticalResultVOS.add(statisticalResultVO);
+            }
+        }
+        return statisticalResultVOS;
+    }
+    public Double getPrice(Product product, Integer quantity) {
+        Double price = 0.0;
+        for(DetailProduct detailProduct: product.getDetailProducts()){
+            price += detailProduct.getIngredient().getPrice() * detailProduct.getQuantity();
+        }
+        return price * quantity;
+    }
+    public Double getTurnover(List<StatisticalResultVO> statisticalResultVOS){
+        Double totalMoney = 0.0;
+        for (StatisticalResultVO statisticalResultVO : statisticalResultVOS) {
+            totalMoney += statisticalResultVO.getTotalMoney();
+        }
+        return totalMoney;
+    }
+    public Double getProfit(List<StatisticalResultVO> statisticalResultVOS){
+        Double profitMoney = 0.0;
+        for (StatisticalResultVO statisticalResultVO : statisticalResultVOS) {
+            profitMoney += statisticalResultVO.getProfitMoney();
+        }
+        return profitMoney;
+    }
+
+    public DetailInvoiceDTO toDto(DetailInvoice detailInvoice) {
+        DetailInvoiceDTO bean = new DetailInvoiceDTO();
+        bean.setIdDetailInvoice(detailInvoice.getId());
+        bean.setQuantity(detailInvoice.getQuantity());
+        bean.setTotalMoney(Float.parseFloat(detailInvoice.getTotalMoney().toString()));
+        bean.setDateTime(Date.from(detailInvoice.getDateTime()));
+        bean.setIdProduct(detailInvoice.getProduct().getId());
+        bean.setIdInvoice(detailInvoice.getInvoice().getId());
+        bean.setIdInvoice(detailInvoice.getInvoice().getId());
+        bean.setIdProduct(detailInvoice.getProduct().getId());
+        return bean;
+    }
+    public Integer getQuantityByIdProduct(String idProduct){
+        return detailInvoiceRepository.getSumQuantity(idProduct);
+    }
+    public Double getSumTotalMoneyByIdProduct(String idProduct){
+        return detailInvoiceRepository.getSumTotalMoney(idProduct);
     }
 }

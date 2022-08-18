@@ -76,4 +76,5 @@ public class DetailInvoice {
         this.quantity = quantity;
     }
 
+
 }

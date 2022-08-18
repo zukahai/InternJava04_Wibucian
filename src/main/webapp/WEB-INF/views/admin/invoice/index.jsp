@@ -28,7 +28,7 @@
         <h3>Danh sách sản phẩm order</h3>
         <div class="d-flex flex-stack ">
 
-            <table class="table" id="tabel-invoice">
+            <table class="table table-row-dashed table-row-gray-300 gy-7" id="tabel-invoice">
                 <!--begin::Table head-->
                 <thead>
                 <!--begin::Table row-->
