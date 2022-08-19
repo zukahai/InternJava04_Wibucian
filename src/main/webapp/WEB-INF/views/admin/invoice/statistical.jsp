@@ -12,11 +12,10 @@
     <div class="card-header cursor-pointer">
         <!--begin::Card title-->
         <div class="card-title m-0">
-            <h3 class="fw-bold m-0">Order</h3>
+            <h3 class="fw-bold m-0">Thống kê doan thu</h3>
         </div>
         <!--end::Card title-->
         <!--begin::Action-->
-        <span class="btn btn-primary align-self-center save-data">Lưu thông tin</span>
         <!--end::Action-->
     </div>
     <!--begin::Card header-->
