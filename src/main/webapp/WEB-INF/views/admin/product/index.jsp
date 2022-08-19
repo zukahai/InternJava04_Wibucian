@@ -55,7 +55,7 @@
                                 <a href="admin/product/detail/${item.id}" class="btn btn-warning mx-1">Xem</a>
                                 <a href="admin/product/edit/${ item.id }" class="btn btn-success mx-1">Sửa</a>
                                 <span data-id="${ item.id }" class="btn btn-danger mx-1 delete-btn">Xoá</span>
-                                <a href="admin/detailProduct/view//${ item.id }" class="btn btn-iìno mx-1">Nguyên liệu</a>
+                                <a href="admin/detailProduct/view/${ item.id }" class="btn btn-info mx-1">Nguyên liệu</a>
                             </td>
                         </tr>
                     </c:forEach>
