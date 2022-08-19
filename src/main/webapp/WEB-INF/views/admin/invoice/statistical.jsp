@@ -12,7 +12,11 @@
     <div class="card-header cursor-pointer">
         <!--begin::Card title-->
         <div class="card-title m-0">
+<<<<<<< HEAD
             <h3 class="fw-bold m-0">Thống kê doanh thu</h3>
+=======
+            <h3 class="fw-bold m-0">Thống kê doan thu</h3>
+>>>>>>> 29d0ff00591de1c38142306f9c1fe729018ba044
         </div>
         <!--end::Card title-->
         <!--begin::Action-->
