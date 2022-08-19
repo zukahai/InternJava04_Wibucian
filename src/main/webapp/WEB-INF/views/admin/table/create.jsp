@@ -35,7 +35,7 @@
                         <label for="idTypeTable">Loại bàn</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="number" class="form-control" id="capacity" name="capacity" value="1"/>
+                        <input type="number" class="form-control" id="capacity" name="capacity" value="1" min="1"/>
                         <label for="capacity">Sức chứa</label>
                     </div>
                     <div class="form-group">
