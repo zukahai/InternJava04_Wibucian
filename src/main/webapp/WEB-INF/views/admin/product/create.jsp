@@ -63,7 +63,7 @@
                         <div class="col">
                             <div class="form-floating my-5">
                                 <input type="text" class="form-control" id="productName" name="productName"
-                                       placeholder="VIP"/>
+                                       placeholder="VIP" required/>
                                 <label for="productName">Tên sản phẩm</label>
                             </div>
                             <div class="form-floating my-5">
@@ -86,7 +86,7 @@
                             </div>
                             <div class="form-floating my-5">
                                 <input type="text" class="form-control" id="describe" name="describe"
-                                       placeholder="VIP"/>
+                                       placeholder="VIP" required/>
                                 <label for="productName">Mô tả</label>
                             </div>
                         </div>

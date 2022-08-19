@@ -76,10 +76,7 @@
                                         <td>Mô tả</td>
                                         <td>${product.describe}</td>
                                     </tr>
-                                    <tr>
-                                        <td>Giá</td>
-                                        <td>${product.price}</td>
-                                    </tr>
+                                   
 
                                     </tbody>
                                     <!--end::Table body-->

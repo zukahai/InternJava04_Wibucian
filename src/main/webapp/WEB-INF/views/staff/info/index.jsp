@@ -71,7 +71,7 @@
 					<div class="col">Trạng thái hôn nhân</div>
 					<div class="col w-300px">
 						<c:choose>
-							<c:when test="${employee.maritalStatus eq 'married'}">Đã kết hôn</c:when>
+							<c:when test="${employee.maritalStatus eq 'Đã kết hôn'}">Đã kết hôn</c:when>
 							<c:otherwise>Độc thân</c:otherwise>
 						</c:choose>
 					</div>

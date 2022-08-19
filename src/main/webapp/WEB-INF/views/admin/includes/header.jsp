@@ -86,7 +86,7 @@
 							</div>
 							<!--end::Aside  toggle-->
 							<!--begin::Logo-->
-							<a href="../../demo14/dist/index.html">
+							<a href="/">
 								<img
 										alt="Logo"
 										src="/admin/assets/media/logos/default-small.svg"

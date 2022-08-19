@@ -61,9 +61,18 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+
+
     public Product get(String productId) {
         return productRepository.findById(productId)
                 .get();
+    }
+
+    public String updateProductSaleNull(String idProduct) {
+        Product product  = productRepository.findById(idProduct).orElse(null);
+        product.setSale(null);
+        product = productRepository.save(product);
+        return product.getId();
     }
 
     public List<Product> listAll() {

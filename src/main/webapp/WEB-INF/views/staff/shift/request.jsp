@@ -141,9 +141,9 @@
 															   shiftDay="${day.value}"
 															   shiftCode="${shiftOfDay.value}"
 															   type="checkbox"
-																<c:if test="${isInShiftApproveTime eq true}">
-																	disabled
-																</c:if>
+<%--																<c:if test="${isInShiftApproveTime eq true}">--%>
+<%--																	disabled--%>
+<%--																</c:if>--%>
 																<c:choose>
 																	<c:when test="${canManipulate eq false}">
 																		disabled

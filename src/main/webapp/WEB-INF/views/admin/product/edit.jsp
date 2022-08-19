@@ -31,7 +31,7 @@
                         <label for="idProduct">Mã sản phẩm</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="productName" class="form-control" id="productName" name="productName" placeholder="0" value="${product.productName}" />
+                        <input type="productName" class="form-control" id="productName" name="productName" placeholder="0" value="${product.productName}" required/>
                         <label for="idProduct">Tên sản phẩm</label>
                     </div>
 

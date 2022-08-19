@@ -28,15 +28,15 @@
 
 
                     <div class="form-floating my-5">
-                        <input type="text" class="form-control" id="pcent" name="pcent" placeholder="VIP"/>
+                        <input type="text" class="form-control" id="pcent" name="pcent" placeholder="VIP" required/>
                         <label for="pcent">Giảm giá</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="date" class="form-control" id="timeStart" name="timeStart" placeholder="VIP"/>
+                        <input type="date" class="form-control" id="timeStart" name="timeStart" placeholder="VIP" required/>
                         <label for="timeStart">Thời gian bắt đầu</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="date" class="form-control" id="timeEnd" name="timeEnd" placeholder="VIP"/>
+                        <input type="date" class="form-control" id="timeEnd" name="timeEnd" placeholder="VIP" required/>
                         <label for="timeEnd">Thời gian kết thúc</label>
                     </div>
 

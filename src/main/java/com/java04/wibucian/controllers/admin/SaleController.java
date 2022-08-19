@@ -132,7 +132,14 @@ public class SaleController {
         }
     }
     //delete
+    @GetMapping(value = "/deleteDetail/{id}")
+    public String deleteDetail(ModelMap modelMap,@Valid @NotNull @PathVariable("id") String id
+    ) throws Exception {
+        System.out.println(id);
+        productService.updateProductSaleNull(id);
 
+        return "redirect:/admin/sale/";
+    }
     //edit
 
     @GetMapping("/create")

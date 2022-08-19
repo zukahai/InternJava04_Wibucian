@@ -51,6 +51,7 @@
 						   value="${employee.name}"
 						   placeholder="Tên nhân viên"
 						   name="name"
+						   required
 					/>
 				</h4>
 				<input type="hidden"
@@ -65,6 +66,7 @@
 						   value="${employee.address}"
 						   placeholder="Địa chỉ"
 						   name="address"
+						   required
 					/>
 				</h4>
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
@@ -83,6 +85,8 @@
 						   value="${employee.phoneNumber}"
 						   placeholder="Số điện thoại"
 						   name="phoneNumber"
+						   pattern="^(^(09)[0-9]{8})?$"
+						   required
 					/>
 				</h4>
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
@@ -100,24 +104,24 @@
 						   class="form-control w-250px h-40px maritalStatus"
 						   value="<fmt:formatDate pattern="yyyy-MM-dd" value="${employee.birthDay}"/>"
 						   name="birthDay"
+						   required
 					/>
 				
 				</h4>
-				
 				<h4 class="row w-75 row-cols-2 mb-10 h-40px">
 					<div class="col">Trạng thái hôn nhân</div>
 					<div class="form-check form-check-custom form-check-solid justify-content-between">
 						<div class="d-flex align-items-center">
 							<input class="form-check-input mx-3" type="radio"
-								   name="maritalStatus" value="single"
-								   <c:if test="${employee.maritalStatus eq 'single'}">checked</c:if>/>
+								   name="maritalStatus" value="Độc thân"
+								   <c:if test="${employee.maritalStatus eq 'Độc thân'}">checked</c:if>/>
 							<span>Độc thân</span>
 						</div>
 						<div class="d-flex align-items-center">
 							<input class="form-check-input mx-3" type="radio"
-								   value="married"
+								   value="Đã kết hôn"
 								   name="maritalStatus"
-								   <c:if test="${employee.maritalStatus eq 'married'}">checked</c:if>/>
+								   <c:if test="${employee.maritalStatus eq 'Đã kết hôn'}">checked</c:if>/>
 							<span>Đã kết hôn</span>
 						</div>
 					</div>

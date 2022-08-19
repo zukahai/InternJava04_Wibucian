@@ -44,6 +44,7 @@ public class SalaryController {
     @GetMapping
     public String getSalaryMainPage(Model model,
                                     @ModelAttribute("current") Calendar current) {
+        current.add(Calendar.MONTH, -1);
         model.addAttribute("currentMonth", Utils.getDateFormat(current.getTime(),
                                                                Constant.YYYY_MM_FORMAT));
         return "admin/salary/index";

@@ -31,15 +31,15 @@
                         <label for="idSale">Mã đợt giảm giá</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="groupName" class="form-control" id="pcent" name="pcent" value="${sale.pcent}"/>
+                        <input type="groupName" class="form-control" id="pcent" name="pcent" value="${sale.pcent}" required/>
                         <label for="pcent">Giảm giá</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="date" class="form-control" id="timeStart" name="timeStart" value="${sale.timeStart}"/>
+                        <input type="date" class="form-control" id="timeStart" name="timeStart" value="${sale.timeStart}" required/>
                         <label for="timeStart">Thời gian bắt đầu</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="date" class="form-control" id="timeEnd" name="timeEnd" value="${sale.timeEnd}"/>
+                        <input type="date" class="form-control" id="timeEnd" name="timeEnd" value="${sale.timeEnd}" required/>
                         <label for="timeStart">Thời gian kết thúc</label>
                     </div>
                 </div>

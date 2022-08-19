@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../includes/hd.jsp"></jsp:include>
 <jsp:include page="../includes/header.jsp"></jsp:include>
-<jsp:include page="../includes/sidebar1.jsp"></jsp:include>
+<jsp:include page="../includes/sidebar.jsp"></jsp:include>
 <jsp:include page="../includes/container.jsp"></jsp:include>
 <div class="content flex-column-fluid" id="kt_content">
 
@@ -37,7 +37,6 @@
                         <th>Ảnh</th>
                         <th>Tên sản phẩm</th>
                         <th>Thể loại</th>
-                        <th>Giá</th>
                         <th class="d-flex align-center justify-content-center">Hành động</th>
                     </tr>
                     </thead>
@@ -50,7 +49,6 @@
                                      src="${pageContext.request.contextPath}/admin/assets/file-upload/${item.srcImage}"></div></td>
                             <td>${  item.productName }</td>
                             <td>${  item.productType.productName }</td>
-                            <td>${  item.price }</td>
                             <td class="d-flex align-center justify-content-center">
                                 <a href="admin/product/detail/${item.id}" class="btn btn-warning mx-1">Xem</a>
                                 <a href="admin/product/edit/${ item.id }" class="btn btn-success mx-1">Sửa</a>
@@ -121,6 +119,7 @@
                         if (result.check === true) {
                             toastr.success("Xóa thành công");
                             row.remove();
+                            window.location.reload();
                         } else {
                             toastr.error("Xóa thất bại");
                         }

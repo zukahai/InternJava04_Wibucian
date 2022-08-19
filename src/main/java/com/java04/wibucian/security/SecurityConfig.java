@@ -58,7 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             Exception {
         http.formLogin()
             .defaultSuccessUrl("/")
-            .loginPage("/login");
+            .loginPage("/login")
+            .failureUrl("/login?error=true");
 
         http.csrf()
             .disable()

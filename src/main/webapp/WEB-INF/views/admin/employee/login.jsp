@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="error" value="${requestScope.error}"/>
 <!--
 Author: Keenthemes
 Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular, Asp.Net Core, Blazor, Django, Flask & Laravel Admin Dashboard Theme
@@ -98,9 +101,9 @@ License: For each use you must have a valid license purchased only from above li
 									<h1 class="text-dark fw-bolder mb-3">Đăng nhập</h1>
 									<!--end::Title-->
 									<!--begin::Subtitle-->
-<%--									<div class="text-gray-500 fw-semibold fs-6">Your--%>
-<%--										Social Campaigns--%>
-<%--									</div>--%>
+									<%--									<div class="text-gray-500 fw-semibold fs-6">Your--%>
+									<%--										Social Campaigns--%>
+									<%--									</div>--%>
 									<!--end::Subtitle=-->
 								</div>
 								<!--begin::Heading-->
@@ -117,7 +120,7 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin::Email-->
 									<input type="text" placeholder="Username"
 										   name="username" autocomplete="off"
-										   class="form-control bg-transparent"/>
+										   class="form-control bg-transparent" required/>
 									<!--end::Email-->
 								</div>
 								<!--end::Input group=-->
@@ -125,7 +128,19 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin::Password-->
 									<input type="password" placeholder="Password"
 										   name="password" autocomplete="off"
-										   class="form-control bg-transparent"/>
+										   class="form-control bg-transparent" required/>
+									<!--end::Password-->
+								</div>
+								
+								<%--								<div>${param.error}</div>--%>
+								
+								<div class="fv-row mb-3">
+									<!--begin::Password-->
+									<c:if test="${not empty param.error}">
+										<div class="text-center text-danger mt-10">Sai tên
+											đăng nhập hoặc mật khẩu
+										</div>
+									</c:if>
 									<!--end::Password-->
 								</div>
 								
@@ -133,10 +148,10 @@ License: For each use you must have a valid license purchased only from above li
 								<!--begin::Wrapper-->
 								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
 									<div></div>
-<%--									<!--begin::Link-->--%>
-<%--									<a href="../../demo14/dist/authentication/layouts/creative/reset-password.html"--%>
-<%--									   class="link-primary">Forgot Password ?--%>
-<%--									</a>--%>
+									<%--									<!--begin::Link-->--%>
+									<%--									<a href="../../demo14/dist/authentication/layouts/creative/reset-password.html"--%>
+									<%--									   class="link-primary">Forgot Password ?--%>
+									<%--									</a>--%>
 									<!--end::Link-->
 								</div>
 								<!--end::Wrapper-->
@@ -177,7 +192,7 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="/admin/assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Custom Javascript(used by this page)-->
-<%--		<script src="/admin/assets/js/custom/authentication/sign-in/general.js"></script>--%>
+		<%--		<script src="/admin/assets/js/custom/authentication/sign-in/general.js"></script>--%>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 	</body>

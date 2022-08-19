@@ -101,10 +101,16 @@
                            },
                            {
                                data   : "hoursWorked",
+                               render : (data, type, row) => {
+                                   return data.toFixed(1);
+                               },
                                targets: 6,
                            },
                            {
                                data   : "totalSalary",
+                               render : (data, type, row) => {
+                                   return data.toFixed(2);
+                               },
                                targets: 7,
                            },
                        ],

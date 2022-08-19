@@ -233,10 +233,16 @@
                            },
                            {
                                data   : "hoursWorked",
+                               render : (data, type, row) => {
+                                   return data.toFixed(1);
+                               },
                                targets: 5,
                            },
                            {
                                data   : "totalSalary",
+                               render : (data, type, row) => {
+									return data.toFixed(2);
+                               },
                                targets: 6,
                            },
                        ],
@@ -250,11 +256,11 @@
         let i = 1;
 
         salaryDataTable.cells(null, 0, {order: 'applied'})
-                 .every(function (cell) {
-                     this.data(i++);
-                 });
+                       .every(function (cell) {
+                           this.data(i++);
+                       });
     })
-             .draw();
+                   .draw();
 
 
     form.addEventListener("submit", async (e) => {
@@ -263,8 +269,8 @@
                        .url("${contextPath}/admin/salary/calculate/api?employeeIdList=" +
                             selectedEmployeeIds.join(","))
         salaryDataTable.ajax.reload()
-		form.reset()
-		selectedEmployeeIds.length = 0
+        form.reset()
+        selectedEmployeeIds.length = 0
         submitBtn.classList.remove("btn-primary")
         submitBtn.classList.remove("active")
         submitBtn.classList.add("btn-secondary")

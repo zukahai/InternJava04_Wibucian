@@ -27,7 +27,7 @@
                 <div class="rounded border p-5">
 
                     <div class="form-floating my-5">
-                        <input type="text" class="form-control" id="productName" name="productName" placeholder="VIP"/>
+                        <input type="text" class="form-control" id="productName" name="productName" placeholder="VIP" required/>
                         <label for="productName">Tên loại sản phẩm</label>
                     </div>
 

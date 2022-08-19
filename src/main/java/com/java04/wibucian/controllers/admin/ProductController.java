@@ -28,7 +28,6 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("admin/product")
 public class ProductController {
-    // bên tôi vẫn bth, không biết bên kia bị gì mà nó k wire cái productService được
 
     @Autowired
     private ProductService productService;
@@ -39,15 +38,18 @@ public class ProductController {
     public static final int limit = 5;
 
 
-    public ProductController(TypeProductService typeProductService, SaleService saleService) {
+    public ProductController(TypeProductService typeProductService,
+                             SaleService saleService) {
         this.typeProductService = typeProductService;
         this.saleService = saleService;
     }
+
     @GetMapping("/")
-    public String Home(ModelMap modelMap) throws Exception {
+    public String Home(ModelMap modelMap) throws
+            Exception {
         int page = 1;
         Pageable pageable = PageRequest.of(page - 1, limit);
-        int totalPage = typeProductService.getTotalPage(limit);
+        int totalPage = productService.getTotalPage(limit);
         modelMap.addAttribute("page", page);
         modelMap.addAttribute("totalPage", totalPage);
         modelMap.addAttribute("product", productService.findAll(pageable));
@@ -56,10 +58,16 @@ public class ProductController {
     }
 
     @GetMapping("/page/{page}")
-    public String HomePage(ModelMap modelMap, @Valid @NotNull @PathVariable("page") int page)throws Exception {
+    public String HomePage(ModelMap modelMap,
+                           @Valid @NotNull @PathVariable("page") int page) throws
+            Exception {
         int totalPage = productService.getTotalPage(limit);
-        page = (page < 1) ? 1 : page;
-        page = (page > totalPage) ? totalPage : page;
+        page = (page < 1)
+                ? 1
+                : page;
+        page = (page > totalPage)
+                ? totalPage
+                : page;
         Pageable pageable = PageRequest.of(page - 1, limit);
         modelMap.addAttribute("page", page);
         modelMap.addAttribute("totalPage", totalPage);
@@ -67,53 +75,66 @@ public class ProductController {
         return "admin/product/index";
     }
 
-      @GetMapping("/create")
-    public String createProductPage(ModelMap modelMap) throws Exception {
+    @GetMapping("/create")
+    public String createProductPage(ModelMap modelMap) throws
+            Exception {
         modelMap.addAttribute("typeProduct", this.typeProductService.findAll());
         modelMap.addAttribute("sale", this.saleService.findAll());
-             return "admin/product/create";
+        return "admin/product/create";
     }
 
     @GetMapping("/edit/{id}")
-    public String HomeEdit(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id)throws Exception {
-      Product product = productService.findById(id);
+    public String HomeEdit(ModelMap modelMap,
+                           @Valid @NotNull @PathVariable("id") String id) throws
+            Exception {
+        Product product = productService.findById(id);
         //Sale sale = saleService.findById(id);
-       modelMap.addAttribute("typeProduct", typeProductService.findAll());
-       modelMap.addAttribute("product", product);
-      // modelMap.addAttribute("sale", sale);
+        modelMap.addAttribute("typeProduct", typeProductService.findAll());
+        modelMap.addAttribute("product", product);
+        // modelMap.addAttribute("sale", sale);
 
         return "admin/product/edit";
     }
-//
-//    @RequestMapping(value = "/edit",
-//            method = RequestMethod.POST,
-//            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-//    public String editProduct(ModelMap modelMap,
-//                            @Valid ProductUpdateVO productUpdateVO,
-//                            @RequestBody MultiValueMap<String, String> formData) throws Exception {
-//        String idProduct =  formData.get("idProduct").get(0);
-//        String idProductType = formData.get("idProductType").get(0);
-//        this.productService.update(idProduct, productUpdateVO, idProductType);
-//        return "redirect:/admin/product/";
-//    }
+    //
+    //    @RequestMapping(value = "/edit",
+    //            method = RequestMethod.POST,
+    //            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    //    public String editProduct(ModelMap modelMap,
+    //                            @Valid ProductUpdateVO productUpdateVO,
+    //                            @RequestBody MultiValueMap<String, String> formData)
+    //                            throws Exception {
+    //        String idProduct =  formData.get("idProduct").get(0);
+    //        String idProductType = formData.get("idProductType").get(0);
+    //        this.productService.update(idProduct, productUpdateVO, idProductType);
+    //        return "redirect:/admin/product/";
+    //    }
 
-    @RequestMapping(value = "/edit/{id}",
-            method = RequestMethod.POST,
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String update(ModelMap modelMap, @Valid ProductUpdateVO  productUpdateVO, @PathVariable("id") String idProduct,
-                         @RequestParam MultiValueMap<String, String> formData) throws Exception {
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST,
+                    consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String update(ModelMap modelMap, @Valid ProductUpdateVO productUpdateVO,
+                         @PathVariable("id") String idProduct,
+                         @RequestParam MultiValueMap<String, String> formData) throws
+            Exception {
         System.out.println(productUpdateVO);
         try {
-            String fileName = StringUtils.cleanPath(productUpdateVO.getAvatar().getOriginalFilename());
+            String fileName = StringUtils.cleanPath(productUpdateVO.getAvatar()
+                                                                   .getOriginalFilename());
             ClassLoader classLoader = getClass().getClassLoader();
             if (!fileName.equals("")) {
-                String filePath = String.valueOf(System.currentTimeMillis()) + "." + fileName.split("\\.")[1];
-                File file = new File(classLoader.getResource(".").getFile() + "static/admin/assets/file-upload/" + filePath);
-                productUpdateVO.getAvatar().transferTo(file);
+                String filePath =
+                        String.valueOf(System.currentTimeMillis()) + "." + fileName.split(
+                                "\\.")[1];
+                File file = new File(classLoader.getResource(".")
+                                                .getFile()
+                                             + "static/admin/assets/file-upload/"
+                                             + filePath);
+                productUpdateVO.getAvatar()
+                               .transferTo(file);
                 productUpdateVO.setSrcImage(filePath);
             }
-//            System.out.println(employeeUpdateVO.getAvatar());
-            this.productService.update(idProduct, productUpdateVO, productUpdateVO.getIdProductType());
+            //            System.out.println(employeeUpdateVO.getAvatar());
+            this.productService.update(idProduct, productUpdateVO,
+                                       productUpdateVO.getIdProductType());
             return "redirect:/admin/product/";
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -123,7 +144,9 @@ public class ProductController {
 
     //detail
     @GetMapping("/detail/{id}")
-    public String viewProductPage(ModelMap modelMap, @Valid @NotNull @PathVariable("id") String id) throws Exception {
+    public String viewProductPage(ModelMap modelMap,
+                                  @Valid @NotNull @PathVariable("id") String id) throws
+            Exception {
         modelMap.addAttribute("id", id);
         Product product = productService.findById(id);
         //System.out.println(id)
@@ -136,25 +159,34 @@ public class ProductController {
 
     // delete
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @RequestMapping(method = RequestMethod.POST,
+                    consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     // @GetMapping("/create")
-    public String createProductPage(ModelMap modelMap,@Valid ProductVO productVO) throws Exception {
+    public String createProductPage(ModelMap modelMap, @Valid ProductVO productVO) throws
+            Exception {
 
         try {
-            String fileName = StringUtils.cleanPath(productVO.getAvatar().getOriginalFilename());
-//            Path path = Paths.get("src/main/resources/static/admin/assets/file-upload");
+            String fileName = StringUtils.cleanPath(productVO.getAvatar()
+                                                             .getOriginalFilename());
+            //            Path path = Paths.get
+            //            ("src/main/resources/static/admin/assets/file-upload");
 
             ClassLoader classLoader = getClass().getClassLoader();
-            String filePath = String.valueOf(System.currentTimeMillis()) + "." + fileName.split("\\.")[1];
-//            System.out.println(classLoader.getResource(".").getFile() + "static/admin/assets/file-upload/" + filePath);
-            File file = new File(classLoader.getResource(".").getFile() + "static/admin/assets/file-upload/" + filePath);
-//            File file = new File(path.resolve(filePath).toUri()); this line to save file in src/main/resource
-            productVO.getAvatar().transferTo(file);
+            if (!fileName.equals("")) {
+                String filePath =
+                        String.valueOf(System.currentTimeMillis()) + "." + fileName.split(
+                                "\\.")[1];
+                File file = new File(classLoader.getResource(".")
+                                                .getFile()
+                                             + "static/admin/assets/file-upload/"
+                                             + filePath);
+                productVO.getAvatar()
+                         .transferTo(file);
 
-            productVO.setSrcImage(filePath);
+                productVO.setSrcImage(filePath);
+            }
 
             String idProduct = this.productService.save(productVO);
-            System.out.println(productVO);
             return "redirect:/admin/product/";
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -170,14 +202,17 @@ public class ProductController {
     }
 
     /*
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String createNewProduct(ModelMap modelMap, @Valid ProductVO productVO, @RequestBody MultiValueMap<String, String> formData) throws Exception {
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType
+    .APPLICATION_FORM_URLENCODED_VALUE)
+    public String createNewProduct(ModelMap modelMap, @Valid ProductVO productVO,
+    @RequestBody MultiValueMap<String, String> formData) throws Exception {
        String idSale =  formData.get("idSale").get(0);
        String productId = this.productService.save(productVO, idSale);
        return "redirect:/admin/product/";
     }
          */
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET,
+                    produces = "application/json; charset=utf-8")
     @ResponseBody
     public ResponseEntity<Object> delete(@PathVariable("id") String id) {
         try {
@@ -185,20 +220,24 @@ public class ProductController {
             HashMap<String, Object> map = new HashMap<>();
             map.put("check", true);
             map.put("value", "test");
-            return ResponseEntity.ok().body(map);
+            return ResponseEntity.ok()
+                                 .body(map);
         } catch (Exception e) {
             e.printStackTrace();
             HashMap<String, Object> map = new HashMap<>();
             map.put("check", false);
             map.put("value", "test");
-            return ResponseEntity.ok().body(map);
+            return ResponseEntity.ok()
+                                 .body(map);
         }
     }
 
 
 /*
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String createNewTable(ModelMap modelMap, @Valid ProductVO product, @RequestBody MultiValueMap<String, String> formData) throws Exception {
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType
+    .APPLICATION_FORM_URLENCODED_VALUE)
+    public String createNewTable(ModelMap modelMap, @Valid ProductVO product,
+    @RequestBody MultiValueMap<String, String> formData) throws Exception {
         String idProductType =  formData.get("idProductType").get(0);
         String typeProductId = this.productService.save(product, idProductType);
         return "redirect:/admin/product/";

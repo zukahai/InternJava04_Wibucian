@@ -49,6 +49,8 @@ public class SaleService {
         bean = saleRepository.save(bean);
     }
 
+
+
     public SaleDTO getById(String id) {
         Sale original = requireOne(id);
         return toDTO(original);

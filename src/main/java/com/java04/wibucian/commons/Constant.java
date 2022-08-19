@@ -3,14 +3,14 @@ package com.java04.wibucian.commons;
 public class Constant {
     // ngày bắt đầu và kết thúc lên kế hoạch làm việc, từ thứ 2 đến cuối thứ 3
     public static final int WORK_PLAN_START_DAY = DayOfWeek.MONDAY.getValue();
-    public static final int WORK_PLAN_END_DAY = DayOfWeek.TUESDAY.getValue();
+    public static final int WORK_PLAN_END_DAY = DayOfWeek.FRIDAY.getValue();
 
     // ngày bắt đầu và kết thúc đăng ký ca làm (từ thứ 4 đến thứ 6)
     public static final int SHIFT_REQUEST_START_DAY = DayOfWeek.WEDNESDAY.getValue();
     public static final int SHIFT_REQUEST_END_DAY = DayOfWeek.FRIDAY.getValue();
 
     // ngày approve đăng ký ca làm việc (thứ 7)
-    public static final int SHIFT_APPROVE_DAY = DayOfWeek.SATURDAY.getValue();
+    public static final int SHIFT_APPROVE_DAY = DayOfWeek.FRIDAY.getValue();
 
     // số lượng tối đa ca làm việc chính thức trong tuần
     public static final int MAX_SHIFT_REQUEST_PER_WEEK = 3;
