@@ -25,6 +25,7 @@ public class IngredientService {
     public String save(IngredientVO vO) {
         Ingredient bean = new Ingredient();
         BeanUtils.copyProperties(vO, bean);
+        bean.setQuantity(0.0);
         bean = ingredientRepository.save(bean);
         return bean.getId();
     }
