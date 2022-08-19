@@ -102,8 +102,6 @@ public class DetailInvoiceController {
         System.out.println(vO);
         Instant start = Instant.parse(vO.getTimeStart()+"T00:00:00Z");
         Instant end = Instant.parse(vO.getTimeEnd()+"T00:00:00Z");
-        System.out.println(start);
-        System.out.println(end);
         List<StatisticalResultVO> statisticalResultVOList = detailInvoiceService.getStatisticalResult(start, end);
         HashMap<String, Object> map = new HashMap<>();
         map.put("data", statisticalResultVOList);

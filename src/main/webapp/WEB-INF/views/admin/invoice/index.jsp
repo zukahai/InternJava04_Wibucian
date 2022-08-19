@@ -12,11 +12,11 @@
     <div class="card-header cursor-pointer">
         <!--begin::Card title-->
         <div class="card-title m-0">
-            <h3 class="fw-bold m-0">Order</h3>
+            <h3 class="fw-bold m-0">Danh sách hoá đơn</h3>
         </div>
         <!--end::Card title-->
         <!--begin::Action-->
-        <span class="btn btn-primary align-self-center save-data">Lưu thông tin</span>
+<%--        <span class="btn btn-primary align-self-center save-data">Lưu thông tin</span>--%>
         <!--end::Action-->
     </div>
     <!--begin::Card header-->
@@ -25,7 +25,7 @@
         <!--begin::Wrapper-->
 
 
-        <h3>Danh sách sản phẩm order</h3>
+        <h3>Danh sách hoá đơn</h3>
         <div class="d-flex flex-stack ">
 
             <table class="table table-row-dashed table-row-gray-300 gy-7" id="tabel-invoice">
