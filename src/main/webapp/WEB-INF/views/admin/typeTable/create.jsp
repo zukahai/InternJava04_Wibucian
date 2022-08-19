@@ -23,14 +23,14 @@
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
-            <form action="/admin/typeTable/create" method="post">
+            <form action="/admin/typeTable/create" method="post" onsubmit="return validateForm()" name="Form" required>
                 <div class="rounded border p-5">
                     <div class="form-floating my-5">
                         <input type="text" class="form-control" id="typeName" name="typeName" placeholder="VIP"/>
                         <label for="typeName">Tên loại bàn</label>
                     </div>
                     <div class="form-floating my-5">
-                        <input type="number" class="form-control" id="price" name="price" placeholder="0" value="0"/>
+                        <input type="number" class="form-control" id="price" name="price" placeholder="0" value="0" min="0"/>
                         <label for="price">Giá</label>
                     </div>
 
@@ -45,3 +45,17 @@
 </div>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 <jsp:include page="../includes/end.jsp"></jsp:include>
+
+
+<script type="text/javascript">
+    function validateForm() {
+        var a = document.forms["Form"]["typeName"].value;
+        var b = document.forms["Form"]["price"].value;
+        console.log(a + " " + b);
+        if (a == null || a == "" || b == null || b == "") {
+            alert("Please Fill All Required Field");
+            return false;
+        }
+        return true;
+    }
+</script>
