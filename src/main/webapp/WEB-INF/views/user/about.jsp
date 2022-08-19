@@ -86,7 +86,7 @@
                                 <div class="subname">Giới tính: ${item.gender}</div>
                             </div>
                             <div class="image kf-image-hover">
-                                <img src="${item.srcEmployee}" alt="" />
+                                <img src="admin/assets/file-upload/${item.srcEmployee}" alt="" />
                                 <div class="info">
                                     <div class="label">${item.email}</div>
                                     <div class="label">${item.phoneNumber}</div>
