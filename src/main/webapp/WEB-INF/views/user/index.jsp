@@ -176,7 +176,7 @@
                             <div class="kf-menu-item-col col-xs-12 col-sm-12 col-md-12 col-lg-6 all ${item.productType.id}">
                                 <div class="kf-menu-item element-anim-1 scroll-animate" data-animate="active">
                                     <div class="image kf-image-hover">
-                                        <a href="${item.srcImage}" class="has-popup-image"><img src="${item.srcImage}" alt="" /></a>
+                                        <a href="admin/assets/file-upload/${item.srcImage}" class="has-popup-image"><img src="admin/assets/file-upload/${item.srcImage}" alt="" /></a>
                                     </div>
                                     <div class="desc">
                                         <h5 class="name">${item.productName}</h5>
