@@ -21,7 +21,7 @@
             <!--end::Card title-->
             <!--begin::Action-->
             <a
-                    href="admin/Ingredient/"
+                    href="admin/ingredient/"
                     class="btn btn-primary align-self-center"
             >Quay về kho nguyên liệu</a
             >
